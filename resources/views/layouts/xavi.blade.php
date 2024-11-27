@@ -36,6 +36,7 @@
         {{--  Footer  --}}            
         <x-layout.xavifooter />
         @stack('script')
+        @livewireScripts
     </div>
 </body>
 
