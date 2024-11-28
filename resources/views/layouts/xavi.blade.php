@@ -1,10 +1,9 @@
 <!DOCTYPE html>
-<html lang="{{ config('app.locale', 'en') }}">
+<html lang="{{ config('app.locale', 'es') }}">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    {{-- <script src="https://cdn.tailwindcss.com"></script> --}}
     <meta name="description" content="{{ $description ?? 'Welcome to Xavrod' }}">
     <title>{{ $title ?? 'XavRod' }}</title>
 
@@ -35,6 +34,7 @@
         </main>
         {{--  Footer  --}}            
         <x-layout.xavifooter />
+        {{-- JS --}}
         @stack('script')
         @livewireScripts
     </div>
