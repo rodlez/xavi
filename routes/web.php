@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 /* Controllers */
 use App\Http\Controllers\LanguageController;
+use App\Http\Controllers\Playground;
 
 /* ------------------------------------------------------------- WEB ------------------------------------------------------------- */
 
@@ -17,6 +18,8 @@ Route::get('/contact', function () {
 Route::get('/services', function () {
     return 'services';
 })->name('services');
+
+Route::get('/playground', [Playground::class, 'index'])->name('playground');
 
 /* LANGUAGES SWITCH */
 Route::get('lang', [LanguageController::class, 'change'])->name("change.lang");
