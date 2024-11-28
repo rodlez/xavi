@@ -23,7 +23,6 @@
         <li>The Who - Tommy</li>
     </x-xavi.list>
 
-
     <h2>Sections</h2>
     <div class="grid grid-cols-3 gap-4">
         <x-xavi.section class="col-span-3 md:col-span-1">
@@ -42,5 +41,39 @@
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nostrum, quasi?</p>
         </x-xavi.section>
     </div>
+
+    <section class="my-4">
+        <h2>Preloader</h2>
+        <x-xavi.preloader class="px-0"/>
+        <x-xavi.preloader class="bg-green-100 text-green-700 border border-green-700"/>
+        <x-xavi.preloader class="bg-slate-600 text-white italic w-1/2">Loading records...</x-xavi.preloader>
+    </section>
+
+    <section class="my-4">
+        <h2>Alerts</h2>
+        <x-xavi.alert>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Debitis dolores dolorum error eum eveniet
+            exercitationem expedita, impedit itaque laudantium, natus, nobis numquam omnis praesentium quis reiciendis
+            soluta sunt vel vero.
+        </x-xavi.alert>
+        <x-xavi.alert type="danger" class="mt-8 shadow-xl">
+            lorem ipsum
+        </x-xavi.alert>
+        <x-xavi.alert type="info" class="mt-8">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloribus eligendi facilis libero maiores non,
+            praesentium quam reiciendis sunt ut voluptatibus.
+        </x-xavi.alert>
+        <x-xavi.alert type="warning" dismissible="false" close-self="5000">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloribus eligendi facilis libero maiores non,
+            praesentium quam reiciendis sunt ut voluptatibus.
+        </x-xavi.alert>
+    </section>
+
+    <h2>Logo</h2>
+    <section class="flex items-start space-x-4">
+        <x-xavi.logo type="small"/>
+        <x-xavi.logo type="medium"/>
+        <x-xavi.logo type="big" transition="hover:w-52 hover:drop-shadow-lg transition"/>
+    </section>
 
 </x-xavi-layout>
