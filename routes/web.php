@@ -3,7 +3,14 @@
 use Illuminate\Support\Facades\Route;
 /* Controllers */
 use App\Http\Controllers\LanguageController;
+use App\Http\Controllers\Languages\LanguagesController;
 use App\Http\Controllers\Playground;
+
+/* Livewire Full Page Components */
+use App\Livewire\Languages\Languages;
+use App\Livewire\Languages\LanguagesCreate;
+use App\Livewire\Languages\LanguagesEdit;
+use App\Livewire\Languages\LanguagesShow;
 
 /* ------------------------------------------------------------- WEB ------------------------------------------------------------- */
 
@@ -37,5 +44,13 @@ Route::middleware([
         return view('dashboard');
     })->name('dashboard');
 
-    
+    /* LANGUAGES */
+    Route::get('/languages', Languages::class)->name('languages');
+    Route::get('/languages/create', LanguagesCreate::class)->name('languages.create');
+    Route::get('/languages/{language}', LanguagesShow::class)->name('languages.show');
+    Route::put('/languages/{language}', [LanguagesController::class, 'update'])->name('languages.update');
+    Route::delete('/languages/{language}', [LanguagesController::class, 'destroy'])->name('languages.destroy');
+    Route::get('/languages/edit/{language}', LanguagesEdit::class)->name('languages.edit');
+
+
 });

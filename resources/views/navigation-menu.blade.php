@@ -19,6 +19,10 @@
                         {{ __('Home') }}
                     </x-nav-link>
 
+                    <x-nav-link href="{{ route('languages') }}" :active="request()->routeIs('languages.languages')">
+                        {{ __('Languages') }}
+                    </x-nav-link>
+
                     <!-- TEST LANG -->
                     <x-dropdown align="right" width="48">
                         <x-slot name="trigger">
