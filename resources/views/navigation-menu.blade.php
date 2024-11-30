@@ -23,6 +23,10 @@
                         {{ __('Languages') }}
                     </x-nav-link>
 
+                    <x-nav-link href="{{ route('pf_categories') }}" :active="request()->routeIs('portfolio.portfolio-categories')">
+                        {{ __('PF Cats') }}
+                    </x-nav-link>
+
                     <!-- TEST LANG -->
                     <x-dropdown align="right" width="48">
                         <x-slot name="trigger">

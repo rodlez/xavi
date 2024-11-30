@@ -9,7 +9,6 @@ use Livewire\Component;
 
 class LanguagesCreate extends Component
 {
-
     public $name;
     public $code;
 

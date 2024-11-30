@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Http\Controllers\Languages;
+namespace App\Http\Controllers\Portfolio;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Languages\StoreLanguagesRequest;
-use App\Models\Languages;
+use App\Http\Requests\Portfolio\StorePFCategoryRequest;
+use App\Models\Portfolio\PortfolioCategory;
 use Exception;
 use Illuminate\Http\Request;
 
-class LanguagesController extends Controller
+class PortfolioCategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -53,31 +53,32 @@ class LanguagesController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(StoreLanguagesRequest $request, Languages $language)
+    public function update(StorePFCategoryRequest $request, PortfolioCategory $category)
     {
         $formData = $request->validated();
         try {
-            Languages::where('id', $language->id)->update($formData);
-            /* return to_route('languages.show', $language)->with('message', 'Language successfully updated'); */
-             return to_route('languages.show', $language);
+            PortfolioCategory::where('id', $category->id)->update($formData);
+            /* return to_route('pf_categories.show', $language)->with('message', 'Language successfully updated'); */
+             return to_route('pf_categories.show', $category);
         } catch (Exception $e) {
-            /* return to_route('languages.show', $language)->with('message', 'Error(' . $e->getCode() . ') Language can not be updated.'); */
-            return to_route('languages.show', $language);
+            /* return to_route('pf_categories.show', $language)->with('message', 'Error(' . $e->getCode() . ') Language can not be updated.'); */
+            return to_route('pf_categories.show', $category);
+
         }
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Languages $language)
+    public function destroy(PortfolioCategory $category)
     {
         try {
-            $language->delete();
-            return to_route('languages');
+            $category->delete();
+            return to_route('pf_categories');
             /* return to_route('wk_types.index')->with('message', 'Type (' . $type->name . ') deleted.'); */
         } catch (Exception $e) {
             /* return to_route('wk_types.index')->with('message', 'Error (' . $e->getCode() . ') Type: ' . $type->name . ' can not be deleted.'); */
-            return to_route('languages');
+            return to_route('pf_categories');
         }
     }
 }
