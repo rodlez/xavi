@@ -12,10 +12,12 @@ use App\Livewire\Languages\Languages;
 use App\Livewire\Languages\LanguagesCreate;
 use App\Livewire\Languages\LanguagesEdit;
 use App\Livewire\Languages\LanguagesShow;
-use App\Livewire\Portfolio\PortfolioCategories;
-use App\Livewire\Portfolio\PortfolioCategoriesCreate;
-use App\Livewire\Portfolio\PortfolioCategoriesEdit;
-use App\Livewire\Portfolio\PortfolioCategoriesShow;
+use App\Livewire\Portfolio\Categories\PortfolioCategories;
+use App\Livewire\Portfolio\Categories\PortfolioCategoriesCreate;
+use App\Livewire\Portfolio\Categories\PortfolioCategoriesEdit;
+use App\Livewire\Portfolio\Categories\PortfolioCategoriesShow;
+use App\Livewire\Portfolio\Categories\Translations\PortfolioCategoriesTranslation;
+use App\Livewire\Portfolio\Categories\Translations\PortfolioCategoriesTranslationCreate;
 
 /* ------------------------------------------------------------- WEB ------------------------------------------------------------- */
 
@@ -64,5 +66,13 @@ Route::middleware([
     Route::put('/pf_categories/{category}', [PortfolioCategoryController::class, 'update'])->name('pf_categories.update');
     Route::delete('/pf_categories/{category}', [PortfolioCategoryController::class, 'destroy'])->name('pf_categories.destroy');
     Route::get('/pf_categories/edit/{category}', PortfolioCategoriesEdit::class)->name('pf_categories.edit');
+
+
+    /* PORTFOLIO CATEGORIES */
+
+    Route::get('/pf_categories/{category}/translation/create', PortfolioCategoriesTranslationCreate::class)->name('pf_categories_trans.create');
+
+
+    Route::get('/pf_categories_trans', PortfolioCategoriesTranslation::class)->name('pf_categories_trans');
 
 });

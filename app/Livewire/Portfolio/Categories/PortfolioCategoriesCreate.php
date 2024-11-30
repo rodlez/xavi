@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Portfolio;
+namespace App\Livewire\Portfolio\Categories;
 
 use App\Models\Portfolio\PortfolioCategory;
 use Illuminate\Http\Request;
@@ -34,6 +34,6 @@ class PortfolioCategoriesCreate extends Component
 
     public function render()
     {
-        return view('livewire.portfolio.portfolio-categories-create')->layout('layouts.app');
+        return view('livewire.portfolio.categories.portfolio-categories-create')->layout('layouts.app');
     }
 }

@@ -13,5 +13,16 @@ class PortfolioCategory extends Model
     use HasFactory;
 
     protected $fillable = ['name', 'description'];
+
+    /**
+     * Get the translations associated.
+     */
+    public function translations()
+    {
+        return $this->hasMany(
+            PortfolioCategoryTranslation::class,
+            foreignKey: 'pf_cat_id'
+        );
+    }
     
 }

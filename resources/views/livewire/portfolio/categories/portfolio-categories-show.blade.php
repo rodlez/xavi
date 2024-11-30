@@ -37,6 +37,24 @@
                     </button>
                 </form>
             </div>
+
+           <!-- Translations --> 
+
+            <div>
+                translations
+                {{ $category->translations->count()}}
+
+                @foreach ($category->translations as $translation)
+                Name {{ $translation->language->name }} Code {{ $translation->language->code }}
+                @endforeach
+
+                <a href="{{ route('pf_categories_trans.create', $category) }}"
+                                    class="w-full sm:w-40 p-2 rounded-md text-white text-sm text-center bg-green-600 hover:bg-green-400 transition-all duration-500">
+                                    <span> Create Translation</span>
+                                    <span class="px-2"><i class="fa-solid fa-file-arrow-up"></i></span>
+                                </a>
+            </div>
+
         </div>
 
         <!-- Footer -->

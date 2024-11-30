@@ -1,9 +1,8 @@
 <?php
 
-namespace App\Livewire\Portfolio;
+namespace App\Livewire\Portfolio\categories;
 
 use App\Models\Portfolio\PortfolioCategory;
-use App\Models\Portfolio\PortfolioCategoryTranslation;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -75,7 +74,7 @@ class PortfolioCategories extends Component
         $categories = $categories->paginate($this->perPage);
 
     
-        return view('livewire.portfolio.portfolio-categories', [
+        return view('livewire.portfolio.categories.portfolio-categories', [
             'categories'    => $categories,
             'found'         => $found,
             'column'        => $this->orderColumn,

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Portfolio;
+namespace App\Livewire\Portfolio\Categories;
 
 use App\Models\Portfolio\PortfolioCategory;
 use Livewire\Component;
@@ -16,7 +16,7 @@ class PortfolioCategoriesShow extends Component
 
     public function render()
     {
-        return view('livewire.portfolio.portfolio-categories-show', [
+        return view('livewire.portfolio.categories.portfolio-categories-show', [
             'category' => $this->category
         ])->layout('layouts.app');
     }

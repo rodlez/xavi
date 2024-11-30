@@ -54,7 +54,8 @@
                         <a wire:click.prevent="bulkClear" class="cursor-pointer" title="Unselect All">
                             <span><i class="fa-solid fa-rotate-right text-green-600 hover:text-green-500"></i></span>
                         </a>
-                        <a wire:click.prevent="bulkDelete" wire:confirm="Are you sure you want to delete this categories?"
+                        <a wire:click.prevent="bulkDelete"
+                            wire:confirm="Are you sure you want to delete this categories?"
                             class="cursor-pointer text-red-600 hover:text-red-500" title="Delete">
                             <span><i class="fa-sm fa-solid fa-trash"></i></span>
                             <span>({{ count($selections) }})</span>
@@ -77,15 +78,15 @@
                                     <th wire:click="sorting('name')" scope="col"
                                         class="p-2 hover:cursor-pointer hover:text-blue-600 {{ $column == 'name' ? 'text-blue-600' : '' }}">
                                         name {!! $sortLink !!}</th>
-                                        <th wire:click="sorting('description')" scope="col"
-                                        class="p-2 hover:cursor-pointer hover:text-blue-600 {{ $column == 'description' ? 'text-blue-600' : '' }}">
-                                        description {!! $sortLink !!}</th>
+                                    <th scope="col" class="p-2 capitalize">description</th>
                                     <th wire:click="sorting('pf_categories.created_at')" scope="col"
                                         class="p-2 hover:cursor-pointer hover:text-blue-600 {{ $column == 'pf_categories.created_at' ? 'text-blue-600' : '' }}">
                                         created {!! $sortLink !!}</th>
                                     <th wire:click="sorting('pf_categories.updated_at')" scope="col"
                                         class="p-2 hover:cursor-pointer hover:text-blue-600 {{ $column == 'pf_categories.updated_at' ? 'text-blue-600' : '' }}">
                                         updated {!! $sortLink !!}</th>
+
+                                    <th scope="col" class="p-2 text-center capitalize">translations</th>
                                     <th scope="col" class="p-2 text-center capitalize">actions</th>
                                 </tr>
                             </thead>
@@ -100,11 +101,16 @@
                                         <td class="p-2">{{ $category->id }}</td>
                                         <td class="p-2"><a
                                                 href="{{ route('pf_categories.show', $category) }}">{{ $category->name }}</a>
-                                            </td>
+                                        </td>
                                         <td class="p-2">{{ $category->description }}</td>
 
                                         <td class="p-2">{{ date('d-m-Y', strtotime($category->created_at)) }}</td>
-                                        <td class="p-2">{{ date('d-m-Y', strtotime($category->updated_at)) }}</td>                                        
+                                        <td class="p-2">{{ date('d-m-Y', strtotime($category->updated_at)) }}</td>
+                                        <td class="p-2 text-center">
+                                            @foreach ($category->translations as $translation)
+                                                {{ $translation->language->code }}
+                                            @endforeach
+                                        </td>
                                         <td class="p-2">
                                             <div class="flex justify-center items-center gap-2">
                                                 <!-- Show -->
@@ -118,7 +124,8 @@
                                                         class="fa-solid fa-pen-to-square text-green-600 hover:text-black transition duration-1000 ease-in-out"></i>
                                                 </a>
                                                 <!-- Delete -->
-                                                <form action="{{ route('pf_categories.destroy', $category) }}" method="POST">
+                                                <form action="{{ route('pf_categories.destroy', $category) }}"
+                                                    method="POST">
                                                     <!-- Add Token to prevent Cross-Site Request Forgery (CSRF) -->
                                                     @csrf
                                                     <!-- Dirtective to Override the http method -->
@@ -168,4 +175,3 @@
     </div>
 
 </div>
-

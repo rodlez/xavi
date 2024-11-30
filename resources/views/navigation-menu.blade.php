@@ -19,12 +19,16 @@
                         {{ __('Home') }}
                     </x-nav-link>
 
-                    <x-nav-link href="{{ route('languages') }}" :active="request()->routeIs('languages.languages')">
+                    <x-nav-link href="{{ route('languages') }}" :active="request()->routeIs('languages')">
                         {{ __('Languages') }}
                     </x-nav-link>
 
-                    <x-nav-link href="{{ route('pf_categories') }}" :active="request()->routeIs('portfolio.portfolio-categories')">
+                    <x-nav-link href="{{ route('pf_categories') }}" :active="request()->routeIs('pf_categories')">
                         {{ __('PF Cats') }}
+                    </x-nav-link>
+
+                    <x-nav-link href="{{ route('pf_categories_trans') }}" :active="request()->routeIs('pf_categories_trans')">
+                        {{ __('PF Cats Trans') }}
                     </x-nav-link>
 
                     <!-- TEST LANG -->
