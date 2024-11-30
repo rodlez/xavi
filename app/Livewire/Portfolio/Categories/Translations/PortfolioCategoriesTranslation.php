@@ -63,19 +63,19 @@ class PortfolioCategoriesTranslation extends Component
     {
         $found = 0;
 
-        $categories = PortfolioCategoryTranslation::orderby($this->orderColumn, $this->sortOrder)->select('*');
+        $translations = PortfolioCategoryTranslation::orderby($this->orderColumn, $this->sortOrder)->select('*');
 
         if (!empty($this->search)) {
 
-            $found = $categories->where('name', "like", "%" . $this->search . "%")->count();
+            $found = $translations->where('name', "like", "%" . $this->search . "%")->count();
         }
 
-        $total = $categories->count();
-        $categories = $categories->paginate($this->perPage);
+        $total = $translations->count();
+        $translations = $translations->paginate($this->perPage);
 
     
         return view('livewire.portfolio.categories.translations.portfolio-categories-translation', [
-            'categories'    => $categories,
+            'translations'    => $translations,
             'found'         => $found,
             'column'        => $this->orderColumn,
             'total'         => $total,

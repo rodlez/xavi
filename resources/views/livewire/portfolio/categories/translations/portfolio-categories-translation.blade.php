@@ -2,7 +2,7 @@
 
     <!-- Sitemap -->
     <div class="flex flex-row justify-start items-start gap-1 text-sm py-3 px-4 text-slate-500">
-        <a href="/pf_categories_trans_trans" class="font-bold text-black border-b-2 border-b-blue-600">Categories
+        <a href="/pf_categories_trans_trans" class="font-bold text-black border-b-2 border-b-violet-600">Categories
             Translations</a>
     </div>
     <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
@@ -10,7 +10,7 @@
         <div>
 
             <!-- Header -->
-            <div class="flex flex-row justify-between items-center py-4 bg-blue-400">
+            <div class="flex flex-row justify-between items-center py-4 bg-violet-400">
                 <div>
                     <span class="text-lg text-white px-4">Categories Translations <span
                             class="text-sm">({{ $search != '' ? $found : $total }})</span></span>
@@ -30,7 +30,7 @@
                         <i class="fa-solid fa-magnifying-glass"></i>
                     </div>
                     <input wire:model.live="search" type="search"
-                        class="w-full rounded-lg pl-10 font-sm placeholder-zinc-400 focus:outline-none focus:ring-0 focus:border-blue-400 border-2 border-zinc-200"
+                        class="w-full rounded-lg pl-10 font-sm placeholder-zinc-400 focus:outline-none focus:ring-0 focus:border-violet-400 border-2 border-zinc-200"
                         placeholder="Search by name">
                 </div>
                 <!-- Pagination -->
@@ -39,7 +39,7 @@
                         <i class="fa-solid fa-book-open"></i>
                     </div>
                     <select wire:model.live="perPage"
-                        class="w-full rounded-lg text-end focus:outline-none focus:ring-0 focus:border-blue-400 border-2 border-zinc-200 ">
+                        class="w-full rounded-lg text-end focus:outline-none focus:ring-0 focus:border-violet-400 border-2 border-zinc-200 ">
                         <option value="10">10</option>
                         <option value="25">25</option>
                         <option value="50">50</option>
@@ -68,74 +68,78 @@
             <div class="px-0 sm:px-4 pb-0 ">
                 <div class="overflow-x-auto">
 
-                    @if ($categories->count())
+                    @if ($translations->count())
                         <table class="min-w-full ">
                             <thead>
                                 <tr class="text-black text-left text-sm font-normal uppercase">
                                     <th></th>
                                     <th wire:click="sorting('pf_categories_trans.id')" scope="col"
-                                        class="p-2 hover:cursor-pointer hover:text-blue-600 {{ $column == 'pf_categories_trans.id' ? 'text-blue-600' : '' }}">
+                                        class="p-2 hover:cursor-pointer hover:text-violet-600 {{ $column == 'pf_categories_trans.id' ? 'text-violet-600' : '' }}">
                                         id {!! $sortLink !!}</th>
                                     <th wire:click="sorting('pf_categories_trans.pf_cat_id')" scope="col"
-                                        class="p-2 hover:cursor-pointer hover:text-blue-600 {{ $column == 'pf_categories_trans.pf_cat_id' ? 'text-blue-600' : '' }}">
+                                        class="p-2 hover:cursor-pointer hover:text-violet-600 {{ $column == 'pf_categories_trans.pf_cat_id' ? 'text-violet-600' : '' }}">
                                         Cat {!! $sortLink !!}</th>
                                     <th wire:click="sorting('pf_categories_trans.lang_id')" scope="col"
-                                        class="p-2 hover:cursor-pointer hover:text-blue-600 {{ $column == 'pf_categories_trans.lang_id' ? 'text-blue-600' : '' }}">
+                                        class="p-2 hover:cursor-pointer hover:text-violet-600 {{ $column == 'pf_categories_trans.lang_id' ? 'text-violet-600' : '' }}">
                                         Lang {!! $sortLink !!}</th>
                                     <th wire:click="sorting('name')" scope="col"
-                                        class="p-2 hover:cursor-pointer hover:text-blue-600 {{ $column == 'name' ? 'text-blue-600' : '' }}">
+                                        class="p-2 hover:cursor-pointer hover:text-violet-600 {{ $column == 'name' ? 'text-violet-600' : '' }}">
                                         name {!! $sortLink !!}</th>
                                     <th wire:click="sorting('pf_categories_trans.created_at')" scope="col"
-                                        class="p-2 hover:cursor-pointer hover:text-blue-600 {{ $column == 'pf_categories_trans.created_at' ? 'text-blue-600' : '' }}">
+                                        class="p-2 hover:cursor-pointer hover:text-violet-600 {{ $column == 'pf_categories_trans.created_at' ? 'text-violet-600' : '' }}">
                                         created {!! $sortLink !!}</th>
                                     <th wire:click="sorting('pf_categories_trans.updated_at')" scope="col"
-                                        class="p-2 hover:cursor-pointer hover:text-blue-600 {{ $column == 'pf_categories_trans.updated_at' ? 'text-blue-600' : '' }}">
+                                        class="p-2 hover:cursor-pointer hover:text-violet-600 {{ $column == 'pf_categories_trans.updated_at' ? 'text-violet-600' : '' }}">
                                         updated {!! $sortLink !!}</th>
                                     <th scope="col" class="p-2 text-center capitalize">actions</th>
                                 </tr>
                             </thead>
                             <tbody>
 
-                                @foreach ($categories as $category)
+                                @foreach ($translations as $translation)
                                     <tr
-                                        class="text-black text-sm leading-6 even:bg-zinc-200 odd:bg-gray-300 transition-all duration-1000 hover:bg-blue-400">
+                                        class="text-black text-sm leading-6 even:bg-zinc-200 odd:bg-gray-300 transition-all duration-1000 hover:bg-violet-400">
                                         <td class="p-2 text-center"><input wire:model.live="selections" type="checkbox"
                                                 class="text-green-600 outline-none focus:ring-0 checked:bg-green-500"
-                                                value={{ $category->id }}></td>
-                                                <td class="p-2">{{ $category->id }}</td>
-                                                <td class="p-2">{{ $category->category->name }}</td>
-                                                <td class="p-2">{{ $category->language->code }}</td>
+                                                value={{ $translation->id }}></td>
+                                        <td class="p-2">{{ $translation->id }}</td>
+                                        <td class="p-2">{{ $translation->category->name }}</td>
+                                        <td class="p-2">{{ $translation->language->code }}</td>
                                         <td class="p-2">{{-- <a
-                                                href="{{ route('pf_categories_trans.show', $category) }}">{{ $category->name }}</a> --}}
-                                                {{ $category->name }}
+                                                href="{{ route('pf_categories_trans.show', $translation) }}">{{ $translation->name }}</a> --}}
+                                            {{ $translation->name }}
                                         </td>
-                                        <td class="p-2">{{ date('d-m-Y', strtotime($category->created_at)) }}</td>
-                                        <td class="p-2">{{ date('d-m-Y', strtotime($category->updated_at)) }}</td>
+                                        <td class="p-2">{{ date('d-m-Y', strtotime($translation->created_at)) }}
+                                        </td>
+                                        <td class="p-2">{{ date('d-m-Y', strtotime($translation->updated_at)) }}
+                                        </td>
                                         <td class="p-2">
                                             <div class="flex justify-center items-center gap-2">
                                                 <!-- Show -->
-                                                {{-- <a href="{{ route('pf_categories_trans.show', $category) }}" title="Show">
+                                                {{-- <a href="{{ route('pf_categories_trans.show', $translation) }}" title="Show">
                                                     <i
-                                                        class="fa-solid fa-circle-info text-blue-600 hover:text-black transition duration-1000 ease-in-out"></i>
+                                                        class="fa-solid fa-circle-info text-violet-600 hover:text-black transition duration-1000 ease-in-out"></i>
                                                 </a> --}}
                                                 <!-- Edit -->
-                                                {{-- <a href="{{ route('pf_categories_trans.edit', $category) }}" title="Edit">
+                                                <a href="{{ route('pf_categories_trans.edit', $translation) }}"
+                                                    title="Edit">
                                                     <i
                                                         class="fa-solid fa-pen-to-square text-green-600 hover:text-black transition duration-1000 ease-in-out"></i>
-                                                </a> --}}
+                                                </a>
                                                 <!-- Delete -->
-                                                {{-- <form action="{{ route('pf_categories_trans.destroy', $category) }}" method="POST">
+                                                <form action="{{ route('pf_categories_trans.destroy', $translation) }}"
+                                                    method="POST">
                                                     <!-- Add Token to prevent Cross-Site Request Forgery (CSRF) -->
                                                     @csrf
                                                     <!-- Dirtective to Override the http method -->
                                                     @method('DELETE')
                                                     <button
-                                                        onclick="return confirm('Are you sure you want to delete the language: {{ $category->name }}?')"
+                                                        onclick="return confirm('Are you sure you want to delete the translation: {{ $translation->name }}?')"
                                                         title="Delete">
                                                         <i
                                                             class="fa-solid fa-trash text-red-600 hover:text-black transition duration-1000 ease-in-out"></i>
                                                     </button>
-                                                </form> --}}
+                                                </form>
                                             </div>
                                         </td>
                                     </tr>
@@ -159,10 +163,10 @@
             </div>
             <!-- Pagination Links -->
             <div class="py-2 px-4">
-                {{ $categories->links() }}
+                {{ $translations->links() }}
             </div>
             <!-- Footer -->
-            <div class="flex flex-row justify-end items-center py-4 px-4 bg-blue-400 sm:rounded-b-lg">
+            <div class="flex flex-row justify-end items-center py-4 px-4 bg-violet-400 sm:rounded-b-lg">
                 <a href="{{ route('dashboard') }}">
                     <i class="fa-lg fa-solid fa-backward-step text-white hover:text-black transition duration-1000 ease-in-out"
                         title="Go Back"></i>

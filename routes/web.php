@@ -6,6 +6,7 @@ use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\Languages\LanguagesController;
 use App\Http\Controllers\Playground;
 use App\Http\Controllers\Portfolio\PortfolioCategoryController;
+use App\Http\Controllers\Portfolio\PortfolioCategoryTranslationController;
 /* Livewire Full Page Components */
 
 use App\Livewire\Languages\Languages;
@@ -18,6 +19,7 @@ use App\Livewire\Portfolio\Categories\PortfolioCategoriesEdit;
 use App\Livewire\Portfolio\Categories\PortfolioCategoriesShow;
 use App\Livewire\Portfolio\Categories\Translations\PortfolioCategoriesTranslation;
 use App\Livewire\Portfolio\Categories\Translations\PortfolioCategoriesTranslationCreate;
+use App\Livewire\Portfolio\Categories\Translations\PortfolioCategoriesTranslationEdit;
 
 /* ------------------------------------------------------------- WEB ------------------------------------------------------------- */
 
@@ -74,5 +76,9 @@ Route::middleware([
 
 
     Route::get('/pf_categories_trans', PortfolioCategoriesTranslation::class)->name('pf_categories_trans');
+    Route::put('/pf_categories_trans/{translation}', [PortfolioCategoryTranslationController::class, 'update'])->name('pf_categories_trans.update');
+    Route::delete('/pf_categories_trans/{translation}', [PortfolioCategoryTranslationController::class, 'destroy'])->name('pf_categories_trans.destroy');
+
+    Route::get('/pf_categories_trans/edit/{translation}', PortfolioCategoriesTranslationEdit::class)->name('pf_categories_trans.edit');
 
 });
