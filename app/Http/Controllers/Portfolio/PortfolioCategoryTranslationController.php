@@ -56,16 +56,13 @@ class PortfolioCategoryTranslationController extends Controller
     public function update(StorePFCategoryTranslationRequest $request, PortfolioCategoryTranslation $translation)
     {
         $validated = $request->validated();
-        $validated['lang_id'] = $request->language_id;
+        $validated['lang_id'] = $translation->language->id;
 
         try {
             PortfolioCategoryTranslation::where('id', $translation->id)->update($validated);
-            /* return to_route('pf_categories.show', $language)->with('message', 'Language successfully updated'); */
-             return to_route('pf_categories_trans');
+            return to_route('pf_categories.show', $translation->category)->with('message', '(' . $translation->language->name . ') Translation successfully updated');
         } catch (Exception $e) {
-            /* return to_route('pf_categories.show', $language)->with('message', 'Error(' . $e->getCode() . ') Language can not be updated.'); */
-            return to_route('pf_categories_trans');
-
+            return to_route('pf_categories.show', $translation->category)->with('error', 'Error(' . $e->getCode() . '): (' . $translation->language->name . ') Translation can not be updated');
         }
     }
 
@@ -76,11 +73,9 @@ class PortfolioCategoryTranslationController extends Controller
     {
         try {
             $translation->delete();
-            return to_route('pf_categories_trans');
-            /* return to_route('wk_types.index')->with('message', 'Type (' . $type->name . ') deleted.'); */
+            return to_route('pf_categories.show', $translation->category)->with('message', '(' . $translation->language->name . ') Translation successfully deleted');
         } catch (Exception $e) {
-            /* return to_route('wk_types.index')->with('message', 'Error (' . $e->getCode() . ') Type: ' . $type->name . ' can not be deleted.'); */
-            return to_route('pf_categories_trans');
+            return to_route('pf_categories.show', $translation->category)->with('error', 'Error(' . $e->getCode() . '): (' . $translation->language->name . ') Translation can not be deleted');
         }
     }
 }

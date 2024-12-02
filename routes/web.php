@@ -72,7 +72,7 @@ Route::middleware([
 
     /* PORTFOLIO CATEGORIES */
 
-    Route::get('/pf_categories/{category}/translation/create', PortfolioCategoriesTranslationCreate::class)->name('pf_categories_trans.create');
+    Route::get('/pf_categories/{category}/translation/create/{missingTranslation?}', PortfolioCategoriesTranslationCreate::class)->name('pf_categories_trans.create');
 
 
     Route::get('/pf_categories_trans', PortfolioCategoriesTranslation::class)->name('pf_categories_trans');

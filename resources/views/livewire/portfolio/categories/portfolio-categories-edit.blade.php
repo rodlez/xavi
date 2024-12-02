@@ -2,8 +2,9 @@
     <!-- Sitemap -->
     <div class="flex flex-row justify-start items-start gap-1 text-sm py-3 px-4 text-slate-500">
         <a href="/pf_categories" class="hover:text-blue-600">Categories</a> /
-        <a href="/pf_categories/{{$category->id}}" class="hover:text-blue-600">Info</a> /
-        <a href="/pf_categories/edit/{{ $category->id }}" class="font-bold text-black border-b-2 border-b-blue-600">Edit</a>
+        <a href="/pf_categories/{{ $category->id }}" class="hover:text-blue-600">Info</a> /
+        <a href="/pf_categories/edit/{{ $category->id }}"
+            class="font-bold text-black border-b-2 border-b-blue-600">Edit</a>
     </div>
 
     <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
@@ -24,7 +25,8 @@
                 <!-- Name -->
                 <div class="flex flex-col justify-start items-start w-full sm:w-2/3 gap-4 py-2">
                     <span class="text-md font-semibold px-2">Name</span>
-                    <input name="name" id="name" type="text" value="{{ $category->name }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-md rounded-lg w-full sm:w-2/3 p-2 focus:ring-blue-500 focus:border-blue-500">
+                    <input name="name" id="name" type="text" value="{{ $category->name }}"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-md rounded-lg w-full sm:w-2/3 p-2 focus:ring-blue-500 focus:border-blue-500">
                 </div>
                 <!-- Errors -->
                 @error('name')
@@ -34,9 +36,14 @@
                 @enderror
 
                 <!-- Description -->
-                <div class="flex flex-col justify-start items-start w-full sm:w-2/3 gap-4 py-2">
+                {{-- <div class="flex flex-col justify-start items-start w-full sm:w-2/3 gap-4 py-2">
                     <span class="text-md font-semibold px-2">Description</span>
                     <input name="description" id="description" type="text" value="{{ $category->description }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-md rounded-lg w-full sm:w-2/3 p-2 focus:ring-blue-500 focus:border-blue-500">
+                </div> --}}
+                <div class="flex flex-col justify-start items-start w-full sm:w-2/3 gap-4 py-2">
+                    <span class="text-md font-semibold px-2">Description</span>
+                    <textarea rows="6" name="description" id="description"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-md rounded-lg w-full p-2 focus:ring-blue-500 focus:border-blue-500">{{ $category->description }}</textarea>
                 </div>
                 <!-- Errors -->
                 @error('description')
@@ -47,7 +54,8 @@
 
                 <!-- Save -->
                 <div class="py-4">
-                    <button type="submit" class="w-full sm:w-fit bg-black hover:bg-slate-700 text-white capitalize p-2 sm:px-4 rounded-lg shadow-none transition duration-500 ease-in-out">
+                    <button type="submit"
+                        class="w-full sm:w-fit bg-black hover:bg-slate-700 text-white capitalize p-2 sm:px-4 rounded-lg shadow-none transition duration-500 ease-in-out">
                         Save
                         <i class="fa-solid fa-floppy-disk px-2"></i>
                     </button>
@@ -58,7 +66,8 @@
     <!-- Footer -->
     <div class="flex flex-row justify-end items-center py-4 px-4 bg-blue-400 sm:rounded-b-lg">
         <a href="{{ route('pf_categories.show', $category) }}">
-            <i class="fa-lg fa-solid fa-backward-step text-white hover:text-black transition duration-1000 ease-in-out" title="Go Back"></i>
+            <i class="fa-lg fa-solid fa-backward-step text-white hover:text-black transition duration-1000 ease-in-out"
+                title="Go Back"></i>
         </a>
     </div>
 </div>

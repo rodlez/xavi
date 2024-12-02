@@ -102,7 +102,9 @@
                                         <td class="p-2"><a
                                                 href="{{ route('pf_categories.show', $category) }}">{{ $category->name }}</a>
                                         </td>
-                                        <td class="p-2">{{ $category->description }}</td>
+                                        <td class="p-2">
+                                            {{(strlen($category->description) >= 20 ? substr($category->description,0,20) . '...' : $category->description)}}                                            
+                                        </td>
 
                                         <td class="p-2">{{ date('d-m-Y', strtotime($category->created_at)) }}</td>
                                         <td class="p-2">{{ date('d-m-Y', strtotime($category->updated_at)) }}</td>
