@@ -58,11 +58,9 @@ class PortfolioCategoryController extends Controller
         $formData = $request->validated();
         try {
             PortfolioCategory::where('id', $category->id)->update($formData);
-            /* return to_route('pf_categories.show', $language)->with('message', 'Language successfully updated'); */
-             return to_route('pf_categories.show', $category);
+            return to_route('pf_categories.show', $category)->with('message', 'Category ('.$category->name.') successfully updated');
         } catch (Exception $e) {
-            /* return to_route('pf_categories.show', $language)->with('message', 'Error(' . $e->getCode() . ') Language can not be updated.'); */
-            return to_route('pf_categories.show', $category);
+            return to_route('pf_categories.show', $category)->with('error', 'Category ('.$category->name.') can not be updated');
 
         }
     }
@@ -74,11 +72,9 @@ class PortfolioCategoryController extends Controller
     {
         try {
             $category->delete();
-            return to_route('pf_categories');
-            /* return to_route('wk_types.index')->with('message', 'Type (' . $type->name . ') deleted.'); */
+            return to_route('pf_categories')->with('message', 'Category ('.$category->name.') successfully deleted');
         } catch (Exception $e) {
-            /* return to_route('wk_types.index')->with('message', 'Error (' . $e->getCode() . ') Type: ' . $type->name . ' can not be deleted.'); */
-            return to_route('pf_categories');
+            return to_route('pf_categories')->with('error', 'Category ('.$category->name.') can not be deleted');
         }
     }
 }

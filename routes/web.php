@@ -69,7 +69,6 @@ Route::middleware([
     Route::delete('/pf_categories/{category}', [PortfolioCategoryController::class, 'destroy'])->name('pf_categories.destroy');
     Route::get('/pf_categories/edit/{category}', PortfolioCategoriesEdit::class)->name('pf_categories.edit');
 
-
     /* PORTFOLIO CATEGORIES TRANSLATIONS */
     Route::get('/pf_categories/{category}/translation/create/{missingTranslationId?}', PortfolioCategoriesTranslationCreate::class)->name('pf_categories_trans.create')->where('missingTranslationId', '[0-9]+');
     Route::get('/pf_categories_trans', PortfolioCategoriesTranslation::class)->name('pf_categories_trans');

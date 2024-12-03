@@ -8,13 +8,13 @@
     </div>
 
     <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-        <!-- Header -->
-        <div class="flex flex-row justify-between items-center py-4 bg-blue-400">
+        <!-- HEADER -->
+        <div class="flex flex-row justify-between items-center py-4 bg-blue-600">
             <div>
                 <span class="text-lg text-white px-4">Category Edit</span>
             </div>
         </div>
-        <!--Category -->
+        <!--EDIT -->
         <div class="mx-auto w-11/12 py-4 px-2">
             <form action="{{ route('pf_categories.update', $category) }}" method="POST">
                 <!-- Add Token to prevent Cross-Site Request Forgery (CSRF) -->
@@ -35,11 +35,7 @@
                     </div>
                 @enderror
 
-                <!-- Description -->
-                {{-- <div class="flex flex-col justify-start items-start w-full sm:w-2/3 gap-4 py-2">
-                    <span class="text-md font-semibold px-2">Description</span>
-                    <input name="description" id="description" type="text" value="{{ $category->description }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-md rounded-lg w-full sm:w-2/3 p-2 focus:ring-blue-500 focus:border-blue-500">
-                </div> --}}
+                <!-- Description -->                
                 <div class="flex flex-col justify-start items-start w-full sm:w-2/3 gap-4 py-2">
                     <span class="text-md font-semibold px-2">Description</span>
                     <textarea rows="6" name="description" id="description"
@@ -63,8 +59,8 @@
             </form>
         </div>
     </div>
-    <!-- Footer -->
-    <div class="flex flex-row justify-end items-center py-4 px-4 bg-blue-400 sm:rounded-b-lg">
+    <!-- FOOTER -->
+    <div class="flex flex-row justify-end items-center py-4 px-4 bg-blue-600 sm:rounded-b-lg">
         <a href="{{ route('pf_categories.show', $category) }}">
             <i class="fa-lg fa-solid fa-backward-step text-white hover:text-black transition duration-1000 ease-in-out"
                 title="Go Back"></i>

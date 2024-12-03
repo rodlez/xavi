@@ -12,8 +12,9 @@
             <!-- Header -->
             <div class="flex flex-row justify-between items-center py-4 bg-violet-400">
                 <div>
-                    <span class="text-lg text-white px-4">Categories Translations <span
-                            class="text-sm">({{ $search != '' ? $found : $total }})</span></span>
+                    <span class="text-lg text-white px-4">Categories <span class="text-sm">({{ $categoriesTotal }})</span>
+                        Translations <span class="text-sm">({{ $translationsTotal }})</span>
+                    </span>
                 </div>
                 <div class="px-4">
                     {{-- <a href="{{ route('pf_categories_trans.create') }}"
@@ -22,8 +23,17 @@
                     </a> --}}
                 </div>
             </div>
+
+            <!-- Found -->
+            <div class="flex flex-col sm:flex-row px-4 sm:px-8 pt-2 pb-0">            
+                @if($search != '' && $found > 0)
+                    <span class="text-green-600">{{$found}} Translations found for this search</span>                
+                @endif
+            </div>
+            
             <!-- Search -->
             <div class="flex flex-col sm:flex-row justify-between items-start px-2 sm:px-4 py-4 gap-4">
+
                 <!-- Search -->
                 <div class="relative w-full">
                     <div class="absolute top-2.5 bottom-0 left-4 text-slate-700">
@@ -149,7 +159,7 @@
                     @else
                         <div
                             class="flex flex-row justify-between items-center bg-black text-white rounded-lg p-4 mx-2 sm:mx-0">
-                            <span>No categories translations found in the system.</span>
+                            <span class="text-red-600">No translations found in the system.</span>
                             <a wire:click.prevent="clearSearch" title="Reset">
                                 <i
                                     class="fa-lg fa-solid fa-circle-xmark cursor-pointer px-2 text-red-600 hover:text-red-400 transition duration-1000 ease-in-out"></i>

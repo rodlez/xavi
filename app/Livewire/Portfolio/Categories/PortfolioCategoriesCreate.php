@@ -3,6 +3,7 @@
 namespace App\Livewire\Portfolio\Categories;
 
 use App\Models\Portfolio\PortfolioCategory;
+use Exception;
 use Illuminate\Http\Request;
 use Livewire\Component;
 
@@ -16,20 +17,24 @@ class PortfolioCategoriesCreate extends Component
         'description' => 'nullable|min:3',
     ];
 
-    protected $messages = [              
+    protected $messages = [
         'name.required' => 'The name is required',
-        'name.min' => 'The name must have at least 2 characters',
-        'name.unique' => 'The name for this category is already created',  
+        'name.min' => 'The name must have at least 3 characters',
+        'name.unique' => 'This category is already created',
         'description.min' => 'The description must have at least 3 characters',
     ];
- 
+
     public function save(Request $request)
     {
         $validated = $this->validate();
 
-        $category = PortfolioCategory::create($validated);
-        
-        return to_route('pf_categories', $category)/* ->with('message', 'category (' . $category->name . ') successfully created.') */;       
+        try {
+            PortfolioCategory::create($validated);
+
+            return to_route('pf_categories')->with('message', 'Category (' . $this->name . ') successfully created');
+        } catch (Exception $e) {
+            return to_route('pf_categories')->with('error', 'Error (' . $e->getCode() . ') Category (' . $this->name . ')  can not be created');
+        }
     }
 
     public function render()

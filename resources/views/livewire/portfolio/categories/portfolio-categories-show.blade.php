@@ -7,20 +7,28 @@
 
     <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
 
-        <!-- Header -->
-        <div class="flex flex-row justify-between items-center py-4 bg-blue-400">
+        <!-- HEADER -->
+        <div class="flex flex-row justify-between items-center py-4 bg-blue-600">
             <div>
                 <span class="text-lg text-white px-4">Portfolio Category - {{ $category->name }}</span>
             </div>
         </div>
 
-        <!-- Info -->
+        <!-- INFO -->
         <div class="flex flex-col mt-4 mx-8 pb-0 lg:mx-14">
-            <div class="flex flex-col text-white bg-slate-800 p-0">
-                <span class="uppercase bg-orange-600 p-2">Name</span>
+            <!-- Category -->
+            <div class="flex flex-col">
+                <div class="w-fit bg-black text-white text-lg capitalize mb-1 p-2">
+                    Information
+                </div>
+                <div class="flex flex-col text-white bg-slate-800">
+                <span class="bg-orange-600 py-1 px-2">Id</span>
+                <span class="text-sm p-2">{{ $category->id }}</span>
+                <span class="bg-orange-600 py-1 px-2">Name</span>
                 <span class="font-bold p-2">{{ $category->name }}</span>
-                <span class="uppercase bg-orange-600 p-2">Description</span>
-                <span class="text-sm p-2">{{ $category->description }}</span>
+                <span class="bg-orange-600 py-1 px-2">Description</span>
+                <span class="text-sm p-2">{{ ($category->description) ? $category->description : '-' }}</span>
+                </div>
             </div>
             <!-- Actions -->
             <div class="flex flex-row justify-between sm:justify-start gap-4 px-0 py-2">
@@ -29,7 +37,7 @@
                     class="bg-black hover:bg-slate-700 text-white capitalize p-2 sm:px-4 rounded-sm shadow-none transition duration-500 ease-in-out">
                     <a href="{{ route('pf_categories.edit', $category) }}">
                         Edit
-                        <i class="fa-solid fa-pen-to-square text-blue-400 px-1"></i>
+                        <i class="fa-solid fa-pen-to-square text-blue-600 px-1"></i>
                     </a>
                 </button>
                 <!-- Delete -->
@@ -153,7 +161,7 @@
         </div>
 
         <!-- Footer -->
-        <div class="flex flex-row justify-end items-center py-4 px-4 bg-blue-400 sm:rounded-b-lg">
+        <div class="flex flex-row justify-end items-center py-4 px-4 bg-blue-600 sm:rounded-b-lg">
             <a href="{{ route('pf_categories') }}">
                 <i class="fa-lg fa-solid fa-backward-step text-white hover:text-black transition duration-1000 ease-in-out"
                     title="Go Back"></i>

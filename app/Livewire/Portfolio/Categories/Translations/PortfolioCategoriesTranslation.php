@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Portfolio\Categories\Translations;
 
+use App\Models\Portfolio\PortfolioCategory;
 use App\Models\Portfolio\PortfolioCategoryTranslation;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -70,15 +71,17 @@ class PortfolioCategoriesTranslation extends Component
             $found = $translations->where('name', "like", "%" . $this->search . "%")->count();
         }
 
-        $total = $translations->count();
+        //$total = $translations->count();
         $translations = $translations->paginate($this->perPage);
-
+        $translationsTotal = PortfolioCategoryTranslation::all()->count();
+        $categoriesTotal = PortfolioCategory::all()->count();
     
         return view('livewire.portfolio.categories.translations.portfolio-categories-translation', [
-            'translations'    => $translations,
-            'found'         => $found,
-            'column'        => $this->orderColumn,
-            'total'         => $total,
+            'translations'      => $translations,
+            'found'             => $found,
+            'column'            => $this->orderColumn,
+            'translationsTotal' => $translationsTotal,
+            'categoriesTotal'   => $categoriesTotal,
         ])->layout('layouts.app');
     }
    

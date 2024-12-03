@@ -2,14 +2,14 @@
 
     <!-- Sitemap -->
     <div class="flex flex-row justify-start items-start gap-1 text-sm py-3 px-4 text-slate-500">
-        <a href="/pf_categories" class="font-bold text-black border-b-2 border-b-blue-600">Categories</a>
+        <a href="/pf_categories" class="font-bold text-black border-b-2 border-b-blue-600">PortFolio Categories</a>
     </div>
     <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
 
         <div>
 
             <!-- Header -->
-            <div class="flex flex-row justify-between items-center py-4 bg-blue-400">
+            <div class="flex flex-row justify-between items-center py-4 bg-blue-600">
                 <div>
                     <span class="text-lg text-white px-4">Categories <span
                             class="text-sm">({{ $search != '' ? $found : $total }})</span></span>
@@ -29,7 +29,7 @@
                         <i class="fa-solid fa-magnifying-glass"></i>
                     </div>
                     <input wire:model.live="search" type="search"
-                        class="w-full rounded-lg pl-10 font-sm placeholder-zinc-400 focus:outline-none focus:ring-0 focus:border-blue-400 border-2 border-zinc-200"
+                        class="w-full rounded-lg pl-10 font-sm placeholder-zinc-400 focus:outline-none focus:ring-0 focus:border-blue-600 border-2 border-zinc-200"
                         placeholder="Search by name">
                 </div>
                 <!-- Pagination -->
@@ -38,7 +38,7 @@
                         <i class="fa-solid fa-book-open"></i>
                     </div>
                     <select wire:model.live="perPage"
-                        class="w-full rounded-lg text-end focus:outline-none focus:ring-0 focus:border-blue-400 border-2 border-zinc-200 ">
+                        class="w-full rounded-lg text-end focus:outline-none focus:ring-0 focus:border-blue-600 border-2 border-zinc-200 ">
                         <option value="10">10</option>
                         <option value="25">25</option>
                         <option value="50">50</option>
@@ -94,7 +94,7 @@
 
                                 @foreach ($categories as $category)
                                     <tr
-                                        class="text-black text-sm leading-6 even:bg-zinc-200 odd:bg-gray-300 transition-all duration-1000 hover:bg-blue-400">
+                                        class="text-black text-sm leading-6 even:bg-zinc-200 odd:bg-gray-300 transition-all duration-1000 hover:bg-yellow-400">
                                         <td class="p-2 text-center"><input wire:model.live="selections" type="checkbox"
                                                 class="text-green-600 outline-none focus:ring-0 checked:bg-green-500"
                                                 value={{ $category->id }}></td>
@@ -165,7 +165,7 @@
                 {{ $categories->links() }}
             </div>
             <!-- Footer -->
-            <div class="flex flex-row justify-end items-center py-4 px-4 bg-blue-400 sm:rounded-b-lg">
+            <div class="flex flex-row justify-end items-center py-4 px-4 bg-blue-600 sm:rounded-b-lg">
                 <a href="{{ route('dashboard') }}">
                     <i class="fa-lg fa-solid fa-backward-step text-white hover:text-black transition duration-1000 ease-in-out"
                         title="Go Back"></i>
