@@ -18,21 +18,15 @@ class PortfolioCategoriesTranslationCreate extends Component
     
     public PortfolioCategory $category;
     public string $missingTranslationId;
-
-    //public $language_id;
     public $name;
-
-    public $translationId;
 
     protected $rules = [
         'name' => 'required|min:3',
-        /* 'language_id'       => 'required', */
     ];
 
     protected $messages = [
-        'name.required' => 'The name is required',
+        'name.required' => 'The category name is required',
         'name.min' => 'The name must have at least 3 characters',
-        /* 'language_id.required' => 'The language is required', */
     ];
 
     public function boot(
@@ -83,22 +77,9 @@ class PortfolioCategoriesTranslationCreate extends Component
     }
 
     public function render()
-    {
-        /* var_dump($this->missingTranslationId);
-        dd('oli');  */
-
-        /* $idNumber = (int)$this->missingTranslationId;
-        var_dump($idNumber);
-        dd($idNumber); */
-        
-        /* $translationLanguage = Languages::where('code', $this->missingTranslation)->get()->toArray();
-
-        dd($translationLanguage[0]['code']); */
-
+    {       
         // 1 - Check if the missingTranslationId is a valid Translation Language
         $translationLanguage = Languages::where('id', $this->missingTranslationId)->first();
-
-        /* dd($translationLanguage); */
 
         if (!$translationLanguage) {
             abort(404, 'Language not found');
@@ -106,17 +87,7 @@ class PortfolioCategoriesTranslationCreate extends Component
 
         // 2 - Check if the Language have already a translation. if so, no need to give the option to create a new one.
         $isTranslated = $this->translationService->isTranslated($this->category->translations,$this->missingTranslationId);
-        //dd($isTranslated);
-        //$this->translationId = $translationLanguage->id;
-
-        /* if ($translationLanguage)
-        {
-            dd($translationLanguage);
-        }
-        else {
-            dd('vacio');
-        } */
-
+        
         return view('livewire.portfolio.categories.translations.portfolio-categories-translation-create', [
             'category' => $this->category,
             'languages' => Languages::all(),

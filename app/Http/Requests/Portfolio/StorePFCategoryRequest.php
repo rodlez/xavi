@@ -30,4 +30,15 @@ class StorePFCategoryRequest extends FormRequest
             'description' => 'bail|nullable|min:3|string',
         ];
     }
+
+    public function messages(): array
+    {
+        //dd($this->category);
+        return [
+            'name.required' => 'The category name is required',
+            'name.min' => 'The category name must have at least :min characters',
+            'name.unique' => 'This category is already created',
+            'description' => 'If there is a description must have at least :min characters',
+        ];
+    }
 }

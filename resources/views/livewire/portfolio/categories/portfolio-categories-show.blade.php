@@ -1,14 +1,14 @@
 <div class="max-w-7xl mx-auto sm:pb-8 sm:px-6 lg:px-8">
     <!-- Sitemap -->
     <div class="flex flex-row justify-start items-start gap-1 text-sm py-3 px-4 text-slate-500">
-        <a href="/pf_categories" class="text-black hover:text-blue-600">PortFolio Categories</a> /
-        <a href="/pf_categories/{{ $category->id }}" class="font-bold text-black border-b-2 border-b-blue-600">Info</a>
+        <a href="/pf_categories" class="text-black hover:text-blue-800">PortFolio Categories</a> /
+        <a href="/pf_categories/{{ $category->id }}" class="font-bold text-black border-b-2 border-b-blue-800">Info</a>
     </div>
 
     <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
 
         <!-- HEADER -->
-        <div class="flex flex-row justify-between items-center py-4 bg-blue-600">
+        <div class="flex flex-row justify-between items-center py-4 bg-blue-800">
             <div>
                 <span class="text-lg text-white px-4">Portfolio Category - {{ $category->name }}</span>
             </div>
@@ -37,7 +37,7 @@
                     class="bg-black hover:bg-slate-700 text-white capitalize p-2 sm:px-4 rounded-sm shadow-none transition duration-500 ease-in-out">
                     <a href="{{ route('pf_categories.edit', $category) }}">
                         Edit
-                        <i class="fa-solid fa-pen-to-square text-blue-600 px-1"></i>
+                        <i class="fa-solid fa-pen-to-square text-blue-800 px-1"></i>
                     </a>
                 </button>
                 <!-- Delete -->
@@ -114,7 +114,7 @@
                                         <!-- Edit -->
                                         <a href="{{ route('pf_categories_trans.edit', $translation) }}" title="Edit">
                                             <i
-                                                class="fa-solid fa-pen-to-square text-blue-600 hover:text-black transition duration-1000 ease-in-out"></i>
+                                                class="fa-solid fa-pen-to-square text-blue-800 hover:text-black transition duration-1000 ease-in-out"></i>
                                         </a>
                                         <!-- Delete -->
                                         <form action="{{ route('pf_categories_trans.destroy', $translation) }}"
@@ -161,7 +161,7 @@
         </div>
 
         <!-- Footer -->
-        <div class="flex flex-row justify-end items-center py-4 px-4 bg-blue-600 sm:rounded-b-lg">
+        <div class="flex flex-row justify-end items-center py-4 px-4 bg-blue-800 sm:rounded-b-lg">
             <a href="{{ route('pf_categories') }}">
                 <i class="fa-lg fa-solid fa-backward-step text-white hover:text-black transition duration-1000 ease-in-out"
                     title="Go Back"></i>

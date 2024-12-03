@@ -2,14 +2,14 @@
 
     <!-- Sitemap -->
     <div class="flex flex-row justify-start items-start gap-1 text-sm py-3 px-4 text-slate-500">
-        <a href="/pf_categories" class="font-bold text-black border-b-2 border-b-blue-600">PortFolio Categories</a>
+        <a href="/pf_categories" class="font-bold text-black border-b-2 border-b-blue-800">PortFolio Categories</a>
     </div>
     <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
 
         <div>
 
             <!-- Header -->
-            <div class="flex flex-row justify-between items-center py-4 bg-blue-600">
+            <div class="flex flex-row justify-between items-center py-4 bg-blue-800">
                 <div>
                     <span class="text-lg text-white px-4">Categories <span
                             class="text-sm">({{ $search != '' ? $found : $total }})</span></span>
@@ -29,7 +29,7 @@
                         <i class="fa-solid fa-magnifying-glass"></i>
                     </div>
                     <input wire:model.live="search" type="search"
-                        class="w-full rounded-lg pl-10 font-sm placeholder-zinc-400 focus:outline-none focus:ring-0 focus:border-blue-600 border-2 border-zinc-200"
+                        class="w-full rounded-lg pl-10 font-sm placeholder-zinc-400 focus:outline-none focus:ring-0 focus:border-blue-800 border-2 border-zinc-200"
                         placeholder="Search by name">
                 </div>
                 <!-- Pagination -->
@@ -38,7 +38,7 @@
                         <i class="fa-solid fa-book-open"></i>
                     </div>
                     <select wire:model.live="perPage"
-                        class="w-full rounded-lg text-end focus:outline-none focus:ring-0 focus:border-blue-600 border-2 border-zinc-200 ">
+                        class="w-full rounded-lg text-end focus:outline-none focus:ring-0 focus:border-blue-800 border-2 border-zinc-200 ">
                         <option value="10">10</option>
                         <option value="25">25</option>
                         <option value="50">50</option>
@@ -73,17 +73,17 @@
                                 <tr class="text-black text-left text-sm font-normal uppercase">
                                     <th></th>
                                     <th wire:click="sorting('pf_categories.id')" scope="col"
-                                        class="p-2 hover:cursor-pointer hover:text-blue-600 {{ $column == 'pf_categories.id' ? 'text-blue-600' : '' }}">
+                                        class="p-2 hover:cursor-pointer hover:text-blue-800 {{ $column == 'pf_categories.id' ? 'text-blue-800' : '' }}">
                                         id {!! $sortLink !!}</th>
                                     <th wire:click="sorting('name')" scope="col"
-                                        class="p-2 hover:cursor-pointer hover:text-blue-600 {{ $column == 'name' ? 'text-blue-600' : '' }}">
+                                        class="p-2 hover:cursor-pointer hover:text-blue-800 {{ $column == 'name' ? 'text-blue-800' : '' }}">
                                         name {!! $sortLink !!}</th>
                                     <th scope="col" class="p-2 capitalize">description</th>
                                     <th wire:click="sorting('pf_categories.created_at')" scope="col"
-                                        class="p-2 hover:cursor-pointer hover:text-blue-600 {{ $column == 'pf_categories.created_at' ? 'text-blue-600' : '' }}">
+                                        class="p-2 hover:cursor-pointer hover:text-blue-800 {{ $column == 'pf_categories.created_at' ? 'text-blue-800' : '' }}">
                                         created {!! $sortLink !!}</th>
                                     <th wire:click="sorting('pf_categories.updated_at')" scope="col"
-                                        class="p-2 hover:cursor-pointer hover:text-blue-600 {{ $column == 'pf_categories.updated_at' ? 'text-blue-600' : '' }}">
+                                        class="p-2 hover:cursor-pointer hover:text-blue-800 {{ $column == 'pf_categories.updated_at' ? 'text-blue-800' : '' }}">
                                         updated {!! $sortLink !!}</th>
 
                                     <th scope="col" class="p-2 text-center capitalize">translations</th>
@@ -108,7 +108,7 @@
 
                                         <td class="p-2">{{ date('d-m-Y', strtotime($category->created_at)) }}</td>
                                         <td class="p-2">{{ date('d-m-Y', strtotime($category->updated_at)) }}</td>
-                                        <td class="p-2 text-center">
+                                        <td class="p-2 text-center uppercase">
                                             @foreach ($category->translations as $translation)
                                                 {{ $translation->language->code }}
                                             @endforeach
@@ -118,7 +118,7 @@
                                                 <!-- Show -->
                                                 <a href="{{ route('pf_categories.show', $category) }}" title="Show">
                                                     <i
-                                                        class="fa-solid fa-circle-info text-blue-600 hover:text-black transition duration-1000 ease-in-out"></i>
+                                                        class="fa-solid fa-circle-info text-blue-800 hover:text-black transition duration-1000 ease-in-out"></i>
                                                 </a>
                                                 <!-- Edit -->
                                                 <a href="{{ route('pf_categories.edit', $category) }}" title="Edit">
@@ -165,7 +165,7 @@
                 {{ $categories->links() }}
             </div>
             <!-- Footer -->
-            <div class="flex flex-row justify-end items-center py-4 px-4 bg-blue-600 sm:rounded-b-lg">
+            <div class="flex flex-row justify-end items-center py-4 px-4 bg-blue-800 sm:rounded-b-lg">
                 <a href="{{ route('dashboard') }}">
                     <i class="fa-lg fa-solid fa-backward-step text-white hover:text-black transition duration-1000 ease-in-out"
                         title="Go Back"></i>

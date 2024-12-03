@@ -18,10 +18,10 @@ class PortfolioCategoriesCreate extends Component
     ];
 
     protected $messages = [
-        'name.required' => 'The name is required',
-        'name.min' => 'The name must have at least 3 characters',
+        'name.required' => 'The category name is required',
+        'name.min' => 'The category name must have at least 3 characters',
         'name.unique' => 'This category is already created',
-        'description.min' => 'The description must have at least 3 characters',
+        'description.min' => 'If there is a description must have at least 3 characters',
     ];
 
     public function save(Request $request)
