@@ -70,15 +70,11 @@ Route::middleware([
     Route::get('/pf_categories/edit/{category}', PortfolioCategoriesEdit::class)->name('pf_categories.edit');
 
 
-    /* PORTFOLIO CATEGORIES */
-
-    Route::get('/pf_categories/{category}/translation/create/{missingTranslation?}', PortfolioCategoriesTranslationCreate::class)->name('pf_categories_trans.create');
-
-
+    /* PORTFOLIO CATEGORIES TRANSLATIONS */
+    Route::get('/pf_categories/{category}/translation/create/{missingTranslationId?}', PortfolioCategoriesTranslationCreate::class)->name('pf_categories_trans.create')->where('missingTranslationId', '[0-9]+');
     Route::get('/pf_categories_trans', PortfolioCategoriesTranslation::class)->name('pf_categories_trans');
     Route::put('/pf_categories_trans/{translation}', [PortfolioCategoryTranslationController::class, 'update'])->name('pf_categories_trans.update');
     Route::delete('/pf_categories_trans/{translation}', [PortfolioCategoryTranslationController::class, 'destroy'])->name('pf_categories_trans.destroy');
-
     Route::get('/pf_categories_trans/edit/{translation}', PortfolioCategoriesTranslationEdit::class)->name('pf_categories_trans.edit');
 
 });

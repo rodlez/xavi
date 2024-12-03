@@ -136,7 +136,7 @@
                                 <td class="p-2 bg-red-100 max-sm:hidden">-</td>
                                 <td class="p-2 bg-red-100 max-sm:hidden">-</td>
                                 <td class="p-2 bg-red-100">
-                                    <a href="{{ route('pf_categories_trans.create', ['category' => $category, 'missingTranslation' => $missing->code]) }}"
+                                    <a href="{{ route('pf_categories_trans.create', ['category' => $category, 'missingTranslationId' => $missing->id]) }}"
                                         title="New Translation">
                                         <i
                                             class="fa-solid fa-circle-plus text-green-600 hover:text-green-400 transition duration-1000 ease-in-out"></i>

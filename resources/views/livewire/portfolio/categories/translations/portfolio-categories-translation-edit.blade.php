@@ -2,7 +2,7 @@
 
     <!-- Sitemap -->
     <div class="flex flex-row justify-start items-start gap-1 text-sm py-3 px-4 text-slate-500">
-        <a href="/pf_categories/{{ $translation->category->id }}" class="hover:text-violet-600">Portfolio Category</a> /
+        <a href="/pf_categories/{{ $translation->category->id }}" class="hover:text-violet-600">{{ $translation->category->name }}</a> /
         <a href="/pf_categories_trans/edit/{{ $translation->id }}"
             class="font-bold text-black border-b-2 border-b-violet-600">Edit</a>
     </div>
@@ -14,7 +14,7 @@
             <!-- Header -->
             <div class="flex flex-row justify-between items-center py-4 bg-violet-400">
                 <div>
-                    <span class="text-lg text-white px-4">Translation</span>
+                    <span class="text-lg text-white px-4 capitalize">Edit Translation ({{ $translation->language->name }})</span>
                 </div>
 
             </div>

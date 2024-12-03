@@ -27,10 +27,7 @@ class PortfolioCategoriesShow extends Component
 
     public function render()
     {
-       //dd($this->translationService->getLanguageCodes());
-
-       //dd($this->category->translations);
-
+       
        $missingTranslations = $this->translationService->getPFCategoryTranslationsMissing($this->category->id);
 
         return view('livewire.portfolio.categories.portfolio-categories-show', [
