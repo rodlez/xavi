@@ -7,6 +7,8 @@ use App\Http\Controllers\Languages\LanguagesController;
 use App\Http\Controllers\Playground;
 use App\Http\Controllers\Portfolio\PortfolioCategoryController;
 use App\Http\Controllers\Portfolio\PortfolioCategoryTranslationController;
+use App\Http\Controllers\Portfolio\PortfolioTypeController;
+use App\Http\Controllers\Portfolio\PortfolioTypeTranslationController;
 /* Livewire Full Page Components */
 
 use App\Livewire\Languages\Languages;
@@ -20,6 +22,13 @@ use App\Livewire\Portfolio\Categories\PortfolioCategoriesShow;
 use App\Livewire\Portfolio\Categories\Translations\PortfolioCategoriesTranslation;
 use App\Livewire\Portfolio\Categories\Translations\PortfolioCategoriesTranslationCreate;
 use App\Livewire\Portfolio\Categories\Translations\PortfolioCategoriesTranslationEdit;
+use App\Livewire\Portfolio\Types\PortfolioTypes;
+use App\Livewire\Portfolio\Types\PortfolioTypesCreate;
+use App\Livewire\Portfolio\Types\PortfolioTypesEdit;
+use App\Livewire\Portfolio\Types\PortfolioTypesShow;
+use App\Livewire\Portfolio\Types\Translations\PortfolioTypesTranslation;
+use App\Livewire\Portfolio\Types\Translations\PortfolioTypesTranslationCreate;
+use App\Livewire\Portfolio\Types\Translations\PortfolioTypesTranslationEdit;
 
 /* ------------------------------------------------------------- WEB ------------------------------------------------------------- */
 
@@ -38,28 +47,26 @@ Route::get('/services', function () {
 Route::get('/playground', [Playground::class, 'index'])->name('playground');
 
 /* LANGUAGES SWITCH */
-Route::get('lang', [LanguageController::class, 'change'])->name("change.lang");
+Route::get('lang', [LanguageController::class, 'change'])->name('change.lang');
 
 /* ------------------------------------------------------------ ADMIN ------------------------------------------------------------ */
 
-Route::middleware([
-    'auth:sanctum',
-    config('jetstream.auth_session'),
-    'verified',
-])->group(function () {
-
+Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified'])->group(function () {
     /* DASHBOARD */
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
 
-    /* LANGUAGES */
+    /************************* LANGUAGES *************************/
+
     Route::get('/languages', Languages::class)->name('languages');
     Route::get('/languages/create', LanguagesCreate::class)->name('languages.create');
     Route::get('/languages/{language}', LanguagesShow::class)->name('languages.show');
     Route::put('/languages/{language}', [LanguagesController::class, 'update'])->name('languages.update');
     Route::delete('/languages/{language}', [LanguagesController::class, 'destroy'])->name('languages.destroy');
     Route::get('/languages/edit/{language}', LanguagesEdit::class)->name('languages.edit');
+
+    /************************* PORTFOLIO *************************/
 
     /* PORTFOLIO CATEGORIES */
     Route::get('/pf_categories', PortfolioCategories::class)->name('pf_categories');
@@ -70,10 +77,29 @@ Route::middleware([
     Route::get('/pf_categories/edit/{category}', PortfolioCategoriesEdit::class)->name('pf_categories.edit');
 
     /* PORTFOLIO CATEGORIES TRANSLATIONS */
-    Route::get('/pf_categories/{category}/translation/create/{missingTranslationId?}', PortfolioCategoriesTranslationCreate::class)->name('pf_categories_trans.create')->where('missingTranslationId', '[0-9]+');
+    Route::get('/pf_categories/{category}/translation/create/{missingTranslationId?}', PortfolioCategoriesTranslationCreate::class)
+        ->name('pf_categories_trans.create')
+        ->where('missingTranslationId', '[0-9]+');
     Route::get('/pf_categories_trans', PortfolioCategoriesTranslation::class)->name('pf_categories_trans');
     Route::put('/pf_categories_trans/{translation}', [PortfolioCategoryTranslationController::class, 'update'])->name('pf_categories_trans.update');
     Route::delete('/pf_categories_trans/{translation}', [PortfolioCategoryTranslationController::class, 'destroy'])->name('pf_categories_trans.destroy');
     Route::get('/pf_categories_trans/edit/{translation}', PortfolioCategoriesTranslationEdit::class)->name('pf_categories_trans.edit');
+
+    /* PORTFOLIO TYPES */
+    Route::get('/pf_types', PortfolioTypes::class)->name('pf_types');
+    Route::get('/pf_types/create', PortfolioTypesCreate::class)->name('pf_types.create');
+    Route::get('/pf_types/{type}', PortfolioTypesShow::class)->name('pf_types.show');
+    Route::put('/pf_types/{type}', [PortfolioTypeController::class, 'update'])->name('pf_types.update');
+    Route::delete('/pf_types/{type}', [PortfolioTypeController::class, 'destroy'])->name('pf_types.destroy');
+    Route::get('/pf_types/edit/{type}', PortfolioTypesEdit::class)->name('pf_types.edit');
+
+    /* PORTFOLIO TYPES TRANSLATIONS */
+    Route::get('/pf_types/{type}/translation/create/{missingTranslationId?}', PortfolioTypesTranslationCreate::class)
+        ->name('pf_types_trans.create')
+        ->where('missingTranslationId', '[0-9]+');
+    Route::get('/pf_types_trans', PortfolioTypesTranslation::class)->name('pf_types_trans');
+    Route::put('/pf_types_trans/{translation}', [PortfolioTypeTranslationController::class, 'update'])->name('pf_types_trans.update');
+    Route::delete('/pf_types_trans/{translation}', [PortfolioTypeTranslationController::class, 'destroy'])->name('pf_types_trans.destroy');
+    Route::get('/pf_types_trans/edit/{translation}', PortfolioTypesTranslationEdit::class)->name('pf_types_trans.edit');
 
 });

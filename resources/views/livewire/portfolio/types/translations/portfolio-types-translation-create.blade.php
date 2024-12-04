@@ -2,35 +2,35 @@
 
     <!-- Sitemap -->
     <div class="flex flex-row justify-start items-start gap-1 text-sm py-3 px-4 text-slate-500">
-        <a href="/pf_categories" class="hover:text-blue-400">Categories</a> /
-        <a href="/pf_categories/{{ $category->id }}" class="hover:text-blue-400">{{ $category->name }}</a> /
-        <a href="/pf_categories/{{ $category->id }}/translation/create"
-            class="font-bold text-black border-b-2 border-b-blue-400">Translation</a>
+        <a href="/pf_types" class="hover:text-{{$menuColor}}-400">Types</a> /
+        <a href="/pf_types/{{ $type->id }}" class="hover:text-{{$menuColor}}-400">{{ $type->name }}</a> /
+        <a href="/pf_types/{{ $type->id }}/translation/create"
+            class="font-bold text-black border-b-2 border-b-{{$menuColor}}-400">Translation</a>
     </div>
 
     <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
 
         <!-- HEADER -->
-        <div class="flex flex-row justify-between items-center py-4 bg-blue-400">
+        <div class="flex flex-row justify-between items-center py-4 bg-{{$menuColor}}-400">
             <div>
                 <span class="text-lg text-white px-4 capitalize">New Translation
                     ({{ $translationLanguage->name }})</span>
             </div>
         </div>
 
-        <!-- CATEGORY INFO -->
+        <!-- TYPE INFO -->
         <div class="flex flex-col mx-auto my-4 w-11/12">
             <div class="w-fit bg-black text-white text-lg capitalize mb-1 p-2">
                 Information
             </div>
             <div class="flex flex-col text-white bg-slate-800">
                 <span class="bg-orange-600 py-1 px-2">Id</span>
-                <span class="text-sm p-2">{{ $category->id }}</span>
-                <span class="bg-orange-600 py-1 px-2">Category</span>
-                <span class="font-bold p-2">{{ $category->name }}</span>
+                <span class="text-sm p-2">{{ $type->id }}</span>
+                <span class="bg-orange-600 py-1 px-2">Type</span>
+                <span class="font-bold p-2">{{ $type->name }}</span>
                 <span class="bg-orange-600 py-1 px-2">Description</span>
                 <span
-                    class="text-sm p-2">{{ $category->description ? $category->description : '-' }}</span>
+                    class="text-sm p-2">{{ $type->description ? $type->description : '-' }}</span>
             </div>
         </div>
 
@@ -42,7 +42,7 @@
                     <!-- Add Token to prevent Cross-Site Request Forgery (CSRF) -->
                     @csrf
 
-                    <div class="italic p-2 rounded-md bg-blue-100">Type a new Translation for this Category
+                    <div class="italic p-2 rounded-md bg-{{$menuColor}}-100">Type a new Translation for this Type
                     </div>
 
                     <!-- Language -->
@@ -88,7 +88,7 @@
             <div class="flex flex-row justify-between items-center gap-4 bg-red-600 p-4 rounded-md">
                 <span class="text-white font-bold">The Translation for this language ({{ $translationLanguage->name }}) is already
                     created.</span>
-                <a href="{{ route('pf_categories.show', $category) }}" 
+                <a href="{{ route('pf_types.show', $type) }}" 
                 class="font-bold text-white hover:text-black transition duration-1000 ease-in-out"
                 title="Go Back"
                 >
@@ -99,8 +99,8 @@
         </div>
 
         <!-- Footer -->
-        <div class="flex flex-row justify-end items-center py-4 px-4 bg-blue-400 sm:rounded-b-lg">
-            <a href="{{ route('pf_categories.show', $category) }}">
+        <div class="flex flex-row justify-end items-center py-4 px-4 bg-{{$menuColor}}-400 sm:rounded-b-lg">
+            <a href="{{ route('pf_types.show', $type) }}">
                 <i class="fa-lg fa-solid fa-backward-step text-white hover:text-black transition duration-1000 ease-in-out"
                     title="Go Back"></i>
             </a>

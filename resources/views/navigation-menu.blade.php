@@ -31,6 +31,14 @@
                         {{ __('PF Cats Trans') }}
                     </x-nav-link>
 
+                    <x-nav-link href="{{ route('pf_types') }}" :active="request()->routeIs('pf_types')">
+                        {{ __('PF Types') }}
+                    </x-nav-link>
+
+                    <x-nav-link href="{{ route('pf_types_trans') }}" :active="request()->routeIs('pf_types_trans')">
+                        {{ __('PF Types Trans') }}
+                    </x-nav-link>
+
                     <!-- TEST LANG -->
                     <x-dropdown align="right" width="48">
                         <x-slot name="trigger">

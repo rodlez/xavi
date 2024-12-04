@@ -2,45 +2,34 @@
 
     <!-- Sitemap -->
     <div class="flex flex-row justify-start items-start gap-1 text-sm py-3 px-4 text-slate-500">
-        <a href="/pf_categories_trans" class="font-bold text-black border-b-2 border-b-blue-400">Categories
-            Translations</a>
+        <a href="/pf_types" class="font-bold text-black border-b-2 border-b-{{$menuColor}}">PortFolio Types</a>
     </div>
     <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
 
         <div>
 
             <!-- Header -->
-            <div class="flex flex-row justify-between items-center py-4 bg-blue-400">
+            <div class="flex flex-row justify-between items-center py-4 bg-{{$menuColor}}">
                 <div>
-                    <span class="text-lg text-white px-4">Categories <span class="text-sm">({{ $categoriesTotal }})</span>
-                        Translations <span class="text-sm">({{ $translationsTotal }})</span>
-                    </span>
+                    <span class="text-lg text-white px-4">Types <span
+                            class="text-sm">({{ $search != '' ? $found : $total }})</span></span>
                 </div>
                 <div class="px-4">
-                    {{-- <a href="{{ route('pf_categories_trans.create') }}"
+                    <a href="{{ route('pf_types.create') }}"
                         class="text-white text-sm sm:text-md rounded-lg py-2 px-4 bg-black hover:bg-gray-600 transition duration-1000 ease-in-out"
                         title="Create New Language">New
-                    </a> --}}
+                    </a>
                 </div>
             </div>
-
-            <!-- Found -->
-            <div class="flex flex-col sm:flex-row px-4 sm:px-8 pt-2 pb-0">            
-                @if($search != '' && $found > 0)
-                    <span class="text-green-600">{{$found}} Translations found for this search</span>                
-                @endif
-            </div>
-            
             <!-- Search -->
             <div class="flex flex-col sm:flex-row justify-between items-start px-2 sm:px-4 py-4 gap-4">
-
                 <!-- Search -->
                 <div class="relative w-full">
                     <div class="absolute top-2.5 bottom-0 left-4 text-slate-700">
                         <i class="fa-solid fa-magnifying-glass"></i>
                     </div>
                     <input wire:model.live="search" type="search"
-                        class="w-full rounded-lg pl-10 font-sm placeholder-zinc-400 focus:outline-none focus:ring-0 focus:border-blue-400 border-2 border-zinc-200"
+                        class="w-full rounded-lg pl-10 font-sm placeholder-zinc-400 focus:outline-none focus:ring-0 focus:border-{{$menuColor}} border-2 border-zinc-200"
                         placeholder="Search by name">
                 </div>
                 <!-- Pagination -->
@@ -49,7 +38,7 @@
                         <i class="fa-solid fa-book-open"></i>
                     </div>
                     <select wire:model.live="perPage"
-                        class="w-full rounded-lg text-end focus:outline-none focus:ring-0 focus:border-blue-400 border-2 border-zinc-200 ">
+                        class="w-full rounded-lg text-end focus:outline-none focus:ring-0 focus:border-{{$menuColor}} border-2 border-zinc-200 ">
                         <option value="10">10</option>
                         <option value="25">25</option>
                         <option value="50">50</option>
@@ -66,7 +55,7 @@
                             <span><i class="fa-solid fa-rotate-right text-green-600 hover:text-green-500"></i></span>
                         </a>
                         <a wire:click.prevent="bulkDelete"
-                            wire:confirm="Are you sure you want to delete this categories?"
+                            wire:confirm="Are you sure you want to delete this types?"
                             class="cursor-pointer text-red-600 hover:text-red-500" title="Delete">
                             <span><i class="fa-sm fa-solid fa-trash"></i></span>
                             <span>({{ count($selections) }})</span>
@@ -78,73 +67,73 @@
             <div class="px-0 sm:px-4 pb-0 ">
                 <div class="overflow-x-auto">
 
-                    @if ($translations->count())
+                    @if ($types->count())
                         <table class="min-w-full ">
                             <thead>
                                 <tr class="text-black text-left text-sm font-normal uppercase">
                                     <th></th>
-                                    <th wire:click="sorting('pf_categories_trans.id')" scope="col"
-                                        class="p-2 hover:cursor-pointer hover:text-blue-400 {{ $column == 'pf_categories_trans.id' ? 'text-blue-400' : '' }}">
+                                    <th wire:click="sorting('pf_types.id')" scope="col"
+                                        class="p-2 hover:cursor-pointer hover:{{$menuTextColor}} {{ $column == 'pf_types.id' ? $menuTextColor : '' }}">
                                         id {!! $sortLink !!}</th>
-                                    <th wire:click="sorting('pf_categories_trans.pf_cat_id')" scope="col"
-                                        class="p-2 hover:cursor-pointer hover:text-blue-400 {{ $column == 'pf_categories_trans.pf_cat_id' ? 'text-blue-400' : '' }}">
-                                        Cat {!! $sortLink !!}</th>
-                                    <th wire:click="sorting('pf_categories_trans.lang_id')" scope="col"
-                                        class="p-2 hover:cursor-pointer hover:text-blue-400 {{ $column == 'pf_categories_trans.lang_id' ? 'text-blue-400' : '' }}">
-                                        Lang {!! $sortLink !!}</th>
                                     <th wire:click="sorting('name')" scope="col"
-                                        class="p-2 hover:cursor-pointer hover:text-blue-400 {{ $column == 'name' ? 'text-blue-400' : '' }}">
+                                        class="p-2 hover:cursor-pointer hover:{{$menuTextColor}} {{ $column == 'name' ? $menuTextColor : '' }}">
                                         name {!! $sortLink !!}</th>
-                                    <th wire:click="sorting('pf_categories_trans.created_at')" scope="col"
-                                        class="p-2 hover:cursor-pointer hover:text-blue-400 {{ $column == 'pf_categories_trans.created_at' ? 'text-blue-400' : '' }}">
+                                    <th scope="col" class="p-2 capitalize">description</th>
+                                    <th wire:click="sorting('pf_types.created_at')" scope="col"
+                                        class="p-2 hover:cursor-pointer hover:{{$menuTextColor}} {{ $column == 'pf_types.created_at' ? $menuTextColor : '' }}">
                                         created {!! $sortLink !!}</th>
-                                    <th wire:click="sorting('pf_categories_trans.updated_at')" scope="col"
-                                        class="p-2 hover:cursor-pointer hover:text-blue-400 {{ $column == 'pf_categories_trans.updated_at' ? 'text-blue-400' : '' }}">
+                                    <th wire:click="sorting('pf_types.updated_at')" scope="col"
+                                        class="p-2 hover:cursor-pointer hover:{{$menuTextColor}} {{ $column == 'pf_types.updated_at' ? $menuTextColor : '' }}">
                                         updated {!! $sortLink !!}</th>
+
+                                    <th scope="col" class="p-2 text-center capitalize">translations</th>
                                     <th scope="col" class="p-2 text-center capitalize">actions</th>
                                 </tr>
                             </thead>
                             <tbody>
 
-                                @foreach ($translations as $translation)
+                                @foreach ($types as $type)
                                     <tr
-                                        class="text-black text-sm leading-6 even:bg-zinc-200 odd:bg-gray-300 transition-all duration-1000 hover:bg-blue-400">
+                                        class="text-black text-sm leading-6 even:bg-zinc-200 odd:bg-gray-300 transition-all duration-1000 hover:bg-yellow-400">
                                         <td class="p-2 text-center"><input wire:model.live="selections" type="checkbox"
                                                 class="text-green-600 outline-none focus:ring-0 checked:bg-green-500"
-                                                value={{ $translation->id }}></td>
-                                        <td class="p-2">{{ $translation->id }}</td>
-                                        <td class="p-2">{{ $translation->category->name }}</td>
-                                        <td class="p-2">{{ $translation->language->code }}</td>
-                                        <td class="p-2">{{-- <a
-                                                href="{{ route('pf_categories_trans.show', $translation) }}">{{ $translation->name }}</a> --}}
-                                            {{ $translation->name }}
+                                                value={{ $type->id }}></td>
+                                        <td class="p-2">{{ $type->id }}</td>
+                                        <td class="p-2"><a
+                                                href="{{ route('pf_types.show', $type) }}">{{ $type->name }}</a>
                                         </td>
-                                        <td class="p-2">{{ date('d-m-Y', strtotime($translation->created_at)) }}
+                                        <td class="p-2">
+                                            {{(strlen($type->description) >= 20 ? substr($type->description,0,20) . '...' : $type->description)}}                                            
                                         </td>
-                                        <td class="p-2">{{ date('d-m-Y', strtotime($translation->updated_at)) }}
+
+                                        <td class="p-2">{{ date('d-m-Y', strtotime($type->created_at)) }}</td>
+                                        <td class="p-2">{{ date('d-m-Y', strtotime($type->updated_at)) }}</td>
+                                        <td class="p-2 text-center uppercase">
+                                            @foreach ($type->translations as $translation)
+                                                {{ $translation->language->code }}
+                                            @endforeach
                                         </td>
                                         <td class="p-2">
                                             <div class="flex justify-center items-center gap-2">
                                                 <!-- Show -->
-                                                {{-- <a href="{{ route('pf_categories_trans.show', $translation) }}" title="Show">
+                                                <a href="{{ route('pf_types.show', $type) }}" title="Show">
                                                     <i
-                                                        class="fa-solid fa-circle-info text-blue-400 hover:text-black transition duration-1000 ease-in-out"></i>
-                                                </a> --}}
+                                                        class="fa-solid fa-circle-info text-blue-600 hover:text-black transition duration-1000 ease-in-out"></i>
+                                                </a>
                                                 <!-- Edit -->
-                                                <a href="{{ route('pf_categories_trans.edit', $translation) }}"
-                                                    title="Edit">
+                                                <a href="{{ route('pf_types.edit', $type) }}" title="Edit">
                                                     <i
                                                         class="fa-solid fa-pen-to-square text-green-600 hover:text-black transition duration-1000 ease-in-out"></i>
                                                 </a>
                                                 <!-- Delete -->
-                                                <form action="{{ route('pf_categories_trans.destroy', $translation) }}"
+                                                <form action="{{ route('pf_types.destroy', $type) }}"
                                                     method="POST">
                                                     <!-- Add Token to prevent Cross-Site Request Forgery (CSRF) -->
                                                     @csrf
                                                     <!-- Dirtective to Override the http method -->
                                                     @method('DELETE')
                                                     <button
-                                                        onclick="return confirm('Are you sure you want to delete the translation: {{ $translation->name }}?')"
+                                                        onclick="return confirm('Are you sure you want to delete the language: {{ $type->name }}?')"
                                                         title="Delete">
                                                         <i
                                                             class="fa-solid fa-trash text-red-600 hover:text-black transition duration-1000 ease-in-out"></i>
@@ -159,7 +148,7 @@
                     @else
                         <div
                             class="flex flex-row justify-between items-center bg-black text-white rounded-lg p-4 mx-2 sm:mx-0">
-                            <span class="text-red-600">No translations found in the system.</span>
+                            <span>No types found in the system.</span>
                             <a wire:click.prevent="clearSearch" title="Reset">
                                 <i
                                     class="fa-lg fa-solid fa-circle-xmark cursor-pointer px-2 text-red-600 hover:text-red-400 transition duration-1000 ease-in-out"></i>
@@ -173,10 +162,10 @@
             </div>
             <!-- Pagination Links -->
             <div class="py-2 px-4">
-                {{ $translations->links() }}
+                {{ $types->links() }}
             </div>
             <!-- Footer -->
-            <div class="flex flex-row justify-end items-center py-4 px-4 bg-blue-400 sm:rounded-b-lg">
+            <div class="flex flex-row justify-end items-center py-4 px-4 bg-{{$menuColor}} sm:rounded-b-lg">
                 <a href="{{ route('dashboard') }}">
                     <i class="fa-lg fa-solid fa-backward-step text-white hover:text-black transition duration-1000 ease-in-out"
                         title="Go Back"></i>
@@ -188,3 +177,4 @@
     </div>
 
 </div>
+
