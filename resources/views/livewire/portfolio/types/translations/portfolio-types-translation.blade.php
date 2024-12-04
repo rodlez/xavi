@@ -2,13 +2,13 @@
 
     <!-- Sitemap -->
     <div class="flex flex-row justify-start items-start gap-1 text-sm py-3 px-4 text-slate-500">
-        <a href="/pf_types_trans" class="font-bold text-black border-b-2 border-b-{{$menuColor}}-400">Types
+        <a href="/pf_types_trans" class="font-bold text-black {{$underlineMenuHeader}}">Types
             Translations</a>
     </div>
     <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
 
             <!-- HEADER -->
-            <div class="flex flex-row justify-between items-center py-4 bg-{{$menuColor}}-400">
+            <div class="flex flex-row justify-between items-center py-4 {{$bgMenuColor}}">
                 <div>
                     <span class="text-lg text-white px-4">Types <span class="text-sm">({{ $totalEntries }})</span>
                         Translations <span class="text-sm">({{ $totalTranslations }})</span>
@@ -38,7 +38,7 @@
                         <i class="fa-solid fa-magnifying-glass"></i>
                     </div>
                     <input wire:model.live="search" type="search"
-                        class="w-full rounded-lg pl-10 font-sm placeholder-zinc-400 focus:outline-none focus:ring-0 focus:border-{{$menuColor}}-400 border-2 border-zinc-200"
+                        class="w-full rounded-lg pl-10 font-sm placeholder-zinc-400 {{$focusColor}} border-2 border-zinc-200"
                         placeholder="Search by name">
                 </div>
                 <!-- Pagination -->
@@ -47,7 +47,7 @@
                         <i class="fa-solid fa-book-open"></i>
                     </div>
                     <select wire:model.live="perPage"
-                        class="w-full rounded-lg text-end focus:outline-none focus:ring-0 focus:border-{{$menuColor}}-400 border-2 border-zinc-200 ">
+                        class="w-full rounded-lg text-end {{$focusColor}} border-2 border-zinc-200 ">
                         <option value="10">10</option>
                         <option value="25">25</option>
                         <option value="50">50</option>
@@ -175,7 +175,7 @@
                 {{ $translations->links() }}
             </div>
             <!-- Footer -->
-            <div class="flex flex-row justify-end items-center py-4 px-4 bg-{{$menuColor}}-400 sm:rounded-b-lg">
+            <div class="flex flex-row justify-end items-center py-4 px-4 {{$bgMenuColor}} sm:rounded-b-lg">
                 <a href="{{ route('dashboard') }}">
                     <i class="fa-lg fa-solid fa-backward-step text-white hover:text-black transition duration-1000 ease-in-out"
                         title="Go Back"></i>

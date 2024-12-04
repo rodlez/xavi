@@ -2,16 +2,16 @@
 
     <!-- Sitemap -->
     <div class="flex flex-row justify-start items-start gap-1 text-sm py-3 px-4 text-slate-500">
-        <a href="/pf_types" class="hover:text-{{$menuColor}}-400">Types</a> /
-        <a href="/pf_types/{{ $type->id }}" class="hover:text-{{$menuColor}}-400">{{ $type->name }}</a> /
+        <a href="/pf_types" class="{{$textMenuHeader}}">Types</a> /
+        <a href="/pf_types/{{ $type->id }}" class="{{$textMenuHeader}}">{{ $type->name }}</a> /
         <a href="/pf_types/{{ $type->id }}/translation/create"
-            class="font-bold text-black border-b-2 border-b-{{$menuColor}}-400">Translation</a>
+            class="font-bold text-black {{$underlineMenuHeader}}">Translation</a>
     </div>
 
     <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
 
         <!-- HEADER -->
-        <div class="flex flex-row justify-between items-center py-4 bg-{{$menuColor}}-400">
+        <div class="flex flex-row justify-between items-center py-4 {{$bgMenuColor}}">
             <div>
                 <span class="text-lg text-white px-4 capitalize">New Translation
                     ({{ $translationLanguage->name }})</span>
@@ -42,7 +42,7 @@
                     <!-- Add Token to prevent Cross-Site Request Forgery (CSRF) -->
                     @csrf
 
-                    <div class="italic p-2 rounded-md bg-{{$menuColor}}-100">Type a new Translation for this Type
+                    <div class="italic p-2 rounded-md {{$bgInfoColor}}">Type a new Translation for this Type
                     </div>
 
                     <!-- Language -->
@@ -99,7 +99,7 @@
         </div>
 
         <!-- Footer -->
-        <div class="flex flex-row justify-end items-center py-4 px-4 bg-{{$menuColor}}-400 sm:rounded-b-lg">
+        <div class="flex flex-row justify-end items-center py-4 px-4 {{$bgMenuColor}} sm:rounded-b-lg">
             <a href="{{ route('pf_types.show', $type) }}">
                 <i class="fa-lg fa-solid fa-backward-step text-white hover:text-black transition duration-1000 ease-in-out"
                     title="Go Back"></i>

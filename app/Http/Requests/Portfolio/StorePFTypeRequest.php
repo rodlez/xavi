@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Portfolio;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\App;
 use Illuminate\Validation\Rule;
 
 class StorePFTypeRequest extends FormRequest
@@ -25,19 +26,18 @@ class StorePFTypeRequest extends FormRequest
         return [
             // TODO: Ignore current id in the unique validation - https://laravel-news.com/laravel-validation
             /* 'name' => 'bail|required|min:3|string|unique:pf_categories,name', */
-            'name' => 'bail|required|min:3|string|'. Rule::unique('pf_types')->ignore($this->type),
+            'name' => 'bail|required|min:3|string|' . Rule::unique('pf_types')->ignore($this->type),
             'description' => 'bail|nullable|min:3|string',
         ];
     }
 
     public function messages(): array
     {
-        //dd($this->type);
-        return [
+         return [
             'name.required' => 'The type name is required',
             'name.min' => 'The type name must have at least :min characters',
             'name.unique' => 'This type is already created',
             'description' => 'If there is a description must have at least :min characters',
-        ];
+         ];
     }
 }

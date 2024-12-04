@@ -31,8 +31,10 @@ class PortfolioTypesShow extends Component
 
         return view('livewire.portfolio.types.portfolio-types-show', [
             // Styles
-            'menuColor' => 'emerald-800',
-            'menuTextColor' => 'text-emerald-800',
+            'underlineMenuHeader'   => 'border-b-2 border-b-emerald-600',
+            'textMenuHeader'        => 'hover:text-emerald-800',
+            'bgMenuColor'           => 'bg-emerald-800',
+            'menuTextColor'         => 'text-emerald-800',
             // Data
             'type'                  => $this->type,
             'languages'             => Languages::all(),

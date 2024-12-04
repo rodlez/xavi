@@ -2,15 +2,15 @@
 
     <!-- Sitemap -->
     <div class="flex flex-row justify-start items-start gap-1 text-sm py-3 px-4 text-slate-500">
-        <a href="/pf_types/{{ $translation->type->id }}" class="hover:text-{{$menuColor}}-400">{{ $translation->type->name }}</a> /
+        <a href="/pf_types/{{ $translation->type->id }}" class="{{$textMenuHeader}}">{{ $translation->type->name }}</a> /
         <a href="/pf_types_trans/edit/{{ $translation->id }}"
-            class="font-bold text-black border-b-2 border-b-{{$menuColor}}-400">Edit</a>
+            class="font-bold text-black {{$underlineMenuHeader}}">Edit</a>
     </div>
 
     <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
 
             <!-- HEADER -->
-            <div class="flex flex-row justify-between items-center py-4 bg-{{$menuColor}}-400">
+            <div class="flex flex-row justify-between items-center py-4 {{$bgMenuColor}}">
                 <div>
                     <span class="text-lg text-white px-4 capitalize">Edit Translation ({{ $translation->language->name }})</span>
                 </div>
@@ -40,7 +40,7 @@
                 <!-- Dirtective to Override the http method -->
                 @method('PUT')
 
-                    <div class="italic p-2 rounded-md bg-{{$menuColor}}-100">Edit the Translation for this Type
+                    <div class="italic p-2 rounded-md {{$bgInfoColor}}">Edit the Translation for this Type
                     </div>
 
                     <!-- Language -->
@@ -86,7 +86,7 @@
             </form>
 
             <!-- Footer -->
-            <div class="flex flex-row justify-end items-center py-4 px-4 bg-{{$menuColor}}-400 sm:rounded-b-lg">
+            <div class="flex flex-row justify-end items-center py-4 px-4 {{$bgMenuColor}} sm:rounded-b-lg">
                 <a href="{{ route('pf_types.show', $translation->type) }}">
                     <i class="fa-lg fa-solid fa-backward-step text-white hover:text-black transition duration-1000 ease-in-out"
                         title="Go Back"></i>

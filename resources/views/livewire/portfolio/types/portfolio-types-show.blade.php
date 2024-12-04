@@ -1,14 +1,14 @@
 <div class="max-w-7xl mx-auto sm:pb-8 sm:px-6 lg:px-8">
     <!-- Sitemap -->
     <div class="flex flex-row justify-start items-start gap-1 text-sm py-3 px-4 text-slate-500">
-        <a href="/pf_types" class="text-black hover:{{$menuTextColor}}">PortFolio Types</a> /
-        <a href="/pf_types/{{ $type->id }}" class="font-bold text-black border-b-2 border-b-{{$menuColor}}">Info</a>
+        <a href="/pf_types" class="text-black {{$textMenuHeader}}">PortFolio Types</a> /
+        <a href="/pf_types/{{ $type->id }}" class="font-bold text-black {{$underlineMenuHeader}}">Info</a>
     </div>
 
     <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
 
         <!-- HEADER -->
-        <div class="flex flex-row justify-between items-center py-4 bg-{{$menuColor}}">
+        <div class="flex flex-row justify-between items-center py-4 {{$bgMenuColor}}">
             <div>
                 <span class="text-lg text-white px-4">Portfolio Type - {{ $type->name }}</span>
             </div>
@@ -162,7 +162,7 @@
         </div>
 
         <!-- Footer -->
-        <div class="flex flex-row justify-end items-center py-4 px-4 bg-{{$menuColor}} sm:rounded-b-lg">
+        <div class="flex flex-row justify-end items-center py-4 px-4 {{$bgMenuColor}} sm:rounded-b-lg">
             <a href="{{ route('pf_types') }}">
                 <i class="fa-lg fa-solid fa-backward-step text-white hover:text-black transition duration-1000 ease-in-out"
                     title="Go Back"></i>

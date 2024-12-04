@@ -78,8 +78,10 @@ class PortfolioTypesTranslation extends Component
     
         return view('livewire.portfolio.types.translations.portfolio-types-translation', [
             // Styles
-            'menuColor'             => 'emerald',
-            'menuTextColor'         => 'text-emerald-800',
+            'underlineMenuHeader'   => 'border-b-2 border-b-emerald-400',
+            'bgMenuColor'           => 'bg-emerald-400',
+            'menuTextColor'         => 'text-emerald-400',
+            'focusColor'            => 'focus:ring-emerald-400 focus:border-emerald-400',
             // Data
             'translations'          => $translations,
             'found'                 => $found,

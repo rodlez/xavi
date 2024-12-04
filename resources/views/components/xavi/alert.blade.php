@@ -7,11 +7,11 @@
 @php
     $dismissible = filter_var($dismissible, FILTER_VALIDATE_BOOLEAN);
     $options = [
-        'success' => 'text-emerald-900 bg-emerald-100 border-emerald-300',
-        'danger' => 'text-red-900 bg-red-100 border-red-300',
-        'info' => 'text-sky-900 bg-sky-100 border-sky-300',
-        'warning' => 'text-orange-900 bg-orange-100 border-orange-300',
-        'light' => 'bg-white border-gray-300',
+        'success' => 'text-emerald-900 bg-emerald-100 border-emerald-300 capitalize',
+        'danger' => 'text-red-900 bg-red-100 border-red-300 capitalize',
+        'info' => 'text-sky-900 bg-sky-100 border-sky-300 capitalize',
+        'warning' => 'text-orange-900 bg-orange-100 border-orange-300 capitalize',
+        'light' => 'bg-white border-gray-300 capitalize',
     ];
     $style = $options[$type] ?? $options['success']
 @endphp

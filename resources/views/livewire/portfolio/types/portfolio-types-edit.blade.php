@@ -2,23 +2,23 @@
 
     <!-- Sitemap -->
     <div class="flex flex-row justify-start items-start gap-1 text-sm py-3 px-4 text-slate-500">
-        <a href="/pf_types" class="hover:text-{{$menuColor}}-800">Types</a> /
-        <a href="/pf_types/{{ $type->id }}" class="hover:text-{{$menuColor}}-800">Info</a> /
+        <a href="/pf_types" class="{{$textMenuHeader}}">Types</a> /
+        <a href="/pf_types/{{ $type->id }}" class="{{$textMenuHeader}}">Info</a> /
         <a href="/pf_types/edit/{{ $type->id }}"
-            class="font-bold text-black border-b-2 border-b-{{$menuColor}}-800">Edit</a>
+            class="font-bold text-black {{$underlineMenuHeader}}">Edit</a>
     </div>
 
     <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
 
         <!-- HEADER -->
-        <div class="flex flex-row py-4 bg-{{$menuColor}}-800">
+        <div class="flex flex-row py-4 {{$bgMenuColor}}">
             <span class="text-lg text-white capitalize px-4">Portfolio Type </span>
         </div>
 
         <!--EDIT TYPE -->
         <div class="mx-auto w-11/12 py-4 px-2">
 
-            <div class="italic p-2 rounded-md bg-{{$menuColor}}-100">Edit the PortFolio Type, description is optional.</div>
+            <div class="italic p-2 rounded-md {{$bgInfoColor}}">Edit the PortFolio Type, description is optional.</div>
 
             <form action="{{ route('pf_types.update', $type) }}" method="POST">
                 <!-- Add Token to prevent Cross-Site Request Forgery (CSRF) -->
@@ -32,7 +32,7 @@
                 <div class="relative">
                     <input wire:model="name" name="name" id="name" type="text" value="{{ $type->name }}"
                         maxlength="100"
-                        class="w-full pl-12 rounded-lg bg-gray-50 border border-gray-200 text-gray-900 dark:bg-gray-700 dark:border-gray-600 dark:text-white focus:ring-green-500 focus:border-green-500">
+                        class="w-full pl-12 rounded-lg bg-gray-50 border border-gray-200 text-gray-900 dark:bg-gray-700 dark:border-gray-600 dark:text-white {{$focusColor}}">
                     <div class="absolute flex items-center inset-y-0 left-0 pointer-events-none">
                         <i class="fa-solid fa-tag  bg-gray-200 p-3 rounded-l-md"></i>
                     </div>
@@ -48,7 +48,7 @@
                 <div class="flex flex-col justify-start items-start w-full sm:w-2/3 gap-4 py-2">
                     <span class="text-md font-semibold px-2">Description</span>
                     <textarea rows="6" name="description" id="description"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-md rounded-lg w-full p-2 focus:ring-blue-500 focus:border-blue-500">{{ $type->description }}</textarea>
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-md rounded-lg w-full p-2 {{$focusColor}}">{{ $type->description }}</textarea>
                 </div>
                 <!-- Errors -->
                 @error('description')
@@ -71,7 +71,7 @@
         </div>
 
         <!-- FOOTER -->
-        <div class="flex flex-row justify-end items-center py-4 px-4 bg-{{$menuColor}}-800 sm:rounded-b-lg">
+        <div class="flex flex-row justify-end items-center py-4 px-4 {{$bgMenuColor}} sm:rounded-b-lg">
             <a href="{{ route('pf_types.show', $type) }}">
                 <i class="fa-lg fa-solid fa-backward-step text-white hover:text-black transition duration-1000 ease-in-out"
                     title="Go Back"></i>

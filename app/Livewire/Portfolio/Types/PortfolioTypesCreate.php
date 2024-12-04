@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Portfolio\Types;
 
+use App\Http\Requests\Portfolio\StorePFTypeRequest;
 use App\Models\Portfolio\PortfolioType;
 use Exception;
 use Illuminate\Http\Request;
@@ -12,7 +13,7 @@ class PortfolioTypesCreate extends Component
     public $name;
     public $description;
 
-    protected $rules = [
+    /* protected $rules = [
         'name' => 'required|min:3|unique:pf_types,name',
         'description' => 'nullable|min:3',
     ];
@@ -22,12 +23,13 @@ class PortfolioTypesCreate extends Component
         'name.min' => 'The type name must have at least 3 characters',
         'name.unique' => 'This type is already created',
         'description.min' => 'If there is a description must have at least 3 characters',
-    ];
+    ]; */
 
-    public function save(Request $request)
+    public function save(StorePFTypeRequest $request)
     {
-        $validated = $this->validate();
-
+        //dd('oli');
+        //$validated = $this->validate();
+        $validated = $request->validate();
         try {
             PortfolioType::create($validated);
 

@@ -74,8 +74,10 @@ class PortfolioTypes extends Component
 
         return view('livewire.portfolio.types.portfolio-types', [
             // Styles
-            'menuColor' => 'emerald-800',
-            'menuTextColor' => 'text-emerald-800',
+            'underlineMenuHeader'   => 'border-b-2 border-b-emerald-600',
+            'bgMenuColor'           => 'bg-emerald-800',
+            'menuTextColor'         => 'text-emerald-800',
+            'focusColor'            => 'focus:ring-emerald-500 focus:border-emerald-500',
             // Data
             'types' => $data,
             'found' => $found,
