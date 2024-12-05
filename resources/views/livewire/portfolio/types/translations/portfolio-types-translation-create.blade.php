@@ -42,7 +42,7 @@
                     <!-- Add Token to prevent Cross-Site Request Forgery (CSRF) -->
                     @csrf
 
-                    <div class="italic p-2 rounded-md {{$bgInfoColor}}">Type a new Translation for this Type
+                    <div class="italic p-2 rounded-md {{$bgInfoColor}}">Enter a new Translation for this Type
                     </div>
 
                     <!-- Language -->
@@ -76,7 +76,7 @@
 
                     <!-- Save -->
                     <div class="py-4">
-                        <button wire:click.prevent="save"
+                        <button type="submit"
                             class="w-full sm:w-fit bg-black hover:bg-slate-700 text-white capitalize p-2 sm:px-4 rounded-lg shadow-none transition duration-500 ease-in-out">
                             Save
                             <i class="fa-solid fa-floppy-disk px-2"></i>

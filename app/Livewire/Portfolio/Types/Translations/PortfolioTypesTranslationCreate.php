@@ -2,11 +2,12 @@
 
 namespace App\Livewire\Portfolio\Types\Translations;
 
+use App\Http\Requests\Portfolio\StorePFTypeTranslationRequest;
 use App\Models\Languages;
 use App\Models\Portfolio\PortfolioType;
 use App\Services\TranslationService;
 use Exception;
-use Illuminate\Http\Request;
+
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 
@@ -19,14 +20,22 @@ class PortfolioTypesTranslationCreate extends Component
     public string $missingTranslationId;
     public $name;
 
-    protected $rules = [
-        'name' => 'required|min:3',
-    ];
-
-    protected $messages = [
-        'name.required' => 'The type name is required',
-        'name.min' => 'The name must have at least 3 characters',
-    ];
+    /**
+     * USE LARAVEL FORM REQUEST IN LIVEWIRE
+     * In Livewire Component you can add rules in the rules() method by returning an array. 
+     * In this method, you can return the rules() method from your Form Request. 
+     * Just don't forget that public properties in Livewire Component need to be the same name as in the rules.
+     */
+    
+     protected function rules(): array
+     {
+         return (new StorePFTypeTranslationRequest())->rules();
+     }
+ 
+     protected function messages(): array
+     {
+         return (new StorePFTypeTranslationRequest())->messages();
+     }   
 
     public function boot(
         TranslationService $translationService,
@@ -41,14 +50,11 @@ class PortfolioTypesTranslationCreate extends Component
         $this->missingTranslationId = $missingTranslationId;
     }
 
-    public function save(Request $request)
-    {
-        $validated = $this->validate();
-        /* $validated['pf_type_id'] = $this->type->id;
-        $validated['lang_id'] = $this->translationId;
-
+    public function save()
+    {  
         // TODO: No insert the current cataegory id as pf_type_id
         // Error(PDOException: SQLSTATE[HY000]: General error: 1364 Field 'pf_type_id' doesn't have a default value
+        /*
         $translate = PortfolioTypeTranslation::create($validated);
 
         $translate = PortfolioTypeTranslation::create([
@@ -57,18 +63,16 @@ class PortfolioTypesTranslationCreate extends Component
             'name'  => $this->name,
         ]); */
 
+        $this->validate();
+
+        // Get the language of the translation to show on the returned success or fail message
         $languageName = Languages::where('id', $this->missingTranslationId)
             ->pluck('name')
             ->first();
 
-        try {           
-            DB::table('pf_types_trans')->insert([
-                'pf_type_id'    => $this->type->id,
-                'lang_id'       => $this->missingTranslationId,
-                'name'          => $this->name,
-                'created_at'    => date('Y-m-d H:i:s'),
-                'updated_at'    => date('Y-m-d H:i:s'),
-            ]);
+        try {      
+            $this->translationService->insertTranslation('pf_types_trans','pf_type_id', $this->type->id, $this->missingTranslationId, $this->name);   
+            
             return to_route('pf_types.show', $this->type)->with('message', '(' . $languageName . ') Translation successfully created');
         } catch (Exception $e) {
             return to_route('pf_types.show', $this->type)->with('error', 'Error (' . $e->getCode() . ') Translation in (' . $languageName . ') can not be created');
@@ -76,7 +80,7 @@ class PortfolioTypesTranslationCreate extends Component
     }
 
     public function render()
-    {       
+    {              
         // 1 - Check if the missingTranslationId is a valid Translation Language
         $translationLanguage = Languages::where('id', $this->missingTranslationId)->first();
 

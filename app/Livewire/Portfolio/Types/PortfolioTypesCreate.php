@@ -13,25 +13,29 @@ class PortfolioTypesCreate extends Component
     public $name;
     public $description;
 
-    /* protected $rules = [
-        'name' => 'required|min:3|unique:pf_types,name',
-        'description' => 'nullable|min:3',
-    ];
-
-    protected $messages = [
-        'name.required' => 'The type name is required',
-        'name.min' => 'The type name must have at least 3 characters',
-        'name.unique' => 'This type is already created',
-        'description.min' => 'If there is a description must have at least 3 characters',
-    ]; */
-
-    public function save(StorePFTypeRequest $request)
+    /**
+     * USE LARAVEL FORM REQUEST IN LIVEWIRE
+     * In Livewire Component you can add rules in the rules() method by returning an array. 
+     * In this method, you can return the rules() method from your Form Request. 
+     * Just don't forget that public properties in Livewire Component need to be the same name as in the rules.
+     */
+    
+    protected function rules(): array
     {
-        //dd('oli');
-        //$validated = $this->validate();
-        $validated = $request->validate();
+        return (new StorePFTypeRequest())->rules();
+    }
+
+    protected function messages(): array
+    {
+        return (new StorePFTypeRequest())->messages();
+    }   
+
+    public function save()
+    {
+        $formData = $this->validate();
+
         try {
-            PortfolioType::create($validated);
+            PortfolioType::create($formData);
 
             return to_route('pf_types')->with('message', 'Type (' . $this->name . ') successfully created');
         } catch (Exception $e) {
@@ -43,8 +47,12 @@ class PortfolioTypesCreate extends Component
     {
         return view('livewire.portfolio.types.portfolio-types-create', [
             // Styles
-            'menuColor' => 'emerald',
-            'menuTextColor' => 'text-emerald-800',
+            'underlineMenuHeader'   => 'border-b-2 border-b-emerald-600',
+            'textMenuHeader'        => 'hover:text-emerald-800',
+            'bgMenuColor'           => 'bg-emerald-800',
+            'bgInfoColor'           => 'bg-emerald-100',
+            'menuTextColor'         => 'text-emerald-800',
+            'focusColor'            => 'focus:ring-emerald-500 focus:border-emerald-500',
             ])->layout('layouts.app');
     }
     

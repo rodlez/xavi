@@ -22,10 +22,8 @@ class StorePFTypeRequest extends FormRequest
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
     public function rules(): array
-    {
+    {        
         return [
-            // TODO: Ignore current id in the unique validation - https://laravel-news.com/laravel-validation
-            /* 'name' => 'bail|required|min:3|string|unique:pf_categories,name', */
             'name' => 'bail|required|min:3|string|' . Rule::unique('pf_types')->ignore($this->type),
             'description' => 'bail|nullable|min:3|string',
         ];
@@ -33,11 +31,31 @@ class StorePFTypeRequest extends FormRequest
 
     public function messages(): array
     {
-         return [
-            'name.required' => 'The type name is required',
-            'name.min' => 'The type name must have at least :min characters',
-            'name.unique' => 'This type is already created',
-            'description' => 'If there is a description must have at least :min characters',
-         ];
+        $language = App::currentLocale();
+
+        if ($language == 'en') {
+            return [
+                'name.required' => 'The type name is required',
+                'name.min' => 'The type name must have at least :min characters',
+                'name.unique' => 'This type is already created',
+                'description' => 'If there is a description must have at least :min characters',
+            ];
+        }
+        if ($language == 'es') {
+            return [
+                'name.required' => 'El Nombre es obligatorio',
+                'name.min' => 'El nombre debe tener al menos :min carácteres',
+                'name.unique' => 'Este nombre ya ha sido creado',
+                'description' => 'Si hay una descripción, debe tener al menos :min carácteres',
+            ];
+        }
+        if ($language == 'ca') {
+            return [
+                'name.required' => 'El Nom es obligatori',
+                'name.min' => 'El nom ha de tenir al menys :min caràcters',
+                'name.unique' => 'Aquest nom ja ha estat creat',
+                'description' => 'Si hi ha una descripció, ha de tenir al menys :min caràcters',
+            ];
+        }
     }
 }
