@@ -6,8 +6,6 @@
     </div>
     <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
 
-        <div>
-
             <!-- Header -->
             <div class="flex flex-row justify-between items-center py-4 {{$bgMenuColor}}">
                 <div>
@@ -131,13 +129,7 @@
                                                     <!-- Add Token to prevent Cross-Site Request Forgery (CSRF) -->
                                                     @csrf
                                                     <!-- Dirtective to Override the http method -->
-                                                    @method('DELETE')
-                                                    {{-- <button
-                                                        onclick="return confirm('Are you sure you want to delete the language: {{ $type->name }}?')"
-                                                        title="{{__("generic.delete")}}">
-                                                        <i
-                                                            class="fa-solid fa-trash text-red-600 hover:text-black transition duration-1000 ease-in-out"></i>
-                                                    </button> --}}
+                                                    @method('DELETE')                                                    
                                                     <button
                                                         onclick="return confirm('{{__('generic.confirmDelete')}}')"
                                                         title="{{__("generic.delete")}}">
@@ -183,4 +175,3 @@
     </div>
 
 </div>
-

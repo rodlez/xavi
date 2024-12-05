@@ -42,7 +42,7 @@ class PortfolioTypesTranslation extends Component
             $element->delete();
         }
 
-        return to_route('pf_types')->with('message', 'Element successfully deleted.');
+        return to_route('pf_types_trans')->with('message', __('generic.bulkDelete'));
     }
 
     public function sorting($columnName = "")

@@ -38,11 +38,11 @@ class PortfolioCategoriesTranslation extends Component
     public function bulkDelete()
     {
         foreach ($this->selections as $selection) {
-            $category = PortfolioCategoryTranslation::find($selection);
-            $category->delete();
+            $element = PortfolioCategoryTranslation::find($selection);
+            $element->delete();
         }
 
-        return to_route('pf_categories')/* ->with('message', 'category successfully deleted.') */;
+        return to_route('pf_categories_trans')->with('message', __('generic.bulkDelete'));
     }
 
     public function sorting($columnName = "")
@@ -73,15 +73,21 @@ class PortfolioCategoriesTranslation extends Component
 
         //$total = $translations->count();
         $translations = $translations->paginate($this->perPage);
-        $translationsTotal = PortfolioCategoryTranslation::all()->count();
-        $categoriesTotal = PortfolioCategory::all()->count();
+        $totalTranslations = PortfolioCategoryTranslation::all()->count();
+        $totalEntries = PortfolioCategory::all()->count();
     
         return view('livewire.portfolio.categories.translations.portfolio-categories-translation', [
-            'translations'      => $translations,
-            'found'             => $found,
-            'column'            => $this->orderColumn,
-            'translationsTotal' => $translationsTotal,
-            'categoriesTotal'   => $categoriesTotal,
+            // Styles
+            'underlineMenuHeader'   => 'border-b-2 border-b-blue-400',
+            'bgMenuColor'           => 'bg-blue-400',
+            'menuTextColor'         => 'text-blue-400',
+            'focusColor'            => 'focus:ring-blue-400 focus:border-blue-400',
+            // Data
+            'translations'          => $translations,
+            'found'                 => $found,
+            'column'                => $this->orderColumn,
+            'totalTranslations'     => $totalTranslations,
+            'totalEntries'          => $totalEntries,
         ])->layout('layouts.app');
     }
    

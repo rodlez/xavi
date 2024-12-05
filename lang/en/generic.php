@@ -35,7 +35,15 @@ return [
     "save" => "save",
     "info" => "information",
     // MESSAGES
+    "error" => "error",
     "confirmDelete" => "Are you sure you want to delete this element?",
+    "successCreate" => "successfully created",
+    "errorCreate" => "can not be created",
+    "successUpdate" => "successfully updated",
+    "errorUpdate" => "can not be updated",
+    "successDelete" => "successfully deleted",
+    "errorDelete" => "can not be deleted",
+    "bulkDelete" => "Elements successfully deleted",
     // TRANSLATIONS
     "missingTranslation" => "Missing Translation",
     "missingTranslations" => "Missing Translations",

@@ -11,10 +11,10 @@ class PortfolioCategories extends Component
     use WithPagination;
 
     //protected $paginationTheme = "bootstrap";
-    public $orderColumn = "pf_categories.id";
-    public $sortOrder = "desc";
+    public $orderColumn = 'pf_categories.id';
+    public $sortOrder = 'desc';
     public $sortLink = '<i class="fa-solid fa-caret-down"></i>';
-    public $search = "";
+    public $search = '';
     public $perPage = 25;
 
     public $selections = [];
@@ -26,7 +26,7 @@ class PortfolioCategories extends Component
 
     public function clearSearch()
     {
-        $this->search = "";
+        $this->search = '';
     }
 
     public function bulkClear()
@@ -41,12 +41,12 @@ class PortfolioCategories extends Component
             $category->delete();
         }
 
-        return to_route('pf_categories')/* ->with('message', 'category successfully deleted.') */;
+        return to_route('pf_categories')->with('message', __('generic.bulkDelete'));
     }
 
-    public function sorting($columnName = "")
+    public function sorting($columnName = '')
     {
-        $caretOrder = "up";
+        $caretOrder = 'up';
         if ($this->sortOrder == 'asc') {
             $this->sortOrder = 'desc';
             $caretOrder = 'down';
@@ -66,19 +66,23 @@ class PortfolioCategories extends Component
         $categories = PortfolioCategory::orderby($this->orderColumn, $this->sortOrder)->select('*');
 
         if (!empty($this->search)) {
-
-            $found = $categories->where('name', "like", "%" . $this->search . "%")->count();
+            $found = $categories->where('name', 'like', '%' . $this->search . '%')->count();
         }
 
         $total = $categories->count();
         $categories = $categories->paginate($this->perPage);
 
-    
         return view('livewire.portfolio.categories.portfolio-categories', [
-            'categories'    => $categories,
-            'found'         => $found,
-            'column'        => $this->orderColumn,
-            'total'         => $total,
+            // Styles
+            'underlineMenuHeader' => 'border-b-2 border-b-blue-600',
+            'bgMenuColor' => 'bg-blue-800',
+            'menuTextColor' => 'text-blue-800',
+            'focusColor' => 'focus:ring-blue-500 focus:border-blue-500',
+            // Data
+            'categories' => $categories,
+            'found' => $found,
+            'column' => $this->orderColumn,
+            'total' => $total,
         ])->layout('layouts.app');
     }
 }

@@ -40,8 +40,7 @@ class PortfolioTypes extends Component
             $element = PortfolioType::find($selection);
             $element->delete();
         }
-
-        return to_route('pf_types')->with('message', 'Selected Elements successfully deleted.'); 
+        return to_route('pf_types')->with('message', __('generic.bulkDelete'));
     }
 
     public function sorting($columnName = '')

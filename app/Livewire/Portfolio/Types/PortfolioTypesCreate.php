@@ -5,7 +5,6 @@ namespace App\Livewire\Portfolio\Types;
 use App\Http\Requests\Portfolio\StorePFTypeRequest;
 use App\Models\Portfolio\PortfolioType;
 use Exception;
-use Illuminate\Http\Request;
 use Livewire\Component;
 
 class PortfolioTypesCreate extends Component
@@ -37,9 +36,9 @@ class PortfolioTypesCreate extends Component
         try {
             PortfolioType::create($formData);
 
-            return to_route('pf_types')->with('message', 'Type (' . $this->name . ') successfully created');
+            return to_route('pf_types')->with('message', __("generic.type") . ' (' . $this->name . ') '. __("generic.successCreate"));
         } catch (Exception $e) {
-            return to_route('pf_types')->with('error', 'Error (' . $e->getCode() . ') Type (' . $this->name . ')  can not be created');
+            return to_route('pf_types')->with('error', __("generic.error") . ' (' . $e->getCode() . ') ' .__("generic.type"). ' (' . $this->name . ') '. __("generic.errorCreate"));
         }
     }
 

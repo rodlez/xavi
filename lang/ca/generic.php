@@ -36,7 +36,15 @@ return [
     "save" => "guardar",
     "info" => "informació",
     // MESSAGES
+    "error" => "error",
     "confirmDelete" => "¿Segur que vols eliminar aquest element?",
+    "successCreate" => "S'ha creat amb exit",
+    "errorCreate" => "No s'ha pogut crear",
+    "successUpdate" => "S'ha actualitzat amb exit",
+    "errorUpdate" => "No s'ha pogut actualitzar",
+    "successDelete" => "S'ha eliminat amb exit",
+    "errorDelete" => "No s'ha pogut eliminar",
+    "bulkDelete" => "Elements eliminats amb exit",
     // TRANSLATIONS
     "missingTranslation" => "Traducció no feta",
     "missingTranslations" => "Traduccions no fetes",

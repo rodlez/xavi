@@ -1,32 +1,32 @@
 <div class="max-w-7xl mx-auto sm:pb-8 sm:px-6 lg:px-8">
 
     <!-- Sitemap -->
-    <div class="flex flex-row justify-start items-start gap-1 text-sm py-3 px-4 text-slate-500">
-        <a href="/pf_categories/{{ $translation->category->id }}" class="hover:text-blue-400">{{ $translation->category->name }}</a> /
+    <div class="flex flex-row justify-start items-start gap-1 text-sm py-3 px-4 text-slate-500 capitalize">
+        <a href="/pf_categories/{{ $translation->category->id }}" class="{{$textMenuHeader}}">{{ $translation->category->name }}</a> /
         <a href="/pf_categories_trans/edit/{{ $translation->id }}"
-            class="font-bold text-black border-b-2 border-b-blue-400">Edit</a>
+            class="font-bold text-black {{$underlineMenuHeader}}">{{__("generic.edit")}}</a>
     </div>
 
     <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
 
             <!-- HEADER -->
-            <div class="flex flex-row justify-between items-center py-4 bg-blue-400">
+            <div class="flex flex-row justify-between items-center py-4 {{$bgMenuColor}}">
                 <div>
-                    <span class="text-lg text-white px-4 capitalize">Edit Translation ({{ $translation->language->name }})</span>
+                    <span class="text-lg text-white px-4 capitalize">{{__("generic.edit")}} {{__("generic.translation")}} ({{ $translation->language->name }})</span>
                 </div>
             </div>
 
             <!-- CATEGORY INFO -->
-            <div class="flex flex-col mt-4 mx-8 pb-0 lg:mx-14">
+            <div class="flex flex-col capitalize mt-4 mx-8 pb-0 lg:mx-14">
                 <div class="w-fit bg-black text-white text-lg capitalize mb-1 p-2">
-                    Information
+                    {{__("generic.info")}}
                 </div>
                 <div class="flex flex-col text-white bg-slate-800">
                 <span class="bg-orange-600 py-1 px-2">Id</span>
                 <span class="text-sm p-2">{{ $translation->category->id }}</span>
-                <span class="bg-orange-600 py-1 px-2">Category</span>
+                <span class="bg-orange-600 py-1 px-2">{{__("generic.category")}}</span>
                 <span class="font-bold p-2">{{ $translation->category->name }}</span>
-                <span class="bg-orange-600 py-1 px-2">Description</span>
+                <span class="bg-orange-600 py-1 px-2">{{__("generic.description")}}</span>
                 <span class="text-sm p-2">{{ ($translation->category->description) ? $translation->category->description : '-' }}</span>
                 </div>
             </div>
@@ -40,11 +40,11 @@
                 <!-- Dirtective to Override the http method -->
                 @method('PUT')
 
-                    <div class="italic p-2 rounded-md bg-blue-100">Edit the Translation for this Category
+                    <div class="italic p-2 rounded-md {{$bgInfoColor}}">{{__("generic.editTranslation")}}
                     </div>
 
                     <!-- Language -->
-                    <h2 class="text-lg font-bold px-2">Language </h2>
+                    <h2 class="text-lg font-bold capitalize px-2">{{__("generic.language")}}</h2>
 
                     <div class="relative">
                         <input placeholder="{{ $translation->language->name }}" readonly disabled
@@ -55,7 +55,7 @@
                     </div>
 
                     <!-- Name -->
-                    <h2 class="text-lg font-bold px-2">Translation <span class="text-red-600">*</span></h2>
+                    <h2 class="text-lg font-bold capitalize px-2">{{__("generic.translation")}} <span class="text-red-600">*</span></h2>
 
                     <div class="relative">
                         <input wire:model="name" name="name" id="name" type="text"
@@ -76,7 +76,7 @@
                     <div class="py-4">
                         <button type="submit"
                             class="w-full sm:w-fit bg-black hover:bg-slate-700 text-white capitalize p-2 sm:px-4 rounded-lg shadow-none transition duration-500 ease-in-out">
-                            Save
+                            {{__("generic.save")}}
                             <i class="fa-solid fa-floppy-disk px-2"></i>
                         </button>
                     </div>
@@ -86,10 +86,10 @@
             </form>
 
             <!-- Footer -->
-            <div class="flex flex-row justify-end items-center py-4 px-4 bg-blue-400 sm:rounded-b-lg">
+            <div class="flex flex-row justify-end items-center py-4 px-4 {{$bgMenuColor}} sm:rounded-b-lg">
                 <a href="{{ route('pf_categories.show', $translation->category) }}">
                     <i class="fa-lg fa-solid fa-backward-step text-white hover:text-black transition duration-1000 ease-in-out"
-                        title="Go Back"></i>
+                        title="{{__("generic.back")}}"></i>
                 </a>
             </div>
 

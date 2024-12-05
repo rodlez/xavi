@@ -58,10 +58,9 @@ class PortfolioCategoryController extends Controller
         $formData = $request->validated();
         try {
             PortfolioCategory::where('id', $category->id)->update($formData);
-            return to_route('pf_categories.show', $category)->with('message', 'Category ('.$category->name.') successfully updated');
+            return to_route('pf_categories.show', $category)->with('message', __('generic.category') . ' (' . $category->name . ') ' . __('generic.successUpdate'));
         } catch (Exception $e) {
-            return to_route('pf_categories.show', $category)->with('error', 'Category ('.$category->name.') can not be updated');
-
+            return to_route('pf_categories.show', $category)->with('error', __('generic.error') . ' (' . $e->getCode() . ') ' . __('generic.category') . ' (' . $category->name . ') ' . __('generic.errorUpdate'));
         }
     }
 
@@ -72,9 +71,9 @@ class PortfolioCategoryController extends Controller
     {
         try {
             $category->delete();
-            return to_route('pf_categories')->with('message', 'Category ('.$category->name.') successfully deleted');
+            return to_route('pf_categories')->with('message', __('generic.category') . ' (' . $category->name . ') ' . __('generic.successDelete'));
         } catch (Exception $e) {
-            return to_route('pf_categories')->with('error', 'Category ('.$category->name.') can not be deleted');
+            return to_route('pf_categories')->with('error', __('generic.error') . ' (' . $e->getCode() . ') ' . __('generic.category') . ' (' . $category->name . ') ' . __('generic.errorDelete'));
         }
     }
 }

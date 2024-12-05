@@ -58,9 +58,9 @@ class PortfolioTypeController extends Controller
         $formData = $request->validated();
         try {
             PortfolioType::where('id', $type->id)->update($formData);
-            return to_route('pf_types.show', $type)->with('message', 'Type ('.$type->name.') successfully updated');
+            return to_route('pf_types.show', $type)->with('message', __("generic.type") . ' (' . $type->name . ') '. __("generic.successUpdate"));
         } catch (Exception $e) {
-            return to_route('pf_types.show', $type)->with('error', 'Type ('.$type->name.') can not be updated');
+            return to_route('pf_types.show', $type)->with('error', __("generic.error") . ' (' . $e->getCode() . ') ' .__("generic.type"). ' (' . $type->name . ') '. __("generic.errorUpdate"));
 
         }
     }
@@ -72,9 +72,9 @@ class PortfolioTypeController extends Controller
     {
         try {
             $type->delete();
-            return to_route('pf_types')->with('message', 'Type ('.$type->name.') successfully deleted');
+            return to_route('pf_types')->with('message', __('generic.type') . ' (' . $type->name . ') ' . __('generic.successDelete'));
         } catch (Exception $e) {
-            return to_route('pf_types')->with('error', 'Type ('.$type->name.') can not be deleted');
+            return to_route('pf_types')->with('error', __('generic.error') . ' (' . $e->getCode() . ') ' . __('generic.type') . ' (' . $type->name . ') ' . __('generic.errorDelete'));
         }
     }
 }

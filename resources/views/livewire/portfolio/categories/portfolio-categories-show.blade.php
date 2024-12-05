@@ -1,32 +1,32 @@
 <div class="max-w-7xl mx-auto sm:pb-8 sm:px-6 lg:px-8">
     <!-- Sitemap -->
-    <div class="flex flex-row justify-start items-start gap-1 text-sm py-3 px-4 text-slate-500">
-        <a href="/pf_categories" class="text-black hover:text-blue-800">PortFolio Categories</a> /
-        <a href="/pf_categories/{{ $category->id }}" class="font-bold text-black border-b-2 border-b-blue-800">Info</a>
+    <div class="flex flex-row justify-start items-start gap-1 text-sm py-3 px-4 text-slate-500 capitalize">
+        <a href="/pf_categories" class="text-black {{$textMenuHeader}}">{{__("admin/portfolio/portfolioCategories.menuIndex")}}</a> /
+        <a href="/pf_categories/{{ $category->id }}" class="font-bold text-black {{$underlineMenuHeader}}">{{__("generic.info")}}</a>
     </div>
 
     <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
 
         <!-- HEADER -->
-        <div class="flex flex-row justify-between items-center py-4 bg-blue-800">
+        <div class="flex flex-row justify-between items-center py-4 {{$bgMenuColor}}">
             <div>
-                <span class="text-lg text-white px-4">Portfolio Category - {{ $category->name }}</span>
+                <span class="text-lg text-white capitalize px-4">{{__("admin/portfolio/portfolioCategories.titleHeader")}} - {{ $category->name }}</span>
             </div>
         </div>
 
         <!-- INFO -->
         <div class="flex flex-col mt-4 mx-8 pb-0 lg:mx-14">
-            <!-- Category -->
-            <div class="flex flex-col">
+            <!-- category -->
+            <div class="flex flex-col capitalize">
                 <div class="w-fit bg-black text-white text-lg capitalize mb-1 p-2">
-                    Information
+                    {{__("generic.info")}}
                 </div>
                 <div class="flex flex-col text-white bg-slate-800">
                 <span class="bg-orange-600 py-1 px-2">Id</span>
                 <span class="text-sm p-2">{{ $category->id }}</span>
-                <span class="bg-orange-600 py-1 px-2">Name</span>
+                <span class="bg-orange-600 py-1 px-2">{{__("generic.name")}}</span>
                 <span class="font-bold p-2">{{ $category->name }}</span>
-                <span class="bg-orange-600 py-1 px-2">Description</span>
+                <span class="bg-orange-600 py-1 px-2">{{__("generic.description")}}</span>
                 <span class="text-sm p-2">{{ ($category->description) ? $category->description : '-' }}</span>
                 </div>
             </div>
@@ -36,7 +36,7 @@
                 <button
                     class="bg-black hover:bg-slate-700 text-white capitalize p-2 sm:px-4 rounded-sm shadow-none transition duration-500 ease-in-out">
                     <a href="{{ route('pf_categories.edit', $category) }}">
-                        Edit
+                        {{__("generic.edit")}}
                         <i class="fa-solid fa-pen-to-square text-blue-800 px-1"></i>
                     </a>
                 </button>
@@ -48,9 +48,9 @@
                     @method('DELETE')
                     <button
                         class="bg-black hover:bg-slate-700 text-white capitalize p-2 sm:px-4 rounded-sm shadow-none transition duration-500 ease-in-out"
-                        onclick="return confirm('Are you sure you want to delete the category: {{ $category->name }}?')">
-                        Delete
-                        <i class="fa-solid fa-trash px-1 text-red-600" title="Delete"></i>
+                        onclick="return confirm('{{__('generic.confirmDelete')}}')">
+                        {{__("generic.delete")}}
+                        <i class="fa-solid fa-trash px-1 text-red-600"></i>
                     </button>
                 </form>
             </div>
@@ -60,15 +60,15 @@
         <!-- Translations -->
         <div class="flex flex-col mt-4 mx-8 pb-0 lg:mx-14">
             <div class="flex flex-col text-white bg-slate-800 p-0">
-                <div class="uppercase bg-orange-600 p-2">Translations
+                <div class="uppercase bg-orange-600 p-2">{{__("generic.translations")}}
                     ({{ $category->translations->count() }}/{{ $languages->count() }})
                 </div>
                 
                     @if ($category->translations->count() >= $languages->count())
-                        <div class="text-green-600 font-bold bg-green-100 p-2">All Translations are done</div>
+                        <div class="text-green-600 font-bold bg-green-100 p-2">{{__("generic.doneTranslations")}}</div>
                     @else
                         <div class="text-red-600 font-bold bg-red-100 p-2">{{$missingTranslations->count()}} 
-                            Missing Translation{{$missingTranslations->count() > 1 ? 's' : ''}} >
+                            {{$missingTranslations->count() > 1 ? __("generic.missingTranslations") : __("generic.missingTranslation")}} >
                             <span>
                                 @foreach ($missingTranslations as $missing)
                                     {{ $missing->name }}
@@ -84,13 +84,13 @@
                 <!-- Translations Table -->
                 <div class="w-full overflow-x-auto">
 
-                    <table class="table-auto w-full border text-sm">
+                    <table class="table-auto w-full border text-sm capitalize">
                         <thead class="text-sm text-center text-white bg-orange-600">
-                            <th class="p-2">Translation</th>
-                            <th class="p-2 max-sm:hidden">Language</th>
-                            <th class="p-2">Code</th>
-                            <th class="p-2 max-sm:hidden">Created</th>
-                            <th class="p-2 max-sm:hidden">Updated</th>
+                            <th class="p-2">{{__("generic.translation")}}</th>
+                            <th class="p-2 max-sm:hidden">{{__("generic.language")}}</th>
+                            <th class="p-2">{{__("generic.code")}}</th>
+                            <th class="p-2 max-sm:hidden">{{__("generic.created")}}</th>
+                            <th class="p-2 max-sm:hidden">{{__("generic.updated")}}</th>
                             <th></th>
                         </thead>
 
@@ -112,7 +112,7 @@
                                 <td class="p-2">
                                     <div class="flex justify-center items-center gap-2">
                                         <!-- Edit -->
-                                        <a href="{{ route('pf_categories_trans.edit', $translation) }}" title="Edit">
+                                        <a href="{{ route('pf_categories_trans.edit', $translation) }}" title="{{__("generic.edit")}}">
                                             <i
                                                 class="fa-solid fa-pen-to-square text-blue-800 hover:text-black transition duration-1000 ease-in-out"></i>
                                         </a>
@@ -124,8 +124,8 @@
                                             <!-- Dirtective to Override the http method -->
                                             @method('DELETE')
                                             <button
-                                                onclick="return confirm('Are you sure you want to delete the translation: {{ $translation->name }}?')"
-                                                title="Delete">
+                                                onclick="return confirm('{{__('generic.confirmDelete')}}')"
+                                                title="{{__("generic.delete")}}">
                                                 <i
                                                     class="fa-solid fa-trash text-red-600 hover:text-black transition duration-1000 ease-in-out"></i>
                                             </button>
@@ -136,9 +136,10 @@
                             </tr>
                         @endforeach
 
+                        <!-- Check Missing Translations -->
                         @foreach ($missingTranslations as $missing)
                             <tr class="bg-white text-red-600 border-b text-center">
-                                <td class="p-2 bg-red-100 text-red-600">Pending</td>
+                                <td class="p-2 bg-red-100 text-red-600">{{__("generic.pending")}}</td>
                                 <td class="p-2 bg-red-100 max-sm:hidden">{{ $missing->name }}</td>
                                 <td class="p-2 bg-red-100">{{ $missing->code }}</td>
                                 <td class="p-2 bg-red-100 max-sm:hidden">-</td>
@@ -161,10 +162,10 @@
         </div>
 
         <!-- Footer -->
-        <div class="flex flex-row justify-end items-center py-4 px-4 bg-blue-800 sm:rounded-b-lg">
+        <div class="flex flex-row justify-end items-center py-4 px-4 {{$bgMenuColor}} sm:rounded-b-lg">
             <a href="{{ route('pf_categories') }}">
                 <i class="fa-lg fa-solid fa-backward-step text-white hover:text-black transition duration-1000 ease-in-out"
-                    title="Go Back"></i>
+                    title="{{__("generic.back")}}"></i>
             </a>
         </div>
 

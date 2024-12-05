@@ -60,9 +60,9 @@ class PortfolioTypeTranslationController extends Controller
 
         try {
             PortfolioTypeTranslation::where('id', $translation->id)->update($validated);
-            return to_route('pf_types.show', $translation->type)->with('message', '(' . $translation->language->name . ') Translation successfully updated');
+            return to_route('pf_types.show', $translation->type)->with('message', __('generic.translation') . ' (' . $translation->language->name . ') ' . __('generic.successUpdate'));
         } catch (Exception $e) {
-            return to_route('pf_types.show', $translation->type)->with('error', 'Error(' . $e->getCode() . '): (' . $translation->language->name . ') Translation can not be updated');
+            return to_route('pf_types.show', $translation->type)->with('error', __('generic.error') . ' (' . $e->getCode() . ') ' . __('generic.translation') . ' (' . $translation->language->name . ') ' . __('generic.errorUpdate'));
         }
     }
 
@@ -73,9 +73,9 @@ class PortfolioTypeTranslationController extends Controller
     {
         try {
             $translation->delete();
-            return to_route('pf_types.show', $translation->type)->with('message', '(' . $translation->language->name . ') Translation successfully deleted');
+            return to_route('pf_types.show', $translation->type)->with('message', __('generic.translation') . ' (' . $translation->language->name . ') ' . __('generic.successDelete'));
         } catch (Exception $e) {
-            return to_route('pf_types.show', $translation->type)->with('error', 'Error(' . $e->getCode() . '): (' . $translation->language->name . ') Translation can not be deleted');
+            return to_route('pf_types.show', $translation->type)->with('error', __('generic.error') . ' (' . $e->getCode() . ') ' . __('generic.translation') . ' (' . $translation->language->name . ') ' . __('generic.errorDelete'));
         }
     }
 }
