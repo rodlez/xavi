@@ -37,8 +37,8 @@ class PortfolioCategories extends Component
     public function bulkDelete()
     {
         foreach ($this->selections as $selection) {
-            $category = PortfolioCategory::find($selection);
-            $category->delete();
+            $element = PortfolioCategory::find($selection);
+            $element->delete();
         }
 
         return to_route('pf_categories')->with('message', __('generic.bulkDelete'));

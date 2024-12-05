@@ -18,6 +18,12 @@ class LanguagesShow extends Component
     {
         //dd($this->language->code);
         return view('livewire.languages.languages-show', [
+            // Styles
+            'underlineMenuHeader' => 'border-b-2 border-b-violet-600',
+            'textMenuHeader' => 'hover:text-violet-800',
+            'bgMenuColor' => 'bg-violet-800',
+            'menuTextColor' => 'text-violet-800',
+            // Data
             'language' => $this->language
         ])->layout('layouts.app');
     }

@@ -37,11 +37,11 @@ class Languages extends Component
     public function bulkDelete()
     {
         foreach ($this->selections as $selection) {
-            $type = ModelLanguage::find($selection);
-            $type->delete();
+            $element = ModelLanguage::find($selection);
+            $element->delete();
         }
 
-        return to_route('languages')/* ->with('message', 'Types successfully deleted.') */;
+        return to_route('languages')->with('message', __('generic.bulkDelete'));
     }
 
     public function sorting($columnName = "")
@@ -66,7 +66,6 @@ class Languages extends Component
         $languages = ModelLanguage::orderby($this->orderColumn, $this->sortOrder)->select('*');
 
         if (!empty($this->search)) {
-
             $found = $languages->where('name', "like", "%" . $this->search . "%")->count();
         }
 
@@ -74,6 +73,12 @@ class Languages extends Component
         $languages = $languages->paginate($this->perPage);
 
         return view('livewire.languages.languages', [
+            // Styles
+            'underlineMenuHeader' => 'border-b-2 border-b-violet-600',
+            'bgMenuColor' => 'bg-violet-800',
+            'menuTextColor' => 'text-violet-800',
+            'focusColor' => 'focus:ring-violet-500 focus:border-violet-500',
+            // Data
             'languages' => $languages,
             'found'     => $found,
             'column'    => $this->orderColumn,

@@ -14,6 +14,7 @@ return [
     "code" => "code",
     "actions" => "actions",
     "language" => "language",
+    "languages" => "languages",
     "pending" => "pending",
     "type" => "type",
     "types" => "types",

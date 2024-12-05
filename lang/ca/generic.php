@@ -15,6 +15,7 @@ return [
     "code" => "codi",
     "actions" => "accions",
     "language" => "idioma",
+    "languages" => "idiomes",
     "pending" => "pendent",
     "type" => "tipus",
     "types" => "tipus",

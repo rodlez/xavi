@@ -58,11 +58,9 @@ class LanguagesController extends Controller
         $formData = $request->validated();
         try {
             Languages::where('id', $language->id)->update($formData);
-            /* return to_route('languages.show', $language)->with('message', 'Language successfully updated'); */
-             return to_route('languages.show', $language);
+            return to_route('languages.show', $language)->with('message', __('generic.language') . ' (' . $language->name . ') ' . __('generic.successUpdate'));
         } catch (Exception $e) {
-            /* return to_route('languages.show', $language)->with('message', 'Error(' . $e->getCode() . ') Language can not be updated.'); */
-            return to_route('languages.show', $language);
+            return to_route('languages.show', $language)->with('error', __('generic.error') . ' (' . $e->getCode() . ') ' . __('generic.language') . ' (' . $language->name . ') ' . __('generic.errorUpdate'));
         }
     }
 
@@ -73,11 +71,9 @@ class LanguagesController extends Controller
     {
         try {
             $language->delete();
-            return to_route('languages');
-            /* return to_route('wk_types.index')->with('message', 'Type (' . $type->name . ') deleted.'); */
+            return to_route('languages')->with('message', __('generic.language') . ' (' . $language->name . ') ' . __('generic.successDelete'));
         } catch (Exception $e) {
-            /* return to_route('wk_types.index')->with('message', 'Error (' . $e->getCode() . ') Type: ' . $type->name . ' can not be deleted.'); */
-            return to_route('languages');
+            return to_route('languages')->with('error', __('generic.error') . ' (' . $e->getCode() . ') ' . __('generic.language') . ' (' . $language->name . ') ' . __('generic.errorDelete'));
         }
     }
 }

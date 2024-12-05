@@ -15,7 +15,7 @@
                 <div class="px-4">
                     <a href="{{ route('pf_categories.create') }}"
                         class="text-white text-sm capitalize sm:text-md rounded-lg py-2 px-4 bg-black hover:bg-gray-600 transition duration-1000 ease-in-out"
-                        title="Create New Language">{{__("generic.new")}}
+                        >{{__("generic.new")}}
                     </a>
                 </div>
             </div>

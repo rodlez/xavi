@@ -1,16 +1,17 @@
 <div class="max-w-7xl mx-auto sm:pb-8 sm:px-6 lg:px-8">
     <!-- Sitemap -->
     <div class="flex flex-row justify-start items-start gap-1 text-sm py-3 px-4 text-slate-500">
-        <a href="/languages" class="hover:text-yellow-600">Languages</a> /
-        <a href="/languages/{{$language->id}}" class="hover:text-yellow-600">Info</a> /
-        <a href="/languages/edit/{{ $language->id }}" class="font-bold text-black border-b-2 border-b-yellow-600">Edit</a>
+        <a href="/languages" class="{{ $textMenuHeader }}">{{ __('generic.languages') }}</a> /
+        <a href="/languages/{{ $language->id }}" class="{{ $textMenuHeader }}">{{ __('generic.info') }}</a> /
+        <a href="/languages/edit/{{ $language->id }}"
+            class="font-bold text-black {{ $underlineMenuHeader }}">{{ __('generic.edit') }}</a>
     </div>
 
     <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
         <!-- Header -->
-        <div class="flex flex-row justify-between items-center py-4 bg-yellow-400">
+        <div class="flex flex-row justify-between items-center py-4 {{ $bgMenuColor }}">
             <div>
-                <span class="text-lg text-white px-4">Language Edit</span>
+                <span class="text-lg text-white px-4">{{ __('generic.languages') }}</span>
             </div>
         </div>
         <!--Language -->
@@ -23,8 +24,9 @@
 
                 <!-- Name -->
                 <div class="flex flex-col justify-start items-start w-full sm:w-2/3 gap-4 py-2">
-                    <span class="text-md font-semibold px-2">Name</span>
-                    <input name="name" id="name" type="text" value="{{ $language->name }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-md rounded-lg w-full sm:w-2/3 p-2 focus:ring-yellow-500 focus:border-yellow-500">
+                    <span class="text-md font-semibold capitalize px-2">{{ __('generic.name') }} <span class="text-red-600">*</span></span>
+                    <input name="name" id="name" type="text" value="{{ $language->name }}"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-md rounded-lg w-full sm:w-2/3 p-2 focus:ring-yellow-500 focus:border-yellow-500">
                 </div>
                 <!-- Errors -->
                 @error('name')
@@ -35,8 +37,9 @@
 
                 <!-- Code -->
                 <div class="flex flex-col justify-start items-start w-full sm:w-2/3 gap-4 py-2">
-                    <span class="text-md font-semibold px-2">Code</span>
-                    <input name="code" id="code" type="text" value="{{ $language->code }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-md rounded-lg w-full sm:w-2/3 p-2 focus:ring-yellow-500 focus:border-yellow-500">
+                    <span class="text-md font-semibold capitalize px-2">{{ __('generic.code') }} <span class="text-red-600">*</span></span>
+                    <input name="code" id="code" type="text" value="{{ $language->code }}"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-md rounded-lg w-full sm:w-2/3 p-2 focus:ring-yellow-500 focus:border-yellow-500">
                 </div>
                 <!-- Errors -->
                 @error('code')
@@ -47,8 +50,9 @@
 
                 <!-- Save -->
                 <div class="py-4">
-                    <button type="submit" class="w-full sm:w-fit bg-black hover:bg-slate-700 text-white capitalize p-2 sm:px-4 rounded-lg shadow-none transition duration-500 ease-in-out">
-                        Save
+                    <button type="submit"
+                        class="w-full sm:w-fit bg-black hover:bg-slate-700 text-white capitalize p-2 sm:px-4 rounded-lg shadow-none transition duration-500 ease-in-out">
+                        {{ __('generic.save') }}
                         <i class="fa-solid fa-floppy-disk px-2"></i>
                     </button>
                 </div>
@@ -56,9 +60,10 @@
         </div>
     </div>
     <!-- Footer -->
-    <div class="flex flex-row justify-end items-center py-4 px-4 bg-yellow-400 sm:rounded-b-lg">
+    <div class="flex flex-row justify-end items-center py-4 px-4 {{ $bgMenuColor }} sm:rounded-b-lg">
         <a href="{{ route('languages.show', $language) }}">
-            <i class="fa-lg fa-solid fa-backward-step text-white hover:text-black transition duration-1000 ease-in-out" title="Go Back"></i>
+            <i class="fa-lg fa-solid fa-backward-step text-white hover:text-black transition duration-1000 ease-in-out"
+                title="{{ __('generic.back') }}"></i>
         </a>
     </div>
 </div>
