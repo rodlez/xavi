@@ -1,24 +1,26 @@
 <div class="max-w-7xl mx-auto sm:pb-8 sm:px-6 lg:px-8">
 
     <!-- Sitemap -->
-    <div class="flex flex-row justify-start items-start gap-1 text-sm py-3 px-4 text-slate-500">
-        <a href="/pf_types" class="{{$textMenuHeader}}">Types</a> /
-        <a href="/pf_types/{{ $type->id }}" class="{{$textMenuHeader}}">Info</a> /
+    <div class="flex flex-row justify-start items-start gap-1 text-sm py-3 px-4 text-slate-500 capitalize">
+        <a href="/pf_types" class="{{$textMenuHeader}}">{{__("admin/portfolio/portfolioTypes.menuIndex")}}</a> /
+        <a href="/pf_types/{{ $type->id }}" class="{{$textMenuHeader}}">{{__("generic.info")}}</a> /
         <a href="/pf_types/edit/{{ $type->id }}"
-            class="font-bold text-black {{$underlineMenuHeader}}">Edit</a>
+            class="font-bold text-black {{$underlineMenuHeader}}">{{__("generic.edit")}}</a>
     </div>
 
     <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
 
         <!-- HEADER -->
         <div class="flex flex-row py-4 {{$bgMenuColor}}">
-            <span class="text-lg text-white capitalize px-4">Portfolio Type </span>
+            <span class="text-lg text-white capitalize px-4">{{__("admin/portfolio/portfolioTypes.titleHeader")}}</span>
         </div>
 
         <!--EDIT TYPE -->
         <div class="mx-auto w-11/12 py-4 px-2">
 
-            <div class="italic p-2 rounded-md {{$bgInfoColor}}">Edit the PortFolio Type, description is optional.</div>
+            <div class="italic p-2 rounded-md {{$bgInfoColor}}">
+                {{__("admin/portfolio/portfolioTypes.infoMessageEdit")}}
+            </div>
 
             <form action="{{ route('pf_types.update', $type) }}" method="POST">
                 <!-- Add Token to prevent Cross-Site Request Forgery (CSRF) -->
@@ -27,7 +29,7 @@
                 @method('PUT')
 
                 <!-- Name -->
-                <h2 class="text-lg font-bold pt-2 pb-1 px-2">Name <span class="text-red-600">*</span></h2>
+                <h2 class="text-lg font-bold capitalize pt-2 pb-1 px-2">{{__("generic.name")}} <span class="text-red-600">*</span></h2>
 
                 <div class="relative">
                     <input wire:model="name" name="name" id="name" type="text" value="{{ $type->name }}"
@@ -46,7 +48,7 @@
 
                 <!-- Description -->
                 <div class="flex flex-col justify-start items-start w-full sm:w-2/3 gap-4 py-2">
-                    <span class="text-md font-semibold px-2">Description</span>
+                    <span class="text-lg font-semibold capitalize px-2">{{__("generic.description")}}</span>
                     <textarea rows="6" name="description" id="description"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-md rounded-lg w-full p-2 {{$focusColor}}">{{ $type->description }}</textarea>
                 </div>
@@ -61,7 +63,7 @@
                 <div class="py-4">
                     <button type="submit"
                         class="w-full sm:w-fit bg-black hover:bg-slate-700 text-white capitalize p-2 sm:px-4 rounded-lg shadow-none transition duration-500 ease-in-out">
-                        Save
+                        {{__("generic.save")}}
                         <i class="fa-solid fa-floppy-disk px-2"></i>
                     </button>
                 </div>
@@ -74,7 +76,7 @@
         <div class="flex flex-row justify-end items-center py-4 px-4 {{$bgMenuColor}} sm:rounded-b-lg">
             <a href="{{ route('pf_types.show', $type) }}">
                 <i class="fa-lg fa-solid fa-backward-step text-white hover:text-black transition duration-1000 ease-in-out"
-                    title="Go Back"></i>
+                    title="{{__("generic.back")}}"></i>
             </a>
         </div>
 

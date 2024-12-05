@@ -43,7 +43,7 @@ class StorePFTypeRequest extends FormRequest
         }
         if ($language == 'es') {
             return [
-                'name.required' => 'El Nombre es obligatorio',
+                'name.required' => 'El nombre es obligatorio',
                 'name.min' => 'El nombre debe tener al menos :min carácteres',
                 'name.unique' => 'Este nombre ya ha sido creado',
                 'description' => 'Si hay una descripción, debe tener al menos :min carácteres',
@@ -51,7 +51,7 @@ class StorePFTypeRequest extends FormRequest
         }
         if ($language == 'ca') {
             return [
-                'name.required' => 'El Nom es obligatori',
+                'name.required' => 'El nom es obligatori',
                 'name.min' => 'El nom ha de tenir al menys :min caràcters',
                 'name.unique' => 'Aquest nom ja ha estat creat',
                 'description' => 'Si hi ha una descripció, ha de tenir al menys :min caràcters',

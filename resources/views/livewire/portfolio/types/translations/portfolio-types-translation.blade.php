@@ -1,17 +1,17 @@
 <div class="max-w-7xl mx-auto sm:pb-8 sm:px-6 lg:px-8">
 
     <!-- Sitemap -->
-    <div class="flex flex-row justify-start items-start gap-1 text-sm py-3 px-4 text-slate-500">
-        <a href="/pf_types_trans" class="font-bold text-black {{$underlineMenuHeader}}">Types
-            Translations</a>
+    <div class="flex flex-row justify-start items-start gap-1 text-sm py-3 px-4 text-slate-500 capitalize">
+        <a href="/pf_types_trans" class="font-bold text-black {{$underlineMenuHeader}}">{{__("admin/portfolio/portfolioTypes.menuIndexTranslations")}}
+        </a>
     </div>
     <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
 
             <!-- HEADER -->
             <div class="flex flex-row justify-between items-center py-4 {{$bgMenuColor}}">
                 <div>
-                    <span class="text-lg text-white px-4">Types <span class="text-sm">({{ $totalEntries }})</span>
-                        Translations <span class="text-sm">({{ $totalTranslations }})</span>
+                    <span class="text-lg text-white capitalize px-4">{{__("generic.types")}} <span class="text-sm">({{ $totalEntries }})</span>
+                    {{__("generic.translations")}} <span class="text-sm">({{ $totalTranslations }})</span>
                     </span>
                 </div>
                 <div class="px-4">
@@ -25,7 +25,7 @@
             <!-- FOUND -->
             <div class="flex flex-col sm:flex-row px-4 sm:px-8 pt-2 pb-0">            
                 @if($search != '' && $found > 0)
-                    <span class="text-green-600">{{$found}} Translations found for this search</span>                
+                    <span class="text-green-600">{{$found}} {{__("generic.elementFound")}}</span>                
                 @endif
             </div>
             
@@ -39,7 +39,7 @@
                     </div>
                     <input wire:model.live="search" type="search"
                         class="w-full rounded-lg pl-10 font-sm placeholder-zinc-400 {{$focusColor}} border-2 border-zinc-200"
-                        placeholder="Search by name">
+                        placeholder="{{__("generic.searchPlaceholder")}}">
                 </div>
                 <!-- Pagination -->
                 <div class="relative w-32">
@@ -59,13 +59,13 @@
             @if (count($selections) > 0)
                 <div class="px-2 sm:px-4">
                     <div class="flex flex-row justify-start items-center gap-4 py-2 px-4 mb-2 rounded-lg bg-zinc-200">
-                        <span class="text-sm font-semibold">Bulk Actions</span>
-                        <a wire:click.prevent="bulkClear" class="cursor-pointer" title="Unselect All">
+                        <span class="text-sm font-semibold capitalize">{{__("generic.bulkActions")}}</span>
+                        <a wire:click.prevent="bulkClear" class="cursor-pointer" title="{{__("generic.bulkActionsClear")}}">
                             <span><i class="fa-solid fa-rotate-right text-green-600 hover:text-green-500"></i></span>
                         </a>
                         <a wire:click.prevent="bulkDelete"
-                            wire:confirm="Are you sure you want to delete this categories?"
-                            class="cursor-pointer text-red-600 hover:text-red-500" title="Delete">
+                            wire:confirm="{{__("generic.confirmDelete")}}"
+                            class="cursor-pointer text-red-600 hover:text-red-500" title="{{__("generic.bulkActionsDelete")}}">
                             <span><i class="fa-sm fa-solid fa-trash"></i></span>
                             <span>({{ count($selections) }})</span>
                         </a>
@@ -87,20 +87,20 @@
                                         id {!! $sortLink !!}</th>
                                     <th wire:click="sorting('pf_types_trans.pf_type_id')" scope="col"
                                         class="p-2 hover:cursor-pointer hover:{{$menuTextColor}} {{ $column == 'pf_types_trans.pf_type_id' ? $menuTextColor : '' }}">
-                                        type {!! $sortLink !!}</th>
+                                        {{__("generic.type")}} {!! $sortLink !!}</th>
                                     <th wire:click="sorting('pf_types_trans.lang_id')" scope="col"
                                         class="p-2 hover:cursor-pointer hover:{{$menuTextColor}} {{ $column == 'pf_types_trans.lang_id' ? $menuTextColor : '' }}">
-                                        Lang {!! $sortLink !!}</th>
+                                        {{__("generic.language")}} {!! $sortLink !!}</th>
                                     <th wire:click="sorting('name')" scope="col"
                                         class="p-2 hover:cursor-pointer hover:{{$menuTextColor}} {{ $column == 'name' ? $menuTextColor : '' }}">
-                                        name {!! $sortLink !!}</th>
+                                        {{__("generic.name")}} {!! $sortLink !!}</th>
                                     <th wire:click="sorting('pf_types_trans.created_at')" scope="col"
                                         class="p-2 hover:cursor-pointer hover:{{$menuTextColor}} {{ $column == 'pf_types_trans.created_at' ? $menuTextColor : '' }}">
-                                        created {!! $sortLink !!}</th>
+                                        {{__("generic.created")}} {!! $sortLink !!}</th>
                                     <th wire:click="sorting('pf_types_trans.updated_at')" scope="col"
                                         class="p-2 hover:cursor-pointer hover:{{$menuTextColor}} {{ $column == 'pf_types_trans.updated_at' ? $menuTextColor : '' }}">
-                                        updated {!! $sortLink !!}</th>
-                                    <th scope="col" class="p-2 text-center capitalize">actions</th>
+                                        {{__("generic.updated")}} {!! $sortLink !!}</th>
+                                    <th scope="col" class="p-2 text-center capitalize">{{__("generic.actions")}}</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -131,7 +131,7 @@
                                                 </a> --}}
                                                 <!-- Edit -->
                                                 <a href="{{ route('pf_types_trans.edit', $translation) }}"
-                                                    title="Edit">
+                                                    title="{{__("generic.edit")}}">
                                                     <i
                                                         class="fa-solid fa-pen-to-square text-green-600 hover:text-black transition duration-1000 ease-in-out"></i>
                                                 </a>
@@ -144,7 +144,7 @@
                                                     @method('DELETE')
                                                     <button
                                                         onclick="return confirm('Are you sure you want to delete the translation: {{ $translation->name }}?')"
-                                                        title="Delete">
+                                                        title="{{__("generic.delete")}}">
                                                         <i
                                                             class="fa-solid fa-trash text-red-600 hover:text-black transition duration-1000 ease-in-out"></i>
                                                     </button>
@@ -158,8 +158,8 @@
                     @else
                         <div
                             class="flex flex-row justify-between items-center bg-black text-white rounded-lg p-4 mx-2 sm:mx-0">
-                            <span class="text-red-600">No translations found in the system.</span>
-                            <a wire:click.prevent="clearSearch" title="Reset">
+                            <span class="text-red-600">{{__("generic.elementNotFound")}}</span>
+                            <a wire:click.prevent="clearSearch" title="{{__("generic.close")}}">
                                 <i
                                     class="fa-lg fa-solid fa-circle-xmark cursor-pointer px-2 text-red-600 hover:text-red-400 transition duration-1000 ease-in-out"></i>
                             </a>
@@ -178,7 +178,7 @@
             <div class="flex flex-row justify-end items-center py-4 px-4 {{$bgMenuColor}} sm:rounded-b-lg">
                 <a href="{{ route('dashboard') }}">
                     <i class="fa-lg fa-solid fa-backward-step text-white hover:text-black transition duration-1000 ease-in-out"
-                        title="Go Back"></i>
+                        title="{{__("generic.back")}}"></i>
                 </a>
             </div>
 
