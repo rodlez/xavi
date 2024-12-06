@@ -24,6 +24,10 @@
                         {{ __('Languages') }}
                     </x-nav-link>
 
+                    <x-nav-link href="{{ route('portfolios') }}" :active="request()->routeIs('portfolios')">
+                        {{ __('Portfolios') }}
+                    </x-nav-link>
+
                     <x-nav-link href="{{ route('pf_types') }}" :active="request()->routeIs('pf_types')">
                         {{ __('PF Types') }}
                     </x-nav-link>

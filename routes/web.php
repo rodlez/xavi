@@ -17,6 +17,7 @@ use App\Livewire\Languages\Languages;
 use App\Livewire\Languages\LanguagesCreate;
 use App\Livewire\Languages\LanguagesEdit;
 use App\Livewire\Languages\LanguagesShow;
+use App\Livewire\Portfolio\Portfolio;
 use App\Livewire\Portfolio\Categories\PortfolioCategories;
 use App\Livewire\Portfolio\Categories\PortfolioCategoriesCreate;
 use App\Livewire\Portfolio\Categories\PortfolioCategoriesEdit;
@@ -24,6 +25,7 @@ use App\Livewire\Portfolio\Categories\PortfolioCategoriesShow;
 use App\Livewire\Portfolio\Categories\Translations\PortfolioCategoriesTranslation;
 use App\Livewire\Portfolio\Categories\Translations\PortfolioCategoriesTranslationCreate;
 use App\Livewire\Portfolio\Categories\Translations\PortfolioCategoriesTranslationEdit;
+use App\Livewire\Portfolio\PortfolioCreate;
 use App\Livewire\Portfolio\Tags\PortfolioTags;
 use App\Livewire\Portfolio\Tags\PortfolioTagsCreate;
 use App\Livewire\Portfolio\Tags\PortfolioTagsEdit;
@@ -76,6 +78,10 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
     Route::get('/languages/edit/{language}', LanguagesEdit::class)->name('languages.edit');
 
     /************************* PORTFOLIO *************************/
+
+    /* PORTFOLIO */
+    Route::get('/portfolios', Portfolio::class)->name('portfolios');
+    Route::get('/portfolios/create', PortfolioCreate::class)->name('portfolios.create');
 
     /* PORTFOLIO CATEGORIES */
     Route::get('/pf_categories', PortfolioCategories::class)->name('pf_categories');

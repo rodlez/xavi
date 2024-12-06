@@ -21,7 +21,11 @@ return [
     "category" => "category",    
     "categories" => "categories", 
     "tag" => "tag",
-    "tags" => "tags",       
+    "tags" => "tags",    
+    "published" => "published",
+    "status" => "status",   
+    "process" => "process",
+    "done" => "done",     
     // BULK
     "bulkActions" => "bulk actions",
     "bulkActionsClear" => "unselect all",

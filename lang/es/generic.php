@@ -23,6 +23,10 @@ return [
     "categories" => "categorias",
     "tag" => "tag",
     "tags" => "tags",
+    "published" => "publicado",
+    "status" => "estado",
+    "process" => "en proceso",
+    "done" => "acabado",
     // BULK
     "bulkActions" => "acciones en grupo",
     "bulkActionsClear" => "deseleccionar todo",
