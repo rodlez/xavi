@@ -25,8 +25,8 @@ return [
     "tags" => "tags",
     "published" => "publicat",
     "status" => "estat",
-    "process" => "en proceso",
-    "done" => "acabado",
+    "process" => "en proces",
+    "done" => "acabat",
     // BULK
     "bulkActions" => "accions en grup",
     "bulkActionsClear" => "deseleccionar tot",

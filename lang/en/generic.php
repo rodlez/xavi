@@ -24,7 +24,7 @@ return [
     "tags" => "tags",    
     "published" => "published",
     "status" => "status",   
-    "process" => "process",
+    "process" => "in process",
     "done" => "done",     
     // BULK
     "bulkActions" => "bulk actions",

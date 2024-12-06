@@ -76,15 +76,15 @@
                                 <th wire:click="sorting('portfolios.id')" scope="col"
                                     class="p-2 hover:cursor-pointer hover:{{ $menuTextColor }} {{ $column == 'portfolios.id' ? $menuTextColor : '' }}">
                                     id {!! $sortLink !!}</th>
+                                <th wire:click="sorting('name')" scope="col"
+                                    class="p-2 hover:cursor-pointer hover:{{ $menuTextColor }} {{ $column == 'name' ? $menuTextColor : '' }}">
+                                    {{ __('generic.name') }} {!! $sortLink !!}</th>
                                 <th wire:click="sorting('portfolios.id')" scope="col"
                                     class="p-2 hover:cursor-pointer hover:{{ $menuTextColor }} {{ $column == 'published' ? $menuTextColor : '' }}">
                                     {{ __('generic.published') }} {!! $sortLink !!}</th>
                                 <th wire:click="sorting('portfolios.id')" scope="col"
                                     class="p-2 hover:cursor-pointer hover:{{ $menuTextColor }} {{ $column == 'status' ? $menuTextColor : '' }}">
                                     {{ __('generic.status') }} {!! $sortLink !!}</th>
-                                <th wire:click="sorting('name')" scope="col"
-                                    class="p-2 hover:cursor-pointer hover:{{ $menuTextColor }} {{ $column == 'name' ? $menuTextColor : '' }}">
-                                    {{ __('generic.name') }} {!! $sortLink !!}</th>
                                 <th wire:click="sorting('portfolios.created_at')" scope="col"
                                     class="p-2 hover:cursor-pointer hover:{{ $menuTextColor }} {{ $column == 'portfolios.created_at' ? $menuTextColor : '' }}">
                                     {{ __('generic.created') }} {!! $sortLink !!}</th>
@@ -106,13 +106,11 @@
                                             class="text-green-600 outline-none focus:ring-0 checked:bg-green-500"
                                             value={{ $portfolio->id }}></td>
                                     <td class="p-2">{{ $portfolio->id }}</td>
-                                    <td class="p-2">{{ $portfolio->published }}</td>
-                                    <td class="p-2">{{ $portfolio->status }}</td>
-                                    <td class="p-2">{{-- <a
-                                            href="{{ route('portfolios.show', $portfolio) }}">{{ $portfolio->name }}</a> --}}
-                                            {{ $portfolio->name }}
+                                    <td class="p-2"><a
+                                            href="{{ route('portfolios.show', $portfolio) }}">{{ $portfolio->name }}</a>
                                     </td>
-                                    
+                                    <td class="p-2">{{ publishedText($portfolio->published) }}</td>
+                                    <td class="p-2">{{ statusText($portfolio->status) }}</td>
                                     <td class="p-2">{{ date('d-m-Y', strtotime($portfolio->created_at)) }}</td>
                                     <td class="p-2">{{ date('d-m-Y', strtotime($portfolio->updated_at)) }}</td>
                                     <td class="p-2 text-center uppercase">
@@ -123,19 +121,19 @@
                                     <td class="p-2">
                                         <div class="flex justify-center items-center gap-2">
                                             <!-- Show -->
-                                            {{-- <a href="{{ route('portfolios.show', $portfolio) }}"
+                                            <a href="{{ route('portfolios.show', $portfolio) }}"
                                                 title="{{ __('generic.show') }}">
                                                 <i
                                                     class="fa-solid fa-circle-info text-blue-600 hover:text-black transition duration-1000 ease-in-out"></i>
-                                            </a> --}}
+                                            </a>
                                             <!-- Edit -->
-                                            {{-- <a href="{{ route('portfolios.edit', $portfolio) }}"
+                                            <a href="{{ route('portfolios.edit', $portfolio) }}"
                                                 title="{{ __('generic.edit') }}">
                                                 <i
                                                     class="fa-solid fa-pen-to-square text-green-600 hover:text-black transition duration-1000 ease-in-out"></i>
-                                            </a> --}}
+                                            </a>
                                             <!-- Delete -->
-                                            {{-- <form action="{{ route('portfolios.destroy', $portfolio) }}" method="POST">
+                                            <form action="{{ route('portfolios.destroy', $portfolio) }}" method="POST">
                                                 <!-- Add Token to prevent Cross-Site Request Forgery (CSRF) -->
                                                 @csrf
                                                 <!-- Dirtective to Override the http method -->
@@ -145,7 +143,7 @@
                                                     <i
                                                         class="fa-solid fa-trash text-red-600 hover:text-black transition duration-1000 ease-in-out"></i>
                                                 </button>
-                                            </form> --}}
+                                            </form>
                                         </div>
                                     </td>
                                 </tr>

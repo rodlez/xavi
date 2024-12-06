@@ -7,6 +7,7 @@ use App\Http\Controllers\Languages\LanguagesController;
 use App\Http\Controllers\Playground;
 use App\Http\Controllers\Portfolio\PortfolioCategoryController;
 use App\Http\Controllers\Portfolio\PortfolioCategoryTranslationController;
+use App\Http\Controllers\Portfolio\PortfolioController;
 use App\Http\Controllers\Portfolio\PortfolioTagController;
 use App\Http\Controllers\Portfolio\PortfolioTagTranslationController;
 use App\Http\Controllers\Portfolio\PortfolioTypeController;
@@ -26,6 +27,8 @@ use App\Livewire\Portfolio\Categories\Translations\PortfolioCategoriesTranslatio
 use App\Livewire\Portfolio\Categories\Translations\PortfolioCategoriesTranslationCreate;
 use App\Livewire\Portfolio\Categories\Translations\PortfolioCategoriesTranslationEdit;
 use App\Livewire\Portfolio\PortfolioCreate;
+use App\Livewire\Portfolio\PortfolioEdit;
+use App\Livewire\Portfolio\PortfolioShow;
 use App\Livewire\Portfolio\Tags\PortfolioTags;
 use App\Livewire\Portfolio\Tags\PortfolioTagsCreate;
 use App\Livewire\Portfolio\Tags\PortfolioTagsEdit;
@@ -82,6 +85,11 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
     /* PORTFOLIO */
     Route::get('/portfolios', Portfolio::class)->name('portfolios');
     Route::get('/portfolios/create', PortfolioCreate::class)->name('portfolios.create');
+    Route::get('/portfolios/{portfolio}', PortfolioShow::class)->name('portfolios.show');
+    Route::put('/portfolios/{portfolio}', [PortfolioController::class, 'update'])->name('portfolios.update');
+    Route::delete('/portfolios/{portfolio}', [PortfolioController::class, 'destroy'])->name('portfolios.destroy');
+    Route::get('/portfolios/edit/{portfolio}', PortfolioEdit::class)->name('portfolios.edit');
+
 
     /* PORTFOLIO CATEGORIES */
     Route::get('/pf_categories', PortfolioCategories::class)->name('pf_categories');
