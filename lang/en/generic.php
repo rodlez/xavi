@@ -19,7 +19,9 @@ return [
     "type" => "type",
     "types" => "types",
     "category" => "category",    
-    "categories" => "categories",    
+    "categories" => "categories", 
+    "tag" => "tag",
+    "tags" => "tags",       
     // BULK
     "bulkActions" => "bulk actions",
     "bulkActionsClear" => "unselect all",

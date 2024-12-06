@@ -21,6 +21,8 @@ return [
     "types" => "tipus",
     "category" => "categoria",    
     "categories" => "categories",
+    "tag" => "tag",
+    "tags" => "tags",
     // BULK
     "bulkActions" => "accions en grup",
     "bulkActionsClear" => "deseleccionar tot",

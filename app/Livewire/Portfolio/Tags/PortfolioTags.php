@@ -1,17 +1,17 @@
 <?php
 
-namespace App\Livewire\Portfolio\Categories;
+namespace App\Livewire\Portfolio\Tags;
 
-use App\Models\Portfolio\PortfolioCategory;
+use App\Models\Portfolio\PortfolioTag;
 use Livewire\Component;
 use Livewire\WithPagination;
 
-class PortfolioCategories extends Component
+class PortfolioTags extends Component
 {
     use WithPagination;
 
     //protected $paginationTheme = "bootstrap";
-    public $orderColumn = 'pf_categories.id';
+    public $orderColumn = 'pf_tags.id';
     public $sortOrder = 'desc';
     public $sortLink = '<i class="fa-solid fa-caret-down"></i>';
     public $search = '';
@@ -37,11 +37,11 @@ class PortfolioCategories extends Component
     public function bulkDelete()
     {
         foreach ($this->selections as $selection) {
-            $element = PortfolioCategory::find($selection);
+            $element = PortfolioTag::find($selection);
             $element->delete();
         }
 
-        return to_route('pf_categories')->with('message', __('generic.bulkDelete'));
+        return to_route('pf_tags')->with('message', __('generic.bulkDelete'));
     }
 
     public function sorting($columnName = '')
@@ -63,7 +63,7 @@ class PortfolioCategories extends Component
     {
         $found = 0;
 
-        $data = PortfolioCategory::orderby($this->orderColumn, $this->sortOrder)->select('*');
+        $data = PortfolioTag::orderby($this->orderColumn, $this->sortOrder)->select('*');
 
         if (!empty($this->search)) {
             $found = $data->where('name', 'like', '%' . $this->search . '%')->count();
@@ -72,17 +72,18 @@ class PortfolioCategories extends Component
         $total = $data->count();
         $data = $data->paginate($this->perPage);
 
-        return view('livewire.portfolio.categories.portfolio-categories', [
+        return view('livewire.portfolio.tags.portfolio-tags', [
             // Styles
-            'underlineMenuHeader' => 'border-b-2 border-b-blue-600',
-            'bgMenuColor' => 'bg-blue-800',
-            'menuTextColor' => 'text-blue-800',
-            'focusColor' => 'focus:ring-blue-500 focus:border-blue-500',
+            'underlineMenuHeader' => 'border-b-2 border-b-yellow-600',
+            'bgMenuColor' => 'bg-yellow-800',
+            'menuTextColor' => 'text-yellow-800',
+            'focusColor' => 'focus:ring-yellow-500 focus:border-yellow-500',
             // Data
-            'categories' => $data,
+            'tags' => $data,
             'found' => $found,
             'column' => $this->orderColumn,
             'total' => $total,
         ])->layout('layouts.app');
     }
+    
 }

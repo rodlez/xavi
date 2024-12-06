@@ -7,6 +7,8 @@ use App\Http\Controllers\Languages\LanguagesController;
 use App\Http\Controllers\Playground;
 use App\Http\Controllers\Portfolio\PortfolioCategoryController;
 use App\Http\Controllers\Portfolio\PortfolioCategoryTranslationController;
+use App\Http\Controllers\Portfolio\PortfolioTagController;
+use App\Http\Controllers\Portfolio\PortfolioTagTranslationController;
 use App\Http\Controllers\Portfolio\PortfolioTypeController;
 use App\Http\Controllers\Portfolio\PortfolioTypeTranslationController;
 /* Livewire Full Page Components */
@@ -22,6 +24,13 @@ use App\Livewire\Portfolio\Categories\PortfolioCategoriesShow;
 use App\Livewire\Portfolio\Categories\Translations\PortfolioCategoriesTranslation;
 use App\Livewire\Portfolio\Categories\Translations\PortfolioCategoriesTranslationCreate;
 use App\Livewire\Portfolio\Categories\Translations\PortfolioCategoriesTranslationEdit;
+use App\Livewire\Portfolio\Tags\PortfolioTags;
+use App\Livewire\Portfolio\Tags\PortfolioTagsCreate;
+use App\Livewire\Portfolio\Tags\PortfolioTagsEdit;
+use App\Livewire\Portfolio\Tags\PortfolioTagsShow;
+use App\Livewire\Portfolio\Tags\Translations\PortfolioTagsTranslation;
+use App\Livewire\Portfolio\Tags\Translations\PortfolioTagsTranslationCreate;
+use App\Livewire\Portfolio\Tags\Translations\PortfolioTagsTranslationEdit;
 use App\Livewire\Portfolio\Types\PortfolioTypes;
 use App\Livewire\Portfolio\Types\PortfolioTypesCreate;
 use App\Livewire\Portfolio\Types\PortfolioTypesEdit;
@@ -102,4 +111,20 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
     Route::delete('/pf_types_trans/{translation}', [PortfolioTypeTranslationController::class, 'destroy'])->name('pf_types_trans.destroy');
     Route::get('/pf_types_trans/edit/{translation}', PortfolioTypesTranslationEdit::class)->name('pf_types_trans.edit');
 
+    /* PORTFOLIO TAGS */
+    Route::get('/pf_tags', PortfolioTags::class)->name('pf_tags');
+    Route::get('/pf_tags/create', PortfolioTagsCreate::class)->name('pf_tags.create');
+    Route::get('/pf_tags/{tag}', PortfolioTagsShow::class)->name('pf_tags.show');
+    Route::put('/pf_tags/{tag}', [PortfolioTagController::class, 'update'])->name('pf_tags.update');
+    Route::delete('/pf_tags/{tag}', [PortfolioTagController::class, 'destroy'])->name('pf_tags.destroy');
+    Route::get('/pf_tags/edit/{tag}', PortfolioTagsEdit::class)->name('pf_tags.edit');
+
+    /* PORTFOLIO TAGS TRANSLATIONS */
+    Route::get('/pf_tags/{tag}/translation/create/{missingTranslationId?}', PortfolioTagsTranslationCreate::class)
+        ->name('pf_tags_trans.create')
+        ->where('missingTranslationId', '[0-9]+');
+    Route::get('/pf_tags_trans', PortfolioTagsTranslation::class)->name('pf_tags_trans');
+    Route::put('/pf_tags_trans/{translation}', [PortfolioTagTranslationController::class, 'update'])->name('pf_tags_trans.update');
+    Route::delete('/pf_tags_trans/{translation}', [PortfolioTagTranslationController::class, 'destroy'])->name('pf_tags_trans.destroy');
+    Route::get('/pf_tags_trans/edit/{translation}', PortfolioTagsTranslationEdit::class)->name('pf_tags_trans.edit');
 });
