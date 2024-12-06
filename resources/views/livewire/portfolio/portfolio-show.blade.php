@@ -62,7 +62,7 @@
 
 
         <!-- Translations -->
-        {{-- <div class="flex flex-col mt-4 mx-8 pb-0 lg:mx-14">
+        <div class="flex flex-col mt-4 mx-8 pb-0 lg:mx-14">
             <div class="flex flex-col text-white bg-slate-800 p-0">
                 <div class="uppercase bg-orange-600 p-2">{{__("generic.translations")}}
                     ({{ $portfolio->translations->count() }}/{{ $languages->count() }})
@@ -81,7 +81,7 @@
                         </div>
                     @endif
                 
-            </div> --}}
+            </div>
 
             <div class="flex flex-col sm:flex-row my-6 px-0 gap-1">
 
@@ -98,10 +98,10 @@
                             <th></th>
                         </thead>
 
-                       {{--  @foreach ($portfolio->translations as $translation)
+                        @foreach ($portfolio->translations as $translation)
                             <tr class="bg-white border-b text-center">
                                 <td class="p-2">
-                                    {{ $translation->name }}
+                                    {{ $translation->title }}
                                 </td>
                                 <td class="p-2 max-lg:hidden">
                                     {{ $translation->language->name }}
@@ -116,12 +116,12 @@
                                 <td class="p-2">
                                     <div class="flex justify-center items-center gap-2">
                                         <!-- Edit -->
-                                        <a href="{{ route('portfolios_trans.edit', $translation) }}" title="{{__("generic.edit")}}">
+                                        {{-- <a href="{{ route('portfolios_trans.edit', $translation) }}" title="{{__("generic.edit")}}">
                                             <i
                                                 class="fa-solid fa-pen-to-square text-blue-800 hover:text-black transition duration-1000 ease-in-out"></i>
-                                        </a>
+                                        </a> --}}
                                         <!-- Delete -->
-                                        <form action="{{ route('portfolios_trans.destroy', $translation) }}"
+                                        {{-- <form action="{{ route('portfolios_trans.destroy', $translation) }}"
                                             method="POST">
                                             <!-- Add Token to prevent Cross-Site Request Forgery (CSRF) -->
                                             @csrf
@@ -133,15 +133,15 @@
                                                 <i
                                                     class="fa-solid fa-trash text-red-600 hover:text-black transition duration-1000 ease-in-out"></i>
                                             </button>
-                                        </form>
+                                        </form> --}}
                                     </div>
                                 </td>
 
                             </tr>
-                        @endforeach --}}
+                        @endforeach
 
                         <!-- Check Missing Translations -->
-                       {{--  @foreach ($missingTranslations as $missing)
+                        @foreach ($missingTranslations as $missing)
                             <tr class="bg-white text-red-600 border-b text-center">
                                 <td class="p-2 bg-red-100 text-red-600">{{__("generic.pending")}}</td>
                                 <td class="p-2 bg-red-100 max-sm:hidden">{{ $missing->name }}</td>
@@ -156,7 +156,7 @@
                                     </a>
                                 </td>
                             </tr>
-                        @endforeach --}}
+                        @endforeach
 
                     </table>
 

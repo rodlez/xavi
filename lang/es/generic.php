@@ -27,6 +27,13 @@ return [
     "status" => "estado",
     "process" => "en proceso",
     "done" => "acabado",
+    "title" => "título",
+    "subtitle" => "subtítulo",
+    "content" => "contenido",
+    "year" => "año",
+    "location" => "localización",
+    "client" => "cliente",
+    "project" => "proyecto",
     // BULK
     "bulkActions" => "acciones en grupo",
     "bulkActionsClear" => "deseleccionar todo",

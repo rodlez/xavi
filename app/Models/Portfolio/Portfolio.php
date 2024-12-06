@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Portfolio extends Model
-{
+{   
     use HasFactory;
 
     // protected array with the keys that are valid, when create method get the data array will have access to this keys
@@ -27,6 +27,17 @@ class Portfolio extends Model
         return $this->belongsTo(
             User::class,
             foreignKey: 'user_id'
+        );
+    }
+
+    /**
+     * Get the translations associated.
+     */
+    public function translations()
+    {
+        return $this->hasMany(
+            PortfolioTranslation::class,
+            foreignKey: 'portfolio_id'
         );
     }
 

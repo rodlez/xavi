@@ -4,6 +4,7 @@ namespace App\Livewire\Portfolio;
 
 use App\Models\Languages;
 use App\Models\Portfolio\Portfolio;
+use App\Models\Portfolio\PortfolioTranslation;
 use App\Services\TranslationService;
 use Livewire\Component;
 
@@ -24,18 +25,18 @@ class PortfolioShow extends Component
 
     public function render()
     {
-        //$missingTranslations = $this->translationService->getTranslationsMissing(PortfolioportfolioTranslation::class, 'pf_portfolio_id', $this->portfolio->id);
+        $missingTranslations = $this->translationService->getTranslationsMissing(PortfolioTranslation::class, 'portfolio_id', $this->portfolio->id);
 
         return view('livewire.portfolio.portfolio-show', [
             // Styles
-            'underlineMenuHeader' => 'border-b-2 border-b-emerald-600',
-            'textMenuHeader' => 'hover:text-emerald-800',
-            'bgMenuColor' => 'bg-emerald-800',
-            'menuTextColor' => 'text-emerald-800',
+            'underlineMenuHeader' => 'border-b-2 border-b-slate-600',
+            'textMenuHeader' => 'hover:text-slate-800',
+            'bgMenuColor' => 'bg-slate-800',
+            'menuTextColor' => 'text-slate-800',
             // Data
             'portfolio' => $this->portfolio,
             'languages' => Languages::all(),
-            //'missingTranslations' => $missingTranslations,
+            'missingTranslations' => $missingTranslations,
         ])->layout('layouts.app');
     }
    
