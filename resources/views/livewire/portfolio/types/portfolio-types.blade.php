@@ -28,7 +28,7 @@
                     </div>
                     <input wire:model.live="search" type="search"
                         class="w-full rounded-lg pl-10 font-sm placeholder-zinc-400 {{$focusColor}} border-2 border-zinc-200"
-                        placeholder="{{__("generic.searchPlaceholder")}}">
+                        placeholder="{{__("generic.searchPlaceholderName")}}">
                 </div>
                 <!-- Pagination -->
                 <div class="relative w-32">

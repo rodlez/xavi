@@ -30,7 +30,7 @@
                 </div>
                 <input wire:model.live="search" type="search"
                     class="w-full rounded-lg pl-10 font-sm placeholder-zinc-400 {{ $focusColor }} border-2 border-zinc-200"
-                    placeholder="{{ __('generic.searchPlaceholder') }}">
+                    placeholder="{{ __('generic.searchPlaceholderName') }}">
             </div>
             <!-- Pagination -->
             <div class="relative w-32">
@@ -114,9 +114,9 @@
                                     <td class="p-2">{{ date('d-m-Y', strtotime($portfolio->created_at)) }}</td>
                                     <td class="p-2">{{ date('d-m-Y', strtotime($portfolio->updated_at)) }}</td>
                                     <td class="p-2 text-center uppercase">
-                                        {{-- @foreach ($portfolio->translations as $translation)
+                                        @foreach ($portfolio->translations as $translation)
                                             {{ $translation->language->code }}
-                                        @endforeach --}}
+                                        @endforeach
                                     </td>
                                     <td class="p-2">
                                         <div class="flex justify-center items-center gap-2">

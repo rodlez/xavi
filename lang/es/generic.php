@@ -2,7 +2,8 @@
 
 return [
     // SEARCH
-    "searchPlaceholder" => "Búsqueda por nombre",   
+    "searchPlaceholderName" => "Búsqueda por nombre",   
+    "searchPlaceholderTitle" => "Búsqueda por título",   
     "elementFound" => "Elementos encontrados",
     "elementNotFound" => "No se ha encontrado ningún elemento",
     // TABLES
@@ -34,6 +35,8 @@ return [
     "location" => "localización",
     "client" => "cliente",
     "project" => "proyecto",
+    "portfolio" => "portfolio",
+    "portfolios" => "portfolios",
     // BULK
     "bulkActions" => "acciones en grupo",
     "bulkActionsClear" => "deseleccionar todo",

@@ -2,7 +2,8 @@
 
 return [
     // SEARCH
-    "searchPlaceholder" => "Búsqueda per nom",
+    "searchPlaceholderName" => "Búsqueda per nom",
+    "searchPlaceholderTitle" => "Búsqueda per títol",   
     "elementFound" => "Elements trobats",
     "elementNotFound" => "No s'ha trobat cap element",
     // TABLES
@@ -34,6 +35,8 @@ return [
     "location" => "localització",
     "client" => "client",
     "project" => "projecte",
+    "portfolio" => "portfoli",
+    "portfolios" => "portfolis",
     // BULK
     "bulkActions" => "accions en grup",
     "bulkActionsClear" => "deseleccionar tot",

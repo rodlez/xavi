@@ -19,10 +19,11 @@ class PortfolioTranslationEdit extends Component
 
     public function render()
     {
+        
         $languages = Languages::all()->sortBy('name', SORT_NATURAL|SORT_FLAG_CASE);
 
-        $categories = PortfolioCategoryTranslation::all()->where('lang_id', $this->missingTranslationId)->sortBy('name', SORT_NATURAL|SORT_FLAG_CASE);
-        $types = PortfolioTypeTranslation::all()->where('lang_id', $this->missingTranslationId)->sortBy('name', SORT_NATURAL|SORT_FLAG_CASE);
+        $categories = PortfolioCategoryTranslation::all()->where('lang_id', $this->translation->lang_id)->sortBy('name', SORT_NATURAL|SORT_FLAG_CASE);
+        $types = PortfolioTypeTranslation::all()->where('lang_id', $this->translation->lang_id)->sortBy('name', SORT_NATURAL|SORT_FLAG_CASE);
 
         return view('livewire.portfolio.portfolio-translation-edit', [
             // Styles
@@ -33,6 +34,7 @@ class PortfolioTranslationEdit extends Component
             'menuTextColor'         => 'text-slate-400',
             'focusColor'            => 'focus:ring-slate-400 focus:border-slate-400',
             // Data
+            'portfolio'     => $this->translation->portfolio,
             'translation'   => $this->translation,
             'languages'     => $languages,
             // test

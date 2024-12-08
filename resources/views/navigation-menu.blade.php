@@ -28,6 +28,10 @@
                         {{ __('Portfolios') }}
                     </x-nav-link>
 
+                    <x-nav-link href="{{ route('portfolios_trans') }}" :active="request()->routeIs('portfolios_trans')">
+                        {{ __('Portfolios Trans') }}
+                    </x-nav-link>
+
                     <x-nav-link href="{{ route('pf_types') }}" :active="request()->routeIs('pf_types')">
                         {{ __('PF Types') }}
                     </x-nav-link>

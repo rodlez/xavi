@@ -2,7 +2,7 @@
 
     <!-- Sitemap -->
     <div class="flex flex-row justify-start items-start gap-1 text-sm py-3 px-4 text-slate-500 capitalize">
-        <a href="/pf_types_trans" class="font-bold text-black {{$underlineMenuHeader}}">{{__("admin/portfolio/portfolioTypes.menuIndexTranslations")}}
+        <a href="/portfolios_trans" class="font-bold text-black {{$underlineMenuHeader}}">{{__("admin/portfolio/portfolio.menuIndexTranslations")}}
         </a>
     </div>
     <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
@@ -10,12 +10,12 @@
             <!-- HEADER -->
             <div class="flex flex-row justify-between items-center py-4 {{$bgMenuColor}}">
                 <div>
-                    <span class="text-lg text-white capitalize px-4">{{__("generic.types")}} <span class="text-sm">({{ $totalEntries }})</span>
+                    <span class="text-lg text-white capitalize px-4">{{__("generic.portfolios")}} <span class="text-sm">({{ $totalEntries }})</span>
                     {{__("generic.translations")}} <span class="text-sm">({{ $totalTranslations }})</span>
                     </span>
                 </div>
                 <div class="px-4">
-                    {{-- <a href="{{ route('pf_types_trans.create') }}"
+                    {{-- <a href="{{ route('portfolios_trans.create') }}"
                         class="text-white text-sm sm:text-md rounded-lg py-2 px-4 bg-black hover:bg-gray-600 transition duration-1000 ease-in-out"
                         title="Create New Language">New
                     </a> --}}
@@ -39,7 +39,7 @@
                     </div>
                     <input wire:model.live="search" type="search"
                         class="w-full rounded-lg pl-10 font-sm placeholder-zinc-400 {{$focusColor}} border-2 border-zinc-200"
-                        placeholder="{{__("generic.searchPlaceholderName")}}">
+                        placeholder="{{__("generic.searchPlaceholderTitle")}}">
                 </div>
                 <!-- Pagination -->
                 <div class="relative w-32">
@@ -82,23 +82,23 @@
                             <thead>
                                 <tr class="text-black text-left text-sm font-normal uppercase">
                                     <th></th>
-                                    <th wire:click="sorting('pf_types_trans.id')" scope="col"
-                                        class="p-2 hover:cursor-pointer hover:{{$menuTextColor}} {{ $column == 'pf_types_trans.id' ? $menuTextColor : '' }}">
+                                    <th wire:click="sorting('portfolios_translation.id')" scope="col"
+                                        class="p-2 hover:cursor-pointer hover:{{$menuTextColor}} {{ $column == 'portfolios_trans.id' ? $menuTextColor : '' }}">
                                         id {!! $sortLink !!}</th>
-                                    <th wire:click="sorting('pf_types_trans.pf_type_id')" scope="col"
-                                        class="p-2 hover:cursor-pointer hover:{{$menuTextColor}} {{ $column == 'pf_types_trans.pf_type_id' ? $menuTextColor : '' }}">
-                                        {{__("generic.type")}} {!! $sortLink !!}</th>
-                                    <th wire:click="sorting('pf_types_trans.lang_id')" scope="col"
-                                        class="p-2 hover:cursor-pointer hover:{{$menuTextColor}} {{ $column == 'pf_types_trans.lang_id' ? $menuTextColor : '' }}">
+                                    <th wire:click="sorting('portfolios_translation.portfolio_id')" scope="col"
+                                        class="p-2 hover:cursor-pointer hover:{{$menuTextColor}} {{ $column == 'portfolios_translation.portfolio_id' ? $menuTextColor : '' }}">
+                                        {{__("generic.portfolio")}} {!! $sortLink !!}</th>
+                                    <th wire:click="sorting('portfolios_translation.lang_id')" scope="col"
+                                        class="p-2 hover:cursor-pointer hover:{{$menuTextColor}} {{ $column == 'portfolios_translation.lang_id' ? $menuTextColor : '' }}">
                                         {{__("generic.language")}} {!! $sortLink !!}</th>
-                                    <th wire:click="sorting('name')" scope="col"
-                                        class="p-2 hover:cursor-pointer hover:{{$menuTextColor}} {{ $column == 'name' ? $menuTextColor : '' }}">
-                                        {{__("generic.name")}} {!! $sortLink !!}</th>
-                                    <th wire:click="sorting('pf_types_trans.created_at')" scope="col"
-                                        class="p-2 hover:cursor-pointer hover:{{$menuTextColor}} {{ $column == 'pf_types_trans.created_at' ? $menuTextColor : '' }}">
+                                    <th wire:click="sorting('title')" scope="col"
+                                        class="p-2 hover:cursor-pointer hover:{{$menuTextColor}} {{ $column == 'title' ? $menuTextColor : '' }}">
+                                        {{__("generic.title")}} {!! $sortLink !!}</th>
+                                    <th wire:click="sorting('portfolios_translation.created_at')" scope="col"
+                                        class="p-2 hover:cursor-pointer hover:{{$menuTextColor}} {{ $column == 'portfolios_translation.created_at' ? $menuTextColor : '' }}">
                                         {{__("generic.created")}} {!! $sortLink !!}</th>
-                                    <th wire:click="sorting('pf_types_trans.updated_at')" scope="col"
-                                        class="p-2 hover:cursor-pointer hover:{{$menuTextColor}} {{ $column == 'pf_types_trans.updated_at' ? $menuTextColor : '' }}">
+                                    <th wire:click="sorting('portfolios_translation.updated_at')" scope="col"
+                                        class="p-2 hover:cursor-pointer hover:{{$menuTextColor}} {{ $column == 'portfolios_translation.updated_at' ? $menuTextColor : '' }}">
                                         {{__("generic.updated")}} {!! $sortLink !!}</th>
                                     <th scope="col" class="p-2 text-center capitalize">{{__("generic.actions")}}</th>
                                 </tr>
@@ -112,11 +112,11 @@
                                                 class="text-green-600 outline-none focus:ring-0 checked:bg-green-500"
                                                 value={{ $translation->id }}></td>
                                         <td class="p-2">{{ $translation->id }}</td>
-                                        <td class="p-2">{{ $translation->type->name }}</td>
+                                        <td class="p-2">{{ $translation->portfolio->name }}</td>
                                         <td class="p-2">{{ $translation->language->code }}</td>
                                         <td class="p-2">{{-- <a
-                                                href="{{ route('pf_types_trans.show', $translation) }}">{{ $translation->name }}</a> --}}
-                                            {{ $translation->name }}
+                                                href="{{ route('portfolios_trans.show', $translation) }}">{{ $translation->title }}</a> --}}
+                                            {{ $translation->title }}
                                         </td>
                                         <td class="p-2">{{ date('d-m-Y', strtotime($translation->created_at)) }}
                                         </td>
@@ -125,18 +125,18 @@
                                         <td class="p-2">
                                             <div class="flex justify-center items-center gap-2">
                                                 <!-- Show -->
-                                                {{-- <a href="{{ route('pf_types_trans.show', $translation) }}" title="Show">
+                                                {{-- <a href="{{ route('portfolios_trans.show', $translation) }}" title="Show">
                                                     <i
                                                         class="fa-solid fa-circle-info text-blue-600 hover:text-black transition duration-1000 ease-in-out"></i>
                                                 </a> --}}
                                                 <!-- Edit -->
-                                                <a href="{{ route('pf_types_trans.edit', $translation) }}"
+                                                <a href="{{ route('portfolios_trans.edit', $translation) }}"
                                                     title="{{__("generic.edit")}}">
                                                     <i
                                                         class="fa-solid fa-pen-to-square text-green-600 hover:text-black transition duration-1000 ease-in-out"></i>
                                                 </a>
                                                 <!-- Delete -->
-                                                <form action="{{ route('pf_types_trans.destroy', $translation) }}"
+                                                {{-- <form action="{{ route('portfolios_trans.destroy', $translation) }}"
                                                     method="POST">
                                                     <!-- Add Token to prevent Cross-Site Request Forgery (CSRF) -->
                                                     @csrf
@@ -148,7 +148,7 @@
                                                         <i
                                                             class="fa-solid fa-trash text-red-600 hover:text-black transition duration-1000 ease-in-out"></i>
                                                     </button>
-                                                </form>
+                                                </form> --}}
                                             </div>
                                         </td>
                                     </tr>
@@ -186,4 +186,5 @@
     </div>
 
 </div>
+
 

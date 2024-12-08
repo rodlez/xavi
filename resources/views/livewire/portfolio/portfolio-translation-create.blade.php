@@ -64,48 +64,77 @@
                     <!-- Category -->
                     <h2 class="text-lg font-bold capitalize pt-2 pb-1 px-2">{{ __('generic.categories') }} <span
                             class="text-red-600">*</span></h2>
-                    <div class="relative">
-                        <select wire:model.live="category_id" name="category_id" id="category_id"
-                            class="w-full pl-12 rounded-lg bg-gray-50 border border-gray-200 text-gray-900 dark:bg-gray-700 dark:border-gray-600 dark:text-white focus:ring-green-500 focus:border-green-500">
-                            @foreach ($categories as $category)
-                                <option value="{{ $category->id }}" class="text-green-600"
-                                    @if (old('category_id') == $category->id) selected @endif>{{ $category->name }}</option>
-                            @endforeach
-                        </select>
-                        <div class="absolute flex items-center inset-y-0 left-0 pointer-events-none">
-                            <i class="fa-solid fa-basketball bg-gray-200 p-3 rounded-l-md"></i>
+                    @if ($categories->count() > 0)
+                        <div class="relative">
+                            <select wire:model.live="pf_cat_trans_id" name="pf_cat_trans_id" id="pf_cat_trans_id"
+                                class="w-full pl-12 rounded-lg bg-gray-50 border border-gray-200 text-gray-900 dark:bg-gray-700 dark:border-gray-600 dark:text-white focus:ring-green-500 focus:border-green-500">
+                                @foreach ($categories as $category)
+                                    <option value="{{ $category->id }}" class="text-green-600"
+                                        @if (old('pf_cat_trans_id') == $category->id) selected @endif>{{ $category->name }}
+                                    </option>
+                                @endforeach
+                            </select>
+                            <div class="absolute flex items-center inset-y-0 left-0 pointer-events-none">
+                                <i class="fa-solid fa-basketball bg-gray-200 p-3 rounded-l-md"></i>
+                            </div>
                         </div>
-                    </div>
-                    <div class="text-sm text-red-600 font-bold py-1 px-2">
-                        @error('category_id')
-                            {{ $message }}
-                        @enderror
-                    </div>
+                        <div class="text-sm text-red-600 font-bold py-1 px-2">
+                            @error('pf_cat_trans_id')
+                                {{ $message }}
+                            @enderror
+                        </div>
+                    @else
+                        <!-- Still No Categories created -->
+                        <div class="text-sm text-red-600 font-bold py-1 px-2">
+                            {{ __('admin/portfolio/portfolio.noCategoriesMessage') }}
+                            <button
+                                class="bg-black hover:bg-slate-700 text-white capitalize p-2 sm:px-4 rounded-sm shadow-none transition duration-500 ease-in-out">
+                                <a href="{{ route('pf_categories') }}">
+                                    {{ __('generic.categories') }}
+                                </a>
+                            </button>
+                        </div>
+                    @endif
+
 
                     <!-- Type -->
                     <h2 class="text-lg font-bold capitalize pt-2 pb-1 px-2">{{ __('generic.types') }} <span
                             class="text-red-600">*</span></h2>
-                    <div class="relative">
-                        <select wire:model.live="type_id" name="type_id" id="type_id"
-                            class="w-full pl-12 rounded-lg bg-gray-50 border border-gray-200 text-gray-900 dark:bg-gray-700 dark:border-gray-600 dark:text-white focus:ring-green-500 focus:border-green-500">
-                            @foreach ($types as $type)
-                                <option value="{{ $type->id }}" class="text-green-600"
-                                    @if (old('type_id') == $type->id) selected @endif>{{ $type->name }}</option>
-                            @endforeach
-                        </select>
-                        <div class="absolute flex items-center inset-y-0 left-0 pointer-events-none">
-                            <i class="fa-solid fa-basketball bg-gray-200 p-3 rounded-l-md"></i>
+                    @if ($types->count() > 0)
+                        <div class="relative">
+                            <select wire:model.live="pf_type_trans_id" name="pf_type_trans_id" id="pf_type_trans_id"
+                                class="w-full pl-12 rounded-lg bg-gray-50 border border-gray-200 text-gray-900 dark:bg-gray-700 dark:border-gray-600 dark:text-white focus:ring-green-500 focus:border-green-500">
+                                @foreach ($types as $type)
+                                    <option value="{{ $type->id }}" class="text-green-600"
+                                        @if (old('pf_type_trans_id') == $type->id) selected @endif>{{ $type->name }}</option>
+                                @endforeach
+                            </select>
+                            <div class="absolute flex items-center inset-y-0 left-0 pointer-events-none">
+                                <i class="fa-solid fa-basketball bg-gray-200 p-3 rounded-l-md"></i>
+                            </div>
                         </div>
-                    </div>
-                    <div class="text-sm text-red-600 font-bold py-1 px-2">
-                        @error('type_id')
-                            {{ $message }}
-                        @enderror
-                    </div>
+                        <div class="text-sm text-red-600 font-bold py-1 px-2">
+                            @error('pf_type_trans_id')
+                                {{ $message }}
+                            @enderror
+                        </div>
+                    @else
+                        <!-- Still No Types created -->
+                        <div class="text-sm text-red-600 font-bold py-1 px-2">
+                            {{ __('admin/portfolio/portfolio.noTypesMessage') }}
+                            <button
+                                class="bg-black hover:bg-slate-700 text-white capitalize p-2 sm:px-4 rounded-sm shadow-none transition duration-500 ease-in-out">
+                                <a href="{{ route('pf_types') }}">
+                                    {{ __('generic.types') }}
+                                </a>
+                            </button>
+                        </div>
+                    @endif
 
                     <!-- Title -->
                     <h2 class="text-lg font-bold capitalize px-2">{{ __('generic.title') }} <span
-                            class="text-red-600">*</span></h2>
+                            class="text-red-600">*</span>
+                    </h2>
 
                     <div class="relative">
                         <input wire:model="title" name="title" id="title" type="text"

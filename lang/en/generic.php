@@ -2,7 +2,8 @@
 
 return [
     // SEARCH
-    "searchPlaceholder" => "search by name",   
+    "searchPlaceholderName" => "search by name",   
+    "searchPlaceholderTitle" => "search by title",   
     "elementNotFound" => "No elements found",
     // TABLES
     "name" => "name",
@@ -33,6 +34,8 @@ return [
     "location" => "location",
     "client" => "client",
     "project" => "project",
+    "portfolio" => "portfolio",
+    "portfolios" => "portfolios",
     // BULK
     "bulkActions" => "bulk actions",
     "bulkActionsClear" => "unselect all",

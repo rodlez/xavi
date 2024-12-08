@@ -26,8 +26,8 @@ class PortfolioTranslationCreate extends Component
     public $location;
     public $client;
     public $project;
-    public $category_id;
-    public $type_id;
+    public $pf_cat_trans_id;
+    public $pf_type_trans_id;
 
 
     /**
@@ -58,6 +58,10 @@ class PortfolioTranslationCreate extends Component
         $this->portfolio = $portfolio;
         // optional parameter to make the translation from the PortfolioShow Component
         $this->missingTranslationId = $missingTranslationId;
+        // default avalues for category and type in case the user do not select any
+        $this->pf_cat_trans_id = PortfolioCategoryTranslation::where('lang_id', $this->missingTranslationId)->orderBy('name', 'asc')->pluck('id')->first();
+        $this->pf_type_trans_id = PortfolioTypeTranslation::where('lang_id', $this->missingTranslationId)->orderBy('name', 'asc')->pluck('id')->first();
+
     }
 
     public function save()
@@ -67,8 +71,8 @@ class PortfolioTranslationCreate extends Component
         
         $validated = $this->validate(); 
         $validated['portfolio_id'] = $this->portfolio->id;
-        $validated['pf_cat_trans_id'] = $this->category_id;
-        $validated['pf_type_trans_id'] = $this->type_id;
+       /*  $validated['pf_cat_trans_id'] = $this->category_id;
+        $validated['pf_type_trans_id'] = $this->type_id; */
         $validated['lang_id'] = $this->missingTranslationId;
         $validated['created_at'] = date('Y-m-d H:i:s');
         $validated['updated_at'] = date('Y-m-d H:i:s');
