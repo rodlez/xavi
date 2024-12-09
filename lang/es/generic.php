@@ -52,6 +52,7 @@ return [
     "close" => "cerrar",
     "save" => "guardar",
     "info" => "información",
+    "reset" => "reset",
     // MESSAGES
     "error" => "error",
     "confirmDelete" => "¿Seguro que quieres eliminar este elemento?",
@@ -62,6 +63,7 @@ return [
     "successDelete" => "Se ha eliminado con éxito",
     "errorDelete" => "No se ha podido eliminar",
     "bulkDelete" => "Elementos eliminados con éxito",
+    "errorForm" => "El formulario es incorrecto, por favor comprueba los mensajes de error",
     // TRANSLATIONS
     "missingTranslation" => "Traducción no hecha",
     "missingTranslations" => "Traducciones no hechas",

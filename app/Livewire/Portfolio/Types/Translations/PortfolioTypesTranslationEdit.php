@@ -12,7 +12,7 @@ class PortfolioTypesTranslationEdit extends Component
 
     public function mount(PortfolioTypeTranslation $translation)
     {        
-        $this->translation = $translation;        
+        $this->translation = $translation;       
     }
 
     public function render()

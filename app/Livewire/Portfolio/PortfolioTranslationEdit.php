@@ -10,11 +10,11 @@ use Livewire\Component;
 
 class PortfolioTranslationEdit extends Component
 {
-    public PortfolioTranslation $translation;
+    public PortfolioTranslation $translation;    
 
     public function mount(PortfolioTranslation $translation)
     {        
-        $this->translation = $translation;        
+        $this->translation = $translation;       
     }
 
     public function render()
@@ -34,7 +34,6 @@ class PortfolioTranslationEdit extends Component
             'menuTextColor'         => 'text-slate-400',
             'focusColor'            => 'focus:ring-slate-400 focus:border-slate-400',
             // Data
-            'portfolio'     => $this->translation->portfolio,
             'translation'   => $this->translation,
             'languages'     => $languages,
             // test

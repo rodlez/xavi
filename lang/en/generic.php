@@ -51,6 +51,7 @@ return [
     "close" => "close",
     "save" => "save",
     "info" => "information",
+    "reset" => "reset",
     // MESSAGES
     "error" => "error",
     "confirmDelete" => "Are you sure you want to delete this element?",
@@ -61,6 +62,7 @@ return [
     "successDelete" => "successfully deleted",
     "errorDelete" => "can not be deleted",
     "bulkDelete" => "Elements successfully deleted",
+    "errorForm" => "There form is incorrect, please check the error messages",
     // TRANSLATIONS
     "missingTranslation" => "Missing Translation",
     "missingTranslations" => "Missing Translations",

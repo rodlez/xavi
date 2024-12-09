@@ -58,7 +58,7 @@ class StorePortfolioTranslationRequest extends FormRequest
                 'pf_cat_trans_id.required' => 'Selecciona una categoria, si no existe ninguna es necesario crearla',
                 'pf_type_trans_id.required' => 'Selecciona un tipo, si no existe ninguno es necesario crearlo',
                 'title.required' => 'El titulo es obligatorio',
-                'title.min' => 'El título tiene que tener al menos :min carácteres',
+                'title.min' => 'El título debe tener al menos :min carácteres',
                 'subtitle' => 'Si hay un subtítulo, debe tener al menos :min caràcters',
                 'content' => 'Si hay un contenido, debe tener al menos :min caràcters',
                 'year' => 'Si hay un año, debe ser mayor que 2000',

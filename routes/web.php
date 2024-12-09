@@ -10,6 +10,7 @@ use App\Http\Controllers\Portfolio\PortfolioCategoryTranslationController;
 use App\Http\Controllers\Portfolio\PortfolioController;
 use App\Http\Controllers\Portfolio\PortfolioTagController;
 use App\Http\Controllers\Portfolio\PortfolioTagTranslationController;
+use App\Http\Controllers\Portfolio\PortfolioTranslationController;
 use App\Http\Controllers\Portfolio\PortfolioTypeController;
 use App\Http\Controllers\Portfolio\PortfolioTypeTranslationController;
 /* Livewire Full Page Components */
@@ -98,6 +99,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
         ->name('portfolios_trans.create')
         ->where('missingTranslationId', '[0-9]+');
     Route::get('/portfolios_trans', PortfolioTranslation::class)->name('portfolios_trans');
+    Route::put('/portfolios_trans/{translation}', [PortfolioTranslationController::class, 'update'])->name('portfolios_trans.update');
 
     Route::get('/portfolios_trans/edit/{translation}', PortfolioTranslationEdit::class)->name('portfolios_trans.edit');
 

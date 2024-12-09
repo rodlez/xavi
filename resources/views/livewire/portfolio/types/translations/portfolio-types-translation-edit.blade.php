@@ -55,11 +55,10 @@
                     </div>
 
                     <!-- Name -->
-                    <h2 class="text-lg font-bold capitalize px-2">{{__("generic.translation")}} <span class="text-red-600">*</span></h2>
-
+                    <h2 class="text-lg font-bold capitalize px-2">{{__("generic.translation")}} <span class="text-red-600">*</span></h2>                    
                     <div class="relative">
-                        <input wire:model="name" name="name" id="name" type="text"
-                            value="{{ $translation->name }}" maxlength="100"
+                        <input wire:model.live="name" name="name" id="name" type="text"
+                            value="{{ old('name') ? old('name') : $translation->name}}" maxlength="100"
                             class="w-full pl-12 rounded-lg bg-gray-50 border border-gray-200 text-gray-900 dark:bg-gray-700 dark:border-gray-600 dark:text-white focus:ring-green-500 focus:border-green-500">
                         <div class="absolute flex items-center inset-y-0 left-0 pointer-events-none">
                             <i class="fa-solid fa-pen-to-square  bg-gray-200 p-3 rounded-l-md"></i>

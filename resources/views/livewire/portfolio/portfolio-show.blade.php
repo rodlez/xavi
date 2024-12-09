@@ -116,10 +116,10 @@
                                 <td class="p-2">
                                     <div class="flex justify-center items-center gap-2">
                                         <!-- Edit -->
-                                        {{-- <a href="{{ route('portfolios_trans.edit', $translation) }}" title="{{__("generic.edit")}}">
+                                        <a href="{{ route('portfolios_trans.edit', $translation) }}" title="{{__("generic.edit")}}">
                                             <i
                                                 class="fa-solid fa-pen-to-square text-blue-800 hover:text-black transition duration-1000 ease-in-out"></i>
-                                        </a> --}}
+                                        </a>
                                         <!-- Delete -->
                                         {{-- <form action="{{ route('portfolios_trans.destroy', $translation) }}"
                                             method="POST">
