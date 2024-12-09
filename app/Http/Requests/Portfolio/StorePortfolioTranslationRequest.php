@@ -25,6 +25,7 @@ class StorePortfolioTranslationRequest extends FormRequest
         return [
             'pf_cat_trans_id' => 'bail|required',
             'pf_type_trans_id' => 'bail|required',
+            'selectedTags' => 'required',
             'title' => 'bail|required|min:3|string',
             'subtitle' => 'bail|nullable|min:3|string',
             'content' => 'bail|nullable|min:3|string',
@@ -43,6 +44,7 @@ class StorePortfolioTranslationRequest extends FormRequest
             return [
                 'pf_cat_trans_id.required' => 'Select one category, if there is not one must be first created',
                 'pf_type_trans_id.required' => 'Select one type, if there is not one must be first created',
+                'selectedTags.required' => 'At least 1 tag must be selected',
                 'title.required' => 'The title is required',
                 'title.min' => 'The title must have at least :min characters',
                 'subtitle' => 'If there is a subtitle must have at least :min characters',
@@ -57,6 +59,7 @@ class StorePortfolioTranslationRequest extends FormRequest
             return [
                 'pf_cat_trans_id.required' => 'Selecciona una categoria, si no existe ninguna es necesario crearla',
                 'pf_type_trans_id.required' => 'Selecciona un tipo, si no existe ninguno es necesario crearlo',
+                'selectedTags.required' => 'Debes seleccionar al menos 1 tag',
                 'title.required' => 'El titulo es obligatorio',
                 'title.min' => 'El título debe tener al menos :min carácteres',
                 'subtitle' => 'Si hay un subtítulo, debe tener al menos :min caràcters',
@@ -71,6 +74,7 @@ class StorePortfolioTranslationRequest extends FormRequest
             return [
                 'pf_cat_trans_id.required' => 'Selecciona una categoria, si no existeix cap es necesari crear-la',
                 'pf_type_trans_id.required' => 'Selecciona un tipus, si no existeix cap es necesari crear-lo',
+                'selectedTags.required' => 'Has de seleccionar al menys 1 tag',
                 'title.required' => 'El títol es obligatori',
                 'title.min' => 'El títol ha de tenir al menys :min caràcters',
                 'subtitle' => 'Si hi ha un subtítol, ha de tenir al menys :min caràcters',

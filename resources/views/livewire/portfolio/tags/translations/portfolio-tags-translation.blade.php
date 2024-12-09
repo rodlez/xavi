@@ -125,10 +125,10 @@
                                         <td class="p-2">
                                             <div class="flex justify-center items-center gap-2">
                                                 <!-- Show -->
-                                                {{-- <a href="{{ route('pf_tags_trans.show', $translation) }}" title="Show">
+                                                <a href="{{ route('pf_tags_trans.show', $translation) }}" title="Show">
                                                     <i
                                                         class="fa-solid fa-circle-info text-blue-600 hover:text-black transition duration-1000 ease-in-out"></i>
-                                                </a> --}}
+                                                </a>
                                                 <!-- Edit -->
                                                 <a href="{{ route('pf_tags_trans.edit', $translation) }}"
                                                     title="{{__("generic.edit")}}">

@@ -83,7 +83,7 @@
                                 @endforeach
                             </select>
                             <div class="absolute flex items-center inset-y-0 left-0 pointer-events-none">
-                                <i class="fa-solid fa-basketball bg-gray-200 p-3 rounded-l-md"></i>
+                                <i class="fa-solid fa-list bg-gray-200 p-3 rounded-l-md"></i>
                             </div>
                         </div>
                         <div class="text-sm text-red-600 font-bold py-1 px-2">
@@ -118,7 +118,7 @@
                                 @endforeach
                             </select>
                             <div class="absolute flex items-center inset-y-0 left-0 pointer-events-none">
-                                <i class="fa-solid fa-basketball bg-gray-200 p-3 rounded-l-md"></i>
+                                <i class="fa-solid fa-folder-tree bg-gray-200 p-3 rounded-l-md"></i>
                             </div>
                         </div>
                         <div class="text-sm text-red-600 font-bold py-1 px-2">
@@ -139,6 +139,42 @@
                         </div>
                     @endif
 
+                    {{$tags}}
+
+                    <!-- Tags -->
+                    <h2 class="text-lg font-bold capitalize pt-2 pb-1 px-2">{{ __('generic.tags') }} <span
+                        class="text-red-600">*</span></h2>
+                @if ($tags->count() > 0)
+                    <div class="relative">
+                        <select wire:model.live="selectedTags" name="selectedTags" id="selectedTags" multiple
+                            class="w-full pl-12 rounded-lg bg-gray-50 border border-gray-200 text-gray-900 dark:bg-gray-700 dark:border-gray-600 dark:text-white focus:ring-green-500 focus:border-green-500">
+                            @foreach ($tags as $tag)
+                                <option value="{{ $tag->id }}" class="text-green-600"
+                                    @if (old('selectedTags') == $tag->id) selected @endif>{{ $tag->name }}</option>
+                            @endforeach
+                        </select>
+                        <div class="absolute flex items-center inset-y-0 left-0 pointer-events-none">
+                            <i class="fa-solid fa-tag bg-gray-200 p-3 rounded-l-md"></i>
+                        </div>
+                    </div>
+                    <div class="text-sm text-red-600 font-bold py-1 px-2">
+                        @error('selectedTags')
+                            {{ $message }}
+                        @enderror
+                    </div>
+                @else
+                    <!-- Still No Tags created -->
+                    <div class="text-sm text-red-600 font-bold py-1 px-2">
+                        {{ __('admin/portfolio/portfolio.noTagsMessage') }}
+                        <button
+                            class="bg-black hover:bg-slate-700 text-white capitalize p-2 sm:px-4 rounded-sm shadow-none transition duration-500 ease-in-out">
+                            <a href="{{ route('pf_tags') }}">
+                                {{ __('generic.tags') }}
+                            </a>
+                        </button>
+                    </div>
+                @endif
+
                     <!-- Title -->
                     <h2 class="text-lg font-bold capitalize px-2">{{ __('generic.title') }} <span
                             class="text-red-600">*</span>
@@ -149,7 +185,7 @@
                             value="{{ old('title') }}" maxlength="200"
                             class="w-full pl-12 rounded-lg bg-gray-50 border border-gray-200 text-gray-900 dark:bg-gray-700 dark:border-gray-600 dark:text-white focus:ring-green-500 focus:border-green-500">
                         <div class="absolute flex items-center inset-y-0 left-0 pointer-events-none">
-                            <i class="fa-solid fa-tag  bg-gray-200 p-3 rounded-l-md"></i>
+                            <i class="fa-solid fa-pencil  bg-gray-200 p-3 rounded-l-md"></i>
                         </div>
                     </div>
 
@@ -167,7 +203,7 @@
                             value="{{ old('subtitle') }}" maxlength="200"
                             class="w-full pl-12 rounded-lg bg-gray-50 border border-gray-200 text-gray-900 dark:bg-gray-700 dark:border-gray-600 dark:text-white focus:ring-green-500 focus:border-green-500">
                         <div class="absolute flex items-center inset-y-0 left-0 pointer-events-none">
-                            <i class="fa-solid fa-tag  bg-gray-200 p-3 rounded-l-md"></i>
+                            <i class="fa-solid fa-pencil  bg-gray-200 p-3 rounded-l-md"></i>
                         </div>
                     </div>
 
@@ -199,7 +235,7 @@
                             class="w-full pl-12 rounded-lg bg-gray-50 border border-gray-200 text-gray-900 dark:bg-gray-700 dark:border-gray-600 dark:text-white focus:ring-green-500 focus:border-green-500">
 
                         <div class="absolute flex items-center inset-y-0 left-0 pointer-events-none">
-                            <i class="fa-solid fa-clock bg-gray-200 p-3 rounded-l-md"></i>
+                            <i class="fa-solid fa-calendar-days bg-gray-200 p-3 rounded-l-md"></i>
                         </div>
                     </div>
 
@@ -217,7 +253,7 @@
                             value="{{ old('location') }}" maxlength="200"
                             class="w-full pl-12 rounded-lg bg-gray-50 border border-gray-200 text-gray-900 dark:bg-gray-700 dark:border-gray-600 dark:text-white focus:ring-green-500 focus:border-green-500">
                         <div class="absolute flex items-center inset-y-0 left-0 pointer-events-none">
-                            <i class="fa-solid fa-tag  bg-gray-200 p-3 rounded-l-md"></i>
+                            <i class="fa-solid fa-location-dot  bg-gray-200 p-3 rounded-l-md"></i>
                         </div>
                     </div>
 
@@ -235,7 +271,7 @@
                             value="{{ old('client') }}" maxlength="200"
                             class="w-full pl-12 rounded-lg bg-gray-50 border border-gray-200 text-gray-900 dark:bg-gray-700 dark:border-gray-600 dark:text-white focus:ring-green-500 focus:border-green-500">
                         <div class="absolute flex items-center inset-y-0 left-0 pointer-events-none">
-                            <i class="fa-solid fa-tag  bg-gray-200 p-3 rounded-l-md"></i>
+                            <i class="fa-solid fa-helmet-safety  bg-gray-200 p-3 rounded-l-md"></i>
                         </div>
                     </div>
 
@@ -253,7 +289,7 @@
                             value="{{ old('project') }}" maxlength="200"
                             class="w-full pl-12 rounded-lg bg-gray-50 border border-gray-200 text-gray-900 dark:bg-gray-700 dark:border-gray-600 dark:text-white focus:ring-green-500 focus:border-green-500">
                         <div class="absolute flex items-center inset-y-0 left-0 pointer-events-none">
-                            <i class="fa-solid fa-tag  bg-gray-200 p-3 rounded-l-md"></i>
+                            <i class="fa-solid fa-wrench  bg-gray-200 p-3 rounded-l-md"></i>
                         </div>
                     </div>
 

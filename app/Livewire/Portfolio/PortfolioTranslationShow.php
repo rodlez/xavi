@@ -16,6 +16,7 @@ class PortfolioTranslationShow extends Component
 
     public function render()
     {
+                
         return view('livewire.portfolio.portfolio-translation-show', [
             // Styles
             'underlineMenuHeader'   => 'border-b-2 border-b-slate-600',

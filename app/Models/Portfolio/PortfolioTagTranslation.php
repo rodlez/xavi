@@ -12,7 +12,7 @@ class PortfolioTagTranslation extends Model
 
     use HasFactory;
 
-    protected $fillable = ['pf_tag_id ', 'lang_id', 'name'];
+    protected $fillable = ['pf_tag_id', 'lang_id', 'name'];
 
     public function tag()
     {
@@ -25,4 +25,17 @@ class PortfolioTagTranslation extends Model
         return $this->belongsTo(Languages::class,
         foreignKey: 'lang_id');
     }
+
+    /* test pivot table */
+
+    public function translations()
+    {
+        return $this->belongsToMany(
+            PortfolioTranslation::class,
+            table: 'portfolios_trans_tags',
+            foreignPivotKey: 'tag_id',
+            relatedPivotKey: 'pf_id',
+        )->withTimestamps();
+    }
+
 }

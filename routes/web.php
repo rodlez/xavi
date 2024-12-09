@@ -41,6 +41,7 @@ use App\Livewire\Portfolio\Tags\PortfolioTagsShow;
 use App\Livewire\Portfolio\Tags\Translations\PortfolioTagsTranslation;
 use App\Livewire\Portfolio\Tags\Translations\PortfolioTagsTranslationCreate;
 use App\Livewire\Portfolio\Tags\Translations\PortfolioTagsTranslationEdit;
+use App\Livewire\Portfolio\Tags\Translations\PortfolioTagsTranslationShow;
 use App\Livewire\Portfolio\Types\PortfolioTypes;
 use App\Livewire\Portfolio\Types\PortfolioTypesCreate;
 use App\Livewire\Portfolio\Types\PortfolioTypesEdit;
@@ -103,8 +104,6 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
     Route::put('/portfolios_trans/{translation}', [PortfolioTranslationController::class, 'update'])->name('portfolios_trans.update');
     Route::delete('/portfolios_trans/{translation}', [PortfolioTranslationController::class, 'destroy'])->name('portfolios_trans.destroy');
     Route::get('/portfolios_trans/{translation}', PortfolioTranslationShow::class)->name('portfolios_trans.show');
-
-
     Route::get('/portfolios_trans/edit/{translation}', PortfolioTranslationEdit::class)->name('portfolios_trans.edit');
 
 
@@ -157,5 +156,8 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
     Route::get('/pf_tags_trans', PortfolioTagsTranslation::class)->name('pf_tags_trans');
     Route::put('/pf_tags_trans/{translation}', [PortfolioTagTranslationController::class, 'update'])->name('pf_tags_trans.update');
     Route::delete('/pf_tags_trans/{translation}', [PortfolioTagTranslationController::class, 'destroy'])->name('pf_tags_trans.destroy');
+
+    Route::get('/pf_tags_trans/{translation}', PortfolioTagsTranslationShow::class)->name('pf_tags_trans.show');
+
     Route::get('/pf_tags_trans/edit/{translation}', PortfolioTagsTranslationEdit::class)->name('pf_tags_trans.edit');
 });

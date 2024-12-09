@@ -12,7 +12,7 @@ class PortfolioCategoryTranslation extends Model
 
     use HasFactory;
 
-    protected $fillable = ['pf_cat_id ', 'lang_id', 'name'];
+    protected $fillable = ['pf_cat_id', 'lang_id', 'name'];
 
     public function category()
     {

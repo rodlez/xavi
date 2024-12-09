@@ -5,6 +5,7 @@ namespace App\Services;
 // Models
 use App\Models\Languages;
 use App\Models\Portfolio\PortfolioCategoryTranslation;
+use App\Models\Portfolio\PortfolioTranslation;
 use App\Models\Portfolio\PortfolioTypeTranslation;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
@@ -106,4 +107,77 @@ class TranslationService
             'updated_at' => date('Y-m-d H:i:s'),
         ]);
     }    
+
+
+    public function insertTranslationPortfolio(array $validated)
+    {
+        $selectedTags = $validated['selectedTags'];
+        unset($validated['selectedTags']);
+
+        $portfolioTranslation = PortfolioTranslation::create($validated);
+        $portfolioTranslation->tags()->sync($selectedTags);
+    }
+
+    /**
+     * Insert a Translation for a Portfolio, also insert the tags in the pivot table
+     * 
+     */
+
+     public function insertTranslationPortfolioTest(array $validatedData)
+     {
+        //dd($validatedData['selectedTags']);
+        
+        /* $selectedTags = $validatedData['selectedTags'];
+        
+        var_dump($selectedTags);
+
+        unset($validatedData['selectedTags']);
+
+        dd($validatedData); */
+
+        
+
+        /* 1 - Extract the selectedTags from the validatedData */
+        $selectedTags = $validatedData['selectedTags'];
+        unset($validatedData['selectedTags']);
+
+        $testini = PortfolioTranslation::create($validatedData);
+
+        dd($testini);
+        
+        $roles = [1, 2, 6];
+        //dd($roles);
+        //dd($selectedTags);
+        
+        $portfolioTranslation = PortfolioTranslation::find(5);
+        //$portfolioTranslation->tags()->attach($roles);
+        foreach ($selectedTags as $tag) {
+        DB::table('portfolios_trans_tags')->insert([
+            'pf_id' => $portfolioTranslation->id,
+            'tag_id' => $tag,
+            'created_at' => date('Y-m-d H:i:s'),
+            'updated_at' => date('Y-m-d H:i:s'),
+        ]);
+        }
+        dd('oli');
+        //dd($selectedTags);
+        /* 2 - Insert the validatedData (without the selectedTags) in the table portfolios_translation */
+        $portfolioTranslationId = DB::table('portfolios_translation')->insertGetId($validatedData);
+        /* 
+            3 - With the id of the inserted entry in the portfolios_translation and the ids of the selectedTags
+                Insert in the pivot table portfolios_trans_tags
+        */
+
+        $portfolioTranslation = PortfolioTranslation::find($portfolioTranslationId);
+        $portfolioTranslation->tags()->sync($selectedTags);
+
+        
+       /*  DB::table($table)->insert([
+             $elementColumn => $elementId,
+             'lang_id' => $languageId,
+             'name' => $translation,
+             'created_at' => date('Y-m-d H:i:s'),
+             'updated_at' => date('Y-m-d H:i:s'),
+         ]); */
+     }   
 }

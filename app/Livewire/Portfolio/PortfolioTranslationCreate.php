@@ -6,6 +6,7 @@ use App\Http\Requests\Portfolio\StorePortfolioTranslationRequest;
 use App\Models\Languages;
 use App\Models\Portfolio\Portfolio;
 use App\Models\Portfolio\PortfolioCategoryTranslation;
+use App\Models\Portfolio\PortfolioTagTranslation;
 use App\Models\Portfolio\PortfolioTypeTranslation;
 use App\Services\TranslationService;
 use Exception;
@@ -28,6 +29,8 @@ class PortfolioTranslationCreate extends Component
     public $project;
     public $pf_cat_trans_id;
     public $pf_type_trans_id;
+
+    public $selectedTags = [];
 
 
     /**
@@ -74,8 +77,8 @@ class PortfolioTranslationCreate extends Component
        /*  $validated['pf_cat_trans_id'] = $this->category_id;
         $validated['pf_type_trans_id'] = $this->type_id; */
         $validated['lang_id'] = $this->missingTranslationId;
-        $validated['created_at'] = date('Y-m-d H:i:s');
-        $validated['updated_at'] = date('Y-m-d H:i:s');
+        //$validated['created_at'] = date('Y-m-d H:i:s');
+        //$validated['updated_at'] = date('Y-m-d H:i:s');
         //dd($validated);
 
         // Get the language of the translation to show on the returned success or fail message
@@ -84,7 +87,9 @@ class PortfolioTranslationCreate extends Component
             ->first();
         
         try { 
-            DB::table('portfolios_translation')->insert($validated);          
+            $this->translationService->insertTranslationPortfolio($validated);
+            
+            //DB::table('portfolios_translation')->insert($validated);          
             //$this->translationService->insertTranslation('pf_categories_trans', 'pf_cat_id', $this->portfolio->id, $this->missingTranslationId, $this->name);
             return to_route('portfolios.show', $this->portfolio)->with('message', __('generic.translation') . ' (' . $languageName . ') ' . __('generic.successCreate'));            
         } catch (Exception $e) {
@@ -109,6 +114,7 @@ class PortfolioTranslationCreate extends Component
         $categories = PortfolioCategoryTranslation::all()->where('lang_id', $this->missingTranslationId)->sortBy('name', SORT_NATURAL|SORT_FLAG_CASE);
         $types = PortfolioTypeTranslation::all()->where('lang_id', $this->missingTranslationId)->sortBy('name', SORT_NATURAL|SORT_FLAG_CASE);
 
+        $tags = PortfolioTagTranslation::all()->where('lang_id', $this->missingTranslationId)->sortBy('name', SORT_NATURAL|SORT_FLAG_CASE);
         
         
         return view('livewire.portfolio.portfolio-translation-create', [
@@ -127,6 +133,7 @@ class PortfolioTranslationCreate extends Component
             // test
             'categories' => $categories,
             'types' => $types,
+            'tags' => $tags,
         ])->layout('layouts.app');
     }
     

@@ -10,6 +10,7 @@ return [
     "infoMessageEdit" => "Edit the portFolio, the description is optional",
 
     // TRANSLATIONS
-    "noCategoriesMessage" => "There is no categories translated for this language, you must first create at least one.",
-    "noTypesMessage" => "There is no types translated for this language, you must first create at least one.",
+    "noCategoriesMessage" => "There is no categories translated for this language, you must first create at least one",
+    "noTypesMessage" => "There is no types translated for this language, you must first create at least one",
+    "noTagsMessage" => "There is no tags translated for this language, you must first create at least one",
 ];

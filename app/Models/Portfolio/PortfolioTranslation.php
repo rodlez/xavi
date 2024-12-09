@@ -12,7 +12,7 @@ class PortfolioTranslation extends Model
 
     use HasFactory;
 
-    protected $fillable = ['portfolio_id ', 'pf_cat_trans_id', 'pf_type_trans_id', 'lang_id', 'title', 'subtitle', 'content', 'year', 'location', 'client', 'project'];
+    protected $fillable = ['portfolio_id', 'pf_cat_trans_id', 'pf_type_trans_id', 'lang_id', 'title', 'subtitle', 'content', 'year', 'location', 'client', 'project'];
 
     public function portfolio()
     {
@@ -38,12 +38,15 @@ class PortfolioTranslation extends Model
         foreignKey: 'lang_id');
     }
 
-    /* public function tags()
+    /* test pivot table */
+
+    public function tags()
     {
         return $this->belongsToMany(
-            SportTag::class,
-            table: 'sports_tag',
-            foreignPivotKey: 'sport_id'
+            PortfolioTagTranslation::class,
+            table: 'portfolios_trans_tags',
+            foreignPivotKey: 'pf_id',
+            relatedPivotKey: 'tag_id',
         )->withTimestamps();
-    } */
+    }
 }
