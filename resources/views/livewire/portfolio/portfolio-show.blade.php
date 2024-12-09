@@ -115,13 +115,18 @@
                                 </td>
                                 <td class="p-2">
                                     <div class="flex justify-center items-center gap-2">
+                                        <!-- Show -->
+                                        <a href="{{ route('portfolios_trans.show', $translation) }}" title="{{__("generic.show")}}">
+                                            <i
+                                                class="fa-solid fa-eye text-orange-800 hover:text-black transition duration-1000 ease-in-out"></i>
+                                        </a>
                                         <!-- Edit -->
                                         <a href="{{ route('portfolios_trans.edit', $translation) }}" title="{{__("generic.edit")}}">
                                             <i
                                                 class="fa-solid fa-pen-to-square text-blue-800 hover:text-black transition duration-1000 ease-in-out"></i>
                                         </a>
                                         <!-- Delete -->
-                                        {{-- <form action="{{ route('portfolios_trans.destroy', $translation) }}"
+                                        <form action="{{ route('portfolios_trans.destroy', $translation) }}"
                                             method="POST">
                                             <!-- Add Token to prevent Cross-Site Request Forgery (CSRF) -->
                                             @csrf
@@ -133,7 +138,7 @@
                                                 <i
                                                     class="fa-solid fa-trash text-red-600 hover:text-black transition duration-1000 ease-in-out"></i>
                                             </button>
-                                        </form> --}}
+                                        </form>
                                     </div>
                                 </td>
 

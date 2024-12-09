@@ -70,4 +70,5 @@ return [
     "alreadyTranslation" => "The Translation for this language is already created",
     "createTranslation" => "Create a new translation",
     "editTranslation" => "Edit this translation",
+    "showTranslation" => "Information about this translation",
 ];

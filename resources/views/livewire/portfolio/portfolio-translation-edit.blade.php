@@ -41,14 +41,8 @@
             </div>
         </div>
 
-        {{--  {{ $translation }} --}}
-
-
-
         <!-- Edit TRANSLATION -->
         <div class="mx-auto w-11/12 my-4">
-
-
 
             <form action="{{ route('portfolios_trans.update', $translation) }}" method="POST">
                 <!-- Add Token to prevent Cross-Site Request Forgery (CSRF) -->
@@ -57,7 +51,6 @@
                 @method('PUT')
 
                 <!-- Form Text Message -->
-
                 <div class="italic p-2 rounded-md {{ $bgInfoColor }}">{{ __('generic.editTranslation') }}
                 </div>
 
@@ -94,7 +87,7 @@
                             @endforeach
                         </select>
                         <div class="absolute flex items-center inset-y-0 left-0 pointer-events-none">
-                            <i class="fa-solid fa-basketball bg-gray-200 p-3 rounded-l-md"></i>
+                            <i class="fa-solid fa-list bg-gray-200 p-3 rounded-l-md"></i>
                         </div>
                     </div>
                     <div class="text-sm text-red-600 font-bold py-1 px-2">
@@ -128,7 +121,7 @@
                             @endforeach
                         </select>
                         <div class="absolute flex items-center inset-y-0 left-0 pointer-events-none">
-                            <i class="fa-solid fa-basketball bg-gray-200 p-3 rounded-l-md"></i>
+                            <i class="fa-solid fa-folder-tree bg-gray-200 p-3 rounded-l-md"></i>
                         </div>
                     </div>
                     <div class="text-sm text-red-600 font-bold py-1 px-2">
@@ -159,7 +152,7 @@
                         value="{{ old('title', $translation->title) }}" maxlength="200"
                         class="w-full pl-12 rounded-lg bg-gray-50 border border-gray-200 text-gray-900 dark:bg-gray-700 dark:border-gray-600 dark:text-white focus:ring-green-500 focus:border-green-500">
                     <div class="absolute flex items-center inset-y-0 left-0 pointer-events-none">
-                        <i class="fa-solid fa-tag  bg-gray-200 p-3 rounded-l-md"></i>
+                        <i class="fa-solid fa-pencil  bg-gray-200 p-3 rounded-l-md"></i>
                     </div>
                 </div>
 
@@ -177,7 +170,7 @@
                         value="{{ old('subtitle', $translation->subtitle) }}" maxlength="200"
                         class="w-full pl-12 rounded-lg bg-gray-50 border border-gray-200 text-gray-900 dark:bg-gray-700 dark:border-gray-600 dark:text-white focus:ring-green-500 focus:border-green-500">
                     <div class="absolute flex items-center inset-y-0 left-0 pointer-events-none">
-                        <i class="fa-solid fa-tag  bg-gray-200 p-3 rounded-l-md"></i>
+                        <i class="fa-solid fa-pencil  bg-gray-200 p-3 rounded-l-md"></i>
                     </div>
                 </div>
 
@@ -201,7 +194,7 @@
                 </div>
 
                 <!-- Year -->
-                <h2 class="text-lg font-bold pt-2 pb-1 px-2">{{ __('generic.year') }}</h2>
+                <h2 class="text-lg font-bold capitalize px-2">{{ __('generic.year') }}</h2>
 
                 <div class="relative">
                     <input wire:model="year" name="year" id="year" type="number"
@@ -209,7 +202,7 @@
                         class="w-full pl-12 rounded-lg bg-gray-50 border border-gray-200 text-gray-900 dark:bg-gray-700 dark:border-gray-600 dark:text-white focus:ring-green-500 focus:border-green-500">
 
                     <div class="absolute flex items-center inset-y-0 left-0 pointer-events-none">
-                        <i class="fa-solid fa-clock bg-gray-200 p-3 rounded-l-md"></i>
+                        <i class="fa-solid fa-calendar-days bg-gray-200 p-3 rounded-l-md"></i>
                     </div>
                 </div>
 
@@ -227,7 +220,7 @@
                         value="{{ old('location', $translation->location) }}" maxlength="200"
                         class="w-full pl-12 rounded-lg bg-gray-50 border border-gray-200 text-gray-900 dark:bg-gray-700 dark:border-gray-600 dark:text-white focus:ring-green-500 focus:border-green-500">
                     <div class="absolute flex items-center inset-y-0 left-0 pointer-events-none">
-                        <i class="fa-solid fa-tag  bg-gray-200 p-3 rounded-l-md"></i>
+                        <i class="fa-solid fa-location-dot  bg-gray-200 p-3 rounded-l-md"></i>
                     </div>
                 </div>
 
@@ -245,7 +238,7 @@
                         value="{{ old('client', $translation->client) }}" maxlength="200"
                         class="w-full pl-12 rounded-lg bg-gray-50 border border-gray-200 text-gray-900 dark:bg-gray-700 dark:border-gray-600 dark:text-white focus:ring-green-500 focus:border-green-500">
                     <div class="absolute flex items-center inset-y-0 left-0 pointer-events-none">
-                        <i class="fa-solid fa-tag  bg-gray-200 p-3 rounded-l-md"></i>
+                        <i class="fa-solid fa-helmet-safety  bg-gray-200 p-3 rounded-l-md"></i>
                     </div>
                 </div>
 
@@ -263,7 +256,7 @@
                         value="{{ old('project', $translation->project) }}" maxlength="200"
                         class="w-full pl-12 rounded-lg bg-gray-50 border border-gray-200 text-gray-900 dark:bg-gray-700 dark:border-gray-600 dark:text-white focus:ring-green-500 focus:border-green-500">
                     <div class="absolute flex items-center inset-y-0 left-0 pointer-events-none">
-                        <i class="fa-solid fa-tag  bg-gray-200 p-3 rounded-l-md"></i>
+                        <i class="fa-solid fa-wrench  bg-gray-200 p-3 rounded-l-md"></i>
                     </div>
                 </div>
 

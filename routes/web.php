@@ -33,6 +33,7 @@ use App\Livewire\Portfolio\PortfolioShow;
 use App\Livewire\Portfolio\PortfolioTranslation;
 use App\Livewire\Portfolio\PortfolioTranslationCreate;
 use App\Livewire\Portfolio\PortfolioTranslationEdit;
+use App\Livewire\Portfolio\PortfolioTranslationShow;
 use App\Livewire\Portfolio\Tags\PortfolioTags;
 use App\Livewire\Portfolio\Tags\PortfolioTagsCreate;
 use App\Livewire\Portfolio\Tags\PortfolioTagsEdit;
@@ -100,6 +101,9 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
         ->where('missingTranslationId', '[0-9]+');
     Route::get('/portfolios_trans', PortfolioTranslation::class)->name('portfolios_trans');
     Route::put('/portfolios_trans/{translation}', [PortfolioTranslationController::class, 'update'])->name('portfolios_trans.update');
+    Route::delete('/portfolios_trans/{translation}', [PortfolioTranslationController::class, 'destroy'])->name('portfolios_trans.destroy');
+    Route::get('/portfolios_trans/{translation}', PortfolioTranslationShow::class)->name('portfolios_trans.show');
+
 
     Route::get('/portfolios_trans/edit/{translation}', PortfolioTranslationEdit::class)->name('portfolios_trans.edit');
 

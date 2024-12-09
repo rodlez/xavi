@@ -47,8 +47,16 @@
                     <!-- Add Token to prevent Cross-Site Request Forgery (CSRF) -->
                     @csrf
 
+                    <!-- Form Text Message -->
                     <div class="italic p-2 rounded-md {{ $bgInfoColor }}">{{ __('generic.createTranslation') }}
                     </div>
+
+                    <!-- Form Errors Message -->
+                    @if ($errors->any())
+                        <div class="bg-red-400 p-2 rounded-md my-2">
+                            <span class="text-lg text-white font-bold">{{ __('generic.errorForm') }}</span>
+                        </div>
+                    @endif
 
                     <!-- Language -->
                     <h2 class="text-lg font-bold capitalize px-2">{{ __('generic.language') }}</h2>

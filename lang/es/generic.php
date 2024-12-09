@@ -71,5 +71,5 @@ return [
     "alreadyTranslation" => "La traducción para este idioma ya ha sido creada",
     "createTranslation" => "Crea una nueva traducción",
     "editTranslation" => "Edita la traducción",
-
+    "showTranslation" => "Información de la traducción",
 ];

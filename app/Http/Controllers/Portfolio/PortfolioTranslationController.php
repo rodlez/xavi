@@ -29,13 +29,13 @@ class PortfolioTranslationController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    /* public function destroy(PortfolioTypeTranslation $translation)
+    public function destroy(PortfolioTranslation $translation)
     {
         try {
             $translation->delete();
-            return to_route('pf_types.show', $translation->type)->with('message', __('generic.translation') . ' (' . $translation->language->name . ') ' . __('generic.successDelete'));
+            return to_route('portfolios.show', $translation->portfolio)->with('message', __('generic.translation') . ' (' . $translation->language->name . ') ' . __('generic.successDelete'));
         } catch (Exception $e) {
-            return to_route('pf_types.show', $translation->type)->with('error', __('generic.error') . ' (' . $e->getCode() . ') ' . __('generic.translation') . ' (' . $translation->language->name . ') ' . __('generic.errorDelete'));
+            return to_route('portfolios.show', $translation->portfolio)->with('error', __('generic.error') . ' (' . $e->getCode() . ') ' . __('generic.translation') . ' (' . $translation->language->name . ') ' . __('generic.errorDelete'));
         }
-    } */
+    }
 }

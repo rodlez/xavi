@@ -114,8 +114,11 @@
                                     <td class="p-2">{{ date('d-m-Y', strtotime($portfolio->created_at)) }}</td>
                                     <td class="p-2">{{ date('d-m-Y', strtotime($portfolio->updated_at)) }}</td>
                                     <td class="p-2 text-center uppercase">
-                                        @foreach ($portfolio->translations as $translation)
-                                            {{ $translation->language->code }}
+                                        @foreach ($portfolio->translations as $translation)                                            
+                                            <a href="{{ route('portfolios_trans.show', $translation) }}"
+                                                title="{{ __('generic.show') }}">
+                                                {{ $translation->language->code }}
+                                            </a>
                                         @endforeach
                                     </td>
                                     <td class="p-2">
