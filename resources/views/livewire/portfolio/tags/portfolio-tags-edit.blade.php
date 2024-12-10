@@ -3,7 +3,7 @@
     <!-- Sitemap -->
     <div class="flex flex-row justify-start items-start gap-1 text-sm py-3 px-4 text-slate-500 capitalize">
         <a href="/pf_tags" class="{{$textMenuHeader}}">{{__("admin/portfolio/portfolioTags.menuIndex")}}</a> /
-        <a href="/pf_tags/{{ $tag->id }}" class="{{$textMenuHeader}}">{{__("generic.info")}}</a> /
+        <a href="/pf_tags/{{ $tag->id }}" class="{{$textMenuHeader}}">{{ $tag->name }}</a> /
         <a href="/pf_tags/edit/{{ $tag->id }}"
             class="font-bold text-black {{$underlineMenuHeader}}">{{__("generic.edit")}}</a>
     </div>
@@ -11,8 +11,8 @@
     <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
 
         <!-- HEADER -->
-        <div class="flex flex-row py-4 {{$bgMenuColor}}">
-            <span class="text-lg text-white capitalize px-4">{{__("admin/portfolio/portfolioTags.titleHeader")}}</span>
+        <div class="flex flex-row justify-start items-center py-4 {{ $bgMenuColor }}">
+            <span class="text-lg text-white capitalize px-4">{{ __('generic.portfolio') }} {{ __('generic.tag') }}</span>
         </div>
 
         <!--EDIT TAG -->

@@ -4,24 +4,23 @@
     <div class="flex flex-row justify-start items-start gap-1 text-sm py-3 px-4 text-slate-500 capitalize">
         <a href="/pf_tags" class="{{$textMenuHeader}}">{{__("admin/portfolio/portfolioTags.menuIndex")}}</a> /
         <a href="/pf_tags/{{ $tag->id }}" class="{{$textMenuHeader}}">{{ $tag->name }}</a> /
-        <a href="/pf_tags/{{ $tag->id }}/translation/create"
-            class="font-bold text-black {{$underlineMenuHeader}}">{{__("generic.translation")}}</a>
+        <a href="/pf_tags/{{ $tag->id }}/translation/create/{{$missingTranslationId}}"
+            class="font-bold text-black {{$underlineMenuHeader}}">{{__("generic.newF")}} {{__("generic.translation")}} ({{ $translationLanguage->code }})</a>
     </div>
 
     <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
 
         <!-- HEADER -->
-        <div class="flex flex-row justify-between items-center py-4 {{$bgMenuColor}}">
+        <div class="flex flex-row justify-between items-center py-4 {{ $bgMenuColor }}">
             <div>
-                <span class="text-lg text-white px-4 capitalize">{{__("generic.newF")}}
-                    ({{ $translationLanguage->name }})</span>
+                <span class="text-lg text-white px-4 capitalize">{{ __('generic.portfolio') }} {{ __('generic.tag') }} {{ __('generic.translation') }}</span>
             </div>
         </div>
 
         <!-- TAG INFO -->
         <div class="flex flex-col mx-auto my-4 w-11/12">
             <div class="w-fit bg-black text-white text-lg capitalize mb-1 p-2">
-                Information
+                {{__("generic.info")}}
             </div>
             <div class="flex flex-col text-white capitalize bg-slate-800">
                 <span class="bg-orange-600 py-1 px-2">Id</span>
@@ -42,19 +41,11 @@
                     <!-- Add Token to prevent Cross-Site Request Forgery (CSRF) -->
                     @csrf
 
-                    <div class="italic p-2 rounded-md {{$bgInfoColor}}">{{__("generic.createTranslation")}}
-                    </div>
-
-                    <!-- Language -->
-                    <h2 class="text-lg font-bold capitalize px-2">{{__("generic.language")}}</h2>
-
-                    <div class="relative">
-                        <input placeholder="{{ $translationLanguage->name }}" readonly disabled
-                            class="w-full pl-12 rounded-lg bg-gray-50 border border-gray-200 text-gray-900 dark:bg-gray-700 dark:border-gray-600 dark:text-white focus:ring-green-500 focus:border-green-500">
-                        <div class="absolute flex items-center inset-y-0 left-0 pointer-events-none">
-                            <i class="fa-solid fa-language  bg-gray-200 p-3 rounded-l-md"></i>
-                        </div>
-                    </div>
+                    <!-- Create Translation Text -->
+                    <div class="flex flex-col capitalize font-bold p-2 rounded-md {{$bgInfoColor}}">
+                        <span class="uppercase underline underline-offset-4">{{__("generic.language")}} > {{ $translationLanguage->name }}</span>
+                        <span>{{__("generic.createTranslation")}}</span>
+                    </div>                    
 
                     <!-- Name -->
                     <h2 class="text-lg font-bold capitalize px-2">{{__("generic.translation")}} <span class="text-red-600">*</span></h2>
@@ -64,7 +55,7 @@
                             value="{{ old('name') }}" maxlength="100"
                             class="w-full pl-12 rounded-lg bg-gray-50 border border-gray-200 text-gray-900 dark:bg-gray-700 dark:border-gray-600 dark:text-white focus:ring-green-500 focus:border-green-500">
                         <div class="absolute flex items-center inset-y-0 left-0 pointer-events-none">
-                            <i class="fa-solid fa-tag  bg-gray-200 p-3 rounded-l-md"></i>
+                            <i class="fa-solid fa-language  bg-gray-200 p-3 rounded-l-md"></i>
                         </div>
                     </div>
 

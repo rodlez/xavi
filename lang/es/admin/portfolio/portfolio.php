@@ -9,7 +9,7 @@ return [
     "infoMessageEdit" => "Edita el portfolio, la descripción es opcional",
 
     // TRANSLATIONS
-    "noCategoriesMessage" => "No hay ninguna categoria creada para este idioma, debes crear primero al menos una",
-    "noTypesMessage" => "No hay ningún tipo creado para este idioma, debes crear primero al menos uno",
-    "noTagsMessage" => "No hay ningún tag creado para este idioma, debes crear primero al menos uno",
+    "noCategoriesMessage" => "No hay ninguna categoria creada para este idioma, debes crear al menos una",
+    "noTypesMessage" => "No hay ningún tipo creado para este idioma, debes crear al menos uno",
+    "noTagsMessage" => "No hay ningún tag creado para este idioma, debes crear al menos uno",
 ];

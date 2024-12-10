@@ -4,8 +4,12 @@ return [
     // SEARCH
     "searchPlaceholderName" => "Búsqueda per nom",
     "searchPlaceholderTitle" => "Búsqueda per títol",   
+    "found" => "trobat",
+    "foundFem" => "trobada",
+    "foundPlural" => "trobats",
+    "foundPluralFem" => "trobades",
     "elementFound" => "Elements trobats",
-    "elementNotFound" => "No s'ha trobat cap element",
+    "elementNotFound" => "No s'ha trobat cap element",    
     // TABLES
     "name" => "nom",
     "description" => "descripció",
@@ -72,4 +76,6 @@ return [
     "createTranslation" => "Crea una nova traducció",
     "editTranslation" => "Edita la traducció",
     "showTranslation" => "Informació de la traducció",
+    // LANGUAGES
+    "noLanguages" => "No hi ha cap idioma a l'aplicació, crea al menys un",
 ];

@@ -77,11 +77,12 @@ class PortfolioTagsTranslation extends Component
         $totalEntries = PortfolioTag::all()->count();
     
         return view('livewire.portfolio.tags.translations.portfolio-tags-translation', [
-            // Styles
-            'underlineMenuHeader'   => 'border-b-2 border-b-yellow-400',
-            'bgMenuColor'           => 'bg-yellow-400',
-            'menuTextColor'         => 'text-yellow-400',
-            'focusColor'            => 'focus:ring-yellow-400 focus:border-yellow-400',
+            // Styles 
+            'underlineMenuHeader' => 'border-b-2 border-b-yellow-400',
+            'textMenuHeader' => 'hover:text-yellow-800',
+            'bgMenuColor' => 'bg-yellow-400',
+            'menuTextColor' => 'text-yellow-400',
+            'focusColor' => 'focus:ring-yellow-400 focus:border-yellow-400',
             // Data
             'translations'          => $translations,
             'found'                 => $found,

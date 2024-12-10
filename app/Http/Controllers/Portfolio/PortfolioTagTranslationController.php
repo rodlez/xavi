@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Portfolio;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Portfolio\StorePFTagRequest;
+use App\Http\Requests\Portfolio\StorePFTagTranslationRequest;
 use App\Models\Portfolio\PortfolioTagTranslation;
 use Exception;
 use Illuminate\Http\Request;
@@ -13,7 +13,7 @@ class PortfolioTagTranslationController extends Controller
      /**
      * Update the specified resource in storage.
      */
-    public function update(StorePFTagRequest $request, PortfolioTagTranslation $translation)
+    public function update(StorePFTagTranslationRequest $request, PortfolioTagTranslation $translation)
     {
         $validated = $request->validated();
         $validated['lang_id'] = $translation->language->id;

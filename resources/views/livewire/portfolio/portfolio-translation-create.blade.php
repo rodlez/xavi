@@ -92,15 +92,17 @@
                             @enderror
                         </div>
                     @else
-                        <!-- Still No Categories created -->
-                        <div class="text-sm text-red-600 font-bold py-1 px-2">
-                            {{ __('admin/portfolio/portfolio.noCategoriesMessage') }}
+                        <!-- Still No Categories created -->                        
+                        <div class="flex flex-col sm:flex-row justify-start items-start gap-2">
+                            <div class="text-md text-red-600 font-bold p-2 bg-red-200 rounded-md w-full">
+                                {{ __('admin/portfolio/portfolio.noCategoriesMessage') }}
+                            </div>
                             <button
-                                class="bg-black hover:bg-slate-700 text-white capitalize p-2 sm:px-4 rounded-sm shadow-none transition duration-500 ease-in-out">
+                                class="bg-black hover:bg-slate-700 text-white capitalize p-2 sm:px-4 rounded-sm shadow-none transition duration-500 ease-in-out w-full sm:w-fit">
                                 <a href="{{ route('pf_categories') }}">
                                     {{ __('generic.categories') }}
                                 </a>
-                            </button>
+                            </button>                
                         </div>
                     @endif
 
@@ -127,53 +129,55 @@
                             @enderror
                         </div>
                     @else
-                        <!-- Still No Types created -->
-                        <div class="text-sm text-red-600 font-bold py-1 px-2">
-                            {{ __('admin/portfolio/portfolio.noTypesMessage') }}
+                        <!-- Still No Types created -->                        
+                        <div class="flex flex-col sm:flex-row justify-start items-start gap-2">
+                            <div class="text-md text-red-600 font-bold p-2 bg-red-200 rounded-md w-full">
+                                {{ __('admin/portfolio/portfolio.noTypesMessage') }}
+                            </div>
                             <button
-                                class="bg-black hover:bg-slate-700 text-white capitalize p-2 sm:px-4 rounded-sm shadow-none transition duration-500 ease-in-out">
+                                class="bg-black hover:bg-slate-700 text-white capitalize p-2 sm:px-4 rounded-sm shadow-none transition duration-500 ease-in-out w-full sm:w-fit">
                                 <a href="{{ route('pf_types') }}">
                                     {{ __('generic.types') }}
                                 </a>
-                            </button>
+                            </button>                
                         </div>
                     @endif
 
-                    {{$tags}}
-
                     <!-- Tags -->
                     <h2 class="text-lg font-bold capitalize pt-2 pb-1 px-2">{{ __('generic.tags') }} <span
-                        class="text-red-600">*</span></h2>
-                @if ($tags->count() > 0)
-                    <div class="relative">
-                        <select wire:model.live="selectedTags" name="selectedTags" id="selectedTags" multiple
-                            class="w-full pl-12 rounded-lg bg-gray-50 border border-gray-200 text-gray-900 dark:bg-gray-700 dark:border-gray-600 dark:text-white focus:ring-green-500 focus:border-green-500">
-                            @foreach ($tags as $tag)
-                                <option value="{{ $tag->id }}" class="text-green-600"
-                                    @if (old('selectedTags') == $tag->id) selected @endif>{{ $tag->name }}</option>
-                            @endforeach
-                        </select>
-                        <div class="absolute flex items-center inset-y-0 left-0 pointer-events-none">
-                            <i class="fa-solid fa-tag bg-gray-200 p-3 rounded-l-md"></i>
+                            class="text-red-600">*</span></h2>
+                    @if ($tags->count() > 0)
+                        <div class="relative">
+                            <select wire:model.live="selectedTags" name="selectedTags" id="selectedTags" multiple
+                                class="w-full pl-12 rounded-lg bg-gray-50 border border-gray-200 text-gray-900 dark:bg-gray-700 dark:border-gray-600 dark:text-white focus:ring-green-500 focus:border-green-500">
+                                @foreach ($tags as $tag)
+                                    <option value="{{ $tag->id }}" class="text-green-600"
+                                        @if (old('selectedTags') == $tag->id) selected @endif>{{ $tag->name }}</option>
+                                @endforeach
+                            </select>
+                            <div class="absolute flex items-center inset-y-0 left-0 pointer-events-none">
+                                <i class="fa-solid fa-tag bg-gray-200 p-3 rounded-l-md"></i>
+                            </div>
                         </div>
-                    </div>
-                    <div class="text-sm text-red-600 font-bold py-1 px-2">
-                        @error('selectedTags')
-                            {{ $message }}
-                        @enderror
-                    </div>
-                @else
-                    <!-- Still No Tags created -->
-                    <div class="text-sm text-red-600 font-bold py-1 px-2">
-                        {{ __('admin/portfolio/portfolio.noTagsMessage') }}
-                        <button
-                            class="bg-black hover:bg-slate-700 text-white capitalize p-2 sm:px-4 rounded-sm shadow-none transition duration-500 ease-in-out">
-                            <a href="{{ route('pf_tags') }}">
-                                {{ __('generic.tags') }}
-                            </a>
-                        </button>
-                    </div>
-                @endif
+                        <div class="text-sm text-red-600 font-bold py-1 px-2">
+                            @error('selectedTags')
+                                {{ $message }}
+                            @enderror
+                        </div>
+                    @else
+                        <!-- Still No Tags created -->
+                        <div class="flex flex-col sm:flex-row justify-start items-start gap-2">
+                            <div class="text-md text-red-600 font-bold p-2 bg-red-200 rounded-md w-full">
+                                {{ __('admin/portfolio/portfolio.noTagsMessage') }}
+                            </div>
+                            <button
+                                class="bg-black hover:bg-slate-700 text-white capitalize p-2 sm:px-4 rounded-sm shadow-none transition duration-500 ease-in-out w-full sm:w-fit">
+                                <a href="{{ route('pf_tags') }}">
+                                    {{ __('generic.tags') }}
+                                </a>
+                            </button>                
+                        </div>
+                    @endif
 
                     <!-- Title -->
                     <h2 class="text-lg font-bold capitalize px-2">{{ __('generic.title') }} <span

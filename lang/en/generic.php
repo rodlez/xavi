@@ -3,7 +3,12 @@
 return [
     // SEARCH
     "searchPlaceholderName" => "search by name",   
-    "searchPlaceholderTitle" => "search by title",   
+    "searchPlaceholderTitle" => "search by title",
+    "found" => "found",
+    "foundFem" => "found",
+    "foundPlural" => "found",
+    "foundPluralFem" => "found",   
+    "elementFound" => "Elements found",
     "elementNotFound" => "No elements found",
     // TABLES
     "name" => "name",
@@ -71,4 +76,6 @@ return [
     "createTranslation" => "Create a new translation",
     "editTranslation" => "Edit this translation",
     "showTranslation" => "Information about this translation",
+    // LANGUAGES
+    "noLanguages" => "There are not any Languages in the App, create at least one",
 ];

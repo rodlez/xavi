@@ -75,6 +75,7 @@ class PortfolioTags extends Component
         return view('livewire.portfolio.tags.portfolio-tags', [
             // Styles
             'underlineMenuHeader' => 'border-b-2 border-b-yellow-600',
+            'textMenuHeader' => 'hover:text-yellow-400',
             'bgMenuColor' => 'bg-yellow-800',
             'menuTextColor' => 'text-yellow-800',
             'focusColor' => 'focus:ring-yellow-500 focus:border-yellow-500',

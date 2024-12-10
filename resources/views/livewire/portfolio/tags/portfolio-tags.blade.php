@@ -2,7 +2,9 @@
 
     <!-- Sitemap -->
     <div class="flex flex-row justify-start items-start gap-1 text-sm py-3 px-4 text-slate-500 capitalize">
-        <a href="/pf_tags" class="font-bold text-black {{$underlineMenuHeader}}">{{__("admin/portfolio/portfolioTags.menuIndex")}}</a>
+        <a href="/pf_tags" class="font-bold text-black {{$underlineMenuHeader}}">{{__("admin/portfolio/portfolioTags.menuIndex")}}</a> /
+        <a href="/pf_tags_trans" class="text-black {{$textMenuHeader}}">{{ __('generic.translations') }}
+        </a>
     </div>
     <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
 
@@ -107,8 +109,10 @@
                                         <td class="p-2">{{ date('d-m-Y', strtotime($tag->created_at)) }}</td>
                                         <td class="p-2">{{ date('d-m-Y', strtotime($tag->updated_at)) }}</td>
                                         <td class="p-2 text-center uppercase">
-                                            @foreach ($tag->translations as $translation)
-                                                {{ $translation->language->code }}
+                                            @foreach ($tag->translations as $translation)                                                
+                                                <a href="{{ route('pf_tags_trans.show', $translation) }}">
+                                                    {{ $translation->language->code }}
+                                                </a>
                                             @endforeach
                                         </td>
                                         <td class="p-2">

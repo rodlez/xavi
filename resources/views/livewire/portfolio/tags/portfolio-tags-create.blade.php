@@ -9,14 +9,15 @@
     <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
 
         <!-- HEADER -->
-        <div class="flex flex-row py-4 {{$bgMenuColor}}">
-            <span class="text-lg text-white capitalize px-4">{{__("admin/portfolio/portfolioTags.titleHeader")}} </span>
+        <div class="flex flex-row justify-start items-center py-4 {{ $bgMenuColor }}">
+            <span class="text-lg text-white capitalize px-4">{{ __('generic.portfolio') }} {{ __('generic.tag') }}</span>
         </div>
 
         <!-- NEW TAG -->
         <div class="mx-auto w-11/12 py-4 px-2">
 
-            <div class="italic p-2 rounded-md {{$bgInfoColor}}">
+            <!-- New Tag Message -->
+            <div class="font-bold p-2 rounded-md {{$bgInfoColor}}">
                 {{__("admin/portfolio/portfolioTags.infoMessageCreate")}}
             </div>
 
