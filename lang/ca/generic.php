@@ -41,6 +41,7 @@ return [
     "project" => "projecte",
     "portfolio" => "portfoli",
     "portfolios" => "portfolis",
+    "optional" => "opcional",
     // BULK
     "bulkActions" => "accions en grup",
     "bulkActionsClear" => "deseleccionar tot",
@@ -68,9 +69,10 @@ return [
     "errorDelete" => "No s'ha pogut eliminar",
     "bulkDelete" => "Elements eliminats amb exit",
     "errorForm" => "El formulari es incorrecte, si us plau comprova els missatges d'error",
+    "mandatoryFields" => "Els camps marcats amb un asterisc (*) son obligatoris",
     // TRANSLATIONS
-    "missingTranslation" => "Traducció no feta",
-    "missingTranslations" => "Traduccions no fetes",
+    "missingTranslation" => "Traducció pendent",
+    "missingTranslations" => "Traduccions pendents",
     "doneTranslations" => "Totes les traduccions estàn fetes",
     "alreadyTranslation" => "La traducció per aquest idioma ja ha estat creada",
     "createTranslation" => "Crea una nova traducció",

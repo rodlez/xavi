@@ -139,7 +139,7 @@
                                             <form action="{{ route('portfolios.destroy', $portfolio) }}" method="POST">
                                                 <!-- Add Token to prevent Cross-Site Request Forgery (CSRF) -->
                                                 @csrf
-                                                <!-- Dirtective to Override the http method -->
+                                                <!-- Directive to Override the http method -->
                                                 @method('DELETE')
                                                 <button onclick="return confirm('{{ __('generic.confirmDelete') }}')"
                                                     title="{{ __('generic.delete') }}">

@@ -25,7 +25,7 @@
             <form action="{{ route('pf_categories.update', $category) }}" method="POST">
                 <!-- Add Token to prevent Cross-Site Request Forgery (CSRF) -->
                 @csrf
-                <!-- Dirtective to Override the http method -->
+                <!-- Directive to Override the http method -->
                 @method('PUT')
 
                 <!-- Name -->

@@ -32,6 +32,10 @@ class PortfolioTagsShow extends Component
             'underlineMenuHeader' => 'border-b-2 border-b-yellow-600',
             'textMenuHeader' => 'hover:text-yellow-800',
             'bgMenuColor' => 'bg-yellow-800',
+            'bgInfoTab' => 'bg-orange-600',
+            'tagName' => 'text-white font-bold bg-orange-600',
+            'menuInfo' => 'text-white bg-slate-800',
+            'bgTranslationTab' => 'bg-pink-600',
             'menuTextColor' => 'text-yellow-800',
             // Data
             'tag' => $this->tag,
@@ -39,5 +43,4 @@ class PortfolioTagsShow extends Component
             'missingTranslations' => $missingTranslations,
         ])->layout('layouts.app');
     }
-    
 }

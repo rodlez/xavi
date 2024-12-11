@@ -181,7 +181,7 @@
                 <form action="{{ route('portfolios_trans.destroy', $translation) }}" method="POST">
                     <!-- Add Token to prevent Cross-Site Request Forgery (CSRF) -->
                     @csrf
-                    <!-- Dirtective to Override the http method -->
+                    <!-- Directive to Override the http method -->
                     @method('DELETE')
                     <button
                         class="bg-black hover:bg-slate-700 text-white capitalize p-2 sm:px-4 rounded-sm shadow-none transition duration-500 ease-in-out"

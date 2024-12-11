@@ -5,86 +5,107 @@
         <a href="/pf_tags" class="{{ $textMenuHeader }}">{{ __('admin/portfolio/portfolioTags.menuIndex') }}</a> /
         <a href="/pf_tags/{{ $translation->tag->id }}" class="{{ $textMenuHeader }}">{{ $translation->tag->name }}</a> /
         <a href="/pf_tags_trans/{{ $translation->id }}"
-            class="font-bold text-black {{ $underlineMenuHeader }}">{{ __('generic.info') }} {{ __('generic.translation') }} ({{$translation->language->code}})</a>
+            class="font-bold text-black {{ $underlineMenuHeader }}">{{ __('generic.info') }}
+            {{ __('generic.translation') }} ({{ $translation->language->code }})</a>
     </div>
 
     <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
 
         <!-- HEADER -->
-        <div class="flex flex-row justify-between items-center py-4 {{ $bgMenuColor }}">
-            <div>
-                <span class="text-lg text-white px-4 capitalize">{{ __('generic.portfolio') }} {{ __('generic.tag') }} {{ __('generic.translation') }}</span>
-            </div>
+        <div class="flex flex-row py-4 {{ $bgMenuColor }}">
+                <span class="text-lg text-white px-4 capitalize">{{ __('generic.portfolio') }} {{ __('generic.tag') }}
+                    {{ __('generic.translation') }}</span>
         </div>
 
-        <!-- TAG INFO -->
-        <div class="flex flex-col capitalize mt-4 mx-8 pb-0 lg:mx-14">
-            <div class="w-fit bg-black text-white text-lg capitalize mb-1 p-2">
-                {{ __('generic.info') }}
-            </div>
-            <div class="flex flex-col text-white bg-slate-800">
-                <span class="bg-orange-600 py-1 px-2">Id</span>
-                <span class="text-sm p-2">{{ $translation->tag->id }}</span>
-                <span class="bg-orange-600 py-1 px-2">{{ __('generic.tag') }}</span>
-                <span class="font-bold p-2">{{ $translation->tag->name }}</span>
-                <span class="bg-orange-600 py-1 px-2">{{ __('generic.description') }}</span>
-                <span
-                    class="text-sm p-2">{{ $translation->tag->description ? $translation->tag->description : '-' }}</span>
-            </div>
-        </div>
+        <div class="mx-auto w-11/12 my-4 px-2">
 
-        <!-- SHOW TRANSLATION -->
-        <div class="mx-auto w-11/12 py-2 px-2">
+            <!-- ORIGINAL TAG INFORMATION -->
+            <div class="flex flex-col capitalize">
 
-            <form action="{{ route('pf_tags_trans.update', $translation) }}" method="POST">
-                <!-- Add Token to prevent Cross-Site Request Forgery (CSRF) -->
-                @csrf
-                <!-- Dirtective to Override the http method -->
-                @method('PUT')
-
-                <!-- Show Translation Text -->
-                <div class="flex flex-col capitalize font-bold p-2 my-2 rounded-md {{ $bgInfoColor }}">
-                    <span class="uppercase underline underline-offset-4">{{ __('generic.language') }} >
-                        {{ $translation->language->name }}</span>
-                </div>                
-
-                <!-- Name -->
-                <div class="relative">
-                    <input placeholder="{{ $translation->name }}" readonly disabled
-                        class="w-full pl-12 rounded-lg bg-gray-50 border border-gray-200 text-gray-900 dark:bg-gray-700 dark:border-gray-600 dark:text-white focus:ring-green-500 focus:border-green-500">
-                    <div class="absolute flex items-center inset-y-0 left-0 pointer-events-none">
-                        <i class="fa-solid fa-language  bg-gray-200 p-3 rounded-l-md"></i>
+                <div class="flex flex-row justify-between">
+                    <div class="w-fit {{ $bgInfoTab }} text-white text-lg rounded-t-md capitalize mb-0 p-2">
+                        {{ __('generic.info') }}
                     </div>
                 </div>
+                <!-- Info Tag -->
+                <div class="flex flex-col text-black bg-gray-200">
+                    <span class="{{ $menuInfo }} p-2">Id</span>
+                    <span class="p-2">{{ $translation->tag->id }}</span>
+                    <span class="{{ $menuInfo }} p-2">{{ __('generic.tag') }}</span>
+                    <span class="{{$tagName}} p-2">{{ $translation->tag->name }}</span>
+                    <span class="{{ $menuInfo }} p-2">{{ __('generic.description') }}</span>
+                    <span
+                        class="text-sm p-2">{{ $translation->tag->description ? $translation->tag->description : '-' }}</span>
+                </div>
 
-                <!-- Save -->
-                <div class="flex flex-col sm:flex-row gap-2 my-4">
+            </div>
+
+            <!-- SHOW TRANSLATION -->
+            <div class="flex flex-col capitalize my-8">
+
+                <div class="flex flex-row justify-between">
+                    <div class="w-fit {{$bgTranslationTab}} text-white text-lg rounded-t-md capitalize mb-0 p-2">
+                        {{ __('generic.translation') }}
+                    </div>
+                    <!-- File Tabs / Visible only in Larger Screens -->
+                    <div class="flex flex-row gap-1 max-sm:hidden">
+                        <!-- Edit Tag -->
+                        <div class="w-fit bg-blue-600 text-white text-lg rounded-t-md capitalize mb-0 p-2">
+                            <a href="{{ route('pf_tags_trans.edit', $translation) }}">
+                                {{ __('generic.edit') }}
+                            </a>
+                        </div>
+                        <!-- Delete Tag -->
+                        <div class="w-fit bg-red-600 text-white text-lg rounded-t-md capitalize mb-0 p-2">
+                            <form action="{{ route('pf_tags_trans.destroy', $translation) }}" method="POST">
+                                <!-- Add Token to prevent Cross-Site Request Forgery (CSRF) -->
+                                @csrf
+                                <!-- Directive to Override the http method -->
+                                @method('DELETE')
+                                <button class="text-white capitalize"
+                                    onclick="return confirm('{{ __('generic.confirmDelete') }}')">
+                                    {{ __('generic.delete') }}
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <!-- Info Translation -->
+                <div class="flex flex-col text-black bg-gray-200">
+                    <span class="{{ $menuTranslation }} p-2">Id</span>
+                    <span class="p-2">{{ $translation->id }}</span>
+                    <span class="{{ $menuTranslation }} p-2">{{ __('generic.language') }}</span>
+                    <span class="{{$translationName}} p-2">{{ $translation->language->name }}</span>
+                    <span class="{{ $menuTranslation }} p-2">{{ __('generic.translation') }}</span>
+                    <span class="{{$translationName}} p-2">{{ $translation->name }}</span>
+                </div>
+
+                <!-- Big Actions Buttons in SMALL SCREENS -->
+                <div class="flex flex-col sm:hidden justify-start gap-1 py-2">
                     <!-- Edit -->
                     <button
-                        class="bg-black hover:bg-slate-700 text-white capitalize p-2 sm:px-4 rounded-sm shadow-none transition duration-500 ease-in-out">
+                        class="bg-blue-600 hover:bg-slate-700 text-white capitalize p-2 sm:px-4 rounded-md shadow-none transition duration-500 ease-in-out w-full sm:w-fit">
                         <a href="{{ route('pf_tags_trans.edit', $translation) }}">
                             {{ __('generic.edit') }}
-                            <i class="fa-solid fa-pen-to-square text-blue-800 px-1"></i>
                         </a>
                     </button>
                     <!-- Delete -->
                     <form action="{{ route('pf_tags_trans.destroy', $translation) }}" method="POST">
                         <!-- Add Token to prevent Cross-Site Request Forgery (CSRF) -->
                         @csrf
-                        <!-- Dirtective to Override the http method -->
+                        <!-- Directive to Override the http method -->
                         @method('DELETE')
                         <button
-                            class="bg-black hover:bg-slate-700 text-white capitalize p-2 sm:px-4 rounded-sm shadow-none transition duration-500 ease-in-out"
+                            class="bg-red-600 hover:bg-slate-700 text-white capitalize p-2 sm:px-4 rounded-md shadow-none transition duration-500 ease-in-out w-full sm:w-fit"
                             onclick="return confirm('{{ __('generic.confirmDelete') }}')">
                             {{ __('generic.delete') }}
-                            <i class="fa-solid fa-trash px-1 text-red-600"></i>
                         </button>
                     </form>
                 </div>
 
-        </div>
+            </div>
 
-        </form>
+        </div>
 
         <!-- Footer -->
         <div class="flex flex-row justify-end items-center py-4 px-4 {{ $bgMenuColor }} sm:rounded-b-lg">

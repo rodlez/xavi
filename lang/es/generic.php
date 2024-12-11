@@ -41,6 +41,7 @@ return [
     "project" => "proyecto",
     "portfolio" => "portfolio",
     "portfolios" => "portfolios",
+    "optional" => "opcional",
     // BULK
     "bulkActions" => "acciones en grupo",
     "bulkActionsClear" => "deseleccionar todo",
@@ -68,9 +69,10 @@ return [
     "errorDelete" => "No se ha podido eliminar",
     "bulkDelete" => "Elementos eliminados con éxito",
     "errorForm" => "El formulario es incorrecto, por favor comprueba los mensajes de error",
+    "mandatoryFields" => "Los campos marcados con un asterisco (*) son obligatorios",
     // TRANSLATIONS
-    "missingTranslation" => "Traducción no hecha",
-    "missingTranslations" => "Traducciones no hechas",
+    "missingTranslation" => "Traducción pendiente",
+    "missingTranslations" => "Traducciones pendientes",
     "doneTranslations" => "Todas las traducciones están hechas",
     "alreadyTranslation" => "La traducción para este idioma ya ha sido creada",
     "createTranslation" => "Crea una nueva traducción",

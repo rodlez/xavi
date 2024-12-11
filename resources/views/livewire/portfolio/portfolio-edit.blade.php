@@ -25,7 +25,7 @@
             <form action="{{ route('portfolios.update', $portfolio) }}" method="POST">
                 <!-- Add Token to prevent Cross-Site Request Forgery (CSRF) -->
                 @csrf
-                <!-- Dirtective to Override the http method -->
+                <!-- Directive to Override the http method -->
                 @method('PUT')
                 <!-- Published -->
                 <div

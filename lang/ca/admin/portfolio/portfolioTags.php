@@ -6,6 +6,6 @@ return [
     "menuIndexTranslations" => "portfoli tags traduccions",
 
     // MESSAGES
-    "infoMessageCreate" => "Crea un nou tag de portfoli, la descripció es opcional",
-    "infoMessageEdit" => "Edita el tag de portfoli, la descripció es opcional",
+    "infoMessageCreate" => "Crea un nou tag de portfoli",
+    "infoMessageEdit" => "Edita el tag de portfoli",
 ];

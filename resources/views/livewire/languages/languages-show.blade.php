@@ -36,7 +36,7 @@
                 <form action="{{ route('languages.destroy', $language) }}" method="POST">
                     <!-- Add Token to prevent Cross-Site Request Forgery (CSRF) -->
                     @csrf
-                    <!-- Dirtective to Override the http method -->
+                    <!-- Directive to Override the http method -->
                     @method('DELETE')
                     <button onclick="return confirm('{{ __('generic.confirmDelete') }}')">
                         <i class="fa-solid fa-trash text-red-600 hover:text-black transition duration-1000 ease-in-out"

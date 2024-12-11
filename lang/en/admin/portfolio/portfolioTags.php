@@ -6,6 +6,6 @@ return [
     "menuIndexTranslations" => "portfolio tags translations",
 
     // MESSAGES
-    "infoMessageCreate" => "Create a new portFolio tag, the description is optional",
-    "infoMessageEdit" => "Edit the portFolio tag, the description is optional",
+    "infoMessageCreate" => "Create a new portfolio tag",
+    "infoMessageEdit" => "Edit the portfolio tag",
 ];

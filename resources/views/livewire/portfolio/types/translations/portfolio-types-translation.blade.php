@@ -140,7 +140,7 @@
                                                     method="POST">
                                                     <!-- Add Token to prevent Cross-Site Request Forgery (CSRF) -->
                                                     @csrf
-                                                    <!-- Dirtective to Override the http method -->
+                                                    <!-- Directive to Override the http method -->
                                                     @method('DELETE')
                                                     <button
                                                         onclick="return confirm('Are you sure you want to delete the translation: {{ $translation->name }}?')"

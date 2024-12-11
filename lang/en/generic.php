@@ -41,6 +41,7 @@ return [
     "project" => "project",
     "portfolio" => "portfolio",
     "portfolios" => "portfolios",
+    "optional" => "optional",
     // BULK
     "bulkActions" => "bulk actions",
     "bulkActionsClear" => "unselect all",
@@ -68,9 +69,10 @@ return [
     "errorDelete" => "can not be deleted",
     "bulkDelete" => "Elements successfully deleted",
     "errorForm" => "There form is incorrect, please check the error messages",
+    "mandatoryFields" => "Fields marked with an asterisk (*) are required",
     // TRANSLATIONS
-    "missingTranslation" => "Missing Translation",
-    "missingTranslations" => "Missing Translations",
+    "missingTranslation" => "Pending Translation",
+    "missingTranslations" => "Pending Translations",
     "doneTranslations" => "All translations are done",
     "alreadyTranslation" => "The Translation for this language is already created",
     "createTranslation" => "Create a new translation",
