@@ -80,4 +80,6 @@ return [
     "showTranslation" => "Información de la traducción",
     // LANGUAGES
     "noLanguages" => "No hay ningún idioma en la aplicación, crea al menos uno",
+    // AUTHOR
+    "authorInfo" => "Web creada por XavRod",
 ];

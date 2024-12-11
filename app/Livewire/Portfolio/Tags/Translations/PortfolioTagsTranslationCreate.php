@@ -88,6 +88,7 @@ class PortfolioTagsTranslationCreate extends Component
             'tagName' => 'text-white font-bold bg-orange-600',
             'menuInfo' => 'text-white bg-slate-800',
             'bgTranslationTab' => 'bg-pink-600',
+            'createTranslation' => 'text-white bg-green-600',
             'languageName' => 'text-pink-600 italic',
             'translationName' => 'text-white font-bold bg-pink-600',
             'menuTranslation' => 'text-white bg-slate-800',

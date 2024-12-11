@@ -28,6 +28,7 @@ class PortfolioTagsTranslationEdit extends Component
             'tagName' => 'text-white font-bold bg-orange-600',
             'menuInfo' => 'text-white bg-slate-800',
             'bgTranslationTab' => 'bg-pink-600',
+            'editTranslation' => 'text-white bg-blue-600',
             'languageName' => 'text-pink-600 italic',
             'translationName' => 'text-white font-bold bg-pink-600',
             'menuTranslation' => 'text-white bg-slate-800',

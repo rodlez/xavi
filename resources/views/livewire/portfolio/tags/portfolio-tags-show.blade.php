@@ -54,7 +54,7 @@
                     <span class="{{ $menuInfo }} p-2">{{ __('generic.tag') }}</span>
                     <span class="{{$tagName}} p-2">{{ $tag->name }}</span>
                     <span class="{{ $menuInfo }} p-2">{{ __('generic.description') }}</span>
-                    <span class="p-2">{{ $tag->description ? $tag->description : '-' }}</span>
+                    <span class="p-2 normal-case">{{ $tag->description ? $tag->description : '-' }}</span>
                 </div>
 
                 <!-- Big Actions Buttons in SMALL SCREENS -->
@@ -114,7 +114,7 @@
                         <table class="table-auto w-full border text-sm capitalize">
                             <thead class="text-sm text-center text-white {{ $bgTranslationTab }}">
                                 <th class="p-2">{{ __('generic.translation') }}</th>
-                                <th class="p-2 max-sm:hidden">{{ __('generic.language') }}</th>
+                                <th class="p-2 max-lg:hidden">{{ __('generic.language') }}</th>
                                 <th class="p-2">{{ __('generic.code') }}</th>
                                 <th class="p-2 max-sm:hidden">{{ __('generic.created') }}</th>
                                 <th class="p-2 max-sm:hidden">{{ __('generic.updated') }}</th>
@@ -161,7 +161,7 @@
                             
                                 <tr class="bg-red-200 text-red-600 border-b text-center">                                    
                                     <td class="p-2 font-bold">{{ __('generic.pending') }}</td>
-                                    <td class="p-2 max-sm:hidden">{{ $missing->name }}</td>
+                                    <td class="p-2 max-lg:hidden">{{ $missing->name }}</td>
                                     <td class="p-2">{{ $missing->code }}</td>
                                     <td class="p-2 max-sm:hidden">-</td>
                                     <td class="p-2 max-sm:hidden">-</td>

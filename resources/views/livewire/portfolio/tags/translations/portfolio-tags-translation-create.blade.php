@@ -20,59 +20,51 @@
         <div class="mx-auto w-11/12 my-4 px-2">
 
             <!-- ORIGINAL TAG INFORMATION -->
-            <div class="flex flex-col capitalize">
+            <div class="flex flex-col">
 
                 <div class="flex flex-row justify-between">
-                    <div class="w-fit {{ $bgInfoTab }} text-white text-lg rounded-t-md capitalize mb-0 p-2">
-                        {{ __('generic.info') }}
+                    <div class="flex w-full sm:w-fit {{ $bgInfoTab }} text-white font-light uppercase rounded-t-md p-2">
+                        {{ __('generic.tag') }}
                     </div>
                 </div>
                 <!-- Info Tag -->
-                <div class="flex flex-col text-black bg-gray-200">
-                    <span class="{{ $menuInfo }} p-2">Id</span>
+                <div class="flex flex-col text-black capitalize bg-slate-200 rounded-b-lg sm:rounded-tr-lg">
+                    <span class="{{ $menuInfo }} p-2 sm:rounded-tr-lg">Id</span>
                     <span class="p-2">{{ $tag->id }}</span>
-                    <span class="{{ $menuInfo }} p-2">{{ __('generic.tag') }}</span>
+                    <span class="{{ $menuInfo }} p-2">{{ __('generic.name') }}</span>
                     <span class="{{ $tagName }} p-2">{{ $tag->name }}</span>
                     <span class="{{ $menuInfo }} p-2">{{ __('generic.description') }}</span>
-                    <span class="text-sm p-2">{{ $tag->description ? $tag->description : '-' }}</span>
+                    <span class="text-sm normal-case p-2">{{ $tag->description ? $tag->description : '-' }}</span>
                 </div>
 
+                <!-- TRANSLATION -->
                 @if ($isTranslated == false)
-                    <div class="flex flex-col capitalize mt-8 mb-4">
-
-                        <div class="flex flex-row justify-between">
-                            <div
-                                class="w-fit {{ $bgTranslationTab }} text-white text-lg rounded-t-md capitalize mb-0 p-2">
-                                {{ __('generic.translation') }}
-                            </div>
+                    <div class="flex flex-col my-8">
+                        <!-- Info Tag Translation -->
+                        <div class="flex w-full sm:w-fit {{ $bgTranslationTab }} text-white font-light uppercase rounded-t-md p-2">
+                            {{ __('generic.translation') }}
                         </div>
-                        <!-- Info Tag -->
-                        <div class="flex flex-col text-black bg-gray-200">
-                            <span class="{{ $menuInfo }} p-2">{{ __('generic.language') }}</span>
-                            <span class="{{ $translationName }} p-2">{{ $translationLanguage->name }}</span>
+                        <div class="flex flex-col text-black capitalize bg-gray-200 rounded-b-lg sm:rounded-tr-lg">
+                            <span class="{{ $menuInfo }} p-2 sm:rounded-tr-lg">{{ __('generic.language') }}</span>
+                            <span class="{{ $translationName }} p-2 rounded-b-lg">{{ $translationLanguage->name }}</span>
                         </div>
-
                     </div>
 
-                    <!-- EDIT TRANSLATION -->
-
-                    <!-- Edit Tag Message -->
-                    <div class="flex justify-start items-end rounded-md py-4 px-2 text-lg text-white bg-blue-600">
-                        <span class="font-light">{{ __('generic.createTranslation') }} > <span
-                                class="font-bold">{{ $translationLanguage->name }}</span></span>
+                    <!-- Create Translation Tag Message -->
+                    <div
+                        class="flex w-full sm:w-fit text-lg {{$createTranslation}} font-light normal-case rounded-t-md p-2">
+                        <span>{{ __('generic.createTranslation') }}</span>
                     </div>
                     <!-- Mandatory Form Fields Message -->
-                    <div class="text-sm text-slate-600 px-2 py-1">
-                        {{ __('generic.mandatoryFields') }}
-                    </div>
-
+                    <div class="flex flex-col text-black normal-case bg-gray-200 sm:rounded-tr-lg">
+                        <span class="{{ $menuInfo }} text-sm p-2 sm:rounded-tr-lg">{{ __('generic.mandatoryFields') }}</span>
+                    </div>                   
 
                     <!-- Form -->
-                    <div class="bg-slate-100 rounded-md my-2 p-2">
+                    <div class="bg-slate-200 rounded-b-md my-0 p-2">
                         <form wire:submit="save">
                             <!-- Add Token to prevent Cross-Site Request Forgery (CSRF) -->
                             @csrf
-
                             <!-- Name -->
                             <h2 class="text-lg font-bold capitalize px-2">{{ __('generic.translation') }} <span
                                     class="text-red-600">*</span></h2>
@@ -82,22 +74,20 @@
                                     value="{{ old('name') }}" maxlength="100"
                                     class="w-full pl-12 rounded-lg bg-gray-50 border border-gray-200 text-gray-900 dark:bg-gray-700 dark:border-gray-600 dark:text-white focus:ring-green-500 focus:border-green-500">
                                 <div class="absolute flex items-center inset-y-0 left-0 pointer-events-none">
-                                    <i class="fa-solid fa-language  bg-gray-200 p-3 rounded-l-md"></i>
+                                    <i class="fa-solid fa-language bg-slate-400 p-3 rounded-l-md"></i>
                                 </div>
                             </div>
 
-
                             @error('name')
-                                <div class="text-sm text-red-600 font-bold py-1 px-2">
+                                <div class="text-sm text-red-600 normal-case font-bold py-1 px-2">
                                     {{ $message }}
                                 </div>
                             @enderror
 
-
                             <!-- Save -->
-                            <div class="py-4">
+                            <div class="mt-4 mb-2">
                                 <button type="submit"
-                                    class="w-full sm:w-fit bg-black hover:bg-slate-700 text-white capitalize p-2 sm:px-4 rounded-lg shadow-none transition duration-500 ease-in-out">
+                                    class="w-full sm:w-1/4 bg-black hover:bg-slate-700 text-white uppercase p-2 rounded-lg shadow-none transition duration-500 ease-in-out">
                                     {{ __('generic.save') }}
                                 </button>
                             </div>
@@ -120,15 +110,22 @@
 
         </div>
 
-
         <!-- Footer -->
-        <div class="flex flex-row justify-end items-center py-4 px-4 {{ $bgMenuColor }} sm:rounded-b-lg">
-            <a href="{{ route('pf_tags.show', $tag) }}">
-                <i class="fa-lg fa-solid fa-backward-step text-white hover:text-black transition duration-1000 ease-in-out"
-                    title="{{ __('generic.back') }}"></i>
-            </a>
+        <div
+            class="flex flex-row justify-between items-center text-white text-center p-4 {{ $bgMenuColor }} sm:rounded-b-lg">
+            <div class="w-1/3 text-left"><a href="{{ route('pf_tags.show', $tag) }}">
+                    <i class="fa-lg fa-solid fa-chevron-left hover:text-black transition duration-1000 ease-in-out"
+                        title="{{ __('generic.back') }}"></i>
+                </a>
+            </div>
+            <div class="w-1/3 max-sm:text-xs">{{ __('generic.authorInfo') }}</div>
+            <div class="w-1/3 text-right">
+                <a href="{{ route('dashboard') }}">
+                    <i class="fa-lg fa-solid fa-house hover:text-black transition duration-1000 ease-in-out"
+                        title="{{ __('generic.back') }}"></i>
+                </a>
+            </div>
         </div>
-
 
     </div>
 
