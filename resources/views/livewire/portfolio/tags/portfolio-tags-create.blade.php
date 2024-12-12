@@ -68,7 +68,7 @@
                     </div>
                     
                     <!-- Name -->
-                    <h2 class="text-lg font-bold capitalize pb-1 px-2">{{ __('generic.name') }} <span
+                    <h2 class="text-lg font-bold capitalize pb-1 px-1">{{ __('generic.name') }} <span
                             class="text-red-600">*</span></h2>
 
                     <div class="relative">
@@ -88,7 +88,7 @@
 
                     <!-- Description -->
                     <div class="flex flex-col justify-start items-start w-full sm:w-2/3 gap-4 py-2">
-                        <span class="text-lg font-semibold capitalize px-2">{{ __('generic.description') }}</span>
+                        <span class="text-lg font-semibold capitalize px-1">{{ __('generic.description') }}</span>
                         <textarea wire:model="description" rows="6" name="description" id="description"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-md rounded-lg w-full p-2 {{ $focusColor }}"></textarea>
                     </div>

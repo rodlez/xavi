@@ -22,7 +22,7 @@
 
                 <div class="flex flex-row justify-between">
                     <div class="w-fit {{ $bgInfoTab }} text-white text-lg rounded-t-md capitalize mb-0 p-2">
-                        {{ __('generic.info') }}
+                        {{ __('generic.tag') }}
                     </div>
                     <!-- File Tabs / Visible only in Larger Screens -->
                     <div class="flex flex-row gap-1 max-sm:hidden">
@@ -51,7 +51,7 @@
                 <div class="flex flex-col text-black bg-gray-100">
                     <span class="{{ $menuInfo }} p-2">Id</span>
                     <span class="p-2">{{ $tag->id }}</span>
-                    <span class="{{ $menuInfo }} p-2">{{ __('generic.tag') }}</span>
+                    <span class="{{ $menuInfo }} p-2">{{ __('generic.name') }}</span>
                     <span class="{{$tagName}} p-2">{{ $tag->name }}</span>
                     <span class="{{ $menuInfo }} p-2">{{ __('generic.description') }}</span>
                     <span class="p-2 normal-case">{{ $tag->description ? $tag->description : '-' }}</span>
@@ -195,14 +195,23 @@
                 </div>
             @endif
 
-        </div>      
+        </div>              
 
-        <!-- Footer -->
-        <div class="flex flex-row justify-end items-center py-4 px-4 {{ $bgMenuColor }} sm:rounded-b-lg">
-            <a href="{{ route('pf_tags') }}">
-                <i class="fa-lg fa-solid fa-backward-step text-white hover:text-black transition duration-1000 ease-in-out"
-                    title="{{ __('generic.back') }}"></i>
-            </a>
+        <!-- FOOTER -->
+        <div
+            class="flex flex-row justify-between items-center text-white text-center p-4 {{ $bgMenuColor }} sm:rounded-b-lg">
+            <div class="w-1/3 text-left"><a href="{{ route('pf_tags') }}">
+                    <i class="fa-lg fa-solid fa-chevron-left hover:text-black transition duration-1000 ease-in-out"
+                        title="{{ __('generic.back') }}"></i>
+                </a>
+            </div>
+            <div class="w-1/3 text-xs">{{ __('generic.authorInfo') }}</div>
+            <div class="w-1/3 text-right">
+                <a href="{{ route('dashboard') }}">
+                    <i class="fa-lg fa-solid fa-house hover:text-black transition duration-1000 ease-in-out"
+                        title="{{ __('generic.back') }}"></i>
+                </a>
+            </div>
         </div>
 
     </div>

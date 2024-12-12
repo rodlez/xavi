@@ -2,20 +2,32 @@
 
     <!-- Sitemap -->
     <div class="flex flex-row justify-start items-start gap-1 text-sm py-3 px-4 text-slate-500 capitalize">
-        <a href="/pf_tags" class="text-black {{$textMenuHeader}}">{{__("admin/portfolio/portfolioTags.menuIndex")}}</a> /
-        <a href="/pf_tags_trans"
-            class="font-bold text-black {{ $underlineMenuHeader }}">{{ __('generic.translations') }}
+        <a href="/pf_tags"
+            class="text-black {{ $textMenuHeader }}">{{ __('admin/portfolio/portfolioTags.menuIndex') }}</a> /
+        <a href="/pf_tags_trans" class="font-bold text-black {{ $underlineMenuHeader }}">{{ __('generic.translations') }}
         </a>
     </div>
     <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
 
         <!-- HEADER -->
         <div class="flex flex-row justify-start items-center py-4 {{ $bgMenuColor }}">
-            <span class="text-lg text-white capitalize px-4">{{ __('generic.tags') }} <span
-                    class="text-sm">({{ $totalEntries }})</span>
-                {{ __('generic.translations') }} <span class="text-sm">({{ $totalTranslations }})</span>
+            <span class="text-lg text-white capitalize px-4">{{ __('admin/portfolio/portfolioTags.menuIndex') }} > {{ __('generic.translations') }}
             </span>
         </div>
+
+        <!-- Information -->
+        <div
+            class="flex flex-col sm:flex-row sm:justify-start sm:items-center mx-4 mt-4 p-4 rounded-md gap-4 bg-slate-800 text-white capitalize">
+
+            <div class="flex">
+                <span class="text-lg font-bold">{{ __('generic.info') }}<span>
+            </div>
+
+            <div class="flex text-sm gap-2">
+                <span>{{ __('generic.tags') }} ({{ $totalEntries }})</span>
+                <span>{{ __('generic.translations') }} ({{ $totalTranslations }})</span>
+            </div>
+        </div>        
 
         <!-- SEARCH -->
         <div class="flex flex-col sm:flex-row justify-between items-start px-2 sm:px-4 py-4 gap-4">
@@ -45,8 +57,8 @@
         </div>
         <!-- FOUND -->
         @if ($search != '' && $found > 0)
-            <div class="flex flex-col sm:flex-row mx-2 my-2 sm:mx-4 bg-green-100 rounded-lg">
-                <span class="text-green-600 p-2">{{ $found }} {{ __('generic.elementFound') }}</span>
+            <div class="flex flex-col sm:flex-row mx-2 my-1 sm:mx-4 bg-green-100 rounded-lg">
+                <span class="text-green-600 p-4">{{ $found }} {{ __('generic.elementFound') }}</span>
             </div>
         @endif
         <!-- BULK ACTIONS -->
@@ -151,7 +163,7 @@
                     </table>
                 @else
                     <div
-                        class="flex flex-row justify-between items-center bg-black text-white rounded-lg p-4 mx-2 sm:mx-0">
+                        class="flex flex-row justify-between items-center bg-red-100 text-white rounded-lg p-4 mx-2 sm:mx-0">
                         <span class="text-red-600">{{ __('generic.elementNotFound') }}</span>
                         <a wire:click.prevent="clearSearch" title="{{ __('generic.close') }}">
                             <i
@@ -164,16 +176,27 @@
             </div>
 
         </div>
+
         <!-- Pagination Links -->
         <div class="py-2 px-4">
             {{ $translations->links() }}
         </div>
-        <!-- Footer -->
-        <div class="flex flex-row justify-end items-center py-4 px-4 {{ $bgMenuColor }} sm:rounded-b-lg">
-            <a href="{{ route('dashboard') }}">
-                <i class="fa-lg fa-solid fa-backward-step text-white hover:text-black transition duration-1000 ease-in-out"
-                    title="{{ __('generic.back') }}"></i>
-            </a>
+
+        <!-- FOOTER -->
+        <div
+            class="flex flex-row justify-between items-center text-white text-center p-4 {{ $bgMenuColor }} sm:rounded-b-lg">
+            <div class="w-1/3 text-left"><a href="{{ route('pf_tags') }}">
+                    <i class="fa-lg fa-solid fa-chevron-left hover:text-black transition duration-1000 ease-in-out"
+                        title="{{ __('generic.back') }}"></i>
+                </a>
+            </div>
+            <div class="w-1/3 text-xs">{{ __('generic.authorInfo') }}</div>
+            <div class="w-1/3 text-right">
+                <a href="{{ route('dashboard') }}">
+                    <i class="fa-lg fa-solid fa-house hover:text-black transition duration-1000 ease-in-out"
+                        title="{{ __('generic.back') }}"></i>
+                </a>
+            </div>
         </div>
 
 
