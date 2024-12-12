@@ -78,6 +78,8 @@ return [
     "createTranslation" => "Crea una nova traducció",
     "editTranslation" => "Edita la traducció",
     "showTranslation" => "Informació de la traducció",
+    "noTranslation" => "Sense traducció",
+    "noTranslationMessage" => "Selecciona sense traducció per utilitzar aquest nom en tots els idiomes. Per exemple: localitzacions, empreses...",
     // LANGUAGES
     "noLanguages" => "No hi ha cap idioma a l'aplicació, crea al menys un",
     // AUTHOR

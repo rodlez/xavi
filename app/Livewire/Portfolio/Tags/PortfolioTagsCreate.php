@@ -4,13 +4,19 @@ namespace App\Livewire\Portfolio\Tags;
 
 use App\Http\Requests\Portfolio\StorePFTagRequest;
 use App\Models\Portfolio\PortfolioTag;
+use App\Models\Portfolio\PortfolioTagTranslation;
+use App\Services\TranslationService;
 use Exception;
 use Livewire\Component;
 
 class PortfolioTagsCreate extends Component
 {
+    // Dependency Injection to use the Service
+    protected TranslationService $translationService;
+
+    public $autoTranslations;
     public $name;
-    public $description;
+    public $description;   
 
     /**
      * USE LARAVEL FORM REQUEST IN LIVEWIRE
@@ -29,16 +35,33 @@ class PortfolioTagsCreate extends Component
         return (new StorePFTagRequest())->messages();
     }   
 
+    public function boot(TranslationService $translationService)
+    {
+        $this->translationService = $translationService;
+    }
+
+    public function mount()
+    {
+        $this->autoTranslations = false;
+    }
+
     public function save()
     {
         $formData = $this->validate();
 
         try {
-            PortfolioTag::create($formData);
+            $inserted = PortfolioTag::create($formData);
+            // Insert AutoTranslations, create ALL the translations for this element using the same name inserted in the form
+            if($this->autoTranslations) {                
+                foreach ($this->translationService->getLanguageIds() as $languageId) {                    
+                    $this->translationService->insertTranslation('pf_tags_trans', 'pf_tag_id', $inserted->id, $languageId, $formData['name']);                    
+                }
+            }
 
-            return to_route('pf_tags')->with('message', __("generic.tag") . ' (' . $this->name . ') '. __("generic.successCreate"));
+            return to_route('pf_tags')->with('message', __("generic.tag") . ' (' . $formData['name'] . ') '. __("generic.successCreate"));
+
         } catch (Exception $e) {
-            return to_route('pf_tags')->with('error', __("generic.error") . ' (' . $e->getCode() . ') ' .__("generic.tag"). ' (' . $this->name . ') '. __("generic.errorCreate"));
+            return to_route('pf_tags')->with('error', __("generic.error") . ' (' . $e->getCode() . ') ' .__("generic.tag"). ' (' . $formData['name'] . ') '. __("generic.errorCreate"));
         }
     }
 
@@ -48,6 +71,11 @@ class PortfolioTagsCreate extends Component
             // Styles
             'underlineMenuHeader'   => 'border-b-2 border-b-yellow-600',
             'textMenuHeader'        => 'hover:text-yellow-800',
+            
+            'bgInfoTab' => 'bg-orange-600',
+            'tagName' => 'text-white font-bold bg-orange-600',
+            'menuInfo' => 'text-white bg-slate-800',
+
             'bgMenuColor'           => 'bg-yellow-800',
             'bgInfoColor'           => 'bg-yellow-100',
             'menuTextColor'         => 'text-yellow-800',

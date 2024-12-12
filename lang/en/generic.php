@@ -78,6 +78,8 @@ return [
     "createTranslation" => "Create a new translation",
     "editTranslation" => "Edit this translation",
     "showTranslation" => "Information about this translation",
+    "noTranslation" => "No translation",
+    "noTranslationMessage" => "Select no translation to use this name in all the languages. E.g. (cities, companies...)",
     // LANGUAGES
     "noLanguages" => "There are not any Languages in the App, create at least one",
     // AUTHOR

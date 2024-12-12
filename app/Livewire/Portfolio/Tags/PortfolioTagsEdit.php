@@ -20,6 +20,11 @@ class PortfolioTagsEdit extends Component
             // Styles
             'underlineMenuHeader'   => 'border-b-2 border-b-yellow-600',
             'textMenuHeader'        => 'hover:text-yellow-800',
+
+            'bgInfoTab' => 'bg-orange-600',
+            'tagName' => 'text-white font-bold bg-orange-600',
+            'menuInfo' => 'text-white bg-slate-800',
+            
             'bgMenuColor'           => 'bg-yellow-800',
             'bgInfoColor'           => 'bg-yellow-100',
             'menuTextColor'         => 'text-yellow-800',

@@ -20,15 +20,17 @@
         <div class="mx-auto w-11/12 py-4 px-2">
 
             <!-- Edit Tag Message -->
-            <div class="flex justify-start items-end rounded-md p-4 text-lg text-white bg-blue-600">
-                <span class="font-light">{{ __('admin/portfolio/portfolioTags.infoMessageEdit') }} > <span class="font-bold">{{ $tag->name }}</span></span>
+            <div class="flex w-full sm:w-fit text-lg text-white bg-blue-600 font-light normal-case rounded-t-md p-2">
+                <span>{{ __('admin/portfolio/portfolioTags.infoMessageEdit') }} > <span class="font-bold">{{ $tag->name }}</span></span>
             </div>
             <!-- Mandatory Form Fields Message -->
-            <div class="text-sm text-slate-600 px-4 py-1">
-                {{ __('generic.mandatoryFields') }}
+            <div class="flex flex-col text-black normal-case bg-gray-200 sm:rounded-tr-lg">
+                <span
+                    class="{{ $menuInfo }} text-sm p-2 sm:rounded-tr-lg">{{ __('generic.mandatoryFields') }}</span>
             </div>
+
             <!-- Form -->
-            <div class="bg-slate-100 rounded-md my-2 p-2">
+            <div class="bg-slate-100 rounded-md p-2">
                 <form action="{{ route('pf_tags.update', $tag) }}" method="POST">
                     <!-- Add Token to prevent Cross-Site Request Forgery (CSRF) -->
                     @csrf
@@ -80,12 +82,21 @@
 
         </div>
 
-        <!-- FOOTER -->
-        <div class="flex flex-row justify-end items-center py-4 px-4 {{ $bgMenuColor }} sm:rounded-b-lg">
-            <a href="{{ route('pf_tags.show', $tag) }}">
-                <i class="fa-lg fa-solid fa-backward-step text-white hover:text-black transition duration-1000 ease-in-out"
-                    title="{{ __('generic.back') }}"></i>
-            </a>
+        <!-- FOOTER -->        
+        <div
+            class="flex flex-row justify-between items-center text-white text-center p-4 {{ $bgMenuColor }} sm:rounded-b-lg">
+            <div class="w-1/3 text-left"><a href="{{ route('pf_tags.show', $tag) }}">
+                    <i class="fa-lg fa-solid fa-chevron-left hover:text-black transition duration-1000 ease-in-out"
+                        title="{{ __('generic.back') }}"></i>
+                </a>
+            </div>
+            <div class="w-1/3 text-xs">{{ __('generic.authorInfo') }}</div>
+            <div class="w-1/3 text-right">
+                <a href="{{ route('dashboard') }}">
+                    <i class="fa-lg fa-solid fa-house hover:text-black transition duration-1000 ease-in-out"
+                        title="{{ __('generic.back') }}"></i>
+                </a>
+            </div>
         </div>
 
     </div>

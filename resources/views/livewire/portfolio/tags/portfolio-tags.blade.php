@@ -117,10 +117,12 @@
                                         @foreach ($this->translationLinks($tag) as $translation)                                            
                                             @if ($translation['translationId'])
                                                 <a href="/pf_tags_trans/{{ $translation['translationId'] }}"
-                                                    class="text-green-600">{{ $translation['code'] }}</a>
+                                                    class="text-green-600" title="{{ __('generic.show') }}">
+                                                    {{ $translation['code'] }}
+                                                </a>
                                             @else
                                                 <a href="{{ route('pf_tags_trans.create', ['tag' => $tag, 'missingTranslationId' => $translation['langId']]) }}"
-                                                    class="text-red-600" title="New Translation">
+                                                    class="text-red-600" title="{{ __('generic.newF') }}">
                                                     {{ $translation['code'] }}
                                                 </a>
                                             @endif
