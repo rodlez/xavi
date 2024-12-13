@@ -11,35 +11,29 @@
 
         <!-- HEADER -->
         <div class="flex flex-row justify-start items-center py-4 {{ $bgMenuColor }}">
-            <span class="text-lg text-white capitalize px-4">{{ __('admin/portfolio/portfolioTags.menuIndex') }} > {{ __('generic.translations') }}
+            <span class="text-lg text-white capitalize px-4">{{ __('admin/portfolio/portfolioTags.menuIndex') }} >
+                {{ __('generic.translations') }} ({{ $madeTranslations }}/{{ $totalTranslations }})
             </span>
-        </div>
-
-        <!-- Information -->
-        <div
-            class="flex flex-col sm:flex-row sm:justify-start sm:items-center mx-4 mt-4 p-4 rounded-md gap-4 bg-slate-800 text-white capitalize">
-
-            <div class="flex">
-                <span class="text-lg font-bold">{{ __('generic.info') }}<span>
-            </div>
-
-            <div class="flex text-sm gap-2">
-                <span>{{ __('generic.tags') }} ({{ $totalEntries }})</span>
-                <span>{{ __('generic.translations') }} ({{ $totalTranslations }})</span>
-            </div>
-        </div>        
-
+        </div>       
         <!-- SEARCH -->
         <div class="flex flex-col sm:flex-row justify-between items-start px-2 sm:px-4 py-4 gap-4">
-
             <!-- Search -->
             <div class="relative w-full">
                 <div class="absolute top-2.5 bottom-0 left-4 text-slate-700">
                     <i class="fa-solid fa-magnifying-glass"></i>
                 </div>
-                <input wire:model.live="search" type="search"
+                <input wire:model.live="search"
                     class="w-full rounded-lg pl-10 font-sm placeholder-zinc-400 {{ $focusColor }} border-2 border-zinc-200"
-                    placeholder="{{ __('generic.searchPlaceholderName') }}">
+                    placeholder="{{ __('generic.searchPlaceholderTranslation') }}">
+                <!-- Clear Search Button / not using input type=search default browser button -->
+                @if ($this->search != '')
+                    <div class="absolute top-2.5 right-1">
+                        <a wire:click.prevent="clearSearch" title="{{ __('generic.reset') }}">
+                            <i
+                                class="fa-lg fa-solid fa-circle-xmark cursor-pointer px-2 text-black hover:text-red-400 transition duration-1000 ease-in-out"></i>
+                        </a>
+                    </div>
+                @endif
             </div>
             <!-- Pagination -->
             <div class="relative w-32">
@@ -94,7 +88,7 @@
                                     id {!! $sortLink !!}</th>
                                 <th wire:click="sorting('name')" scope="col"
                                     class="p-2 hover:cursor-pointer hover:{{ $menuTextColor }} {{ $column == 'name' ? $menuTextColor : '' }}">
-                                    {{ __('generic.name') }} {!! $sortLink !!}</th>
+                                    {{ __('generic.translation') }} {!! $sortLink !!}</th>
                                 <th wire:click="sorting('pf_tags_trans.lang_id')" scope="col"
                                     class="p-2 hover:cursor-pointer hover:{{ $menuTextColor }} {{ $column == 'pf_tags_trans.lang_id' ? $menuTextColor : '' }}">
                                     {{ __('generic.language') }} {!! $sortLink !!}</th>

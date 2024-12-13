@@ -6,6 +6,6 @@ return [
     "menuIndexTranslations" => "portfoli tipus traduccions",
 
     // MESSAGES
-    "infoMessageCreate" => "Crea un nou tipus de portfoli, la descripció es opcional",
-    "infoMessageEdit" => "Edita el tipus de portfoli, la descripció es opcional",
+    "infoMessageCreate" => "Crea un nou tipus de portfoli",
+    "infoMessageEdit" => "Edita el tipus de portfoli",
 ];

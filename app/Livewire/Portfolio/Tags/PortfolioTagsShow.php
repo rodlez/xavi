@@ -4,7 +4,6 @@ namespace App\Livewire\Portfolio\Tags;
 
 use App\Models\Languages;
 use App\Models\Portfolio\PortfolioTag;
-use App\Models\Portfolio\PortfolioTagTranslation;
 use App\Services\TranslationService;
 use Livewire\Component;
 
@@ -25,7 +24,9 @@ class PortfolioTagsShow extends Component
 
     public function render()
     {
-        $missingTranslations = $this->translationService->getTranslationsMissing(PortfolioTagTranslation::class, 'pf_tag_id', $this->tag->id);
+        //$missingTranslations = $this->translationService->getTranslationsMissing(PortfolioTagTranslation::class, 'pf_tag_id', $this->tag->id);
+
+        $missingTranslations = $this->translationService->getTranslationsMissingTest($this->tag);
 
         return view('livewire.portfolio.tags.portfolio-tags-show', [
             // Styles

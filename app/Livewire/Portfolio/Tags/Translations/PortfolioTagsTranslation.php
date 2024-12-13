@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Portfolio\Tags\Translations;
 
+use App\Models\Languages;
 use App\Models\Portfolio\PortfolioTag;
 use App\Models\Portfolio\PortfolioTagTranslation;
 use Livewire\Component;
@@ -12,10 +13,10 @@ class PortfolioTagsTranslation extends Component
     use WithPagination;
 
     //protected $paginationTheme = "bootstrap";
-    public $orderColumn = "pf_tags_trans.id";
-    public $sortOrder = "desc";
+    public $orderColumn = 'pf_tags_trans.id';
+    public $sortOrder = 'desc';
     public $sortLink = '<i class="fa-solid fa-caret-down"></i>';
-    public $search = "";
+    public $search = '';
     public $perPage = 25;
 
     public $selections = [];
@@ -27,7 +28,7 @@ class PortfolioTagsTranslation extends Component
 
     public function clearSearch()
     {
-        $this->search = "";
+        $this->search = '';
     }
 
     public function bulkClear()
@@ -45,9 +46,9 @@ class PortfolioTagsTranslation extends Component
         return to_route('pf_tags_trans')->with('message', __('generic.bulkDelete'));
     }
 
-    public function sorting($columnName = "")
+    public function sorting($columnName = '')
     {
-        $caretOrder = "up";
+        $caretOrder = 'up';
         if ($this->sortOrder == 'asc') {
             $this->sortOrder = 'desc';
             $caretOrder = 'down';
@@ -67,29 +68,35 @@ class PortfolioTagsTranslation extends Component
         $translations = PortfolioTagTranslation::orderby($this->orderColumn, $this->sortOrder)->select('*');
 
         if (!empty($this->search)) {
-
-            $found = $translations->where('name', "like", "%" . $this->search . "%")->count();
+            $found = $translations->where('name', 'like', '%' . $this->search . '%')->count();
         }
 
-        //$total = $translations->count();
         $translations = $translations->paginate($this->perPage);
-        $totalTranslations = PortfolioTagTranslation::all()->count();
+
+        // Stats
         $totalEntries = PortfolioTag::all()->count();
-    
+        $entriesWithTranslations = PortfolioTagTranslation::distinct()->pluck('pf_tag_id')->count();
+        $entriesWithoutTranslations = $totalEntries - $entriesWithTranslations;
+        $totalTranslations = Languages::all()->count() * $totalEntries;
+        $madeTranslations = PortfolioTagTranslation::all()->count();
+
         return view('livewire.portfolio.tags.translations.portfolio-tags-translation', [
-            // Styles 
+            // Styles
             'underlineMenuHeader' => 'border-b-2 border-b-yellow-400',
             'textMenuHeader' => 'hover:text-yellow-800',
             'bgMenuColor' => 'bg-yellow-400',
             'menuTextColor' => 'text-yellow-400',
             'focusColor' => 'focus:ring-yellow-400 focus:border-yellow-400',
             // Data
-            'translations'          => $translations,
-            'found'                 => $found,
-            'column'                => $this->orderColumn,
-            'totalTranslations'     => $totalTranslations,
-            'totalEntries'          => $totalEntries,
+            'translations' => $translations,
+            'found' => $found,
+            'column' => $this->orderColumn,
+            // Stats
+            'totalEntries' => $totalEntries,
+            'entriesWithTranslations' => $entriesWithTranslations,
+            'entriesWithoutTranslations' => $entriesWithoutTranslations,
+            'totalTranslations' => $totalTranslations,
+            'madeTranslations' => $madeTranslations,
         ])->layout('layouts.app');
     }
-    
 }

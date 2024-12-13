@@ -25,20 +25,7 @@
             <div class="flex flex-col text-black normal-case bg-gray-200 sm:rounded-tr-lg">
                 <span
                     class="{{ $menuInfo }} text-sm p-2 sm:rounded-tr-lg">{{ __('generic.mandatoryFields') }}</span>
-            </div>
-
-
-
-
-
-            {{-- <!-- New Tag Message -->
-            <div class="flex justify-start items-end rounded-md p-4 text-lg text-white bg-green-600">
-                <span class="font-light">{{ __('admin/portfolio/portfolioTags.infoMessageCreate') }}</span>
-            </div>
-            <!-- Mandatory Form Fields Message -->
-            <div class="text-sm text-slate-600 px-4 py-1">
-                {{ __('generic.mandatoryFields') }}
-            </div> --}}
+            </div>           
 
             <!-- Form -->
             <div class="bg-slate-100 rounded-md my-0 p-2">
@@ -98,7 +85,6 @@
                             {{ $message }}
                         </div>
                     @enderror
-
 
                     <!-- Save -->
                     <div class="my-4 pt-4">

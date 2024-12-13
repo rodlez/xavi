@@ -6,6 +6,6 @@ return [
     "menuIndexTranslations" => "portfoli categories traduccions",
 
     // MESSAGES
-    "infoMessageCreate" => "Crea una nova categoria de portfoli, la descripció es opcional",
-    "infoMessageEdit" => "Edita la cateagoria de portfoli, la descripció es opcional",
+    "infoMessageCreate" => "Crea una nova categoria de portfoli",
+    "infoMessageEdit" => "Edita la categoria de portfoli",
 ];

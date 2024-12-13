@@ -5,8 +5,8 @@ return [
     "titleHeader" => "portfolio",
     "menuIndexTranslations" => "portfolio traducciones",
     // MESSAGES
-    "infoMessageCreate" => "Crea un nuevo portfolio, la descripción es opcional",
-    "infoMessageEdit" => "Edita el portfolio, la descripción es opcional",
+    "infoMessageCreate" => "Crea un nuevo portfolio",
+    "infoMessageEdit" => "Edita el portfolio",
 
     // TRANSLATIONS
     "noCategoriesMessage" => "No hay ninguna categoria creada para este idioma, debes crear al menos una",

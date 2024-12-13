@@ -6,8 +6,8 @@ return [
     "menuIndexTranslations" => "portfoli traduccions",
 
     // MESSAGES
-    "infoMessageCreate" => "Crea un nou portfoli, la descripció es opcional",
-    "infoMessageEdit" => "Edita el portfoli, la descripció es opcional",
+    "infoMessageCreate" => "Crea un nou portfoli",
+    "infoMessageEdit" => "Edita el portfoli",
 
     // TRANSLATIONS
     "noCategoriesMessage" => "No hi ha cap categoria creada per aquest idioma, has de crear al menys una",

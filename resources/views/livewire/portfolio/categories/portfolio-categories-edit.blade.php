@@ -18,66 +18,84 @@
         <!--EDIT CATEGORY -->
         <div class="mx-auto w-11/12 py-4 px-2">
 
-            <div class="italic p-2 rounded-md {{$bgInfoColor}}">
-                {{__("admin/portfolio/portfolioCategories.infoMessageEdit")}}
+            <!-- Edit Category Message -->
+            <div class="flex w-full sm:w-fit text-lg text-white bg-blue-600 font-light normal-case rounded-t-md p-2">
+                <span>{{ __('admin/portfolio/portfolioCategories.infoMessageEdit') }} > <span class="font-bold">{{ $category->name }}</span></span>
+            </div>
+            <!-- Mandatory Form Fields Message -->
+            <div class="flex flex-col text-black normal-case bg-gray-200 sm:rounded-tr-lg">
+                <span
+                    class="{{ $menuInfo }} text-sm p-2 sm:rounded-tr-lg">{{ __('generic.mandatoryFields') }}</span>
             </div>
 
-            <form action="{{ route('pf_categories.update', $category) }}" method="POST">
-                <!-- Add Token to prevent Cross-Site Request Forgery (CSRF) -->
-                @csrf
-                <!-- Directive to Override the http method -->
-                @method('PUT')
+            <!-- Form -->
+            <div class="bg-slate-100 rounded-md p-2">
+                <form action="{{ route('pf_categories.update', $category) }}" method="POST">
+                    <!-- Add Token to prevent Cross-Site Request Forgery (CSRF) -->
+                    @csrf
+                    <!-- Directive to Override the http method -->
+                    @method('PUT')
 
-                <!-- Name -->
-                <h2 class="text-lg font-bold capitalize pt-2 pb-1 px-2">{{__("generic.name")}} <span class="text-red-600">*</span></h2>
+                    <!-- Name -->
+                    <h2 class="text-lg font-bold capitalize pt-2 pb-1 px-2">{{ __('generic.name') }} <span
+                            class="text-red-600">*</span></h2>
 
-                <div class="relative">
-                    <input wire:model="name" name="name" id="name" type="text" value="{{ $category->name }}"
-                        maxlength="100"
-                        class="w-full pl-12 rounded-lg bg-gray-50 border border-gray-200 text-gray-900 dark:bg-gray-700 dark:border-gray-600 dark:text-white {{$focusColor}}">
-                    <div class="absolute flex items-center inset-y-0 left-0 pointer-events-none">
-                        <i class="fa-solid fa-tag  bg-gray-200 p-3 rounded-l-md"></i>
+                    <div class="relative">
+                        <input wire:model="name" name="name" id="name" type="text"
+                            value="{{ $category->name }}" maxlength="100"
+                            class="w-full pl-12 rounded-lg bg-gray-50 border border-gray-200 text-gray-900 dark:bg-gray-700 dark:border-gray-600 dark:text-white {{ $focusColor }}">
+                        <div class="absolute flex items-center inset-y-0 left-0 pointer-events-none">
+                            <i class="fa-solid fa-tag  bg-gray-200 p-3 rounded-l-md"></i>
+                        </div>
                     </div>
-                </div>
 
-                <div class="text-sm text-red-600 font-bold py-1 px-2">
                     @error('name')
-                        {{ $message }}
+                        <div class="text-sm text-red-600 font-bold py-1">
+                            {{ $message }}
+                        </div>
                     @enderror
-                </div>
 
-                <!-- Description -->
-                <div class="flex flex-col justify-start items-start w-full sm:w-2/3 gap-4 py-2">
-                    <span class="text-lg font-semibold capitalize px-2">{{__("generic.description")}}</span>
-                    <textarea rows="6" name="description" id="description"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-md rounded-lg w-full p-2 {{$focusColor}}">{{ $category->description }}</textarea>
-                </div>
-                <!-- Errors -->
-                @error('description')
-                    <div>
-                        <span class="text-sm text-red-600 font-bold px-2">{{ $message }}</span>
+                    <!-- Description -->
+                    <div class="flex flex-col justify-start items-start w-full sm:w-2/3 gap-4 py-2">
+                        <span class="text-lg font-semibold capitalize px-2">{{ __('generic.description') }}</span>
+                        <textarea rows="6" name="description" id="description"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-md rounded-lg w-full p-2 {{ $focusColor }}">{{ $category->description }}</textarea>
                     </div>
-                @enderror
+                    @error('description')
+                        <div class="text-sm text-red-600 font-bold py-1">
+                            {{ $message }}
+                        </div>
+                    @enderror
 
-                <!-- Save -->
-                <div class="py-4">
-                    <button type="submit"
-                        class="w-full sm:w-fit bg-black hover:bg-slate-700 text-white capitalize p-2 sm:px-4 rounded-lg shadow-none transition duration-500 ease-in-out">
-                        {{__("generic.save")}}
-                        <i class="fa-solid fa-floppy-disk px-2"></i>
-                    </button>
-                </div>
+                    <!-- Save -->
+                    <div class="py-4">
+                        <button type="submit"
+                            class="w-full sm:w-fit bg-black hover:bg-slate-700 text-white capitalize p-2 sm:px-4 rounded-lg shadow-none transition duration-500 ease-in-out">
+                            {{ __('generic.save') }}
+                        </button>
+                    </div>
 
-            </form>
-            
+                </form>
+
+            </div>
+
         </div>
 
-        <!-- FOOTER -->
-        <div class="flex flex-row justify-end items-center py-4 px-4 {{$bgMenuColor}} sm:rounded-b-lg">
-            <a href="{{ route('pf_categories.show', $category) }}">
-                <i class="fa-lg fa-solid fa-backward-step text-white hover:text-black transition duration-1000 ease-in-out"
-                    title="{{__("generic.back")}}"></i>
-            </a>
+        <!-- FOOTER -->        
+        <div
+            class="flex flex-row justify-between items-center text-white text-center p-4 {{ $bgMenuColor }} sm:rounded-b-lg">
+            <div class="w-1/3 text-left"><a href="{{ route('pf_categories.show', $category) }}">
+                    <i class="fa-lg fa-solid fa-chevron-left hover:text-black transition duration-1000 ease-in-out"
+                        title="{{ __('generic.back') }}"></i>
+                </a>
+            </div>
+            <div class="w-1/3 text-xs">{{ __('generic.authorInfo') }}</div>
+            <div class="w-1/3 text-right">
+                <a href="{{ route('dashboard') }}">
+                    <i class="fa-lg fa-solid fa-house hover:text-black transition duration-1000 ease-in-out"
+                        title="{{ __('generic.back') }}"></i>
+                </a>
+            </div>
         </div>
 
     </div>

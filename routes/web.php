@@ -27,6 +27,7 @@ use App\Livewire\Portfolio\Categories\PortfolioCategoriesShow;
 use App\Livewire\Portfolio\Categories\Translations\PortfolioCategoriesTranslation;
 use App\Livewire\Portfolio\Categories\Translations\PortfolioCategoriesTranslationCreate;
 use App\Livewire\Portfolio\Categories\Translations\PortfolioCategoriesTranslationEdit;
+use App\Livewire\Portfolio\Categories\Translations\PortfolioCategoriesTranslationShow;
 use App\Livewire\Portfolio\PortfolioCreate;
 use App\Livewire\Portfolio\PortfolioEdit;
 use App\Livewire\Portfolio\PortfolioShow;
@@ -122,6 +123,8 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
     Route::get('/pf_categories_trans', PortfolioCategoriesTranslation::class)->name('pf_categories_trans');
     Route::put('/pf_categories_trans/{translation}', [PortfolioCategoryTranslationController::class, 'update'])->name('pf_categories_trans.update');
     Route::delete('/pf_categories_trans/{translation}', [PortfolioCategoryTranslationController::class, 'destroy'])->name('pf_categories_trans.destroy');
+    Route::get('/pf_categories_trans/{translation}', PortfolioCategoriesTranslationShow::class)->name('pf_categories_trans.show');
+
     Route::get('/pf_categories_trans/edit/{translation}', PortfolioCategoriesTranslationEdit::class)->name('pf_categories_trans.edit');
 
     /* PORTFOLIO TYPES */

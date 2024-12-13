@@ -18,15 +18,17 @@ class PortfolioCategoriesEdit extends Component
     {
         return view('livewire.portfolio.categories.portfolio-categories-edit', [
             // Styles
-            'underlineMenuHeader'   => 'border-b-2 border-b-blue-600',
-            'textMenuHeader'        => 'hover:text-blue-800',
-            'bgMenuColor'           => 'bg-blue-800',
-            'bgInfoColor'           => 'bg-blue-100',
-            'menuTextColor'         => 'text-blue-800',
-            'focusColor'            => 'focus:ring-blue-500 focus:border-blue-500',
+            'underlineMenuHeader' => 'border-b-2 border-b-blue-600',
+            'textMenuHeader' => 'hover:text-blue-800',
+            'bgInfoTab' => 'bg-orange-600',
+            'tagName' => 'text-white font-bold bg-orange-600',
+            'menuInfo' => 'text-white bg-slate-800',
+            'bgMenuColor' => 'bg-blue-800',
+            'bgInfoColor' => 'bg-blue-100',
+            'menuTextColor' => 'text-blue-800',
+            'focusColor' => 'focus:ring-blue-500 focus:border-blue-500',
             // Data
-            'category' => $this->category
+            'category' => $this->category,
         ])->layout('layouts.app');
     }
-   
 }

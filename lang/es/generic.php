@@ -2,8 +2,9 @@
 
 return [
     // SEARCH
-    "searchPlaceholderName" => "Búsqueda por nombre",   
-    "searchPlaceholderTitle" => "Búsqueda por título",   
+    "searchPlaceholderName" => "Buscar por nombre",   
+    "searchPlaceholderTitle" => "Buscar por título",   
+    "searchPlaceholderTranslation" => "Buscar por traducción",   
     "found" => "encontrado",
     "foundFem" => "encontrada",
     "foundPlural" => "encontrados",
@@ -42,6 +43,7 @@ return [
     "portfolio" => "portfolio",
     "portfolios" => "portfolios",
     "optional" => "opcional",
+    "total" => "total",
     // BULK
     "bulkActions" => "acciones en grupo",
     "bulkActionsClear" => "deseleccionar todo",
@@ -78,6 +80,7 @@ return [
     "createTranslation" => "Crea una nueva traducción",
     "editTranslation" => "Edita la traducción",
     "showTranslation" => "Información de la traducción",
+    "withTranslation" => "Con traducción",
     "noTranslation" => "Sin traducción",
     "noTranslationMessage" => "Selecciona sin traducción para usar este nombre en todos los idiomas. Por ejemplo: lugares, empresas...",
     // LANGUAGES

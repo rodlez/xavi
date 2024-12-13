@@ -25,7 +25,9 @@ class PortfolioTypesShow extends Component
 
     public function render()
     {
-        $missingTranslations = $this->translationService->getTranslationsMissing(PortfolioTypeTranslation::class, 'pf_type_id', $this->type->id);
+        //$missingTranslations = $this->translationService->getTranslationsMissing(PortfolioTypeTranslation::class, 'pf_type_id', $this->type->id);
+
+        $missingTranslations = $this->translationService->getTranslationsMissingTest($this->type);
 
         return view('livewire.portfolio.types.portfolio-types-show', [
             // Styles

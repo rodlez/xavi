@@ -2,109 +2,130 @@
 
     <!-- Sitemap -->
     <div class="flex flex-row justify-start items-start gap-1 text-sm py-3 px-4 text-slate-500 capitalize">
-        <a href="/pf_categories" class="{{$textMenuHeader}}">{{__("admin/portfolio/portfolioCategories.menuIndex")}}</a> /
-        <a href="/pf_categories/{{ $category->id }}" class="{{$textMenuHeader}}">{{ $category->name }}</a> /
-        <a href="/pf_categories/{{ $category->id }}/translation/create"
-            class="font-bold text-black {{$underlineMenuHeader}}">{{__("generic.translation")}}</a>
+        <a href="/pf_categories" class="{{ $textMenuHeader }}">{{ __('admin/portfolio/portfolioCategories.menuIndex') }}</a> /
+        <a href="/pf_categories/{{ $category->id }}" class="{{ $textMenuHeader }}">{{ $category->name }}</a> /
+        <a href="/pf_categories/{{ $category->id }}/translation/create/{{ $missingTranslationId }}"
+            class="font-bold text-black {{ $underlineMenuHeader }}">{{ __('generic.newF') }}
+            {{ __('generic.translation') }} ({{ $translationLanguage->code }})</a>
     </div>
 
     <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
 
         <!-- HEADER -->
-        <div class="flex flex-row justify-between items-center py-4 {{$bgMenuColor}}">
-            <div>
-                <span class="text-lg text-white px-4 capitalize">{{__("generic.newF")}}
-                    ({{ $translationLanguage->name }})</span>
-            </div>
+        <div class="flex flex-row py-4 {{ $bgMenuColor }}">
+            <span class="text-lg text-white px-4 capitalize">{{ __('generic.portfolio') }} {{ __('generic.category') }}
+                {{ __('generic.translation') }}</span>
         </div>
 
-        <!-- CATEGORY INFO -->
-        <div class="flex flex-col mx-auto my-4 w-11/12">
-            <div class="w-fit bg-black text-white text-lg capitalize mb-1 p-2">
-                Information
-            </div>
-            <div class="flex flex-col text-white capitalize bg-slate-800">
-                <span class="bg-orange-600 py-1 px-2">Id</span>
-                <span class="text-sm p-2">{{ $category->id }}</span>
-                <span class="bg-orange-600 py-1 px-2">{{__("generic.category")}}</span>
-                <span class="font-bold p-2">{{ $category->name }}</span>
-                <span class="bg-orange-600 py-1 px-2">{{__("generic.description")}}</span>
-                <span
-                    class="text-sm p-2">{{ $category->description ? $category->description : '-' }}</span>
-            </div>
-        </div>
+        <div class="mx-auto w-11/12 my-4 px-2">
 
-        <!-- CREATE TRANSLATION -->
-        <div class="mx-auto w-11/12 my-4">            
+            <!-- ORIGINAL CATEGORY INFORMATION -->
+            <div class="flex flex-col">
 
-            @if ($isTranslated == false)
-                <form wire:submit="save">
-                    <!-- Add Token to prevent Cross-Site Request Forgery (CSRF) -->
-                    @csrf
-
-                    <div class="italic p-2 rounded-md {{$bgInfoColor}}">{{__("generic.createTranslation")}}
+                <div class="flex flex-row justify-between">
+                    <div class="flex w-full sm:w-fit {{ $bgInfoTab }} text-white font-light uppercase rounded-t-md p-2">
+                        {{ __('generic.category') }}
                     </div>
+                </div>
+                <!-- Info Category -->
+                <div class="flex flex-col text-black capitalize bg-slate-200 rounded-b-lg sm:rounded-tr-lg">
+                    <span class="{{ $menuInfo }} p-2 sm:rounded-tr-lg">Id</span>
+                    <span class="p-2">{{ $category->id }}</span>
+                    <span class="{{ $menuInfo }} p-2">{{ __('generic.name') }}</span>
+                    <span class="{{ $categoryName }} p-2">{{ $category->name }}</span>
+                    <span class="{{ $menuInfo }} p-2">{{ __('generic.description') }}</span>
+                    <span class="text-sm normal-case p-2">{{ $category->description ? $category->description : '-' }}</span>
+                </div>
 
-                    <!-- Language -->
-                    <h2 class="text-lg font-bold capitalize px-2">{{__("generic.language")}}</h2>
-
-                    <div class="relative">
-                        <input placeholder="{{ $translationLanguage->name }}" readonly disabled
-                            class="w-full pl-12 rounded-lg bg-gray-50 border border-gray-200 text-gray-900 dark:bg-gray-700 dark:border-gray-600 dark:text-white focus:ring-green-500 focus:border-green-500">
-                        <div class="absolute flex items-center inset-y-0 left-0 pointer-events-none">
-                            <i class="fa-solid fa-language  bg-gray-200 p-3 rounded-l-md"></i>
+                <!-- TRANSLATION -->
+                @if ($isTranslated == false)
+                    <div class="flex flex-col my-8">
+                        <!-- Info Category Translation -->
+                        <div class="flex w-full sm:w-fit {{ $bgTranslationTab }} text-white font-light uppercase rounded-t-md p-2">
+                            {{ __('generic.translation') }}
+                        </div>
+                        <div class="flex flex-col text-black capitalize bg-gray-200 rounded-b-lg sm:rounded-tr-lg">
+                            <span class="{{ $menuInfo }} p-2 sm:rounded-tr-lg">{{ __('generic.language') }}</span>
+                            <span class="{{ $translationName }} p-2 rounded-b-lg">{{ $translationLanguage->name }}</span>
                         </div>
                     </div>
 
-                    <!-- Name -->
-                    <h2 class="text-lg font-bold capitalize px-2">{{__("generic.translation")}} <span class="text-red-600">*</span></h2>
-
-                    <div class="relative">
-                        <input wire:model="name" name="name" id="name" type="text"
-                            value="{{ old('name') }}" maxlength="100"
-                            class="w-full pl-12 rounded-lg bg-gray-50 border border-gray-200 text-gray-900 dark:bg-gray-700 dark:border-gray-600 dark:text-white focus:ring-green-500 focus:border-green-500">
-                        <div class="absolute flex items-center inset-y-0 left-0 pointer-events-none">
-                            <i class="fa-solid fa-tag  bg-gray-200 p-3 rounded-l-md"></i>
-                        </div>
+                    <!-- Create Translation Category Message -->
+                    <div
+                        class="flex w-full sm:w-fit text-lg {{$createTranslation}} font-light normal-case rounded-t-md p-2">
+                        <span>{{ __('generic.createTranslation') }}</span>
                     </div>
+                    <!-- Mandatory Form Fields Message -->
+                    <div class="flex flex-col text-black normal-case bg-gray-200 sm:rounded-tr-lg">
+                        <span class="{{ $menuInfo }} text-sm p-2 sm:rounded-tr-lg">{{ __('generic.mandatoryFields') }}</span>
+                    </div>                   
 
-                    <div class="text-sm text-red-600 font-bold py-1 px-2">
-                        @error('name')
-                            {{ $message }}
-                        @enderror
+                    <!-- Form -->
+                    <div class="bg-slate-200 rounded-b-md my-0 p-2">
+                        <form wire:submit="save">
+                            <!-- Add Token to prevent Cross-Site Request Forgery (CSRF) -->
+                            @csrf
+                            <!-- Name -->
+                            <h2 class="text-lg font-bold capitalize px-2">{{ __('generic.translation') }} <span
+                                    class="text-red-600">*</span></h2>
+
+                            <div class="relative">
+                                <input wire:model="name" name="name" id="name" type="text"
+                                    value="{{ old('name') }}" maxlength="100"
+                                    class="w-full pl-12 rounded-lg bg-gray-50 border border-gray-200 text-gray-900 dark:bg-gray-700 dark:border-gray-600 dark:text-white focus:ring-green-500 focus:border-green-500">
+                                <div class="absolute flex items-center inset-y-0 left-0 pointer-events-none">
+                                    <i class="fa-solid fa-language bg-slate-400 p-3 rounded-l-md"></i>
+                                </div>
+                            </div>
+
+                            @error('name')
+                                <div class="text-sm text-red-600 normal-case font-bold py-1 px-2">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+
+                            <!-- Save -->
+                            <div class="mt-4 mb-2">
+                                <button type="submit"
+                                    class="w-full sm:w-1/4 bg-black hover:bg-slate-700 text-white uppercase p-2 rounded-lg shadow-none transition duration-500 ease-in-out">
+                                    {{ __('generic.save') }}
+                                </button>
+                            </div>
+
+                        </form>
                     </div>
-
-                    <!-- Save -->
-                    <div class="py-4">
-                        <button type="submit"
-                            class="w-full sm:w-fit bg-black hover:bg-slate-700 text-white capitalize p-2 sm:px-4 rounded-lg shadow-none transition duration-500 ease-in-out">
-                            {{__("generic.save")}}
-                            <i class="fa-solid fa-floppy-disk px-2"></i>
-                        </button>
+                @else
+                    <div class="flex flex-row justify-between items-center gap-4 bg-red-600 p-4 my-6 rounded-md">
+                        <span class="text-white font-bold normal-case">{{ __('generic.alreadyTranslation') }}
+                            ({{ $translationLanguage->name }})</span>
+                        <a href="{{ route('pf_categories.show', $category) }}"
+                            class="font-bold text-white hover:text-black transition duration-1000 ease-in-out"
+                            title="{{ __('generic.back') }}">
+                            <i class="fa-solid fa-x"></i>
+                        </a>
                     </div>
+                @endif
 
-                </form>
-            @else
-            <div class="flex flex-row justify-between items-center gap-4 bg-red-600 p-4 rounded-md">
-                <span class="text-white font-bold">{{__("generic.alreadyTranslation")}} ({{ $translationLanguage->name }})</span>
-                <a href="{{ route('pf_categories.show', $category) }}" 
-                class="font-bold text-white hover:text-black transition duration-1000 ease-in-out"
-                title="{{__("generic.back")}}"
-                >
-                    <i class="fa-solid fa-x"></i>
-                </a>
             </div>
-            @endif
+
         </div>
 
         <!-- Footer -->
-        <div class="flex flex-row justify-end items-center py-4 px-4 {{$bgMenuColor}} sm:rounded-b-lg">
-            <a href="{{ route('pf_categories.show', $category) }}">
-                <i class="fa-lg fa-solid fa-backward-step text-white hover:text-black transition duration-1000 ease-in-out"
-                    title="{{__("generic.back")}}"></i>
-            </a>
+        <div
+            class="flex flex-row justify-between items-center text-white text-center p-4 {{ $bgMenuColor }} sm:rounded-b-lg">
+            <div class="w-1/3 text-left"><a href="{{ route('pf_categories.show', $category) }}">
+                    <i class="fa-lg fa-solid fa-chevron-left hover:text-black transition duration-1000 ease-in-out"
+                        title="{{ __('generic.back') }}"></i>
+                </a>
+            </div>
+            <div class="w-1/3 max-sm:text-xs">{{ __('generic.authorInfo') }}</div>
+            <div class="w-1/3 text-right">
+                <a href="{{ route('dashboard') }}">
+                    <i class="fa-lg fa-solid fa-house hover:text-black transition duration-1000 ease-in-out"
+                        title="{{ __('generic.back') }}"></i>
+                </a>
+            </div>
         </div>
-
 
     </div>
 

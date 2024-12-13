@@ -5,11 +5,8 @@ namespace App\Livewire\Portfolio\Categories\Translations;
 use App\Http\Requests\Portfolio\StorePFCategoryTranslationRequest;
 use App\Models\Languages;
 use App\Models\Portfolio\PortfolioCategory;
-use App\Models\Portfolio\PortfolioCategoryTranslation;
 use App\Services\TranslationService;
 use Exception;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 
 class PortfolioCategoriesTranslationCreate extends Component
@@ -85,12 +82,19 @@ class PortfolioCategoriesTranslationCreate extends Component
         
         return view('livewire.portfolio.categories.translations.portfolio-categories-translation-create', [
             // Styles
-            'underlineMenuHeader' => 'border-b-2 border-b-blue-400',
-            'textMenuHeader' => 'hover:text-blue-400',
-            'bgMenuColor' => 'bg-blue-400',
-            'bgInfoColor' => 'bg-blue-100',
-            'menuTextColor' => 'text-blue-400',
-            'focusColor' => 'focus:ring-blue-400 focus:border-blue-400',
+            'underlineMenuHeader' => 'border-b-2 border-b-yellow-400',
+            'textMenuHeader' => 'hover:text-yellow-400',
+            'bgMenuColor' => 'bg-yellow-400',
+            'bgInfoTab' => 'bg-orange-600',
+            'categoryName' => 'text-white font-bold bg-orange-600',
+            'menuInfo' => 'text-white bg-slate-800',
+            'bgTranslationTab' => 'bg-pink-600',
+            'createTranslation' => 'text-white bg-green-600',
+            'languageName' => 'text-pink-600 italic',
+            'translationName' => 'text-white font-bold bg-pink-600',
+            'menuTranslation' => 'text-white bg-slate-800',
+            'menuTextColor' => 'text-yellow-400',
+            'focusColor' => 'focus:ring-yellow-400 focus:border-yellow-400',
             // Data
             'category' => $this->category,
             'languages' => Languages::all(),

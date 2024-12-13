@@ -2,8 +2,9 @@
 
 return [
     // SEARCH
-    "searchPlaceholderName" => "Búsqueda per nom",
-    "searchPlaceholderTitle" => "Búsqueda per títol",   
+    "searchPlaceholderName" => "Cercar per nom",
+    "searchPlaceholderTitle" => "Cercar per títol",   
+    "searchPlaceholderTranslation" => "Cercar per traducció",   
     "found" => "trobat",
     "foundFem" => "trobada",
     "foundPlural" => "trobats",
@@ -42,6 +43,7 @@ return [
     "portfolio" => "portfoli",
     "portfolios" => "portfolis",
     "optional" => "opcional",
+    "total" => "total",
     // BULK
     "bulkActions" => "accions en grup",
     "bulkActionsClear" => "deseleccionar tot",
@@ -78,6 +80,7 @@ return [
     "createTranslation" => "Crea una nova traducció",
     "editTranslation" => "Edita la traducció",
     "showTranslation" => "Informació de la traducció",
+    "withTranslation" => "Amb traducció",
     "noTranslation" => "Sense traducció",
     "noTranslationMessage" => "Selecciona sense traducció per utilitzar aquest nom en tots els idiomes. Per exemple: localitzacions, empreses...",
     // LANGUAGES

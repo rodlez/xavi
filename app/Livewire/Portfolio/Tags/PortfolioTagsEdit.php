@@ -18,20 +18,17 @@ class PortfolioTagsEdit extends Component
     {
         return view('livewire.portfolio.tags.portfolio-tags-edit', [
             // Styles
-            'underlineMenuHeader'   => 'border-b-2 border-b-yellow-600',
-            'textMenuHeader'        => 'hover:text-yellow-800',
-
+            'underlineMenuHeader' => 'border-b-2 border-b-yellow-600',
+            'textMenuHeader' => 'hover:text-yellow-800',
             'bgInfoTab' => 'bg-orange-600',
             'tagName' => 'text-white font-bold bg-orange-600',
             'menuInfo' => 'text-white bg-slate-800',
-            
-            'bgMenuColor'           => 'bg-yellow-800',
-            'bgInfoColor'           => 'bg-yellow-100',
-            'menuTextColor'         => 'text-yellow-800',
-            'focusColor'            => 'focus:ring-yellow-500 focus:border-yellow-500',
+            'bgMenuColor' => 'bg-yellow-800',
+            'bgInfoColor' => 'bg-yellow-100',
+            'menuTextColor' => 'text-yellow-800',
+            'focusColor' => 'focus:ring-yellow-500 focus:border-yellow-500',
             // Data
-            'tag' => $this->tag
+            'tag' => $this->tag,
         ])->layout('layouts.app');
     }
-    
 }

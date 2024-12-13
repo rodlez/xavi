@@ -2,13 +2,19 @@
 
 namespace App\Livewire\Portfolio\Categories;
 
+use App\Models\Languages;
 use App\Models\Portfolio\PortfolioCategory;
+use App\Services\TranslationService;
+use Illuminate\Database\Eloquent\Model;
 use Livewire\Component;
 use Livewire\WithPagination;
 
 class PortfolioCategories extends Component
 {
     use WithPagination;
+
+    // Dependency Injection to use the Service
+    protected TranslationService $translationService;
 
     //protected $paginationTheme = "bootstrap";
     public $orderColumn = 'pf_categories.id';
@@ -18,6 +24,11 @@ class PortfolioCategories extends Component
     public $perPage = 25;
 
     public $selections = [];
+
+    public function boot(TranslationService $translationService)
+    {
+        $this->translationService = $translationService;
+    }
 
     public function updated()
     {
@@ -57,6 +68,17 @@ class PortfolioCategories extends Component
 
         $this->sortLink = '<i class="fa-solid fa-caret-' . $caretOrder . '"></i>';
         $this->orderColumn = $columnName;
+    }
+
+    /**
+     * Given the element model, check for missing translations.
+     *
+     * @return array With all the languages specifying which ones are missing.
+     */
+
+    public function translationLinks(Model $element): array
+    {
+        return $this->translationService->getListTranslations($element);
     }
 
     public function render()

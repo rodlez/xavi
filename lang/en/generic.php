@@ -2,8 +2,9 @@
 
 return [
     // SEARCH
-    "searchPlaceholderName" => "search by name",   
-    "searchPlaceholderTitle" => "search by title",
+    "searchPlaceholderName" => "Search by name",   
+    "searchPlaceholderTitle" => "Search by title",
+    "searchPlaceholderTranslation" => "Search by translation",   
     "found" => "found",
     "foundFem" => "found",
     "foundPlural" => "found",
@@ -42,6 +43,7 @@ return [
     "portfolio" => "portfolio",
     "portfolios" => "portfolios",
     "optional" => "optional",
+    "total" => "total",
     // BULK
     "bulkActions" => "bulk actions",
     "bulkActionsClear" => "unselect all",
@@ -78,6 +80,7 @@ return [
     "createTranslation" => "Create a new translation",
     "editTranslation" => "Edit this translation",
     "showTranslation" => "Information about this translation",
+    "withTranslation" => "With translation",
     "noTranslation" => "No translation",
     "noTranslationMessage" => "Select no translation to use this name in all the languages. E.g. (cities, companies...)",
     // LANGUAGES

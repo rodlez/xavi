@@ -5,6 +5,6 @@ return [
     "titleHeader" => "portfolio tipos",
     "menuIndexTranslations" => "portfolio tipos traducciones",
     // MESSAGES
-    "infoMessageCreate" => "Crea un nuevo tipo de portfolio, la descripción es opcional",
-    "infoMessageEdit" => "Edita el tipo de portfolio, la descripción es opcional",
+    "infoMessageCreate" => "Crea un nuevo tipo de portfolio",
+    "infoMessageEdit" => "Edita el tipo de portfolio",
 ];

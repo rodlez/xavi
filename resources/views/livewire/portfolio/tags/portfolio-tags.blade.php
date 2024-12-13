@@ -8,7 +8,7 @@
         <a href="/pf_tags_trans" class="text-black {{ $textMenuHeader }}">{{ __('generic.translations') }}
         </a>
     </div>
-    
+
     <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
 
         <!-- Header -->
@@ -31,9 +31,18 @@
                 <div class="absolute top-2.5 bottom-0 left-4 text-slate-700">
                     <i class="fa-solid fa-magnifying-glass"></i>
                 </div>
-                <input wire:model.live="search" type="search"
+                <input wire:model.live="search"
                     class="w-full rounded-lg pl-10 font-sm placeholder-zinc-400 {{ $focusColor }} border-2 border-zinc-200"
                     placeholder="{{ __('generic.searchPlaceholderName') }}">
+                <!-- Clear Search Button / not using input type=search default browser button -->
+                @if ($this->search != '')
+                    <div class="absolute top-2.5 right-1">
+                        <a wire:click.prevent="clearSearch" title="{{ __('generic.reset') }}">
+                            <i
+                                class="fa-lg fa-solid fa-circle-xmark cursor-pointer px-2 text-black hover:text-red-400 transition duration-1000 ease-in-out"></i>
+                        </a>
+                    </div>
+                @endif
             </div>
             <!-- Pagination -->
             <div class="relative w-32">
@@ -113,27 +122,21 @@
 
                                     <td class="p-2">{{ date('d-m-Y', strtotime($tag->created_at)) }}</td>
                                     <td class="p-2">{{ date('d-m-Y', strtotime($tag->updated_at)) }}</td>
-                                    <td class="p-2 text-center uppercase">
+                                    <td class="p-2 text-center normal-case">
                                         <!-- If translation exists link to show, if not link to create new -->
                                         @foreach ($this->translationLinks($tag) as $translation)
                                             @if ($translation['translationId'])
                                                 <a href="/pf_tags_trans/{{ $translation['translationId'] }}"
-                                                    class="text-green-600" title="{{ __('generic.show') }}">
+                                                    class="text-green-600" title="{{ $translation['lang'] }}">
                                                     {{ $translation['code'] }}
                                                 </a>
                                             @else
                                                 <a href="{{ route('pf_tags_trans.create', ['tag' => $tag, 'missingTranslationId' => $translation['langId']]) }}"
-                                                    class="text-red-600" title="{{ __('generic.newF') }}">
+                                                    class="text-red-600" title="{{ $translation['lang'] }}">
                                                     {{ $translation['code'] }}
                                                 </a>
                                             @endif
                                         @endforeach
-                                        {{-- @foreach ($tag->translations as $translation)                                                
-                                          
-                                            <a href="{{ route('pf_tags_trans.show', $translation) }}">
-                                                    {{ $translation->language->code }}
-                                                </a>
-                                            @endforeach --}}
                                     </td>
                                     <td class="p-2">
                                         <div class="flex justify-center items-center gap-2">
@@ -169,9 +172,9 @@
                     </table>
                 @else
                     <div
-                        class="flex flex-row justify-between items-center bg-black text-white rounded-lg p-4 mx-2 sm:mx-0">
-                        <span>{{ __('generic.elementNotFound') }}</span>
-                        <a wire:click.prevent="clearSearch" title={{ __('generic.close') }}>
+                        class="flex flex-row justify-between items-center bg-red-100 text-white rounded-lg p-4 mx-2 sm:mx-0">
+                        <span class="text-red-600">{{ __('generic.elementNotFound') }}</span>
+                        <a wire:click.prevent="clearSearch" title="{{ __('generic.close') }}">
                             <i
                                 class="fa-lg fa-solid fa-circle-xmark cursor-pointer px-2 text-red-600 hover:text-red-400 transition duration-1000 ease-in-out"></i>
                         </a>
