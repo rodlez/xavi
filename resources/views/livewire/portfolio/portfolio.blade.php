@@ -1,10 +1,14 @@
 <div class="max-w-7xl mx-auto sm:pb-8 sm:px-6 lg:px-8">
 
-    <!-- Sitemap -->
+    <!-- Sitemap -->    
     <div class="flex flex-row justify-start items-start gap-1 text-sm py-3 px-4 text-slate-500 capitalize">
         <a href="/portfolios"
             class="font-bold text-black {{ $underlineMenuHeader }}">{{ __('admin/portfolio/portfolio.menuIndex') }}</a>
+        /
+        <a href="/portfolios_trans" class="text-black {{ $textMenuHeader }}">{{ __('generic.translations') }}
+        </a>
     </div>
+
     <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
 
         <!-- Header -->
@@ -113,12 +117,20 @@
                                     <td class="p-2">{{ statusText($portfolio->status) }}</td>
                                     <td class="p-2">{{ date('d-m-Y', strtotime($portfolio->created_at)) }}</td>
                                     <td class="p-2">{{ date('d-m-Y', strtotime($portfolio->updated_at)) }}</td>
-                                    <td class="p-2 text-center uppercase">
-                                        @foreach ($portfolio->translations as $translation)                                            
-                                            <a href="{{ route('portfolios_trans.show', $translation) }}"
-                                                title="{{ __('generic.show') }}">
-                                                {{ $translation->language->code }}
-                                            </a>
+                                    <td class="p-2 text-center uppercase">                                        
+                                        <!-- If translation exists link to show, if not link to create new -->
+                                        @foreach ($this->translationLinks($portfolio) as $translation)
+                                            @if ($translation['translationId'])
+                                                <a href="/portfolios_trans/{{ $translation['translationId'] }}"
+                                                    class="text-green-600" title="{{ $translation['lang'] }}">
+                                                    {{ $translation['code'] }}
+                                                </a>
+                                            @else
+                                                <a href="{{ route('portfolios_trans.create', ['portfolio' => $portfolio, 'missingTranslationId' => $translation['langId']]) }}"
+                                                    class="text-red-600" title="{{ $translation['lang'] }}">
+                                                    {{ $translation['code'] }}
+                                                </a>
+                                            @endif
                                         @endforeach
                                     </td>
                                     <td class="p-2">
@@ -154,15 +166,15 @@
                         </tbody>
                     </table>
                 @else
-                    <div
-                        class="flex flex-row justify-between items-center bg-black text-white rounded-lg p-4 mx-2 sm:mx-0">
-                        <span>{{ __('generic.elementNotFound') }}</span>
-                        <a wire:click.prevent="clearSearch" title={{ __('generic.close') }}>
-                            <i
-                                class="fa-lg fa-solid fa-circle-xmark cursor-pointer px-2 text-red-600 hover:text-red-400 transition duration-1000 ease-in-out"></i>
-                        </a>
-                        </span>
-                    </div>
+                <div
+                class="flex flex-row justify-between items-center bg-red-100 text-white rounded-lg p-4 mx-2 sm:mx-0">
+                <span class="text-red-600">{{ __('generic.elementNotFound') }}</span>
+                <a wire:click.prevent="clearSearch" title="{{ __('generic.close') }}">
+                    <i
+                        class="fa-lg fa-solid fa-circle-xmark cursor-pointer px-2 text-red-600 hover:text-red-400 transition duration-1000 ease-in-out"></i>
+                </a>
+                </span>
+            </div>
                 @endif
 
             </div>
@@ -172,12 +184,21 @@
         <div class="py-2 px-4">
             {{ $portfolios->links() }}
         </div>
-        <!-- Footer -->
-        <div class="flex flex-row justify-end items-center py-4 px-4 {{ $bgMenuColor }} sm:rounded-b-lg">
-            <a href="{{ route('dashboard') }}">
-                <i class="fa-lg fa-solid fa-backward-step text-white hover:text-black transition duration-1000 ease-in-out"
-                    title="{{ __('generic.back') }}"></i>
-            </a>
+        <!-- FOOTER -->
+        <div
+            class="flex flex-row justify-between items-center text-white text-center p-4 {{ $bgMenuColor }} sm:rounded-b-lg">
+            <div class="w-1/3 text-left"><a href="{{ route('dashboard') }}">
+                    <i class="fa-lg fa-solid fa-chevron-left hover:text-black transition duration-1000 ease-in-out"
+                        title="{{ __('generic.back') }}"></i>
+                </a>
+            </div>
+            <div class="w-1/3 text-xs">{{ __('generic.authorInfo') }}</div>
+            <div class="w-1/3 text-right">
+                <a href="{{ route('dashboard') }}">
+                    <i class="fa-lg fa-solid fa-house hover:text-black transition duration-1000 ease-in-out"
+                        title="{{ __('generic.back') }}"></i>
+                </a>
+            </div>
         </div>
 
     </div>

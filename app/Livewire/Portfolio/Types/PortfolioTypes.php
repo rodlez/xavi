@@ -3,12 +3,17 @@
 namespace App\Livewire\Portfolio\Types;
 
 use App\Models\Portfolio\PortfolioType;
+use App\Services\TranslationService;
+use Illuminate\Database\Eloquent\Model;
 use Livewire\Component;
 use Livewire\WithPagination;
 
 class PortfolioTypes extends Component
 {
     use WithPagination;
+
+    // Dependency Injection to use the Service
+    protected TranslationService $translationService;
 
     //protected $paginationTheme = "bootstrap";
     public $orderColumn = 'pf_types.id';
@@ -18,6 +23,11 @@ class PortfolioTypes extends Component
     public $perPage = 25;
 
     public $selections = [];
+
+    public function boot(TranslationService $translationService)
+    {
+        $this->translationService = $translationService;
+    }
 
     public function updated()
     {
@@ -58,6 +68,17 @@ class PortfolioTypes extends Component
         $this->orderColumn = $columnName;
     }
 
+    /**
+     * Given the element model, check for missing translations.
+     * 
+     * @return array With all the languages specifying which ones are missing.
+     */
+
+     public function translationLinks(Model $element): array
+     {
+         return $this->translationService->getListTranslations($element);
+     }
+
     public function render()
     {
         $found = 0;
@@ -73,10 +94,11 @@ class PortfolioTypes extends Component
 
         return view('livewire.portfolio.types.portfolio-types', [
             // Styles
-            'underlineMenuHeader'   => 'border-b-2 border-b-emerald-600',
-            'bgMenuColor'           => 'bg-emerald-800',
-            'menuTextColor'         => 'text-emerald-800',
-            'focusColor'            => 'focus:ring-emerald-500 focus:border-emerald-500',
+            'underlineMenuHeader' => 'border-b-2 border-b-emerald-600',
+            'textMenuHeader' => 'hover:text-emerald-400',
+            'bgMenuColor' => 'bg-emerald-800',
+            'menuTextColor' => 'text-emerald-800',
+            'focusColor' => 'focus:ring-emerald-500 focus:border-emerald-500',
             // Data
             'types' => $data,
             'found' => $found,

@@ -3,12 +3,17 @@
 namespace App\Livewire\Portfolio;
 
 use App\Models\Portfolio\Portfolio as PortfolioModel;
+use App\Services\TranslationService;
+use Illuminate\Database\Eloquent\Model;
 use Livewire\Component;
 use Livewire\WithPagination;
 
 class Portfolio extends Component
 {
     use WithPagination;
+
+    // Dependency Injection to use the Service
+    protected TranslationService $translationService;
 
     //protected $paginationTheme = "bootstrap";
     public $orderColumn = 'portfolios.id';
@@ -18,6 +23,11 @@ class Portfolio extends Component
     public $perPage = 25;
 
     public $selections = [];
+
+    public function boot(TranslationService $translationService)
+    {
+        $this->translationService = $translationService;
+    }
 
     public function updated()
     {
@@ -58,6 +68,17 @@ class Portfolio extends Component
         $this->orderColumn = $columnName;
     }
 
+    /**
+     * Given the element model, check for missing translations.
+     * 
+     * @return array With all the languages specifying which ones are missing.
+     */
+
+     public function translationLinks(Model $element): array
+     {
+         return $this->translationService->getListTranslations($element);
+     }
+
     public function render()
     {
         $found = 0;
@@ -73,10 +94,11 @@ class Portfolio extends Component
 
         return view('livewire.portfolio.portfolio', [
             // Styles
-            'underlineMenuHeader'   => 'border-b-2 border-b-slate-600',
-            'bgMenuColor'           => 'bg-slate-800',
-            'menuTextColor'         => 'text-slate-800',
-            'focusColor'            => 'focus:ring-slate-500 focus:border-slate-500',
+            'underlineMenuHeader' => 'border-b-2 border-b-slate-600',
+            'textMenuHeader' => 'hover:text-slate-400',
+            'bgMenuColor' => 'bg-slate-800',
+            'menuTextColor' => 'text-slate-800',
+            'focusColor' => 'focus:ring-slate-500 focus:border-slate-500',
             // Data
             'portfolios' => $data,
             'found' => $found,

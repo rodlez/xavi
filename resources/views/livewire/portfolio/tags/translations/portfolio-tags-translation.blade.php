@@ -11,7 +11,7 @@
 
         <!-- HEADER -->
         <div class="flex flex-row justify-start items-center py-4 {{ $bgMenuColor }}">
-            <span class="text-lg text-white capitalize px-4">{{ __('admin/portfolio/portfolioTags.menuIndex') }} >
+            <span class="text-lg text-white capitalize px-4">{{ __('admin/portfolio/portfolioTags.menuIndex') }} ({{$totalEntries}}) > 
                 {{ __('generic.translations') }} ({{ $madeTranslations }}/{{ $totalTranslations }})
             </span>
         </div>       

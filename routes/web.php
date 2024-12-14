@@ -50,6 +50,7 @@ use App\Livewire\Portfolio\Types\PortfolioTypesShow;
 use App\Livewire\Portfolio\Types\Translations\PortfolioTypesTranslation;
 use App\Livewire\Portfolio\Types\Translations\PortfolioTypesTranslationCreate;
 use App\Livewire\Portfolio\Types\Translations\PortfolioTypesTranslationEdit;
+use App\Livewire\Portfolio\Types\Translations\PortfolioTypesTranslationShow;
 
 /* ------------------------------------------------------------- WEB ------------------------------------------------------------- */
 
@@ -142,6 +143,8 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
     Route::get('/pf_types_trans', PortfolioTypesTranslation::class)->name('pf_types_trans');
     Route::put('/pf_types_trans/{translation}', [PortfolioTypeTranslationController::class, 'update'])->name('pf_types_trans.update');
     Route::delete('/pf_types_trans/{translation}', [PortfolioTypeTranslationController::class, 'destroy'])->name('pf_types_trans.destroy');
+    Route::get('/pf_types_trans/{translation}', PortfolioTypesTranslationShow::class)->name('pf_types_trans.show');
+
     Route::get('/pf_types_trans/edit/{translation}', PortfolioTypesTranslationEdit::class)->name('pf_types_trans.edit');
 
     /* PORTFOLIO TAGS */
