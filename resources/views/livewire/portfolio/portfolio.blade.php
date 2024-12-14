@@ -117,7 +117,7 @@
                                     <td class="p-2">{{ statusText($portfolio->status) }}</td>
                                     <td class="p-2">{{ date('d-m-Y', strtotime($portfolio->created_at)) }}</td>
                                     <td class="p-2">{{ date('d-m-Y', strtotime($portfolio->updated_at)) }}</td>
-                                    <td class="p-2 text-center uppercase">                                        
+                                    <td class="p-2 text-center normal-case">                                        
                                         <!-- If translation exists link to show, if not link to create new -->
                                         @foreach ($this->translationLinks($portfolio) as $translation)
                                             @if ($translation['translationId'])

@@ -19,12 +19,18 @@ class PortfolioTranslationShow extends Component
                 
         return view('livewire.portfolio.portfolio-translation-show', [
             // Styles
-            'underlineMenuHeader'   => 'border-b-2 border-b-slate-600',
-            'textMenuHeader'        => 'hover:text-slate-800',
-            'bgMenuColor'           => 'bg-slate-800',
-            'bgInfoColor'           => 'bg-slate-100',
-            'menuTextColor'         => 'text-slate-800',
-            'focusColor'            => 'focus:ring-slate-500 focus:border-slate-500',
+            'underlineMenuHeader' => 'border-b-2 border-b-slate-400',
+            'textMenuHeader' => 'hover:text-slate-400',
+            'bgMenuColor' => 'bg-slate-400',
+            'bgInfoTab' => 'bg-orange-600',
+            'portfolioName' => 'text-white font-bold bg-orange-600',
+            'menuInfo' => 'text-white bg-slate-800',
+            'bgTranslationTab' => 'bg-pink-600',
+            'languageName' => 'text-pink-600 italic',
+            'translationName' => 'text-white font-bold bg-pink-600',
+            'menuTranslation' => 'text-white bg-slate-800',
+            'menuTextColor' => 'text-slate-400',
+            'focusColor' => 'focus:ring-slate-400 focus:border-slate-400',
             // Data
             'translation' => $this->translation
         ])->layout('layouts.app');

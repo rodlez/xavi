@@ -13,7 +13,7 @@
 
         <!-- HEADER -->
         <div class="flex flex-row py-4 {{ $bgMenuColor }}">
-            <span class="text-lg text-white px-4 capitalize">{{ __('generic.portfolio') }} {{ __('generic.$type') }}
+            <span class="text-lg text-white px-4 capitalize">{{ __('generic.portfolio') }} {{ __('generic.type') }}
                 {{ __('generic.translation') }}</span>
         </div>
 
@@ -24,7 +24,7 @@
 
                 <div class="flex flex-row justify-between">
                     <div class="flex w-full sm:w-fit {{ $bgInfoTab }} text-white font-light uppercase rounded-t-md p-2">
-                        {{ __('generic.$type') }}
+                        {{ __('generic.type') }}
                     </div>
                 </div>
                 <!-- Info Type -->

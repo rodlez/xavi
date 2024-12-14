@@ -64,7 +64,6 @@ class PortfolioTranslationCreate extends Component
         // default avalues for category and type in case the user do not select any
         $this->pf_cat_trans_id = PortfolioCategoryTranslation::where('lang_id', $this->missingTranslationId)->orderBy('name', 'asc')->pluck('id')->first();
         $this->pf_type_trans_id = PortfolioTypeTranslation::where('lang_id', $this->missingTranslationId)->orderBy('name', 'asc')->pluck('id')->first();
-
     }
 
     public function save()
@@ -74,12 +73,7 @@ class PortfolioTranslationCreate extends Component
         
         $validated = $this->validate(); 
         $validated['portfolio_id'] = $this->portfolio->id;
-       /*  $validated['pf_cat_trans_id'] = $this->category_id;
-        $validated['pf_type_trans_id'] = $this->type_id; */
-        $validated['lang_id'] = $this->missingTranslationId;
-        //$validated['created_at'] = date('Y-m-d H:i:s');
-        //$validated['updated_at'] = date('Y-m-d H:i:s');
-        //dd($validated);
+        $validated['lang_id'] = $this->missingTranslationId;       
 
         // Get the language of the translation to show on the returned success or fail message
         $languageName = Languages::where('id', $this->missingTranslationId)
@@ -89,8 +83,6 @@ class PortfolioTranslationCreate extends Component
         try { 
             $this->translationService->insertTranslationPortfolio($validated);
             
-            //DB::table('portfolios_translation')->insert($validated);          
-            //$this->translationService->insertTranslation('pf_categories_trans', 'pf_cat_id', $this->portfolio->id, $this->missingTranslationId, $this->name);
             return to_route('portfolios.show', $this->portfolio)->with('message', __('generic.translation') . ' (' . $languageName . ') ' . __('generic.successCreate'));            
         } catch (Exception $e) {
             return to_route('portfolios.show', $this->portfolio)->with('error', __('generic.error') . ' (' . $e/* ->getCode() */ . ') ' . __('generic.translation') . ' (' . $languageName . ') ' . __('generic.errorCreate'));
@@ -113,7 +105,6 @@ class PortfolioTranslationCreate extends Component
 
         $categories = PortfolioCategoryTranslation::all()->where('lang_id', $this->missingTranslationId)->sortBy('name', SORT_NATURAL|SORT_FLAG_CASE);
         $types = PortfolioTypeTranslation::all()->where('lang_id', $this->missingTranslationId)->sortBy('name', SORT_NATURAL|SORT_FLAG_CASE);
-
         $tags = PortfolioTagTranslation::all()->where('lang_id', $this->missingTranslationId)->sortBy('name', SORT_NATURAL|SORT_FLAG_CASE);
         
         
@@ -122,7 +113,14 @@ class PortfolioTranslationCreate extends Component
             'underlineMenuHeader' => 'border-b-2 border-b-slate-400',
             'textMenuHeader' => 'hover:text-slate-400',
             'bgMenuColor' => 'bg-slate-400',
-            'bgInfoColor' => 'bg-slate-100',
+            'bgInfoTab' => 'bg-orange-600',
+            'portfolioName' => 'text-white font-bold bg-orange-600',
+            'menuInfo' => 'text-white bg-slate-800',
+            'bgTranslationTab' => 'bg-pink-600',
+            'createTranslation' => 'text-white bg-green-600',
+            'languageName' => 'text-pink-600 italic',
+            'translationName' => 'text-white font-bold bg-pink-600',
+            'menuTranslation' => 'text-white bg-slate-800',
             'menuTextColor' => 'text-slate-400',
             'focusColor' => 'focus:ring-slate-400 focus:border-slate-400',
             // Data

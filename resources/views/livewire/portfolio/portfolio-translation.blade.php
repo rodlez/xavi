@@ -2,46 +2,38 @@
 
     <!-- Sitemap -->
     <div class="flex flex-row justify-start items-start gap-1 text-sm py-3 px-4 text-slate-500 capitalize">
-        <a href="/portfolios_trans"
-            class="font-bold text-black {{ $underlineMenuHeader }}">{{ __('admin/portfolio/portfolio.menuIndexTranslations') }}
+        <a href="/portfolios"
+            class="text-black {{ $textMenuHeader }}">{{ __('admin/portfolio/portfolio.menuIndex') }}</a> /
+        <a href="/portfolios_trans" class="font-bold text-black {{ $underlineMenuHeader }}">{{ __('generic.translations') }}
         </a>
     </div>
     <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
 
         <!-- HEADER -->
-        <div class="flex flex-row justify-between items-center py-4 {{ $bgMenuColor }}">
-            <div>
-                <span class="text-lg text-white capitalize px-4">{{ __('generic.portfolios') }} <span
-                        class="text-sm">({{ $totalEntries }})</span>
-                    {{ __('generic.translations') }} <span class="text-sm">({{ $totalTranslations }})</span>
-                </span>
-            </div>
-            <div class="px-4">
-                {{-- <a href="{{ route('portfolios_trans.create') }}"
-                        class="text-white text-sm sm:text-md rounded-lg py-2 px-4 bg-black hover:bg-gray-600 transition duration-1000 ease-in-out"
-                        title="Create New Language">New
-                    </a> --}}
-            </div>
-        </div>
-
-        <!-- FOUND -->
-        <div class="flex flex-col sm:flex-row px-4 sm:px-8 pt-2 pb-0">
-            @if ($search != '' && $found > 0)
-                <span class="text-green-600">{{ $found }} {{ __('generic.elementFound') }}</span>
-            @endif
-        </div>
-
+        <div class="flex flex-row justify-start items-center py-4 {{ $bgMenuColor }}">
+            <span class="text-lg text-white capitalize px-4">{{ __('admin/portfolio/portfolio.menuIndex') }} ({{$totalEntries}}) > 
+                {{ __('generic.translations') }} ({{ $madeTranslations }}/{{ $totalTranslations }})
+            </span>
+        </div>       
         <!-- SEARCH -->
         <div class="flex flex-col sm:flex-row justify-between items-start px-2 sm:px-4 py-4 gap-4">
-
             <!-- Search -->
             <div class="relative w-full">
                 <div class="absolute top-2.5 bottom-0 left-4 text-slate-700">
                     <i class="fa-solid fa-magnifying-glass"></i>
                 </div>
-                <input wire:model.live="search" type="search"
+                <input wire:model.live="search"
                     class="w-full rounded-lg pl-10 font-sm placeholder-zinc-400 {{ $focusColor }} border-2 border-zinc-200"
-                    placeholder="{{ __('generic.searchPlaceholderTitle') }}">
+                    placeholder="{{ __('generic.searchPlaceholderTranslation') }}">
+                <!-- Clear Search Button / not using input type=search default browser button -->
+                @if ($this->search != '')
+                    <div class="absolute top-2.5 right-1">
+                        <a wire:click.prevent="clearSearch" title="{{ __('generic.reset') }}">
+                            <i
+                                class="fa-lg fa-solid fa-circle-xmark cursor-pointer px-2 text-black hover:text-red-400 transition duration-1000 ease-in-out"></i>
+                        </a>
+                    </div>
+                @endif
             </div>
             <!-- Pagination -->
             <div class="relative w-32">
@@ -57,6 +49,12 @@
                 </select>
             </div>
         </div>
+        <!-- FOUND -->
+        @if ($search != '' && $found > 0)
+            <div class="flex flex-col sm:flex-row mx-2 my-1 sm:mx-4 bg-green-100 rounded-lg">
+                <span class="text-green-600 p-4">{{ $found }} {{ __('generic.elementFound') }}</span>
+            </div>
+        @endif
         <!-- BULK ACTIONS -->
         @if (count($selections) > 0)
             <div class="px-2 sm:px-4">
@@ -85,23 +83,23 @@
                         <thead>
                             <tr class="text-black text-left text-sm font-normal uppercase">
                                 <th></th>
-                                <th wire:click="sorting('portfolios_translation.id')" scope="col"
+                                <th wire:click="sorting('portfolios_trans.id')" scope="col"
                                     class="p-2 hover:cursor-pointer hover:{{ $menuTextColor }} {{ $column == 'portfolios_trans.id' ? $menuTextColor : '' }}">
                                     id {!! $sortLink !!}</th>
-                                <th wire:click="sorting('portfolios_translation.portfolio_id')" scope="col"
-                                    class="p-2 hover:cursor-pointer hover:{{ $menuTextColor }} {{ $column == 'portfolios_translation.portfolio_id' ? $menuTextColor : '' }}">
-                                    {{ __('generic.portfolio') }} {!! $sortLink !!}</th>
-                                <th wire:click="sorting('portfolios_translation.lang_id')" scope="col"
-                                    class="p-2 hover:cursor-pointer hover:{{ $menuTextColor }} {{ $column == 'portfolios_translation.lang_id' ? $menuTextColor : '' }}">
+                                <th wire:click="sorting('name')" scope="col"
+                                    class="p-2 hover:cursor-pointer hover:{{ $menuTextColor }} {{ $column == 'name' ? $menuTextColor : '' }}">
+                                    {{ __('generic.translation') }} {!! $sortLink !!}</th>
+                                <th wire:click="sorting('portfolios_trans.lang_id')" scope="col"
+                                    class="p-2 hover:cursor-pointer hover:{{ $menuTextColor }} {{ $column == 'portfolios_trans.lang_id' ? $menuTextColor : '' }}">
                                     {{ __('generic.language') }} {!! $sortLink !!}</th>
-                                <th wire:click="sorting('title')" scope="col"
-                                    class="p-2 hover:cursor-pointer hover:{{ $menuTextColor }} {{ $column == 'title' ? $menuTextColor : '' }}">
-                                    {{ __('generic.title') }} {!! $sortLink !!}</th>
-                                <th wire:click="sorting('portfolios_translation.created_at')" scope="col"
-                                    class="p-2 hover:cursor-pointer hover:{{ $menuTextColor }} {{ $column == 'portfolios_translation.created_at' ? $menuTextColor : '' }}">
+                                <th wire:click="sorting('portfolios_trans.portfolio_id')" scope="col"
+                                    class="p-2 hover:cursor-pointer hover:{{ $menuTextColor }} {{ $column == 'portfolios_trans.portfolio_id' ? $menuTextColor : '' }}">
+                                    {{ __('generic.portfolio') }} {!! $sortLink !!}</th>
+                                <th wire:click="sorting('portfolios_trans.created_at')" scope="col"
+                                    class="p-2 hover:cursor-pointer hover:{{ $menuTextColor }} {{ $column == 'portfolios_trans.created_at' ? $menuTextColor : '' }}">
                                     {{ __('generic.created') }} {!! $sortLink !!}</th>
-                                <th wire:click="sorting('portfolios_translation.updated_at')" scope="col"
-                                    class="p-2 hover:cursor-pointer hover:{{ $menuTextColor }} {{ $column == 'portfolios_translation.updated_at' ? $menuTextColor : '' }}">
+                                <th wire:click="sorting('portfolios_trans.updated_at')" scope="col"
+                                    class="p-2 hover:cursor-pointer hover:{{ $menuTextColor }} {{ $column == 'portfolios_trans.updated_at' ? $menuTextColor : '' }}">
                                     {{ __('generic.updated') }} {!! $sortLink !!}</th>
                                 <th scope="col" class="p-2 text-center capitalize">{{ __('generic.actions') }}</th>
                             </tr>
@@ -115,11 +113,11 @@
                                             class="text-green-600 outline-none focus:ring-0 checked:bg-green-500"
                                             value={{ $translation->id }}></td>
                                     <td class="p-2">{{ $translation->id }}</td>
-                                    <td class="p-2">{{ $translation->portfolio->name }}</td>
-                                    <td class="p-2">{{ $translation->language->code }}</td>
                                     <td class="p-2"><a
                                             href="{{ route('portfolios_trans.show', $translation) }}">{{ $translation->title }}</a>
                                     </td>
+                                    <td class="p-2">{{ $translation->language->code }}</td>
+                                    <td class="p-2">{{ $translation->portfolio->name }}</td>
                                     <td class="p-2">{{ date('d-m-Y', strtotime($translation->created_at)) }}
                                     </td>
                                     <td class="p-2">{{ date('d-m-Y', strtotime($translation->updated_at)) }}
@@ -127,8 +125,7 @@
                                     <td class="p-2">
                                         <div class="flex justify-center items-center gap-2">
                                             <!-- Show -->
-                                            <a href="{{ route('portfolios_trans.show', $translation) }}"
-                                                title="Show">
+                                            <a href="{{ route('portfolios_trans.show', $translation) }}" title="Show">
                                                 <i
                                                     class="fa-solid fa-circle-info text-blue-600 hover:text-black transition duration-1000 ease-in-out"></i>
                                             </a>
@@ -160,7 +157,7 @@
                     </table>
                 @else
                     <div
-                        class="flex flex-row justify-between items-center bg-black text-white rounded-lg p-4 mx-2 sm:mx-0">
+                        class="flex flex-row justify-between items-center bg-red-100 text-white rounded-lg p-4 mx-2 sm:mx-0">
                         <span class="text-red-600">{{ __('generic.elementNotFound') }}</span>
                         <a wire:click.prevent="clearSearch" title="{{ __('generic.close') }}">
                             <i
@@ -173,16 +170,27 @@
             </div>
 
         </div>
+
         <!-- Pagination Links -->
         <div class="py-2 px-4">
             {{ $translations->links() }}
         </div>
-        <!-- Footer -->
-        <div class="flex flex-row justify-end items-center py-4 px-4 {{ $bgMenuColor }} sm:rounded-b-lg">
-            <a href="{{ route('dashboard') }}">
-                <i class="fa-lg fa-solid fa-backward-step text-white hover:text-black transition duration-1000 ease-in-out"
-                    title="{{ __('generic.back') }}"></i>
-            </a>
+
+        <!-- FOOTER -->
+        <div
+            class="flex flex-row justify-between items-center text-white text-center p-4 {{ $bgMenuColor }} sm:rounded-b-lg">
+            <div class="w-1/3 text-left"><a href="{{ route('portfolios') }}">
+                    <i class="fa-lg fa-solid fa-chevron-left hover:text-black transition duration-1000 ease-in-out"
+                        title="{{ __('generic.back') }}"></i>
+                </a>
+            </div>
+            <div class="w-1/3 text-xs">{{ __('generic.authorInfo') }}</div>
+            <div class="w-1/3 text-right">
+                <a href="{{ route('dashboard') }}">
+                    <i class="fa-lg fa-solid fa-house hover:text-black transition duration-1000 ease-in-out"
+                        title="{{ __('generic.back') }}"></i>
+                </a>
+            </div>
         </div>
 
 

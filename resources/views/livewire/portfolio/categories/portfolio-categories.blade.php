@@ -118,7 +118,7 @@
 
                                     <td class="p-2">{{ date('d-m-Y', strtotime($category->created_at)) }}</td>
                                     <td class="p-2">{{ date('d-m-Y', strtotime($category->updated_at)) }}</td>
-                                    <td class="p-2 text-center uppercase">
+                                    <td class="p-2 text-center normal-case">
                                         <!-- If translation exists link to show, if not link to create new -->
                                         @foreach ($this->translationLinks($category) as $translation)
                                             @if ($translation['translationId'])

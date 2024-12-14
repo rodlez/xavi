@@ -44,6 +44,7 @@ return [
     "portfolios" => "portfolis",
     "optional" => "opcional",
     "total" => "total",
+    "user" => "usuari",
     // BULK
     "bulkActions" => "accions en grup",
     "bulkActionsClear" => "deseleccionar tot",

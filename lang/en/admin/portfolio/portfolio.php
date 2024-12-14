@@ -6,8 +6,8 @@ return [
     "menuIndexTranslations" => "portfolio translations",
 
     // MESSAGES
-    "infoMessageCreate" => "Create a new portFolio",
-    "infoMessageEdit" => "Edit the portFolio",
+    "infoMessageCreate" => "Create a new portfolio",
+    "infoMessageEdit" => "Edit the portfolio",
 
     // TRANSLATIONS
     "noCategoriesMessage" => "There is no categories translated for this language, you must create at least one",

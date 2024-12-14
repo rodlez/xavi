@@ -42,7 +42,7 @@ class PortfolioCreate extends Component
     {
         $formData = $this->validate();
         $formData['user_id'] = Auth::id();
-
+        
         try {
             Portfolio::create($formData);
 
@@ -56,12 +56,15 @@ class PortfolioCreate extends Component
     {
         return view('livewire.portfolio.portfolio-create', [
             // Styles
-            'underlineMenuHeader'   => 'border-b-2 border-b-slate-600',
-            'textMenuHeader'        => 'hover:text-slate-800',
-            'bgMenuColor'           => 'bg-slate-800',
-            'bgInfoColor'           => 'bg-slate-100',
-            'menuTextColor'         => 'text-slate-800',
-            'focusColor'            => 'focus:ring-slate-500 focus:border-slate-500',
+            'underlineMenuHeader' => 'border-b-2 border-b-slate-600',
+            'textMenuHeader' => 'hover:text-slate-800',
+            'bgInfoTab' => 'bg-orange-600',
+            'tagName' => 'text-white font-bold bg-orange-600',
+            'menuInfo' => 'text-white bg-slate-800',
+            'bgMenuColor' => 'bg-slate-800',
+            'bgInfoColor' => 'bg-slate-100',
+            'menuTextColor' => 'text-slate-800',
+            'focusColor' => 'focus:ring-slate-500 focus:border-slate-500',
             ])->layout('layouts.app');
     }
     
