@@ -71,7 +71,7 @@ return [
     "successDelete" => "successfully deleted",
     "errorDelete" => "can not be deleted",
     "bulkDelete" => "Elements successfully deleted",
-    "errorForm" => "There form is incorrect, please check the error messages",
+    "errorForm" => "The form is incorrect, please check the error messages",
     "mandatoryFields" => "Fields marked with an asterisk (*) are required",
     // TRANSLATIONS
     "missingTranslation" => "Pending Translation",

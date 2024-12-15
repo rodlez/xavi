@@ -137,6 +137,7 @@ class TranslationService
 
     public function insertTranslationPortfolio(array $validated)
     {
+        dd($validated);
         $selectedTags = $validated['selectedTags'];
         unset($validated['selectedTags']);
 
@@ -194,6 +195,33 @@ class TranslationService
              'updated_at' => date('Y-m-d H:i:s'),
          ]); */
      }   
+
+     public function updateTranslationPortfolio(PortfolioTranslation $portfolioTranslation, array $validated)
+    {
+        //var_dump($validated);
+        //dd($portfolioTranslation);
+        
+        $selectedTags = $validated['selectedTags'];
+        unset($validated['selectedTags']);
+
+        $portfolioTranslation->update($validated);
+        $portfolioTranslation->tags()->sync($selectedTags);
+    }
+
+     /**
+      * Get an array with the id tags for the Portfolio Translation
+      */
+
+      public function getPortfolioTranslationTags(mixed $elementTags):array
+     {
+        $idTags = array();
+        foreach($elementTags as $elementTag)
+        {
+            $idTags[] = $elementTag->id;
+        }
+        return $idTags;
+     }
+
 
      /**
      * Given an element, get the array with information about the Translations already made and the pending ones

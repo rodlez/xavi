@@ -25,7 +25,7 @@ class StorePortfolioTranslationRequest extends FormRequest
         return [
             'pf_cat_trans_id' => 'bail|required',
             'pf_type_trans_id' => 'bail|required',
-            'selectedTags' => 'required',
+            'selectedTags' => 'required|array',
             'title' => 'bail|required|min:3|string',
             'subtitle' => 'bail|nullable|min:3|string',
             'content' => 'bail|nullable|min:3|string',
