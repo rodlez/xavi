@@ -61,6 +61,12 @@ return [
     "save" => "save",
     "info" => "information",
     "reset" => "reset",
+    "upload" => "upload",
+    "file" => "file",
+    "files" => "files",
+    "filename" => "filename",
+    "size" => "size",
+    "format" => "format",
     // MESSAGES
     "error" => "error",
     "confirmDelete" => "Are you sure you want to delete this element?",

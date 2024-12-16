@@ -2,8 +2,8 @@
 
     <!-- Sitemap -->
     <div class="flex flex-row justify-start items-start gap-1 text-sm py-3 px-4 text-slate-500 capitalize">
-        <a href="/portfolios"
-            class="text-black {{ $textMenuHeader }}">{{ __('admin/portfolio/portfolio.menuIndex') }}</a> /
+        <a href="/portfolios" class="text-black {{ $textMenuHeader }}">{{ __('admin/portfolio/portfolio.menuIndex') }}</a>
+        /
         <a href="/portfolios/{{ $portfolio->id }}"
             class="font-bold text-black {{ $underlineMenuHeader }}">{{ $portfolio->name }}</a>
     </div>
@@ -52,13 +52,14 @@
                     <span class="{{ $menuInfo }} p-2">Id</span>
                     <span class="p-2">{{ $portfolio->id }}</span>
                     <span class="{{ $menuInfo }} p-2">{{ __('generic.published') }}</span>
-                    <span class="p-2 {{ $portfolio->published ? 'bg-green-200' : 'bg-red-200' }}">{{ publishedText($portfolio->published) }}</span>
+                    <span
+                        class="p-2 {{ $portfolio->published ? 'bg-green-200' : 'bg-red-200' }}">{{ publishedText($portfolio->published) }}</span>
                     <span class="{{ $menuInfo }} p-2">{{ __('generic.status') }}</span>
                     <span class="p-2">{{ statusText($portfolio->status) }}</span>
                     <span class="{{ $menuInfo }} p-2">{{ __('generic.name') }}</span>
                     <span class="p-2 {{ $portfolioName }}">{{ $portfolio->name }}</span>
                     <span class="{{ $menuInfo }} p-2">{{ __('generic.description') }}</span>
-                    <span class="p-2 normal-case">{{ $portfolio->description ? $portfolio->description : '-' }}</span>                   
+                    <span class="p-2 normal-case">{{ $portfolio->description ? $portfolio->description : '-' }}</span>
                 </div>
 
                 <!-- Big Actions Buttons in SMALL SCREENS -->
@@ -87,6 +88,88 @@
             </div>
 
             <!-- Check for Languges in the App -->
+            @if ($portfolio->files->count() > 0)
+                <!-- Files -->
+                <div class="flex flex-col my-8">
+
+                    <!-- Files Text / Number of Files and Pending Files -->
+                    <div class="mb-2">
+
+                        <div class="w-fit {{ $bgTranslationTab }} text-white text-lg rounded-t-md capitalize mb-0 p-2">
+                            {{ __('generic.files') }}
+                            ({{ $portfolio->files->count() }})
+                        </div>                       
+
+                    </div>
+
+                    <!-- Files Table -->
+                    <div class="w-full overflow-x-auto">
+
+                        <table class="table-auto w-full border text-sm capitalize">
+                            <thead class="text-sm text-center text-white {{ $bgTranslationTab }}">
+                                <th></th>
+                                <th class="p-2 max-lg:hidden">{{ __('generic.filename') }}</th>
+                                <th class="p-2 max-sm:hidden">{{ __('generic.created') }}</th>
+                                <th class="p-2 max-sm:hidden">{{ __('generic.size') }} <span class="text-xs">(KB)</span></th>
+                                <th class="p-2">{{ __('generic.format') }}</th>
+                                <th></th>
+                            </thead>
+
+                            @foreach ($portfolio->files as $file)
+                            <tr class="bg-white border-b text-center">
+                                <td class="p-2">
+                                    @include('partials.mediatypes-file', [
+                                        'file' => $file,
+                                        'iconSize' => 'fa-lg',
+                                        'imagesBig' => false,
+                                    ])
+                                </td>
+                                <td class="p-2 max-lg:hidden">
+                                    {{ $file->original_filename }}
+                                </td>
+                                <td class="p-2 max-sm:hidden">{{ $file->created_at->format('d-m-Y') }}
+                                </td>
+                                <td class="p-2 max-sm:hidden">{{ round($file->size / 1000) }} </td>
+                                <td class="p-2 normal-case">{{ basename($file->media_type) }}</td>
+                                <td class="p-2">
+                                    <div class="flex justify-center items-center gap-2">
+                                        <!-- Download file -->
+                                        <a href="{{ route('portfoliosfile.download', [$portfolio, $file]) }}"
+                                            title="Download File">
+                                            <span
+                                                class="text-green-600 hover:text-black transition-all duration-500">
+                                                <i class="fa-lg fa-solid fa-file-arrow-down"></i>
+                                            </span>
+                                        </a>
+                                        <!-- Delete file -->
+                                        <form action="{{ route('portfoliosfile.destroy', [$portfolio, $file]) }}"
+                                            method="POST">
+                                            <!-- Add Token to prevent Cross-Site Request Forgery (CSRF) -->
+                                            @csrf
+                                            <!-- Dirtective to Override the http method -->
+                                            @method('DELETE')
+                                            <button
+                                                onclick="return confirm('Are you sure you want to delete the file: {{ $file->original_filename }}?')"
+                                                title="Delete file">
+                                                <span
+                                                    class="text-red-600 hover:text-black transition-all duration-500"><i
+                                                        class="fa-lg fa-solid fa-trash"></i></span>
+                                            </button>
+                                        </form>
+                                    </div>
+                                </td>
+
+                            </tr>
+                            @endforeach                           
+
+                        </table>
+
+                    </div>
+
+                </div>
+            @endif
+
+            <!-- Check for Languges in the App -->
             @if ($languages->count() > 0)
 
                 <!-- Translations -->
@@ -98,15 +181,16 @@
                         <div class="w-fit {{ $bgTranslationTab }} text-white text-lg rounded-t-md capitalize mb-0 p-2">
                             {{ __('generic.translations') }}
                             ({{ $portfolio->translations->count() }}/{{ $languages->count() }})
-                        </div>       
+                        </div>
 
                         @if ($portfolio->translations->count() == $languages->count())
-                            <div class="flex justify-start items-center font-bold bg-gray-100 p-2 gap-2">{{ __('generic.doneTranslations') }}
+                            <div class="flex justify-start items-center font-bold bg-gray-100 p-2 gap-2">
+                                {{ __('generic.doneTranslations') }}
                                 <i class="fa-solid fa-check text-green-600"></i>
                             </div>
                         @else
                             <div class="text-red-600 font-bold bg-gray-100 p-2">{{ $missingTranslations->count() }}
-                                {{ $missingTranslations->count() > 1 ? __('generic.missingTranslations') : __('generic.missingTranslation') }}                                
+                                {{ $missingTranslations->count() > 1 ? __('generic.missingTranslations') : __('generic.missingTranslation') }}
                             </div>
                         @endif
 
@@ -136,12 +220,14 @@
                                         <div class="flex justify-center items-center gap-2">
                                             <!-- Show -->
                                             <a href="{{ route('portfolios_trans.show', $translation) }}">
-                                                <i class="fa-solid fa-circle-info text-blue-600 hover:text-black transition duration-1000 ease-in-out"></i>
+                                                <i
+                                                    class="fa-solid fa-circle-info text-blue-600 hover:text-black transition duration-1000 ease-in-out"></i>
                                             </a>
                                             <!-- Edit -->
                                             <a href="{{ route('portfolios_trans.edit', $translation) }}"
                                                 title="{{ __('generic.edit') }}">
-                                                <i class="fa-solid fa-pen-to-square text-blue-800 hover:text-black transition duration-1000 ease-in-out"></i>
+                                                <i
+                                                    class="fa-solid fa-pen-to-square text-blue-800 hover:text-black transition duration-1000 ease-in-out"></i>
                                             </a>
                                             <!-- Delete -->
                                             <form action="{{ route('portfolios_trans.destroy', $translation) }}"
@@ -152,7 +238,8 @@
                                                 @method('DELETE')
                                                 <button onclick="return confirm('{{ __('generic.confirmDelete') }}')"
                                                     title="{{ __('generic.delete') }}">
-                                                    <i class="fa-solid fa-trash text-red-600 hover:text-black transition duration-1000 ease-in-out"></i>
+                                                    <i
+                                                        class="fa-solid fa-trash text-red-600 hover:text-black transition duration-1000 ease-in-out"></i>
                                                 </button>
                                             </form>
                                         </div>
@@ -162,8 +249,7 @@
 
                             <!-- Check Missing Translations -->
                             @foreach ($missingTranslations as $missing)
-                            
-                                <tr class="bg-red-200 text-red-600 border-b text-center">                                    
+                                <tr class="bg-red-200 text-red-600 border-b text-center">
                                     <td class="p-2 font-bold">{{ __('generic.pending') }}</td>
                                     <td class="p-2 max-lg:hidden">{{ $missing->name }}</td>
                                     <td class="p-2">{{ $missing->code }}</td>
@@ -172,11 +258,11 @@
                                     <td class="p-2">
                                         <a href="{{ route('portfolios_trans.create', ['portfolio' => $portfolio, 'missingTranslationId' => $missing->id]) }}"
                                             title="New Translation">
-                                            <i class="fa-solid fa-circle-plus text-green-600 hover:text-green-400 transition duration-1000 ease-in-out"></i>
+                                            <i
+                                                class="fa-solid fa-circle-plus text-green-600 hover:text-green-400 transition duration-1000 ease-in-out"></i>
                                         </a>
-                                    </td>                                
+                                    </td>
                                 </tr>
-                            
                             @endforeach
 
                         </table>
@@ -199,7 +285,7 @@
                 </div>
             @endif
 
-        </div>              
+        </div>
 
         <!-- FOOTER -->
         <div

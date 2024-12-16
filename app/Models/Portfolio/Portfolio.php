@@ -41,4 +41,15 @@ class Portfolio extends Model
         );
     }
 
+    /**
+     * Get the Files associated.
+     */
+    public function files()
+    {
+        return $this->hasMany(
+            PortfolioFile::class,
+            foreignKey: 'portfolio_id'
+        );
+    }
+
 }

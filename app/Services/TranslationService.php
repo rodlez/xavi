@@ -136,8 +136,7 @@ class TranslationService
 
 
     public function insertTranslationPortfolio(array $validated)
-    {
-        dd($validated);
+    {        
         $selectedTags = $validated['selectedTags'];
         unset($validated['selectedTags']);
 

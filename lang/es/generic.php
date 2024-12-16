@@ -61,6 +61,12 @@ return [
     "save" => "guardar",
     "info" => "información",
     "reset" => "reset",
+    "upload" => "subir archivo",
+    "file" => "archivo",
+    "files" => "archivos",
+    "filename" => "nombre archivo",
+    "size" => "tamaño",
+    "format" => "formato",   
     // MESSAGES
     "error" => "error",
     "confirmDelete" => "¿Seguro que quieres eliminar este elemento?",

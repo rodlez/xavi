@@ -141,6 +141,12 @@
                                                 <i
                                                     class="fa-solid fa-circle-info text-blue-600 hover:text-black transition duration-1000 ease-in-out"></i>
                                             </a>
+                                             <!-- Upload File -->
+                                             <a href="{{ route('portfolios.upload', $portfolio) }}"
+                                                title="{{ __('generic.upload') }}">
+                                                <i
+                                                    class="fa-solid fa-file-arrow-up text-violet-600 hover:text-black transition duration-1000 ease-in-out"></i>
+                                            </a>
                                             <!-- Edit -->
                                             <a href="{{ route('portfolios.edit', $portfolio) }}"
                                                 title="{{ __('generic.edit') }}">

@@ -8,6 +8,7 @@ use App\Http\Controllers\Playground;
 use App\Http\Controllers\Portfolio\PortfolioCategoryController;
 use App\Http\Controllers\Portfolio\PortfolioCategoryTranslationController;
 use App\Http\Controllers\Portfolio\PortfolioController;
+use App\Http\Controllers\Portfolio\PortfolioFileController;
 use App\Http\Controllers\Portfolio\PortfolioTagController;
 use App\Http\Controllers\Portfolio\PortfolioTagTranslationController;
 use App\Http\Controllers\Portfolio\PortfolioTranslationController;
@@ -30,6 +31,7 @@ use App\Livewire\Portfolio\Categories\Translations\PortfolioCategoriesTranslatio
 use App\Livewire\Portfolio\Categories\Translations\PortfolioCategoriesTranslationShow;
 use App\Livewire\Portfolio\PortfolioCreate;
 use App\Livewire\Portfolio\PortfolioEdit;
+use App\Livewire\Portfolio\PortfolioFileUpload;
 use App\Livewire\Portfolio\PortfolioShow;
 use App\Livewire\Portfolio\PortfolioTranslation;
 use App\Livewire\Portfolio\PortfolioTranslationCreate;
@@ -97,6 +99,11 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
     Route::put('/portfolios/{portfolio}', [PortfolioController::class, 'update'])->name('portfolios.update');
     Route::delete('/portfolios/{portfolio}', [PortfolioController::class, 'destroy'])->name('portfolios.destroy');
     Route::get('/portfolios/edit/{portfolio}', PortfolioEdit::class)->name('portfolios.edit');
+
+    /* PORTFOLIO FILES */
+    Route::get('/portfolios/upload/{portfolio}', PortfolioFileUpload::class)->name('portfolios.upload');
+    Route::get('/portfolios/{portfolio}/file/{file}', [PortfolioFileController::class, 'download'])->name('portfoliosfile.download');
+    Route::delete('/portfolios/{portfolio}/file/{file}', [PortfolioFileController::class, 'destroy'])->name('portfoliosfile.destroy');
 
     /* PORTFOLIO TRANSLATIONS */
     Route::get('/portfolios/{portfolio}/translation/create/{missingTranslationId?}', PortfolioTranslationCreate::class)

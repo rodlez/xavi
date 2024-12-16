@@ -72,7 +72,6 @@ class PortfolioTranslationCreate extends Component
         // Error(PDOException: SQLSTATE[HY000]: General error: 1364 Field 'pf_cat_id' doesn't have a default value
         
         $validated = $this->validate(); 
-        dd($validated);
         $validated['portfolio_id'] = $this->portfolio->id;
         $validated['lang_id'] = $this->missingTranslationId;       
 
