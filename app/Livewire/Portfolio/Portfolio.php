@@ -3,6 +3,7 @@
 namespace App\Livewire\Portfolio;
 
 use App\Models\Portfolio\Portfolio as PortfolioModel;
+use App\Services\PortfolioService;
 use App\Services\TranslationService;
 use Illuminate\Database\Eloquent\Model;
 use Livewire\Component;
@@ -14,6 +15,7 @@ class Portfolio extends Component
 
     // Dependency Injection to use the Service
     protected TranslationService $translationService;
+    protected PortfolioService $portfolioService;
 
     //protected $paginationTheme = "bootstrap";
     public $orderColumn = 'portfolios.id';
@@ -24,9 +26,10 @@ class Portfolio extends Component
 
     public $selections = [];
 
-    public function boot(TranslationService $translationService)
+    public function boot(TranslationService $translationService, PortfolioService $portfolioService)
     {
         $this->translationService = $translationService;
+        $this->portfolioService = $portfolioService;
     }
 
     public function updated()
@@ -46,11 +49,12 @@ class Portfolio extends Component
 
     public function bulkDelete()
     {
-        foreach ($this->selections as $selection) {
+       /*  foreach ($this->selections as $selection) {
             $element = PortfolioModel::find($selection);
             $element->delete();
         }
-        return to_route('portfolios')->with('message', __('generic.bulkDelete'));
+        return to_route('portfolios')->with('message', __('generic.bulkDelete')); */
+        return $this->portfolioService->bulkDeletePortfolios($this->selections);
     }
 
     public function sorting($columnName = '')

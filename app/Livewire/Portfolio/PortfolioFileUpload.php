@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Portfolio;
 
+use App\Http\Requests\Files\StoreFileRequest;
 use App\Models\Portfolio\Portfolio;
 use App\Models\Portfolio\PortfolioFile;
 use App\Services\FileService;
@@ -19,19 +20,36 @@ class PortfolioFileUpload extends Component
     // Dependency Injection to use the Service
     protected FileService $fileService;
 
-    protected $rules = [
-        'files' => 'array|min:1|max:5',
+    /**
+     * USE LARAVEL FORM REQUEST IN LIVEWIRE
+     * In Livewire Component you can add rules in the rules() method by returning an array.
+     * In this method, you can return the rules() method from your Form Request.
+     * Just don't forget that public properties in Livewire Component need to be the same name as in the rules.
+     */
+
+     protected function rules(): array
+     {
+         return (new StoreFileRequest())->rules();
+     }
+ 
+     protected function messages(): array
+     {
+         return (new StoreFileRequest())->messages();
+     }
+
+   /*  protected $rules = [
+        'files' => 'array|min:1|max:12',
         //'files.*' => 'required|mimes:pdf,jpeg,png,jpg|max:2048',
-        'files.*' => 'required|file|mimetypes:text/plain,application/pdf,image/jpeg,image/png,application/vnd.oasis.opendocument.text,application/vnd.openxmlformats-officedocument.wordprocessingml.document,video/mp4|max:1024000',
+        'files.*' => 'required|file|mimetypes:application/pdf,image/jpeg,image/png',
     ];
 
     protected $messages = [
-        'files.min' => 'Select at least 1 file to upload (max 5 files)',
-        'files.max' => 'Limited to 5 files to upload',
+        'files.min' => 'Select at least 1 file to upload (max 12 files)',
+        'files.max' => 'Limited to 12 files to upload',
         'files.*.required' => 'Select at least one file to upload',
         //'files.*.mimes' => 'At least one file is not one of the allowed formats: PDF, JPG, JPEG or PNG',
-        'files.*.mimetypes' => 'At least one file do not belong to the allowed formats: PDF, JPG, JPEG, PNG, TXT, DOC, ODT'
-    ];
+        'files.*.mimetypes' => 'At least one file do not belong to the allowed formats: PDF, JPG, JPEG, PNG',
+    ]; */
 
     // Hook Runs on every request, immediately after the component is instantiated, but before any other lifecycle methods are called
     public function boot(
@@ -52,7 +70,7 @@ class PortfolioFileUpload extends Component
 
     public function save()
     {       
-        //dd($this->validate());
+        $this->validate();        
 
         foreach ($this->files as $file) {
             $storagePath = 'portfoliofiles/' . $file->getClientOriginalExtension();
@@ -60,8 +78,7 @@ class PortfolioFileUpload extends Component
             // if there is an error, create method will throw an exception
             PortfolioFile::create($data);            
         }
-        
-        return to_route('portfolios.show', $this->portfolio)->with('message', 'File(s) for (' . $this->portfolio->name . ') successfully uploaded.');
+        return to_route('portfolios.show', $this->portfolio)->with('message', __("generic.file") . ' ' . __("generic.for") . ' (' . $this->portfolio->name . ') ' . __("generic.successUpload"));
     }
 
     public function render()

@@ -67,6 +67,7 @@ return [
     "filename" => "filename",
     "size" => "size",
     "format" => "format",
+    "maximum" => "maximum",
     // MESSAGES
     "error" => "error",
     "confirmDelete" => "Are you sure you want to delete this element?",
@@ -76,9 +77,18 @@ return [
     "errorUpdate" => "can not be updated",
     "successDelete" => "successfully deleted",
     "errorDelete" => "can not be deleted",
+    "successUpload" => "successfully uploaded",
+    "errorUpload" => "can not be uploaded",
     "bulkDelete" => "Elements successfully deleted",
     "errorForm" => "The form is incorrect, please check the error messages",
     "mandatoryFields" => "Fields marked with an asterisk (*) are required",
+    // FILES
+    "foundFiles" => "These are the files found",
+    "noFiles" => "There are no files",
+    "uploadFiles" => "Upload files",
+    "filesIn" => "Files in this",
+    "filesSelected" => "Files selected to upload",
+    "maxFiles" => "Is the maximum number of files to upload",
     // TRANSLATIONS
     "missingTranslation" => "Pending Translation",
     "missingTranslations" => "Pending Translations",
@@ -94,4 +104,6 @@ return [
     "noLanguages" => "There are not any Languages in the App, create at least one",
     // AUTHOR
     "authorInfo" => "Web by XavRod",
+    // GENERIC WORDS
+    "for" => "for",
 ];

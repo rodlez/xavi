@@ -87,88 +87,110 @@
 
             </div>
 
-            <!-- Check for Languges in the App -->
-            @if ($portfolio->files->count() > 0)
-                <!-- Files -->
-                <div class="flex flex-col my-8">
 
-                    <!-- Files Text / Number of Files and Pending Files -->
-                    <div class="mb-2">
+            <!-- Files -->
+            <div class="flex flex-col my-8">
 
-                        <div class="w-fit {{ $bgTranslationTab }} text-white text-lg rounded-t-md capitalize mb-0 p-2">
-                            {{ __('generic.files') }}
-                            ({{ $portfolio->files->count() }})
-                        </div>                       
+                <!-- Files Text Message-->
 
-                    </div>
+                <div id="filetest" class="mb-2">  
 
+                    <div class="w-fit {{ $bgFilesTab }} text-white text-lg rounded-t-md capitalize mb-0 p-2">
+                        {{ __('generic.files') }}
+                        ({{ $portfolio->files->count() }})
+                    </div>                    
+
+                    @if ($portfolio->files->count() == 0)
+                        <div class="text-red-600 font-bold bg-gray-100 p-2">
+                            {{ __('generic.noFiles') }}
+                        </div>        
+                    
+                    @else
+                        <div class="text-green-600 font-bold bg-gray-100 p-2">
+                            {{ __('generic.foundFiles') }}
+                        </div>
+                    @endif
+                </div>
+
+                @if ($portfolio->files->count() > 0)
                     <!-- Files Table -->
                     <div class="w-full overflow-x-auto">
 
                         <table class="table-auto w-full border text-sm capitalize">
-                            <thead class="text-sm text-center text-white {{ $bgTranslationTab }}">
+                            <thead class="text-sm text-center text-white {{ $bgFilesTab }}">
                                 <th></th>
                                 <th class="p-2 max-lg:hidden">{{ __('generic.filename') }}</th>
                                 <th class="p-2 max-sm:hidden">{{ __('generic.created') }}</th>
-                                <th class="p-2 max-sm:hidden">{{ __('generic.size') }} <span class="text-xs">(KB)</span></th>
+                                <th class="p-2 max-sm:hidden">{{ __('generic.size') }} <span
+                                        class="text-xs">(KB)</span></th>
                                 <th class="p-2">{{ __('generic.format') }}</th>
                                 <th></th>
                             </thead>
 
                             @foreach ($portfolio->files as $file)
-                            <tr class="bg-white border-b text-center">
-                                <td class="p-2">
-                                    @include('partials.mediatypes-file', [
-                                        'file' => $file,
-                                        'iconSize' => 'fa-lg',
-                                        'imagesBig' => false,
-                                    ])
-                                </td>
-                                <td class="p-2 max-lg:hidden">
-                                    {{ $file->original_filename }}
-                                </td>
-                                <td class="p-2 max-sm:hidden">{{ $file->created_at->format('d-m-Y') }}
-                                </td>
-                                <td class="p-2 max-sm:hidden">{{ round($file->size / 1000) }} </td>
-                                <td class="p-2 normal-case">{{ basename($file->media_type) }}</td>
-                                <td class="p-2">
-                                    <div class="flex justify-center items-center gap-2">
-                                        <!-- Download file -->
-                                        <a href="{{ route('portfoliosfile.download', [$portfolio, $file]) }}"
-                                            title="Download File">
-                                            <span
-                                                class="text-green-600 hover:text-black transition-all duration-500">
-                                                <i class="fa-lg fa-solid fa-file-arrow-down"></i>
-                                            </span>
-                                        </a>
-                                        <!-- Delete file -->
-                                        <form action="{{ route('portfoliosfile.destroy', [$portfolio, $file]) }}"
-                                            method="POST">
-                                            <!-- Add Token to prevent Cross-Site Request Forgery (CSRF) -->
-                                            @csrf
-                                            <!-- Dirtective to Override the http method -->
-                                            @method('DELETE')
-                                            <button
-                                                onclick="return confirm('Are you sure you want to delete the file: {{ $file->original_filename }}?')"
-                                                title="Delete file">
+                                <tr class="bg-white border-b text-center normal-case">
+                                    <td class="p-2">
+                                        @include('partials.mediatypes-file', [
+                                            'file' => $file,
+                                            'iconSize' => 'fa-lg',
+                                            'imagesBig' => true,
+                                        ])
+                                    </td>
+                                    <td class="p-2 max-lg:hidden">
+                                        {{ $file->original_filename }}
+                                    </td>
+                                    <td class="p-2 max-sm:hidden">{{ $file->created_at->format('d-m-Y') }}
+                                    </td>
+                                    <td class="p-2 max-sm:hidden">{{ round($file->size / 1000) }} </td>
+                                    <td class="p-2 normal-case">{{ basename($file->media_type) }}</td>
+                                    <td class="p-2">
+                                        <div class="flex justify-center items-center gap-2">
+                                            <!-- Download file -->
+                                            <a href="{{ route('portfoliosfile.download', [$portfolio, $file]) }}"
+                                                title="Download File">
                                                 <span
-                                                    class="text-red-600 hover:text-black transition-all duration-500"><i
-                                                        class="fa-lg fa-solid fa-trash"></i></span>
-                                            </button>
-                                        </form>
-                                    </div>
-                                </td>
+                                                    class="text-green-600 hover:text-black transition-all duration-500">
+                                                    <i class="fa-lg fa-solid fa-file-arrow-down"></i>
+                                                </span>
+                                            </a>
+                                            <!-- Delete file -->
+                                            <form action="{{ route('portfoliosfile.destroy', [$portfolio, $file]) }}"
+                                                method="POST">
+                                                <!-- Add Token to prevent Cross-Site Request Forgery (CSRF) -->
+                                                @csrf
+                                                <!-- Dirtective to Override the http method -->
+                                                @method('DELETE')
+                                                <button
+                                                    onclick="return confirm('Are you sure you want to delete the file: {{ $file->original_filename }}?')"
+                                                    title="Delete file">
+                                                    <span
+                                                        class="text-red-600 hover:text-black transition-all duration-500"><i
+                                                            class="fa-lg fa-solid fa-trash"></i></span>
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </td>
 
-                            </tr>
-                            @endforeach                           
+                                </tr>
+                            @endforeach
 
                         </table>
 
                     </div>
+                @else
+                    <!-- Upload file -->
+                    
+                @endif
 
+                <div class="flex flex-row my-2">
+                    <a href="{{ route('portfolios.upload', $portfolio) }}"
+                        class="w-full sm:w-fit p-2 rounded-md text-white text-center bg-slate-800 hover:bg-slate-600 transition-all duration-500">
+                        <span> {{ __('generic.uploadFiles') }}</span>
+                        <span class="pl-2"><i class="fa-solid fa-file-arrow-up"></i></span>
+                    </a>
                 </div>
-            @endif
 
+            </div>
             <!-- Check for Languges in the App -->
             @if ($languages->count() > 0)
 

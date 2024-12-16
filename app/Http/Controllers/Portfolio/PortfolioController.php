@@ -5,11 +5,15 @@ namespace App\Http\Controllers\Portfolio;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Portfolio\StorePortfolioRequest;
 use App\Models\Portfolio\Portfolio;
+use App\Services\PortfolioService;
 use Exception;
 use Illuminate\Http\Request;
 
 class PortfolioController extends Controller
 {
+    public function __construct(private PortfolioService $portfolioService) {        
+    }
+
     /**
      * Update the specified resource in storage.
      */
@@ -30,11 +34,13 @@ class PortfolioController extends Controller
      */
     public function destroy(Portfolio $portfolio)
     {
-        try {
+
+        return $this->portfolioService->deletePortfolio($portfolio);
+       /*  try {
             $portfolio->delete();
             return to_route('portfolios')->with('message', __('generic.portfolio') . ' (' . $portfolio->name . ') ' . __('generic.successDelete'));
         } catch (Exception $e) {
             return to_route('portfolios')->with('error', __('generic.error') . ' (' . $e->getCode() . ') ' . __('generic.portfolio') . ' (' . $portfolio->name . ') ' . __('generic.errorDelete'));
-        }
+        } */
     }
 }

@@ -95,9 +95,8 @@
                                 <th wire:click="sorting('portfolios.updated_at')" scope="col"
                                     class="p-2 hover:cursor-pointer hover:{{ $menuTextColor }} {{ $column == 'portfolios.updated_at' ? $menuTextColor : '' }}">
                                     {{ __('generic.updated') }} {!! $sortLink !!}</th>
-
-                                <th scope="col" class="p-2 text-center capitalize">{{ __('generic.translations') }}
-                                </th>
+                                <th scope="col" class="p-2 text-center capitalize">{{ __('generic.translations') }}</th>
+                                <th scope="col" class="p-2 text-center capitalize">{{ __('generic.files') }}</th>
                                 <th scope="col" class="p-2 text-center capitalize">{{ __('generic.actions') }}</th>
                             </tr>
                         </thead>
@@ -133,6 +132,14 @@
                                             @endif
                                         @endforeach
                                     </td>
+                                    <td class="p-2 text-center normal-case">
+                                        @if ($portfolio->files->count() > 0)
+                                        <a href="/portfolios/{{ $portfolio->id }}/#filetest"
+                                          class="text-green-600"  >{{$portfolio->files->count()}}</a>
+                                        @else
+                                        -
+                                        @endif
+                                            </td>
                                     <td class="p-2">
                                         <div class="flex justify-center items-center gap-2">
                                             <!-- Show -->

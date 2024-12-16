@@ -61,12 +61,13 @@ return [
     "save" => "guardar",
     "info" => "informació",
     "reset" => "reset",
-    "upload" => "pujar arxiu",
+    "upload" => "pujar",
     "file" => "arxiu",
     "files" => "arxius",
-    "filename" => "nom arxiu",
+    "filename" => "nom de l'arxiu",
     "size" => "tamany",
-    "format" => "format", 
+    "format" => "format",
+    "maximum" => "màxim",
     // MESSAGES
     "error" => "error",
     "confirmDelete" => "¿Segur que vols eliminar aquest element?",
@@ -76,9 +77,17 @@ return [
     "errorUpdate" => "No s'ha pogut actualitzar",
     "successDelete" => "S'ha eliminat amb exit",
     "errorDelete" => "No s'ha pogut eliminar",
+    "successUpload" => "S'ha pujat amb exit",
+    "errorUpload" => "No s'ha pogut pujar",
     "bulkDelete" => "Elements eliminats amb exit",
     "errorForm" => "El formulari es incorrecte, si us plau comprova els missatges d'error",
     "mandatoryFields" => "Els camps marcats amb un asterisc (*) son obligatoris",
+    // FILES
+    "foundFiles" => "S'han trobar aquests arxius",
+    "noFiles" => "No hi ha cap arxiu",
+    "uploadFiles" => "Pujar arxius",
+    "filesSelected" => "Arxius seleccionats per pujar",
+    "maxFiles" => "Es el màxim número d'arxius per pujar",
     // TRANSLATIONS
     "missingTranslation" => "Traducció pendent",
     "missingTranslations" => "Traduccions pendents",
@@ -94,4 +103,6 @@ return [
     "noLanguages" => "No hi ha cap idioma a l'aplicació, crea al menys un",
     // AUTHOR
     "authorInfo" => "Web creada per XavRod",
+    // GENERIC WORDS
+    "for" => "per",
 ];

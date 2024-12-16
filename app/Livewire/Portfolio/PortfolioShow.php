@@ -35,7 +35,8 @@ class PortfolioShow extends Component
             'bgMenuColor' => 'bg-slate-800',
             'bgInfoTab' => 'bg-orange-600',
             'portfolioName' => 'text-white font-bold bg-orange-600',
-            'menuInfo' => 'text-white bg-slate-800',
+            'menuInfo' => 'text-white bg-slate-800',            
+            'bgFilesTab' => 'bg-lime-600',
             'bgTranslationTab' => 'bg-pink-600',
             'menuTextColor' => 'text-slate-800',
             // Data

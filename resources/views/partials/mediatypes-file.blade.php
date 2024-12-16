@@ -29,7 +29,7 @@ In Workout Main small icons, in Workout Info and Upload big icons.
     @break
 
     @case('image/jpeg')
-        <a href="{{ asset('storage/' . $file->path) }}" title="Open Image" target="_blank">
+        <a href="{{ asset('storage/' . $file->path) }}" title="{{ __('generic.show') }} {{ __('generic.file') }}" target="_blank">
             @if ($imagesBig)
                 <img src="{{ asset('storage/' . $file->path) }}" class="w-12 md:w-24 mx-auto rounded-lg">
             @else

@@ -61,12 +61,13 @@ return [
     "save" => "guardar",
     "info" => "información",
     "reset" => "reset",
-    "upload" => "subir archivo",
+    "upload" => "subir",
     "file" => "archivo",
     "files" => "archivos",
-    "filename" => "nombre archivo",
+    "filename" => "nombre del archivo",
     "size" => "tamaño",
     "format" => "formato",   
+    "maximum" => "máximo",
     // MESSAGES
     "error" => "error",
     "confirmDelete" => "¿Seguro que quieres eliminar este elemento?",
@@ -76,9 +77,18 @@ return [
     "errorUpdate" => "No se ha podido actualizar",
     "successDelete" => "Se ha eliminado con éxito",
     "errorDelete" => "No se ha podido eliminar",
+    "successUpload" => "Se ha subido con éxito",
+    "errorUpload" => "No se ha podido subir",
     "bulkDelete" => "Elementos eliminados con éxito",
     "errorForm" => "El formulario es incorrecto, por favor comprueba los mensajes de error",
     "mandatoryFields" => "Los campos marcados con un asterisco (*) son obligatorios",
+    // FILES
+    "foundFiles" => "Se han encontrado estos archivos",
+    "noFiles" => "No hay ningún archivo",
+    "uploadFiles" => "Subir archivos",
+    "filesIn" => "Archivos en este",
+    "filesSelected" => "Archivos seleccionados para subir",
+    "maxFiles" => "Es el máximo número de archivos para subir",
     // TRANSLATIONS
     "missingTranslation" => "Traducción pendiente",
     "missingTranslations" => "Traducciones pendientes",
@@ -94,4 +104,6 @@ return [
     "noLanguages" => "No hay ningún idioma en la aplicación, crea al menos uno",
     // AUTHOR
     "authorInfo" => "Web creada por XavRod",
+    // GENERIC WORDS
+    "for" => "para",
 ];

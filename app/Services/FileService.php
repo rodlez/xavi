@@ -2,12 +2,6 @@
 
 namespace App\Services;
 
-// Models
-use App\Models\Sport\Sport;
-use App\Models\Sport\SportCategory;
-use App\Models\Sport\SportFile;
-use App\Models\Sport\SportTag;
-use App\Models\Workout\Workout;
 // Files
 use Illuminate\Support\Facades\Storage;
 
