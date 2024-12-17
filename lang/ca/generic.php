@@ -65,7 +65,9 @@ return [
     "file" => "arxiu",
     "files" => "arxius",
     "filename" => "nom de l'arxiu",
+    "image" => "imatge",
     "size" => "tamany",
+    "video" => "vídeo",
     "format" => "format",
     "maximum" => "màxim",
     // MESSAGES
@@ -88,6 +90,9 @@ return [
     "uploadFiles" => "Pujar arxius",
     "filesSelected" => "Arxius seleccionats per pujar",
     "maxFiles" => "Es el màxim número d'arxius per pujar",
+    "noValidFormat" => "Format d'arxiu no vàlid",
+    "noValidFormatFiles" => "Al menys 1 dels arxius no pertany als formats permesos: PDF, JPG, JPEG, PNG",
+    "deleteAllFiles" => "Esborrar tots els arxius",
     // TRANSLATIONS
     "missingTranslation" => "Traducció pendent",
     "missingTranslations" => "Traduccions pendents",

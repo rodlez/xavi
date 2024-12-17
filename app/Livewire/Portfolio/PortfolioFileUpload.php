@@ -17,6 +17,12 @@ class PortfolioFileUpload extends Component
 
     public $files = [];
 
+    public $tempFiles = [];
+
+    public $testini = 0;
+
+    public $validFormats = ['pdf','jpeg','jpg','png'];
+
     // Dependency Injection to use the Service
     protected FileService $fileService;
 
@@ -68,6 +74,38 @@ class PortfolioFileUpload extends Component
         array_splice($this->files, $position, 1);
     }
 
+    public function deleteAllFiles()
+    {
+        $this->files = [];
+    }
+
+    public function IsValidFormat($fileExtension): bool
+    {
+        return in_array($fileExtension, $this->validFormats);
+    }
+
+    public function filesWithValidFormats($files): bool
+    {
+        foreach($files as $file)
+        {
+            $result = $this->IsValidFormat($file->getClientOriginalExtension());
+            if(!$result)
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
+     * In each update, select a file in the browser, merge the tempFiles with the Files array to have all the possible uploaded files
+     */
+    public function updated()
+    {
+        // TODO: CHECKING IF THE FILES ARE THE SAME OR ALREADY ON THE FILES LIST, using getClientOriginalName() and getSize()
+        $this->files = array_merge($this->files,$this->tempFiles); 
+    }
+
     public function save()
     {       
         $this->validate();        
@@ -78,7 +116,8 @@ class PortfolioFileUpload extends Component
             // if there is an error, create method will throw an exception
             PortfolioFile::create($data);            
         }
-        return to_route('portfolios.show', $this->portfolio)->with('message', __("generic.file") . ' ' . __("generic.for") . ' (' . $this->portfolio->name . ') ' . __("generic.successUpload"));
+        return to_route('portfolios.upload', $this->portfolio)->with('message', __("generic.files") . ' ' . __("generic.for") . ' (' . $this->portfolio->name . ') ' . __("generic.successUpload"));
+                
     }
 
     public function render()

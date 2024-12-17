@@ -25,6 +25,7 @@ class PortfolioFileController extends Controller
     {          
         $this->fileService->deleteOneFile($file);
         
-        return back()->with('message', 'File ' . $file->original_filename . ' from Sport: ' . $portfolio->title . ' deleted.');
+        return back()->with('message', __("generic.file") . ' (' . $file->original_filename . ') ' . __("generic.for") . ' (' . $portfolio->name . ') ' . __("generic.successDelete"));        
+
     }
 }

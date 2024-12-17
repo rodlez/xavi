@@ -65,6 +65,8 @@ return [
     "file" => "file",
     "files" => "files",
     "filename" => "filename",
+    "image" => "image",
+    "video" => "video",
     "size" => "size",
     "format" => "format",
     "maximum" => "maximum",
@@ -89,6 +91,9 @@ return [
     "filesIn" => "Files in this",
     "filesSelected" => "Files selected to upload",
     "maxFiles" => "Is the maximum number of files to upload",
+    "noValidFormat" => "Not a valid Format",
+    "noValidFormatFiles" => "At least one file do not belong to the allowed formats: PDF, JPG, JPEG, PNG",
+    "deleteAllFiles" => "Delete all files",
     // TRANSLATIONS
     "missingTranslation" => "Pending Translation",
     "missingTranslations" => "Pending Translations",

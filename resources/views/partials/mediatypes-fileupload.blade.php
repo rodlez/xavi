@@ -29,5 +29,5 @@
 
     @default
         <i class="{{ $iconSize }} fa-solid fa-triangle-exclamation text-red-600 hover:text-red-400"
-                title="Not a valid Format"></i>
+        title="{{ __('generic.noValidFormat') }}"></i>
 @endswitch
