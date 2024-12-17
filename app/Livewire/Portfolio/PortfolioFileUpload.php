@@ -6,8 +6,11 @@ use App\Http\Requests\Files\StoreFileRequest;
 use App\Models\Portfolio\Portfolio;
 use App\Models\Portfolio\PortfolioFile;
 use App\Services\FileService;
+use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 use Livewire\WithFileUploads;
+
+use Intervention\Image\Laravel\Facades\Image;
 
 class PortfolioFileUpload extends Component
 {
@@ -77,6 +80,7 @@ class PortfolioFileUpload extends Component
     public function deleteAllFiles()
     {
         $this->files = [];
+        return to_route('portfolios.upload', $this->portfolio);
     }
 
     public function IsValidFormat($fileExtension): bool
@@ -95,6 +99,18 @@ class PortfolioFileUpload extends Component
             }
         }
         return true;
+    }
+
+    public function isLandscape($path): string
+    {
+        $landscape = $this->fileService->isLandscape($path);
+
+        if($landscape){
+            return 'landscape';
+        }
+        else{
+            return 'portrait';
+        }
     }
 
     /**
@@ -121,7 +137,7 @@ class PortfolioFileUpload extends Component
     }
 
     public function render()
-    {
+    {   
         return view('livewire.portfolio.portfolio-file-upload', [
             // Styles
             'underlineMenuHeader' => 'border-b-2 border-b-slate-600',

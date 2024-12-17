@@ -4,22 +4,38 @@ namespace App\Livewire\Portfolio;
 
 use App\Models\Languages;
 use App\Models\Portfolio\Portfolio;
+use App\Services\FileService;
 use App\Services\TranslationService;
 use Livewire\Component;
 
 class PortfolioShow extends Component
 {
     protected TranslationService $translationService;
+    protected FileService $fileService;
+
     public Portfolio $portfolio;
 
-    public function boot(TranslationService $translationService)
+    public function boot(TranslationService $translationService, FileService $fileService)
     {
         $this->translationService = $translationService;
+        $this->fileService = $fileService;
     }
 
     public function mount(Portfolio $portfolio)
     {
         $this->portfolio = $portfolio;
+    }
+
+    public function isLandscape($path): string
+    {
+        $landscape = $this->fileService->isLandscape($path);
+
+        if($landscape){
+            return 'landscape';
+        }
+        else{
+            return 'portrait';
+        }
     }
 
     public function render()

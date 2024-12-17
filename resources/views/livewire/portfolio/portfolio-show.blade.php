@@ -93,18 +93,17 @@
 
                 <!-- Files Text Message-->
 
-                <div id="filetest" class="mb-2">  
+                <div id="filetest" class="mb-2">
 
                     <div class="w-fit {{ $bgFilesTab }} text-white text-lg rounded-t-md capitalize mb-0 p-2">
                         {{ __('generic.files') }}
                         ({{ $portfolio->files->count() }})
-                    </div>                    
+                    </div>
 
                     @if ($portfolio->files->count() == 0)
                         <div class="text-red-600 font-bold bg-gray-100 p-2">
                             {{ __('generic.noFiles') }}
-                        </div>        
-                    
+                        </div>
                     @else
                         <div class="text-green-600 font-bold bg-gray-100 p-2">
                             {{ __('generic.foundFiles') }}
@@ -128,11 +127,16 @@
                             </thead>
 
                             @foreach ($portfolio->files as $file)
+                                <!-- Check if the file is an jpg image, and if it is H or V -->
+                                @if ($file->media_type == 'image/jpeg' || $file->media_type == 'image/png')
+                                    @php $orientation = $this->isLandscape($file->path) @endphp
+                                @endif
+
                                 <tr class="bg-white border-b text-center normal-case">
                                     <td class="p-2">
                                         @include('partials.mediatypes-file', [
                                             'file' => $file,
-                                            'iconSize' => 'fa-lg',
+                                            'iconSize' => 'sm:text-4xl text-2xl',
                                             'imagesBig' => true,
                                         ])
                                     </td>
@@ -179,7 +183,7 @@
                     </div>
                 @else
                     <!-- Upload file -->
-                    
+
                 @endif
 
                 <div class="flex flex-row my-2">

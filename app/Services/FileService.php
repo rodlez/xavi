@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Storage;
 
 // Collection
 use Illuminate\Database\Eloquent\Collection;
+// Intervention Image processing library.
+use Intervention\Image\Laravel\Facades\Image;
 
 class FileService
 {
@@ -75,6 +77,20 @@ class FileService
             Storage::disk('public')->delete($file->path);
             $file->delete();
         }
+    }
+
+
+    /**
+     * Get the orientation of an Image. Given a path return true (landscape-horizontal) or false (portrait-vertical)
+    */
+
+    public function isLandscape(string $path): bool
+    {
+        $imageFromStorage = Storage::disk('public')->path($path);
+        
+        $image = Image::read($imageFromStorage);
+
+        return ($image->width() > $image->height()) ? true : false;        
     }
 
 }

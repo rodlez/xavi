@@ -28,11 +28,17 @@
             <div
                 class="flex flex-row flex-wrap justify-start items-center w-fit mx-4 py-2 px-4 border-2 rounded-lg gap-4 bg-gray-200">
                 @foreach ($portfolio->files as $file)
-                    <div class="relative py-2">
+
+                    <!-- Check if the file is an jpg image, and if it is H or V -->
+                    @if($file->media_type == 'image/jpeg' || $file->media_type == 'image/png')
+                        @php $orientation = $this->isLandscape($file->path) @endphp
+                    @endif
+
+                    <div class="relative sm:p-2 p-1">
 
                         @include('partials.mediatypes-file', [
                             'file' => $file,
-                            'iconSize' => 'fa-3x',
+                            'iconSize' => 'sm:text-8xl text-6xl',
                             'imagesBig' => true,
                         ])
                         <!-- Delete file -->
@@ -59,7 +65,7 @@
         <div class="flex flex-col mx-4 my-4 py-4 px-2 bg-gray-100 rounded-lg">
             <form wire:submit.prevent="save">
                 <label class="text-lg text-slate-800 font-semibold mb-2 block">{{ __('generic.uploadFiles') }} <span
-                        class="text-xs font-bold">({{ __('generic.maximum') }} 12)</span></label>
+                        class="text-xs font-bold">({{ __('generic.maximum') }} 2)</span></label>
                 {{-- <input wire:model.live="files" multiple type="file" --}}
                 <input wire:model.live="tempFiles" multiple type="file"
                     class="w-full text-gray-400 font-semibold text-sm bg-white border file:cursor-pointer cursor-pointer file:border-0 file:py-3 file:px-4 file:mr-4 file:bg-black file:hover:bg-slate-600 file:text-white rounded ease-linear transition-all duration-500" />
@@ -85,7 +91,7 @@
                     </button> --}}
 
                 <!-- To show the Upload Button, Must be files, inside the max limnit, and ALL files must have a valid format -->
-                @if ($files && count($files) <= 12 && $this->filesWithValidFormats($files))
+                @if ($files && count($files) <= 2 && $this->filesWithValidFormats($files))
                 <div class="flex flex-col">
                 <button
                         class="w-full sm:w-60 bg-black hover:bg-slate-600 text-white font-bold uppercase text-sm px-6 py-3 my-4 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-500"
@@ -120,7 +126,7 @@
             @if (count($files) !== 0)
                 <div class="py-2 {{ $underlineMenuHeader }}">
                     <span class="text-lg text-slate-800 font-semibold mb-4">{{ __('generic.filesSelected') }}</span>
-                    <span class="text-sm {{ count($files) <= 12 ? 'text-green-600' : 'text-red-600' }}">
+                    <span class="text-sm {{ count($files) <= 2 ? 'text-green-600' : 'text-red-600' }}">
                         ({{ count($files) }})
                     </span>
                 </div>
@@ -136,11 +142,11 @@
                 </div>
 
                 <!-- Upload Errors, maximum files and/or invalid format -->
-                @if (count($files) > 12 || (!$this->filesWithValidFormats($files)))
+                @if (count($files) > 2 || (!$this->filesWithValidFormats($files)))
                     <div class="flex flex-col my-2 p-4 bg-red-200 rounded-lg">
                         <span class="text-lg text-slate-800 font-bold uppercase">{{ __('generic.error') }}</span>
-                        @if (count($files) > 12)
-                            <span class="text-sm text-red-600 font-bold">(12) {{ __('generic.maxFiles') }}</span>
+                        @if (count($files) > 2)
+                            <span class="text-sm text-red-600 font-bold">(2) {{ __('generic.maxFiles') }}</span>
                         @endif
                         @if (!$this->filesWithValidFormats($files))
                             <span class="text-sm text-red-600 font-bold">{{ __('generic.noValidFormatFiles') }}</span>
