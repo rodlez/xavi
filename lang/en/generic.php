@@ -45,6 +45,7 @@ return [
     "optional" => "optional",
     "total" => "total",
     "user" => "user",
+    "position" => "position",
     // BULK
     "bulkActions" => "bulk actions",
     "bulkActionsClear" => "unselect all",
@@ -66,10 +67,13 @@ return [
     "files" => "files",
     "filename" => "filename",
     "image" => "image",
+    "images" => "images",
     "video" => "video",
     "size" => "size",
     "format" => "format",
     "maximum" => "maximum",
+    "up" => "up",
+    "down" => "down",
     // MESSAGES
     "error" => "error",
     "confirmDelete" => "Are you sure you want to delete this element?",
@@ -87,6 +91,10 @@ return [
     // FILES
     "foundFiles" => "These are the files found",
     "noFiles" => "There are no files",
+    "foundImages" => "These are the images found",
+    "noImages" => "There are no images",
+    "foundDocuments" => "These are the documents found",
+    "noDocuments" => "There are no documents",
     "uploadFiles" => "Upload files",
     "filesIn" => "Files in this",
     "filesSelected" => "Files selected to upload",

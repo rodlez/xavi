@@ -2,6 +2,7 @@
 
 namespace App\Models\Portfolio;
 
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -16,7 +17,15 @@ class PortfolioFile extends Model
         'storage_filename',
         'path',
         'media_type',
-        'size'
+        'size',
+        'width',
+        'height',
+        'orientation',
+        'resolution',
+        'position',
+        'type',
+        'title',
+        'description',
     ];
 
     /**
@@ -28,5 +37,5 @@ class PortfolioFile extends Model
             Portfolio::class,
             foreignKey: 'portfolio_id'
         );
-    }
+    }    
 }

@@ -6,6 +6,7 @@ use App\Http\Requests\Files\StoreFileRequest;
 use App\Models\Portfolio\Portfolio;
 use App\Models\Portfolio\PortfolioFile;
 use App\Services\FileService;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -113,6 +114,11 @@ class PortfolioFileUpload extends Component
         }
     }
 
+    public function imageLab($file)
+    {
+        $this->fileService->imageLab($file);
+    }
+
     /**
      * In each update, select a file in the browser, merge the tempFiles with the Files array to have all the possible uploaded files
      */
@@ -124,13 +130,20 @@ class PortfolioFileUpload extends Component
 
     public function save()
     {       
-        $this->validate();        
+        $this->validate();    
+        
+        // TODO: Use Transactions in case not all the files are uploaded to the drive or create in the DB
 
         foreach ($this->files as $file) {
-            $storagePath = 'portfoliofiles/' . $file->getClientOriginalExtension();
+            //$storagePath = 'portfoliofiles/' . $file->getClientOriginalExtension();
+            $storagePath = 'portfoliofiles/' . $this->portfolio->id;
             $data = $this->fileService->uploadFile($file, $this->portfolio->id, 'portfolio_id', 'public', $storagePath);
             // if there is an error, create method will throw an exception
-            PortfolioFile::create($data);            
+            PortfolioFile::create($data);   
+            if($data == 0)
+            {
+                return to_route('portfolios.upload', $this->portfolio)->with('error', __("generic.error") . ' (' . $data . ') ' . __("generic.errorUpload"));
+            }         
         }
         return to_route('portfolios.upload', $this->portfolio)->with('message', __("generic.files") . ' ' . __("generic.for") . ' (' . $this->portfolio->name . ') ' . __("generic.successUpload"));
                 
@@ -138,6 +151,7 @@ class PortfolioFileUpload extends Component
 
     public function render()
     {   
+       
         return view('livewire.portfolio.portfolio-file-upload', [
             // Styles
             'underlineMenuHeader' => 'border-b-2 border-b-slate-600',

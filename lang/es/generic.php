@@ -45,6 +45,7 @@ return [
     'optional' => 'opcional',
     'total' => 'total',
     'user' => 'usuario',
+    "position" => "posición",
     // BULK
     'bulkActions' => 'acciones en grupo',
     'bulkActionsClear' => 'deseleccionar todo',
@@ -66,10 +67,13 @@ return [
     'files' => 'archivos',
     'filename' => 'nombre del archivo',
     'image' => 'imagen',
+    "images" => "imágenes",
     "video" => "vídeo",
     'size' => 'tamaño',
     'format' => 'formato',
     'maximum' => 'máximo',
+    "up" => "sube",
+    "down" => "baja",
     // MESSAGES
     'error' => 'error',
     'confirmDelete' => '¿Seguro que quieres eliminar este elemento?',
@@ -87,6 +91,10 @@ return [
     // FILES
     'foundFiles' => 'Se han encontrado estos archivos',
     'noFiles' => 'No hay ningún archivo',
+    "foundImages" => "Se han encontrado estas imágenes",
+    "noImages" => "No hay ninguna imagen",
+    "foundDocuments" => "Se han encontrado estos documentos",
+    "noDocuments" => "No hay ningún documento",
     'uploadFiles' => 'Subir archivos',
     'filesIn' => 'Archivos en este',
     'filesSelected' => 'Archivos seleccionados para subir',

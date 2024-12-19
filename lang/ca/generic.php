@@ -45,6 +45,7 @@ return [
     "optional" => "opcional",
     "total" => "total",
     "user" => "usuari",
+    "position" => "posició",
     // BULK
     "bulkActions" => "accions en grup",
     "bulkActionsClear" => "deseleccionar tot",
@@ -66,10 +67,13 @@ return [
     "files" => "arxius",
     "filename" => "nom de l'arxiu",
     "image" => "imatge",
+    "images" => "imatges",
     "size" => "tamany",
     "video" => "vídeo",
     "format" => "format",
     "maximum" => "màxim",
+    "up" => "puja",
+    "down" => "baixa",
     // MESSAGES
     "error" => "error",
     "confirmDelete" => "¿Segur que vols eliminar aquest element?",
@@ -87,6 +91,10 @@ return [
     // FILES
     "foundFiles" => "S'han trobar aquests arxius",
     "noFiles" => "No hi ha cap arxiu",
+    "foundImages" => "S'han trobar aquestes imatges",
+    "noImages" => "No hi ha cap imatge",
+    "foundDocuments" => "S'han trobar aquests documents",
+    "noDocuments" => "No hi ha cap document",
     "uploadFiles" => "Pujar arxius",
     "filesSelected" => "Arxius seleccionats per pujar",
     "maxFiles" => "Es el màxim número d'arxius per pujar",

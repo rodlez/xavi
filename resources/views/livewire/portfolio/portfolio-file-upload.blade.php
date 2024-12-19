@@ -27,7 +27,19 @@
         @if ($portfolio->files->count() > 0)
             <div
                 class="flex flex-row flex-wrap justify-start items-center w-fit mx-4 py-2 px-4 border-2 rounded-lg gap-4 bg-gray-200">
-                @foreach ($portfolio->files as $file)
+                
+                
+                {{-- TEST IMAGES --}}
+                {{-- <br /><br />
+                0 - entradas png vertical<br />
+                2 - Megalopolis vertical<br />
+                3 - Higuita horizontal<br />
+                8 - Gatito coche horizontal<br />
+                19 - Gatito png horizontal<br />
+                <br /><br />
+                {{$this->imageLab($portfolio->files[8])}} --}}
+
+                @foreach ($portfolio->files as $file)                  
 
                     <!-- Check if the file is an jpg image, and if it is H or V -->
                     @if($file->media_type == 'image/jpeg' || $file->media_type == 'image/png')
