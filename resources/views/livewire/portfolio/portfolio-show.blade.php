@@ -122,11 +122,11 @@
 
                     @if ($images->count() == 0)
                         <div class="text-red-600 font-bold bg-gray-100 p-2">
-                            {{ __('generic.noFiles') }}
+                            {{ __('generic.noImages') }}
                         </div>
                     @else
                         <div class="text-green-600 font-bold bg-gray-100 p-2">
-                            {{ __('generic.foundFiles') }}
+                            {{ __('generic.foundImages') }}
                         </div>
                     @endif
                 </div>
@@ -147,7 +147,7 @@
                                 <th class="p-2">{{ __('generic.format') }}</th>                                
                                 <th></th>
                             </thead>
-RELOAD -> {{$reload}}
+
                             @foreach ($images as $image)
                                 <!-- Check if the file is an jpg image, and if it is H or V -->
                                 @if ($image->media_type == 'image/jpeg' || $image->media_type == 'image/png')
@@ -157,18 +157,26 @@ RELOAD -> {{$reload}}
                                 <tr class="bg-white border-b text-center normal-case">
                                     <td class="p-2 normal-case">{{ $image->position }}</td>
                                     <td class="p-2">
-                                        {{$images->count()}}                                        
+                                                                               
                                         {{var_dump(array_search($image->toArray(), $images->toArray()))}}                                        
                                         <!-- Order Portfolio Images Position in the Gallery -->
                                         <div class="flex justify-center items-center gap-2">
                                             @if(array_search($image->toArray(), $images->toArray()) > 0)
-                                            <a wire:click="orderPortfolio({{$images}}, {{$image}}, 'up')" class="cursor-pointer"
+                                            {{-- <a wire:click="orderPortfolio({{$images}}, {{$image}}, 'up')" class="cursor-pointer"
+                                                title="{{ __('generic.up') }}">
+                                                <i class="fa-solid fa-arrow-up"></i>
+                                            </a> --}}
+                                            <a wire:click="order({{$images}},{{$image}}, 'up')" class="cursor-pointer"
                                                 title="{{ __('generic.up') }}">
                                                 <i class="fa-solid fa-arrow-up"></i>
                                             </a>
                                             @endif
                                             @if(array_search($image->toArray(), $images->toArray()) + 1 < $images->count())
-                                            <a wire:click="orderPortfolio({{$images}}, {{$image}},'down')" class="cursor-pointer"
+                                            {{-- <a wire:click="orderPortfolio({{$images}}, {{$image}},'down')" class="cursor-pointer"
+                                                title="{{ __('generic.down') }}">
+                                                <i class="fa-solid fa-arrow-down"></i>
+                                            </a> --}}
+                                            <a wire:click="order({{$images}},{{$image}},'down')" class="cursor-pointer"
                                                 title="{{ __('generic.down') }}">
                                                 <i class="fa-solid fa-arrow-down"></i>
                                             </a>
@@ -232,12 +240,114 @@ RELOAD -> {{$reload}}
                 <div class="flex flex-row my-2">
                     <a href="{{ route('portfolios.upload', $portfolio) }}"
                         class="w-full sm:w-fit p-2 rounded-md text-white text-center bg-slate-800 hover:bg-slate-600 transition-all duration-500">
-                        <span> {{ __('generic.uploadFiles') }}</span>
+                        <span class="capitalize"> {{ __('generic.upload') }} {{ __('generic.images') }}</span>
                         <span class="pl-2"><i class="fa-solid fa-file-arrow-up"></i></span>
                     </a>
                 </div>
 
             </div>
+
+            <!-- Documents Text Message-->
+
+            <div class="mb-2">
+
+                <div class="w-fit {{ $bgFilesTab }} text-white text-lg rounded-t-md capitalize mb-0 p-2">
+                    {{ __('generic.documents') }}
+                    ({{ $documents->count() }})
+                </div>
+
+                @if ($documents->count() == 0)
+                    <div class="text-red-600 font-bold bg-gray-100 p-2">
+                        {{ __('generic.noDocuments') }}
+                    </div>
+                @else
+                    <div class="text-green-600 font-bold bg-gray-100 p-2">
+                        {{ __('generic.foundDocuments') }}
+                    </div>
+                @endif
+            </div>
+
+            @if ($documents->count() > 0)
+                    <!-- Files Table -->
+                    <div class="w-full overflow-x-auto">
+
+                        <table class="table-auto w-full border text-sm capitalize">
+                            <thead class="text-sm text-center text-white {{ $bgFilesTab }}">
+                                <th></th>
+                                <th class="p-2 max-lg:hidden">{{ __('generic.filename') }}</th>
+                                <th class="p-2 max-sm:hidden">{{ __('generic.created') }}</th>
+                                <th class="p-2 max-sm:hidden">{{ __('generic.size') }} <span
+                                        class="text-xs">(KB)</span></th>
+                                <th class="p-2">{{ __('generic.format') }}</th>                                
+                                <th></th>
+                            </thead>
+
+                            @foreach ($documents as $document)
+                               
+                                <tr class="bg-white border-b text-center normal-case">                                    
+                                    <td class="p-2">
+                                        @include('partials.mediatypes-file', [
+                                            'file' => $document,
+                                            'iconSize' => 'sm:text-4xl text-2xl',
+                                            'imagesBig' => true,
+                                        ])
+                                    </td>
+                                    <td class="p-2 max-lg:hidden">
+                                        {{ $document->original_filename }}
+                                    </td>
+                                    <td class="p-2 max-sm:hidden">{{ $document->created_at->format('d-m-Y') }}
+                                    </td>
+                                    <td class="p-2 max-sm:hidden">{{ round($document->size / 1000) }} </td>
+                                    <td class="p-2 normal-case">{{ basename($document->media_type) }}</td>
+                                    
+                                    <td class="p-2">
+                                        <div class="flex justify-center items-center gap-2">
+                                            <!-- Download file -->
+                                            <a href="{{ route('portfoliosfile.download', [$portfolio, $document]) }}"
+                                                title="Download File">
+                                                <span
+                                                    class="text-green-600 hover:text-black transition-all duration-500">
+                                                    <i class="fa-lg fa-solid fa-file-arrow-down"></i>
+                                                </span>
+                                            </a>
+                                            <!-- Delete file -->
+                                            <form action="{{ route('portfoliosfile.destroy', [$portfolio, $document]) }}"
+                                                method="POST">
+                                                <!-- Add Token to prevent Cross-Site Request Forgery (CSRF) -->
+                                                @csrf
+                                                <!-- Dirtective to Override the http method -->
+                                                @method('DELETE')
+                                                <button
+                                                    onclick="return confirm('Are you sure you want to delete the file: {{ $document->original_filename }}?')"
+                                                    title="Delete file">
+                                                    <span
+                                                        class="text-red-600 hover:text-black transition-all duration-500"><i
+                                                            class="fa-lg fa-solid fa-trash"></i></span>
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </td>
+
+                                </tr>
+                            @endforeach
+
+                        </table>
+
+                    </div>
+                @else
+                    <!-- Upload file -->
+
+                @endif
+
+                <div class="flex flex-row my-2">
+                    <a href="{{ route('portfolios.upload', $portfolio) }}"
+                        class="w-full sm:w-fit p-2 rounded-md text-white text-center bg-slate-800 hover:bg-slate-600 transition-all duration-500">
+                        <span class="capitalize"> {{ __('generic.upload') }} {{ __('generic.documents') }}</span>
+                        <span class="pl-2"><i class="fa-solid fa-file-arrow-up"></i></span>
+                    </a>
+                </div>
+
+
             <!-- Check for Languges in the App -->
             @if ($languages->count() > 0)
 

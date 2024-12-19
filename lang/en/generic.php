@@ -68,6 +68,8 @@ return [
     "filename" => "filename",
     "image" => "image",
     "images" => "images",
+    "document" => "document",
+    "documents" => "documents",
     "video" => "video",
     "size" => "size",
     "format" => "format",

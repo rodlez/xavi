@@ -68,6 +68,8 @@ return [
     "filename" => "nom de l'arxiu",
     "image" => "imatge",
     "images" => "imatges",
+    "document" => "document",
+    "documents" => "documents",
     "size" => "tamany",
     "video" => "vídeo",
     "format" => "format",

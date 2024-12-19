@@ -68,6 +68,8 @@ return [
     'filename' => 'nombre del archivo',
     'image' => 'imagen',
     "images" => "imágenes",
+    "document" => "documento",
+    "documents" => "documentos",
     "video" => "vídeo",
     'size' => 'tamaño',
     'format' => 'formato',

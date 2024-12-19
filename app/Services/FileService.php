@@ -113,12 +113,32 @@ class FileService
     /**
      * Test
      */
-    public function getFilesbyType(string $type): Collection
+    public function getFilesbyType(int $portfolioId, string $type): Collection
     {
-        return PortfolioFile::where('type', $type)->orderByRaw('-position DESC')->get();
+        return PortfolioFile::where([
+            'portfolio_id' => $portfolioId,
+            'type' => $type,            
+            ])->orderByRaw('-position DESC')->get();
     }
 
     /* ************** Portfolio Images Position ******************/
+
+    public function orderPortfolio(PortfolioFile $image, string $direction)
+    {
+        $imageId = $image->id;
+        unset($image->id);
+        var_dump($direction);
+        //dd($images);
+
+        if ($direction == 'down') {
+            $image->position = $image->position + 1;
+        }
+
+        if ($direction == 'up') {
+            $image->position = $image->position - 1;
+        }
+        PortfolioFile::where('id', $imageId)->update(['position' => $image->position]);        
+    }
 
     public function orderPortfolioGallery(array $images, array $image, string $direction)
     {

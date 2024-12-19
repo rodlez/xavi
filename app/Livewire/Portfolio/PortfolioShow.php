@@ -15,10 +15,9 @@ class PortfolioShow extends Component
     protected FileService $fileService;
 
     public Portfolio $portfolio;
-    //public PortfolioFile $image;
+    public PortfolioFile $image;
 
-    public $reload;
-
+    
     public function boot(TranslationService $translationService, FileService $fileService)
     {
         $this->translationService = $translationService;
@@ -28,8 +27,8 @@ class PortfolioShow extends Component
     public function mount(Portfolio $portfolio, PortfolioFile $image)
     {
         $this->portfolio = $portfolio;
-        //$this->image = $image;
-        $this->reload = 0;
+        $this->image = $image;
+        
     }
 
     public function isLandscape($path): string
@@ -44,6 +43,41 @@ class PortfolioShow extends Component
         }
     }
 
+    /**
+     * TEST ORDER 
+     */
+    public function order(array $images, PortfolioFile $image, string $direction)
+    {   
+        // Copy of image as array to find the key in the images array of image 
+        $imageArray = $image->toArray();
+        // Key in the Images Array
+        $imageKey = array_search($imageArray, $images);
+
+
+        if ($direction == 'down') 
+        {
+            // Image to swap
+            $imageToSwap = $images[$imageKey + 1];
+            // Swap Positions
+            $image->position = $image->position + 1;
+            $imageToSwap['position'] = $imageToSwap['position'] - 1;
+        }
+
+        if ($direction == 'up') 
+        {
+
+            // Image to swap
+            $imageToSwap = $images[$imageKey - 1];
+            // Swap Positions
+            $image->position = $image->position - 1;
+            $imageToSwap['position'] = $imageToSwap['position'] + 1;
+        }
+        
+        // UPDATE swap images positions
+        PortfolioFile::where('id', $image->id)->update(['position' => $image->position]); 
+        PortfolioFile::where('id', $imageToSwap['id'])->update(['position' => $imageToSwap['position']]);
+
+    }
     
 
     public function orderPortfolio($images, $image, $direction)
@@ -60,8 +94,7 @@ class PortfolioShow extends Component
         /* dd('oli');
         return redirect()->back(); */
         // Trigger a component refresh
-        $this->reload++;    
-        dd($this->reload);
+       
     }
 
     protected function refreshComponent()
@@ -89,8 +122,8 @@ class PortfolioShow extends Component
             'menuTextColor' => 'text-slate-800',
             // Data
             'portfolio' => $this->portfolio,
-            'images' =>  $this->fileService->getFilesbyType('image'),
-            'documents' =>  $this->fileService->getFilesbyType('document'),
+            'images' =>   $this->fileService->getFilesbyType($this->portfolio->id, 'image'),
+            'documents' =>  $this->fileService->getFilesbyType($this->portfolio->id, 'document'),
             'languages' => Languages::all(),
             'missingTranslations' => $missingTranslations,
         ])->layout('layouts.app');
