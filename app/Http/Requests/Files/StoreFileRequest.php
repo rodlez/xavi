@@ -23,7 +23,7 @@ class StoreFileRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'files' => 'array|min:1|max:2',
+            'files' => 'array|min:1|max:6',
             //'files.*' => 'required|mimes:pdf,jpeg,png,jpg|max:2048',
             'files.*' => 'required|file|mimetypes:application/pdf,image/jpeg,image/png',
         ];
@@ -35,8 +35,8 @@ class StoreFileRequest extends FormRequest
 
         if ($language == 'en') {
             return [
-                'files.min' => 'Select at least 1 file to upload (maximum 2 files)',
-                'files.max' => 'Limited to 2 files to upload',
+                'files.min' => 'Select at least 1 file to upload (maximum 6 files)',
+                'files.max' => 'Limited to 6 files to upload',
                 'files.*.required' => 'Select at least one file to upload',
                 //'files.*.mimes' => 'At least one file is not one of the allowed formats: PDF, JPG, JPEG or PNG',
                 'files.*.mimetypes' => 'At least one file do not belong to the allowed formats: PDF, JPG, JPEG, PNG',
@@ -44,8 +44,8 @@ class StoreFileRequest extends FormRequest
         }
         if ($language == 'es') {
             return [
-                'files.min' => 'Selecciona al menos 1 archivo (máximo 2 archivos)',
-                'files.max' => 'El límite de archivos para subir es de 2',
+                'files.min' => 'Selecciona al menos 1 archivo (máximo 6 archivos)',
+                'files.max' => 'El límite de archivos para subir es de 6',
                 'files.*.required' => 'No has seleccionado ningún archivo para subir',
                 //'files.*.mimes' => 'At least one file is not one of the allowed formats: PDF, JPG, JPEG or PNG',
                 'files.*.mimetypes' => 'Al menos 1 de los archivos no pertenece a los formatos permitidos: PDF, JPG, JPEG, PNG',
@@ -53,8 +53,8 @@ class StoreFileRequest extends FormRequest
         }
         if ($language == 'ca') {
             return [
-                'files.min' => 'Selecciona al menys 1 arxiu (màxim 2 arxius)',
-                'files.max' => "El límit d'arxius per pujar es de 2",
+                'files.min' => 'Selecciona al menys 1 arxiu (màxim 6 arxius)',
+                'files.max' => "El límit d'arxius per pujar es de 6",
                 'files.*.required' => 'No has seleccionat cap arxiu per pujar',
                 //'files.*.mimes' => 'At least one file is not one of the allowed formats: PDF, JPG, JPEG or PNG',
                 'files.*.mimetypes' => 'Al menys 1 dels arxius no pertany als formats permesos: PDF, JPG, JPEG, PNG',

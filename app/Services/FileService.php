@@ -39,17 +39,29 @@ class FileService
         $storage_filename = basename($path);
 
         // If there is an image, store additional information, ONLY for images
-        $imageInfo = $position = null;
+        $imageInfo = null;
+        $position = 0;
         if ($type == 'image') {
             $imageInfo = $this->imageInfo($disk, $path);
 
             // To get the position, get the total images in the Portfolio and add 1 (because array start at 0) !!! maybe left as is and start at 0...
-            $position = PortfolioFile::where([['portfolio_id', $elementId], ['type', 'image']])
+            /* $position = PortfolioFile::where([['portfolio_id', $elementId], ['type', 'image']])
+                ->get()
+                ->count(); */
+
+                $position = PortfolioFile::where([['portfolio_id', $elementId], ['type', 'image']])
                 ->get()
                 ->count();
+                //dd($position);
+
+                //$position == null ? $position = '0' : '';
 
             // TODO: Create the thumbnails, and images for web. WEBP for big, medium and small screens
+        } else {
+            $position = null;
         }
+
+
 
         return [
             $columnId => $elementId,
@@ -64,7 +76,8 @@ class FileService
             'height' => $imageInfo ? $imageInfo['height'] : null,
             'orientation' => $imageInfo ? $imageInfo['orientation'] : null,
             'resolution' => $imageInfo ? $imageInfo['resolution'] : null,
-            'position' => $position ? $position + 1 : null,
+            //'position' => $position ? $position + 1 : null,
+            'position' => $position,
         ];
     }
 
@@ -120,6 +133,35 @@ class FileService
             'type' => $type,            
             ])->orderByRaw('-position DESC')->get();
     }
+
+    
+    /**
+     * Check if the file of type image is in the last position of the portfolio
+     */
+    public function isLastImage(PortfolioFile $file): bool
+    {
+        $totalImages = PortfolioFile::where([['portfolio_id', $file->portfolio_id], ['type', 'image']])
+                ->get()
+                ->count();
+
+        return (($file->position + 1) == $totalImages) ? true : false;
+    }
+
+    /**
+     * Decrease 1 postition ALL the images that have a bigger position that the current image
+     */
+    public function decreasePortfolioPositions(PortfolioFile $file) 
+    {
+        $images = PortfolioFile::where([['portfolio_id', $file->portfolio_id], ['position', '>', $file->position]])
+                ->get();
+
+        foreach($images as $image)
+        {
+            PortfolioFile::where('id', $image->id)->update(['position' => $image->position -1]);  
+        }
+    }
+
+
 
     /* ************** Portfolio Images Position ******************/
 
@@ -192,8 +234,8 @@ class FileService
         if ($image->width() > $image->height()) {
             $imageInfo['orientation'] = 'landscape';
         }
-        if ($image->width() > $image->height()) {
-            $imageInfo['orientation'] = 'landscape';
+        if ($image->width() < $image->height()) {
+            $imageInfo['orientation'] = 'portrait';
         }
         if ($image->width() == $image->height()) {
             $imageInfo['orientation'] = 'square';

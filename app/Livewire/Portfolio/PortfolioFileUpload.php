@@ -45,21 +45,7 @@ class PortfolioFileUpload extends Component
      protected function messages(): array
      {
          return (new StoreFileRequest())->messages();
-     }
-
-   /*  protected $rules = [
-        'files' => 'array|min:1|max:12',
-        //'files.*' => 'required|mimes:pdf,jpeg,png,jpg|max:2048',
-        'files.*' => 'required|file|mimetypes:application/pdf,image/jpeg,image/png',
-    ];
-
-    protected $messages = [
-        'files.min' => 'Select at least 1 file to upload (max 12 files)',
-        'files.max' => 'Limited to 12 files to upload',
-        'files.*.required' => 'Select at least one file to upload',
-        //'files.*.mimes' => 'At least one file is not one of the allowed formats: PDF, JPG, JPEG or PNG',
-        'files.*.mimetypes' => 'At least one file do not belong to the allowed formats: PDF, JPG, JPEG, PNG',
-    ]; */
+     }  
 
     // Hook Runs on every request, immediately after the component is instantiated, but before any other lifecycle methods are called
     public function boot(
@@ -135,15 +121,15 @@ class PortfolioFileUpload extends Component
         // TODO: Use Transactions in case not all the files are uploaded to the drive or create in the DB
 
         foreach ($this->files as $file) {
-            //$storagePath = 'portfoliofiles/' . $file->getClientOriginalExtension();
             $storagePath = 'portfoliofiles/' . $this->portfolio->id;
             $data = $this->fileService->uploadFile($file, $this->portfolio->id, 'portfolio_id', 'public', $storagePath);
-            // if there is an error, create method will throw an exception
-            PortfolioFile::create($data);   
+               
             if($data == 0)
             {
                 return to_route('portfolios.upload', $this->portfolio)->with('error', __("generic.error") . ' (' . $data . ') ' . __("generic.errorUpload"));
             }         
+            // if there is an error, create method will throw an exception
+            PortfolioFile::create($data);
         }
         return to_route('portfolios.upload', $this->portfolio)->with('message', __("generic.files") . ' ' . __("generic.for") . ' (' . $this->portfolio->name . ') ' . __("generic.successUpload"));
                 
@@ -151,7 +137,9 @@ class PortfolioFileUpload extends Component
 
     public function render()
     {   
-       
+        // Get the files order by image position ignoring documents(left after the images)
+        $portfolioFiles = PortfolioFile::where('portfolio_id', $this->portfolio->id)->orderByRaw('-position DESC')->get();        
+
         return view('livewire.portfolio.portfolio-file-upload', [
             // Styles
             'underlineMenuHeader' => 'border-b-2 border-b-slate-600',
@@ -165,6 +153,7 @@ class PortfolioFileUpload extends Component
             'focusColor' => 'focus:ring-slate-500 focus:border-slate-500',
             // Data
             'portfolio' => $this->portfolio,
+            'portfolioFiles' => $portfolioFiles,
         ])->layout('layouts.app');
     }
 }

@@ -136,9 +136,9 @@
                     <div class="w-full overflow-x-auto">
 
                         <table class="table-auto w-full border text-sm capitalize">
-                            <thead class="text-sm text-center text-white {{ $bgFilesTab }}">
-                                <th></th>
-                                <th class="p-2">{{ __('generic.position') }}</th>
+                            <thead class="text-sm text-center text-white {{ $bgFilesTab }}">                                
+                                <th></th>       
+                                <th class="p-2">{{ __('generic.position') }}</th>                         
                                 <th></th>
                                 <th class="p-2 max-lg:hidden">{{ __('generic.filename') }}</th>
                                 <th class="p-2 max-sm:hidden">{{ __('generic.created') }}</th>
@@ -154,35 +154,25 @@
                                     @php $orientation = $this->isLandscape($image->path) @endphp
                                 @endif
 
-                                <tr class="bg-white border-b text-center normal-case">
-                                    <td class="p-2 normal-case">{{ $image->position }}</td>
-                                    <td class="p-2">
-                                                                               
-                                        {{var_dump(array_search($image->toArray(), $images->toArray()))}}                                        
+                                <tr class="bg-white border-b text-center normal-case">                                    
+                                    <td class="p-2">                                                                               
                                         <!-- Order Portfolio Images Position in the Gallery -->
                                         <div class="flex justify-center items-center gap-2">
                                             @if(array_search($image->toArray(), $images->toArray()) > 0)
-                                            {{-- <a wire:click="orderPortfolio({{$images}}, {{$image}}, 'up')" class="cursor-pointer"
-                                                title="{{ __('generic.up') }}">
-                                                <i class="fa-solid fa-arrow-up"></i>
-                                            </a> --}}
-                                            <a wire:click="order({{$images}},{{$image}}, 'up')" class="cursor-pointer"
+                                            <a wire:click="orderPortfolio({{$images}},{{$image}}, 'up')" class="cursor-pointer"
                                                 title="{{ __('generic.up') }}">
                                                 <i class="fa-solid fa-arrow-up"></i>
                                             </a>
                                             @endif
                                             @if(array_search($image->toArray(), $images->toArray()) + 1 < $images->count())
-                                            {{-- <a wire:click="orderPortfolio({{$images}}, {{$image}},'down')" class="cursor-pointer"
-                                                title="{{ __('generic.down') }}">
-                                                <i class="fa-solid fa-arrow-down"></i>
-                                            </a> --}}
-                                            <a wire:click="order({{$images}},{{$image}},'down')" class="cursor-pointer"
+                                            <a wire:click="orderPortfolio({{$images}},{{$image}},'down')" class="cursor-pointer"
                                                 title="{{ __('generic.down') }}">
                                                 <i class="fa-solid fa-arrow-down"></i>
                                             </a>
                                             @endif
                                         </div>
                                     </td>
+                                    <td class="p-2 normal-case">{{ $image->position }}</td>
                                     <td class="p-2">
                                         @include('partials.mediatypes-file', [
                                             'file' => $image,
@@ -202,7 +192,7 @@
                                         <div class="flex justify-center items-center gap-2">
                                             <!-- Download file -->
                                             <a href="{{ route('portfoliosfile.download', [$portfolio, $image]) }}"
-                                                title="Download File">
+                                                title="{{ __('generic.download') }}">
                                                 <span
                                                     class="text-green-600 hover:text-black transition-all duration-500">
                                                     <i class="fa-lg fa-solid fa-file-arrow-down"></i>
@@ -216,8 +206,8 @@
                                                 <!-- Dirtective to Override the http method -->
                                                 @method('DELETE')
                                                 <button
-                                                    onclick="return confirm('Are you sure you want to delete the file: {{ $image->original_filename }}?')"
-                                                    title="Delete file">
+                                                onclick="return confirm('{{ __('generic.confirmDelete') }}')"
+                                                title="{{ __('generic.delete') }}">
                                                     <span
                                                         class="text-red-600 hover:text-black transition-all duration-500"><i
                                                             class="fa-lg fa-solid fa-trash"></i></span>
@@ -304,7 +294,7 @@
                                         <div class="flex justify-center items-center gap-2">
                                             <!-- Download file -->
                                             <a href="{{ route('portfoliosfile.download', [$portfolio, $document]) }}"
-                                                title="Download File">
+                                                title="{{ __('generic.download') }}">
                                                 <span
                                                     class="text-green-600 hover:text-black transition-all duration-500">
                                                     <i class="fa-lg fa-solid fa-file-arrow-down"></i>
@@ -318,8 +308,8 @@
                                                 <!-- Dirtective to Override the http method -->
                                                 @method('DELETE')
                                                 <button
-                                                    onclick="return confirm('Are you sure you want to delete the file: {{ $document->original_filename }}?')"
-                                                    title="Delete file">
+                                                    onclick="return confirm('{{ __('generic.confirmDelete') }}')"
+                                                    title="{{ __('generic.delete') }}">
                                                     <span
                                                         class="text-red-600 hover:text-black transition-all duration-500"><i
                                                             class="fa-lg fa-solid fa-trash"></i></span>

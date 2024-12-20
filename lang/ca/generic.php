@@ -76,6 +76,7 @@ return [
     "maximum" => "màxim",
     "up" => "puja",
     "down" => "baixa",
+    "download" => "descarregar",
     // MESSAGES
     "error" => "error",
     "confirmDelete" => "¿Segur que vols eliminar aquest element?",

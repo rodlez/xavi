@@ -22,7 +22,16 @@ class PortfolioFileController extends Controller
      * Remove the specified resource from storage.
      */
     public function destroy(Portfolio $portfolio, PortfolioFile $file)
-    {          
+    {         
+        
+        if ($file->type == 'image')
+        {
+            if(!$this->fileService->isLastImage($file))
+            {
+                $this->fileService->decreasePortfolioPositions($file);                
+            }
+        }
+
         $this->fileService->deleteOneFile($file);
         
         return back()->with('message', __("generic.file") . ' (' . $file->original_filename . ') ' . __("generic.for") . ' (' . $portfolio->name . ') ' . __("generic.successDelete"));        

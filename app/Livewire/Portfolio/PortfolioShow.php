@@ -41,67 +41,32 @@ class PortfolioShow extends Component
         else{
             return 'portrait';
         }
-    }
+    }      
 
-    /**
-     * TEST ORDER 
-     */
-    public function order(array $images, PortfolioFile $image, string $direction)
-    {   
-        // Copy of image as array to find the key in the images array of image 
-        $imageArray = $image->toArray();
-        // Key in the Images Array
-        $imageKey = array_search($imageArray, $images);
+    public function orderPortfolio(array $images, PortfolioFile $image, string $direction)
+    {      
+       if ($direction == 'down') 
+       {
+           // Image to swap
+           $imageToSwap = $images[$image->position + 1];
+           // Swap Positions
+           $image->position = $image->position + 1;
+           $imageToSwap['position'] = $imageToSwap['position'] - 1;
+       }
 
-
-        if ($direction == 'down') 
-        {
-            // Image to swap
-            $imageToSwap = $images[$imageKey + 1];
-            // Swap Positions
-            $image->position = $image->position + 1;
-            $imageToSwap['position'] = $imageToSwap['position'] - 1;
-        }
-
-        if ($direction == 'up') 
-        {
-
-            // Image to swap
-            $imageToSwap = $images[$imageKey - 1];
-            // Swap Positions
-            $image->position = $image->position - 1;
-            $imageToSwap['position'] = $imageToSwap['position'] + 1;
-        }
-        
-        // UPDATE swap images positions
-        PortfolioFile::where('id', $image->id)->update(['position' => $image->position]); 
-        PortfolioFile::where('id', $imageToSwap['id'])->update(['position' => $imageToSwap['position']]);
-
-    }
-    
-
-    public function orderPortfolio($images, $image, $direction)
-    {
-       /*  var_dump($image);
-        var_dump($images);
-
-        $key = array_search($image, $images);
-
-        dd($key); */
-        //dd($image);
-
-        $this->fileService->orderPortfolioGallery($images, $image, $direction);
-        /* dd('oli');
-        return redirect()->back(); */
-        // Trigger a component refresh
+       if ($direction == 'up') 
+       {
+           // Image to swap
+           $imageToSwap = $images[$image->position - 1];
+           // Swap Positions
+           $image->position = $image->position - 1;
+           $imageToSwap['position'] = $imageToSwap['position'] + 1;
+       }
        
-    }
-
-    protected function refreshComponent()
-    {
-        dd('AAAAAAAAAAAAAAAAAAAAH');
-        $this->dispatch('$refresh');
-    }
+       // UPDATE swaped images positions
+       PortfolioFile::where('id', $image->id)->update(['position' => $image->position]); 
+       PortfolioFile::where('id', $imageToSwap['id'])->update(['position' => $imageToSwap['position']]);       
+    }   
 
     public function render()
     {
