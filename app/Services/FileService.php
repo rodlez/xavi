@@ -23,7 +23,10 @@ class FileService
     {
         // Storage in filesystem file config, specify the storagePath
         try {
-            $path = Storage::disk($disk)->putFile($storagePath, $file);
+            // Upload File
+            $path = Storage::disk($disk)->putFile($storagePath, $file);   
+                    
+
         } catch (Exception $e) {
             // TODO: save errors in log
             return $e->getCode();
@@ -43,6 +46,8 @@ class FileService
         $position = 0;
         if ($type == 'image') {
             $imageInfo = $this->imageInfo($disk, $path);
+
+            $this->createThumbnail($disk, $path);
 
             // To get the position, get the total images in the Portfolio and add 1 (because array start at 0) !!! maybe left as is and start at 0...
             /* $position = PortfolioFile::where([['portfolio_id', $elementId], ['type', 'image']])
@@ -244,6 +249,36 @@ class FileService
 
         return $imageInfo;
     }
+
+
+    /**
+     * Create Thumbnail for the image
+     */
+    public function createThumbnail(string $disk, string $filePath)
+    {
+        $imageFromStorage = Storage::disk($disk)->path($filePath);
+
+        
+        // READ THE IMAGE
+        $image = Image::read($imageFromStorage);
+
+
+        $storagePath = pathinfo($filePath, PATHINFO_DIRNAME);
+        $filename = pathinfo($filePath, PATHINFO_FILENAME);
+        $extension = pathinfo($filePath, PATHINFO_EXTENSION);
+
+        // SCALE
+        // Resize the image and keep the original aspect ratio. Set the maximum
+        // width and height. The image will be scaled down without
+        // exceeding these dimensions.
+        // New image dimensions: 120 x 80px
+        $thumbnail = $image->scale(width: 200);
+        // Save
+        $thumbnailPath = $storagePath . '/' . $filename . '_' . 'thumb.' . $extension;
+        $thumbnail->save(Storage::disk($disk)->path($thumbnailPath));
+    }
+
+   
 
     /**
      * Experiments with the Intervention Image processing library ("intervention/image-laravel": "^1.3")
