@@ -190,7 +190,15 @@
                                     
                                     <td class="p-2">
                                         <div class="flex justify-center items-center gap-2">
-                                            <!-- Download file -->
+                                            <!-- Show image -->
+                                            <a href="{{ route('portfoliosfile.show', [$portfolio, $image]) }}"
+                                                title="{{ __('generic.show') }}">
+                                                <span
+                                                    class="text-blue-600 hover:text-black transition-all duration-500">
+                                                    <i class="fa-lg fa-solid fa-eye"></i>
+                                                </span>
+                                            </a>
+                                            <!-- Download image -->
                                             <a href="{{ route('portfoliosfile.download', [$portfolio, $image]) }}"
                                                 title="{{ __('generic.download') }}">
                                                 <span
@@ -198,7 +206,7 @@
                                                     <i class="fa-lg fa-solid fa-file-arrow-down"></i>
                                                 </span>
                                             </a>
-                                            <!-- Delete file -->
+                                            <!-- Delete image -->
                                             <form action="{{ route('portfoliosfile.destroy', [$portfolio, $image]) }}"
                                                 method="POST">
                                                 <!-- Add Token to prevent Cross-Site Request Forgery (CSRF) -->
