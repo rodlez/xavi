@@ -140,6 +140,7 @@
                                 <th></th>       
                                 <th class="p-2">{{ __('generic.position') }}</th>                         
                                 <th></th>
+                                <th class="p-2 max-lg:hidden">{{ __('generic.title') }}</th>
                                 <th class="p-2 max-lg:hidden">{{ __('generic.filename') }}</th>
                                 <th class="p-2 max-sm:hidden">{{ __('generic.created') }}</th>
                                 <th class="p-2 max-sm:hidden">{{ __('generic.size') }} <span
@@ -181,21 +182,24 @@
                                         ])
                                     </td>
                                     <td class="p-2 max-lg:hidden">
+                                        {{ $image->title }}
+                                    </td>
+                                    <td class="p-2 max-lg:hidden">
                                         {{ $image->original_filename }}
                                     </td>
                                     <td class="p-2 max-sm:hidden">{{ $image->created_at->format('d-m-Y') }}
                                     </td>
-                                    <td class="p-2 max-sm:hidden">{{ round($image->size / 1000) }} </td>
+                                    <td class="p-2 max-sm:hidden">{{ round($image->size / 1024) }} </td>
                                     <td class="p-2 normal-case">{{ basename($image->media_type) }}</td>
                                     
                                     <td class="p-2">
                                         <div class="flex justify-center items-center gap-2">
-                                            <!-- Show image -->
+                                            <!-- Info image -->
                                             <a href="{{ route('portfoliosfile.show', [$portfolio, $image]) }}"
-                                                title="{{ __('generic.show') }}">
+                                                title="{{ __('generic.info') }}">
                                                 <span
                                                     class="text-blue-600 hover:text-black transition-all duration-500">
-                                                    <i class="fa-lg fa-solid fa-eye"></i>
+                                                    <i class="fa-lg fa-solid fa-info"></i>
                                                 </span>
                                             </a>
                                             <!-- Download image -->
@@ -295,7 +299,7 @@
                                     </td>
                                     <td class="p-2 max-sm:hidden">{{ $document->created_at->format('d-m-Y') }}
                                     </td>
-                                    <td class="p-2 max-sm:hidden">{{ round($document->size / 1000) }} </td>
+                                    <td class="p-2 max-sm:hidden">{{ round($document->size / 1024) }} </td>
                                     <td class="p-2 normal-case">{{ basename($document->media_type) }}</td>
                                     
                                     <td class="p-2">

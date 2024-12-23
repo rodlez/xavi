@@ -57,4 +57,31 @@ class PortfolioFileController extends Controller
         }
     }
 
+
+
+    /**
+     * Make responsive images
+     */
+    public function responsive(Portfolio $portfolio, PortfolioFile $file)
+    {
+       //dd($file);
+
+       try {
+       $this->fileService->createResponsiveImages('public', $file->path);
+       return to_route('portfoliosfile.show', [$portfolio, $file])->with('message', __("generic.portfolio") . ' (' . $portfolio->name . ') '. __("generic.successResponsiveImages"));
+
+       }
+       catch (Exception $e) {
+        return to_route('portfoliosfile.show', [$portfolio, $file])->with('error', __("generic.error") . ' (' . $e->getCode() . ') ' .__("generic.portfolio"). ' (' . $portfolio->name . ') '. __("generic.errorResponsiveImages"));
+        }
+
+        //dd($formData['title']);
+        /* try {
+            PortfolioFile::where('id', $file->id)->update(['title' => $formData['title'], 'description' => $formData['description']]);
+            return to_route('portfoliosfile.show', [$portfolio, $file])->with('message', __("generic.portfolio") . ' (' . $portfolio->name . ') '. __("generic.successUpdate"));
+        } catch (Exception $e) {
+            return to_route('portfoliosfile.show', [$portfolio, $file])->with('error', __("generic.error") . ' (' . $e->getCode() . ') ' .__("generic.portfolio"). ' (' . $portfolio->name . ') '. __("generic.errorUpdate"));
+        } */
+    }
+
 }

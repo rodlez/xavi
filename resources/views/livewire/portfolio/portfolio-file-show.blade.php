@@ -35,9 +35,6 @@
             </div>
             
             
-            
-            
-            
             <!-- ORIGINAL PORTFOLIO INFORMATION -->
             <div class="flex flex-col capitalize">
 
@@ -48,6 +45,13 @@
 
                     <!-- File Portfolios / Visible only in Larger Screens -->
                     <div class="flex flex-row gap-1 max-sm:hidden">
+                        <!-- Create Webp Image Versions -->
+                        <div class="w-fit bg-green-600 text-white text-lg rounded-t-md capitalize mb-0 p-2">
+                            <a href="{{ route('portfoliosfile.responsive', [$portfolio, $image]) }}"
+                                title="{{ __('generic.webpText') }}">
+                                {{ __('generic.webp') }}
+                            </a>
+                        </div>
                         <!-- Edit Portfolio -->
                         <div class="w-fit bg-blue-600 text-white text-lg rounded-t-md capitalize mb-0 p-2">
                             <a href="{{ route('portfoliosfile.edit', [$portfolio, $image]) }}">
@@ -84,8 +88,8 @@
                     <span class="p-2">{{ $image->path }}</span>
                     <span class="{{ $menuInfo }} p-2">{{ __('generic.mediaType') }}</span>
                     <span class="p-2">{{ $image->media_type }}</span>
-                    <span class="{{ $menuInfo }} p-2">{{ __('generic.size') }}</span>
-                    <span class="p-2">{{ $image->size }}</span>
+                    <span class="{{ $menuInfo }} p-2">{{ __('generic.size') }} (KB)</span>
+                    <span class="p-2">{{ ROUND ($image->size / 1024) }}</span>
                     <span class="{{ $menuInfo }} p-2">{{ __('generic.width') }} ({{ __('generic.pixels') }})</span>
                     <span class="p-2">{{ $image->width }}</span>
                     <span class="{{ $menuInfo }} p-2">{{ __('generic.height') }} ({{ __('generic.pixels') }})</span>
@@ -125,32 +129,81 @@
 
             </div>
 
+            <div class="flex flex-col capitalize">
 
-            <!-- Files -->
-            <div class="flex flex-col my-8">
-
-                <!-- Files Text Message-->
-
-                <div id="filetest" class="mb-2">
-
-                    <div class="w-fit {{ $bgFilesTab }} text-white text-lg rounded-t-md capitalize mb-0 p-2">
-                        {{ __('generic.files') }}
-                        ({{ $portfolio->files->count() }})
+                <div class="flex flex-row justify-between">
+                    <div class="w-fit {{ $bgInfoTab }} text-white text-lg rounded-t-md capitalize mb-0 p-2">
+                        {{ __('generic.webpImages') }}
                     </div>
+                </div>
 
-                    @if ($portfolio->files->count() == 0)
-                        <div class="text-red-600 font-bold bg-gray-100 p-2">
-                            {{ __('generic.noFiles') }}
-                        </div>
-                    @else
-                        <div class="text-green-600 font-bold bg-gray-100 p-2">
-                            {{ __('generic.foundFiles') }}
-                        </div>
-                    @endif
-                </div> 
+                <div class="w-full overflow-x-auto">
+
+                    <table class="table-auto w-full border text-sm capitalize">
+                        <thead class="text-sm text-center text-white {{ $bgFilesTab }}">
+                            <th class="p-2 max-lg:hidden">{{ __('generic.filename') }}</th>
+                            <th class="p-2 max-sm:hidden">{{ __('generic.created') }}</th>
+                            <th class="p-2 max-sm:hidden">{{ __('generic.size') }} <span
+                                    class="text-xs">(KB)</span></th>
+                            <th class="p-2">{{ __('generic.format') }}</th>                                
+                            <th></th>
+                        </thead>
+
+                        {{-- @foreach ($documents as $document)
+                           
+                            <tr class="bg-white border-b text-center normal-case">                                    
+                                <td class="p-2">
+                                    @include('partials.mediatypes-file', [
+                                        'file' => $document,
+                                        'iconSize' => 'sm:text-4xl text-2xl',
+                                        'imagesBig' => true,
+                                    ])
+                                </td>
+                                <td class="p-2 max-lg:hidden">
+                                    {{ $document->original_filename }}
+                                </td>
+                                <td class="p-2 max-sm:hidden">{{ $document->created_at->format('d-m-Y') }}
+                                </td>
+                                <td class="p-2 max-sm:hidden">{{ round($document->size / 1024) }} </td>
+                                <td class="p-2 normal-case">{{ basename($document->media_type) }}</td>
+                                
+                                <td class="p-2">
+                                    <div class="flex justify-center items-center gap-2">
+                                        <!-- Download file -->
+                                        <a href="{{ route('portfoliosfile.download', [$portfolio, $document]) }}"
+                                            title="{{ __('generic.download') }}">
+                                            <span
+                                                class="text-green-600 hover:text-black transition-all duration-500">
+                                                <i class="fa-lg fa-solid fa-file-arrow-down"></i>
+                                            </span>
+                                        </a>
+                                        <!-- Delete file -->
+                                        <form action="{{ route('portfoliosfile.destroy', [$portfolio, $document]) }}"
+                                            method="POST">
+                                            <!-- Add Token to prevent Cross-Site Request Forgery (CSRF) -->
+                                            @csrf
+                                            <!-- Dirtective to Override the http method -->
+                                            @method('DELETE')
+                                            <button
+                                                onclick="return confirm('{{ __('generic.confirmDelete') }}')"
+                                                title="{{ __('generic.delete') }}">
+                                                <span
+                                                    class="text-red-600 hover:text-black transition-all duration-500"><i
+                                                        class="fa-lg fa-solid fa-trash"></i></span>
+                                            </button>
+                                        </form>
+                                    </div>
+                                </td>
+
+                            </tr>
+                        @endforeach --}}
+
+                    </table>
+
+                </div>
 
             </div>
-                                     
+
 
 
             {{-- <!-- Check for Languges in the App -->

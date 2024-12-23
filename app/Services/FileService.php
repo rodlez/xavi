@@ -257,11 +257,9 @@ class FileService
     public function createThumbnail(string $disk, string $filePath)
     {
         $imageFromStorage = Storage::disk($disk)->path($filePath);
-
         
         // READ THE IMAGE
         $image = Image::read($imageFromStorage);
-
 
         $storagePath = pathinfo($filePath, PATHINFO_DIRNAME);
         $filename = pathinfo($filePath, PATHINFO_FILENAME);
@@ -276,6 +274,38 @@ class FileService
         // Save
         $thumbnailPath = $storagePath . '/' . $filename . '_' . 'thumb.' . $extension;
         $thumbnail->save(Storage::disk($disk)->path($thumbnailPath));
+    }
+
+     /**
+     * Create Responsive images for different screens
+     */
+    public function createResponsiveImages(string $disk, string $filePath)
+    {
+        $storagePath = pathinfo($filePath, PATHINFO_DIRNAME);
+        $filename = pathinfo($filePath, PATHINFO_FILENAME);
+        
+        $imageFromStorage = Storage::disk($disk)->path($filePath);
+        
+        // READ THE IMAGE
+        $image = Image::read($imageFromStorage); 
+
+        // SCALE FOR DIFFERENT SCREENS
+        // Resize the image and keep the original aspect ratio. Set the maximum
+        // width and height. The image will be scaled down without
+        // exceeding these dimensions.
+        // New image dimensions: 120 x 80px
+        $smallImage = $image->scale(width: 320);
+        $smallImagePathWebp = $storagePath . '/' . $filename . '_' . 'S.' . 'webp';
+        $smallImage->toWebp()->save(Storage::disk($disk)->path($smallImagePathWebp));
+        
+        $mediumImage = $image->scale(width: 640);
+        $mediumImagePathWebp = $storagePath . '/' . $filename . '_' . 'M.' . 'webp';
+        $mediumImage->toWebp()->save(Storage::disk($disk)->path($mediumImagePathWebp));
+        
+        $largeImage = $image->scale(width: 1200);
+        $largeImagePathWebp = $storagePath . '/' . $filename . '_' . 'L.' . 'webp';
+        $largeImage->toWebp()->save(Storage::disk($disk)->path($largeImagePathWebp));
+
     }
 
    

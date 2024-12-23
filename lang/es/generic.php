@@ -102,10 +102,6 @@ return [
     // FILES
     'foundFiles' => 'Se han encontrado estos archivos',
     'noFiles' => 'No hay ningún archivo',
-    "foundImages" => "Se han encontrado estas imágenes",
-    "noImages" => "No hay ninguna imagen",
-    "foundDocuments" => "Se han encontrado estos documentos",
-    "noDocuments" => "No hay ningún documento",
     'uploadFiles' => 'Subir archivos',
     'filesIn' => 'Archivos en este',
     'filesSelected' => 'Archivos seleccionados para subir',
@@ -113,6 +109,15 @@ return [
     "noValidFormat" => "Formato de archivo no válido",
     "noValidFormatFiles" => "Al menos 1 de los archivos no pertenece a los formatos permitidos: PDF, JPG, JPEG, PNG",
     "deleteAllFiles" => "Borrar todos los archivos",
+    // IMAGES
+    "foundImages" => "Se han encontrado estas imágenes",
+    "noImages" => "No hay ninguna imagen",
+    "webp" => "WebP",
+    "webpText" => "Crear Imágenes Responsive",
+    "webpImages" => "Imágenes Responsive",
+    // DOCUMENTS
+    "foundDocuments" => "Se han encontrado estos documentos",
+    "noDocuments" => "No hay ningún documento",
     // TRANSLATIONS
     'missingTranslation' => 'Traducción pendiente',
     'missingTranslations' => 'Traducciones pendientes',

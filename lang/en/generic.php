@@ -97,15 +97,13 @@ return [
     "successUpload" => "successfully uploaded",
     "errorUpload" => "can not be uploaded",
     "bulkDelete" => "Elements successfully deleted",
+    "successResponsiveImages" => "Responsive images successfully created",
+    "errorResponsiveImages" => "Responsive images can not be created",
     "errorForm" => "The form is incorrect, please check the error messages",
     "mandatoryFields" => "Fields marked with an asterisk (*) are required",
     // FILES
     "foundFiles" => "These are the files found",
     "noFiles" => "There are no files",
-    "foundImages" => "These are the images found",
-    "noImages" => "There are no images",
-    "foundDocuments" => "These are the documents found",
-    "noDocuments" => "There are no documents",
     "uploadFiles" => "Upload files",
     "filesIn" => "Files in this",
     "filesSelected" => "Files selected to upload",
@@ -113,6 +111,15 @@ return [
     "noValidFormat" => "Not a valid Format",
     "noValidFormatFiles" => "At least one file do not belong to the allowed formats: PDF, JPG, JPEG, PNG",
     "deleteAllFiles" => "Delete all files",
+    // IMAGES
+    "foundImages" => "These are the images found",
+    "noImages" => "There are no images",
+    "webp" => "WebP",
+    "webpText" => "Create Responsive Images",
+    "webpImages" => "Responsive Images",
+    // DOCUMENTS
+    "foundDocuments" => "These are the documents found",
+    "noDocuments" => "There are no documents",
     // TRANSLATIONS
     "missingTranslation" => "Pending Translation",
     "missingTranslations" => "Pending Translations",

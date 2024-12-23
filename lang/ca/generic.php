@@ -102,16 +102,21 @@ return [
     // FILES
     "foundFiles" => "S'han trobar aquests arxius",
     "noFiles" => "No hi ha cap arxiu",
-    "foundImages" => "S'han trobar aquestes imatges",
-    "noImages" => "No hi ha cap imatge",
-    "foundDocuments" => "S'han trobar aquests documents",
-    "noDocuments" => "No hi ha cap document",
     "uploadFiles" => "Pujar arxius",
     "filesSelected" => "Arxius seleccionats per pujar",
     "maxFiles" => "Es el màxim número d'arxius per pujar",
     "noValidFormat" => "Format d'arxiu no vàlid",
     "noValidFormatFiles" => "Al menys 1 dels arxius no pertany als formats permesos: PDF, JPG, JPEG, PNG",
     "deleteAllFiles" => "Esborrar tots els arxius",
+    // IMAGES
+    "foundImages" => "S'han trobar aquestes imatges",
+    "noImages" => "No hi ha cap imatge",
+    "webp" => "WebP",
+    "webpText" => "Crear Imatges Responsive",
+    "webpImages" => "Imatges Responsive",
+    // DOCUMENTS
+    "foundDocuments" => "S'han trobar aquests documents",
+    "noDocuments" => "No hi ha cap document",
     // TRANSLATIONS
     "missingTranslation" => "Traducció pendent",
     "missingTranslations" => "Traduccions pendents",
