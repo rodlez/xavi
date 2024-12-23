@@ -80,6 +80,8 @@
                     <span class="p-2">{{ $image->id }}</span>
                     <span class="{{ $menuInfo }} p-2">{{ __('generic.position') }}</span>
                     <span class="p-2">{{ $image->position }}</span>
+                    <span class="{{ $menuInfo }} p-2">{{ __('generic.created') }}</span>
+                    <span class="p-2">{{ $image->created_at }}</span>
                     <span class="{{ $menuInfo }} p-2">{{ __('generic.filename') }}</span>
                     <span class="p-2">{{ $image->original_filename }}</span>
                     <span class="{{ $menuInfo }} p-2">{{ __('generic.storagename') }}</span>
@@ -136,40 +138,38 @@
                         {{ __('generic.webpImages') }}
                     </div>
                 </div>
+                {{count($responsiveImages)}}
+
+                @if(count($responsiveImages) > 1)
 
                 <div class="w-full overflow-x-auto">
 
                     <table class="table-auto w-full border text-sm capitalize">
                         <thead class="text-sm text-center text-white {{ $bgFilesTab }}">
+                            <th class="p-2">{{ __('generic.screenSize') }}</th>                                
                             <th class="p-2 max-lg:hidden">{{ __('generic.filename') }}</th>
                             <th class="p-2 max-sm:hidden">{{ __('generic.created') }}</th>
                             <th class="p-2 max-sm:hidden">{{ __('generic.size') }} <span
                                     class="text-xs">(KB)</span></th>
-                            <th class="p-2">{{ __('generic.format') }}</th>                                
                             <th></th>
                         </thead>
 
-                        {{-- @foreach ($documents as $document)
+                        @foreach ($responsiveImages as $responsiveImage)
                            
-                            <tr class="bg-white border-b text-center normal-case">                                    
-                                <td class="p-2">
-                                    @include('partials.mediatypes-file', [
-                                        'file' => $document,
-                                        'iconSize' => 'sm:text-4xl text-2xl',
-                                        'imagesBig' => true,
-                                    ])
-                                </td>
+                            <tr class="{{$responsiveImage['filename'] ? 'bg-white' : 'bg-red-200'}} border-b text-center normal-case">                                    
+                                
+                                <td class="p-2 normal-case">{{ $responsiveImage['screen'] }}</td>
                                 <td class="p-2 max-lg:hidden">
-                                    {{ $document->original_filename }}
+                                    {{ $responsiveImage['filename'] }}
                                 </td>
-                                <td class="p-2 max-sm:hidden">{{ $document->created_at->format('d-m-Y') }}
+                                <td class="p-2 max-sm:hidden">{{ $responsiveImage['created_at'] }}
                                 </td>
-                                <td class="p-2 max-sm:hidden">{{ round($document->size / 1024) }} </td>
-                                <td class="p-2 normal-case">{{ basename($document->media_type) }}</td>
+                                <td class="p-2 max-sm:hidden">{{ $responsiveImage['size'] }} </td>
+                                
                                 
                                 <td class="p-2">
                                     <div class="flex justify-center items-center gap-2">
-                                        <!-- Download file -->
+                                        {{-- <!-- Download file -->
                                         <a href="{{ route('portfoliosfile.download', [$portfolio, $document]) }}"
                                             title="{{ __('generic.download') }}">
                                             <span
@@ -191,18 +191,28 @@
                                                     class="text-red-600 hover:text-black transition-all duration-500"><i
                                                         class="fa-lg fa-solid fa-trash"></i></span>
                                             </button>
-                                        </form>
+                                        </form> --}}
                                     </div>
                                 </td>
 
                             </tr>
-                        @endforeach --}}
+                        @endforeach
 
                     </table>
 
                 </div>
+                @else
+                <h2>No responsive images</h2>
+
+                @endif
+
 
             </div>
+
+            {{var_dump($responsiveImages)}}
+<br />
+
+           
 
 
 

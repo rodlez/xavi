@@ -115,6 +115,7 @@ return [
     "webp" => "WebP",
     "webpText" => "Crear Imágenes Responsive",
     "webpImages" => "Imágenes Responsive",
+    "screenSize" => "Tamaño pantalla",
     // DOCUMENTS
     "foundDocuments" => "Se han encontrado estos documentos",
     "noDocuments" => "No hay ningún documento",

@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Intervention\Image\Image as ImageImage;
 // Intervention Image processing library.
 use Intervention\Image\Laravel\Facades\Image;
 
@@ -24,9 +25,7 @@ class FileService
         // Storage in filesystem file config, specify the storagePath
         try {
             // Upload File
-            $path = Storage::disk($disk)->putFile($storagePath, $file);   
-                    
-
+            $path = Storage::disk($disk)->putFile($storagePath, $file);
         } catch (Exception $e) {
             // TODO: save errors in log
             return $e->getCode();
@@ -54,19 +53,17 @@ class FileService
                 ->get()
                 ->count(); */
 
-                $position = PortfolioFile::where([['portfolio_id', $elementId], ['type', 'image']])
+            $position = PortfolioFile::where([['portfolio_id', $elementId], ['type', 'image']])
                 ->get()
                 ->count();
-                //dd($position);
+            //dd($position);
 
-                //$position == null ? $position = '0' : '';
+            //$position == null ? $position = '0' : '';
 
             // TODO: Create the thumbnails, and images for web. WEBP for big, medium and small screens
         } else {
             $position = null;
         }
-
-
 
         return [
             $columnId => $elementId,
@@ -135,38 +132,35 @@ class FileService
     {
         return PortfolioFile::where([
             'portfolio_id' => $portfolioId,
-            'type' => $type,            
-            ])->orderByRaw('-position DESC')->get();
+            'type' => $type,
+        ])
+            ->orderByRaw('-position DESC')
+            ->get();
     }
 
-    
     /**
      * Check if the file of type image is in the last position of the portfolio
      */
     public function isLastImage(PortfolioFile $file): bool
     {
         $totalImages = PortfolioFile::where([['portfolio_id', $file->portfolio_id], ['type', 'image']])
-                ->get()
-                ->count();
+            ->get()
+            ->count();
 
-        return (($file->position + 1) == $totalImages) ? true : false;
+        return $file->position + 1 == $totalImages ? true : false;
     }
 
     /**
      * Decrease 1 postition ALL the images that have a bigger position that the current image
      */
-    public function decreasePortfolioPositions(PortfolioFile $file) 
+    public function decreasePortfolioPositions(PortfolioFile $file)
     {
-        $images = PortfolioFile::where([['portfolio_id', $file->portfolio_id], ['position', '>', $file->position]])
-                ->get();
+        $images = PortfolioFile::where([['portfolio_id', $file->portfolio_id], ['position', '>', $file->position]])->get();
 
-        foreach($images as $image)
-        {
-            PortfolioFile::where('id', $image->id)->update(['position' => $image->position -1]);  
+        foreach ($images as $image) {
+            PortfolioFile::where('id', $image->id)->update(['position' => $image->position - 1]);
         }
     }
-
-
 
     /* ************** Portfolio Images Position ******************/
 
@@ -184,7 +178,7 @@ class FileService
         if ($direction == 'up') {
             $image->position = $image->position - 1;
         }
-        PortfolioFile::where('id', $imageId)->update(['position' => $image->position]);        
+        PortfolioFile::where('id', $imageId)->update(['position' => $image->position]);
     }
 
     public function orderPortfolioGallery(array $images, array $image, string $direction)
@@ -206,6 +200,85 @@ class FileService
         //dd($image['position']);
 
         PortfolioFile::where('id', $imageId)->update(['position' => $image['position']]);
+    }
+
+    /***************************** IMAGES ************************************/
+
+    /**
+     * True if there is at least one, false if there is none
+     */
+
+    public function responsiveImagesExists($file)
+    {
+        $responsiveScreens = ['S', 'M', 'L'];
+        $totalResponsiveScreens = count($responsiveScreens);
+
+        $storagePath = pathinfo($file->path, PATHINFO_DIRNAME);
+        $filename = pathinfo($file->path, PATHINFO_FILENAME);
+        $extension = 'webp';
+
+        foreach ($responsiveScreens as $screenSize) {
+            $responsiveImagePath = $storagePath . '/' . $filename . '_' . $screenSize . '.' . $extension;
+            //dd($responsiveImagePath);
+            if (file_exists('storage/' . $responsiveImagePath)) {
+                $totalResponsiveScreens = $totalResponsiveScreens - 1;
+                //dd($totalResponsiveScreens);
+            }
+        }
+
+        return $totalResponsiveScreens == count($responsiveScreens) ? false : true;
+    }
+
+    /**
+     * Array with the information about the Responsive Images for this portfolio Image,
+     * return empty array if there is none
+     */
+
+    public function getResponsiveImagesInfo($file): array
+    {   
+        
+        $imageInfo[] = array();
+        
+        // 1 - If there are any responsive Image yet, no need to continue
+
+        if (!$this->responsiveImagesExists($file)) {
+            return $imageInfo;
+        } 
+
+        $responsiveScreens = ['S', 'M', 'L'];
+        $totalResponsiveScreens = count($responsiveScreens);
+        // Original Image Info
+        $storagePath = pathinfo($file->path, PATHINFO_DIRNAME);
+        $filename = pathinfo($file->path, PATHINFO_FILENAME);
+        $extension = 'webp';
+
+        foreach ($responsiveScreens as $key => $screenSize) {
+            $responsiveImagePath = 'storage/' . $storagePath . '/' . $filename . '_' . $screenSize . '.' . $extension;
+
+            if (file_exists($responsiveImagePath)) {
+
+                $imageInfo[$key] = [
+                    "screen" => $screenSize,
+                    "path" => $responsiveImagePath,
+                    "filename" => pathinfo($responsiveImagePath, PATHINFO_FILENAME) . '.' . $extension,
+                    "size" => round (filesize($responsiveImagePath) / 1024),
+                    "created_at" => date('Y-m-d H:i:s',filemtime($responsiveImagePath)),
+                ];                
+            }
+            else
+            {
+                $imageInfo[$key] = [
+                    "screen" => $screenSize,
+                    "path" => null,
+                    "filename" => null,
+                    "size" => null,
+                    "created_at" => null,
+                ];
+            }
+            $totalResponsiveScreens = $totalResponsiveScreens - 1;
+        }
+
+        return $imageInfo;
     }
 
     /* ************** Intervention Image processing library ******************/
@@ -250,6 +323,14 @@ class FileService
         return $imageInfo;
     }
 
+    public function imageResponsiveInfo(string $disk, string $filePath) 
+    {
+        //$disk = 'public';
+        
+        $imageFromStorage = Storage::disk($disk)->path($filePath);
+       
+        return Image::read($imageFromStorage);        
+    }
 
     /**
      * Create Thumbnail for the image
@@ -257,7 +338,7 @@ class FileService
     public function createThumbnail(string $disk, string $filePath)
     {
         $imageFromStorage = Storage::disk($disk)->path($filePath);
-        
+
         // READ THE IMAGE
         $image = Image::read($imageFromStorage);
 
@@ -276,39 +357,35 @@ class FileService
         $thumbnail->save(Storage::disk($disk)->path($thumbnailPath));
     }
 
-     /**
+    /**
      * Create Responsive images for different screens
      */
     public function createResponsiveImages(string $disk, string $filePath)
     {
         $storagePath = pathinfo($filePath, PATHINFO_DIRNAME);
         $filename = pathinfo($filePath, PATHINFO_FILENAME);
-        
+
         $imageFromStorage = Storage::disk($disk)->path($filePath);
-        
+
         // READ THE IMAGE
-        $image = Image::read($imageFromStorage); 
+        $image = Image::read($imageFromStorage);
 
         // SCALE FOR DIFFERENT SCREENS
         // Resize the image and keep the original aspect ratio. Set the maximum
         // width and height. The image will be scaled down without
         // exceeding these dimensions.
-        // New image dimensions: 120 x 80px
         $smallImage = $image->scale(width: 320);
         $smallImagePathWebp = $storagePath . '/' . $filename . '_' . 'S.' . 'webp';
         $smallImage->toWebp()->save(Storage::disk($disk)->path($smallImagePathWebp));
-        
+
         $mediumImage = $image->scale(width: 640);
         $mediumImagePathWebp = $storagePath . '/' . $filename . '_' . 'M.' . 'webp';
         $mediumImage->toWebp()->save(Storage::disk($disk)->path($mediumImagePathWebp));
-        
+
         $largeImage = $image->scale(width: 1200);
         $largeImagePathWebp = $storagePath . '/' . $filename . '_' . 'L.' . 'webp';
         $largeImage->toWebp()->save(Storage::disk($disk)->path($largeImagePathWebp));
-
     }
-
-   
 
     /**
      * Experiments with the Intervention Image processing library ("intervention/image-laravel": "^1.3")
