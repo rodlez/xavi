@@ -118,6 +118,7 @@ return [
     "webpText" => "Create Responsive Images",
     "webpImages" => "Responsive Images",
     "screenSize" => "Screen size",
+    "responsive" => "responsive",
     // DOCUMENTS
     "foundDocuments" => "These are the documents found",
     "noDocuments" => "There are no documents",
@@ -138,4 +139,6 @@ return [
     "authorInfo" => "Web by XavRod",
     // GENERIC WORDS
     "for" => "for",
+    "yes" => "yes",
+    "no" => "no",
 ];

@@ -125,6 +125,31 @@ class FileService
         }
     }
 
+    public function deleteResponsiveImg(string $path)
+    {
+        //dd($path);        
+        if (Storage::disk('public')->exists($path)) 
+        {           
+            Storage::disk('public')->delete($path);
+        }        
+    }
+
+    /**
+     * Download a file, disposition inline(browser) or attachment(download)
+     */
+
+     public function downloadResponsiveImg(string $path, string $imageName)
+     {         
+        
+        if (Storage::disk('public')->exists($path)) 
+        {   
+            return Storage::disk('public')->download($path, $imageName);
+        } else {
+            return back()->with('error', 'Error: File can not be downloaded.');
+        }        
+        
+     }
+
     /**
      * Test
      */
@@ -254,6 +279,7 @@ class FileService
 
         foreach ($responsiveScreens as $key => $screenSize) {
             $responsiveImagePath = 'storage/' . $storagePath . '/' . $filename . '_' . $screenSize . '.' . $extension;
+            $responsiveImagePathInfo = $storagePath . '/' . $filename . '_' . $screenSize . '.' . $extension;
 
             if (file_exists($responsiveImagePath)) {
 
@@ -263,7 +289,9 @@ class FileService
                     "filename" => pathinfo($responsiveImagePath, PATHINFO_FILENAME) . '.' . $extension,
                     "size" => round (filesize($responsiveImagePath) / 1024),
                     "created_at" => date('Y-m-d H:i:s',filemtime($responsiveImagePath)),
-                ];                
+                ];            
+                // get extra information, merge the current information with the generic information for an image (width, height, orientation, resolution)
+                $imageInfo[$key] = array_merge($imageInfo[$key], $this->imageInfo('public', $responsiveImagePathInfo));  
             }
             else
             {
@@ -273,12 +301,30 @@ class FileService
                     "filename" => null,
                     "size" => null,
                     "created_at" => null,
+                    "width" => null,
+                    "height" => null,
+                    "orientation" => null,
+                    "resolution" => null,
                 ];
             }
             $totalResponsiveScreens = $totalResponsiveScreens - 1;
         }
 
         return $imageInfo;
+    }
+
+    /**
+     * Given an Image and Screen get his path for the responsive Image
+     */
+    public function getResponsivePath (PortfolioFile $image, string $screenSize)
+    {
+        // Original Image Info
+        $storagePath = pathinfo($image->path, PATHINFO_DIRNAME);
+        $filename = pathinfo($image->path, PATHINFO_FILENAME);
+        $extension = 'webp';
+
+        return $storagePath . '/' . $filename . '_' . $screenSize . '.' . $extension;
+
     }
 
     /* ************** Intervention Image processing library ******************/
@@ -385,6 +431,44 @@ class FileService
         $largeImage = $image->scale(width: 1200);
         $largeImagePathWebp = $storagePath . '/' . $filename . '_' . 'L.' . 'webp';
         $largeImage->toWebp()->save(Storage::disk($disk)->path($largeImagePathWebp));
+    }
+
+
+    /**
+     * Create Responsive images for different screens
+     */
+    public function createResponsiveImage(string $disk, string $filePath, string $screen)
+    {
+        $storagePath = pathinfo($filePath, PATHINFO_DIRNAME);
+        $filename = pathinfo($filePath, PATHINFO_FILENAME);
+
+        $imageFromStorage = Storage::disk($disk)->path($filePath);
+
+        // READ THE IMAGE
+        $image = Image::read($imageFromStorage);
+
+        // SCALE FOR DIFFERENT SCREENS
+        // Resize the image and keep the original aspect ratio. Set the maximum
+        // width and height. The image will be scaled down without
+        // exceeding these dimensions.
+        if($screen == 'S')
+        {
+        $smallImage = $image->scale(width: 320);
+        $smallImagePathWebp = $storagePath . '/' . $filename . '_' . 'S.' . 'webp';
+        $smallImage->toWebp()->save(Storage::disk($disk)->path($smallImagePathWebp));
+        }
+        if($screen == 'M')
+        {
+        $mediumImage = $image->scale(width: 640);
+        $mediumImagePathWebp = $storagePath . '/' . $filename . '_' . 'M.' . 'webp';
+        $mediumImage->toWebp()->save(Storage::disk($disk)->path($mediumImagePathWebp));
+        }
+        if($screen == 'L')
+        {
+        $largeImage = $image->scale(width: 1200);
+        $largeImagePathWebp = $storagePath . '/' . $filename . '_' . 'L.' . 'webp';
+        $largeImage->toWebp()->save(Storage::disk($disk)->path($largeImagePathWebp));
+        }
     }
 
     /**

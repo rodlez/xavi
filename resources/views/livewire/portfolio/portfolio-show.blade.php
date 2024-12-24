@@ -136,16 +136,19 @@
                     <div class="w-full overflow-x-auto">
 
                         <table class="table-auto w-full border text-sm capitalize">
-                            <thead class="text-sm text-center text-white {{ $bgFilesTab }}">                                
-                                <th></th>       
-                                <th class="p-2">{{ __('generic.position') }}</th>                         
+                            <thead class="text-sm text-center text-white {{ $bgFilesTab }}">
+                                <th></th>
+                                <th class="p-2">{{ __('generic.position') }}</th>
                                 <th></th>
                                 <th class="p-2 max-lg:hidden">{{ __('generic.title') }}</th>
                                 <th class="p-2 max-lg:hidden">{{ __('generic.filename') }}</th>
-                                <th class="p-2 max-sm:hidden">{{ __('generic.created') }}</th>
+                                <th class="p-2 max-sm:hidden">{{ __('generic.pixels') }} </th>
                                 <th class="p-2 max-sm:hidden">{{ __('generic.size') }} <span
                                         class="text-xs">(KB)</span></th>
-                                <th class="p-2">{{ __('generic.format') }}</th>                                
+                                <th class="p-2">{{ __('generic.format') }}</th>
+                                <th class="p-2">{{ __('generic.responsive') }}</th>
+                                <th class="p-2 max-sm:hidden">{{ __('generic.created') }}</th>
+
                                 <th></th>
                             </thead>
 
@@ -155,21 +158,21 @@
                                     @php $orientation = $this->isLandscape($image->path) @endphp
                                 @endif
 
-                                <tr class="bg-white border-b text-center normal-case">                                    
-                                    <td class="p-2">                                                                               
+                                <tr class="bg-white border-b text-center normal-case">
+                                    <td class="p-2">
                                         <!-- Order Portfolio Images Position in the Gallery -->
                                         <div class="flex justify-center items-center gap-2">
-                                            @if(array_search($image->toArray(), $images->toArray()) > 0)
-                                            <a wire:click="orderPortfolio({{$images}},{{$image}}, 'up')" class="cursor-pointer"
-                                                title="{{ __('generic.up') }}">
-                                                <i class="fa-solid fa-arrow-up"></i>
-                                            </a>
+                                            @if (array_search($image->toArray(), $images->toArray()) > 0)
+                                                <a wire:click="orderPortfolio({{ $images }},{{ $image }}, 'up')"
+                                                    class="cursor-pointer" title="{{ __('generic.up') }}">
+                                                    <i class="fa-solid fa-arrow-up"></i>
+                                                </a>
                                             @endif
-                                            @if(array_search($image->toArray(), $images->toArray()) + 1 < $images->count())
-                                            <a wire:click="orderPortfolio({{$images}},{{$image}},'down')" class="cursor-pointer"
-                                                title="{{ __('generic.down') }}">
-                                                <i class="fa-solid fa-arrow-down"></i>
-                                            </a>
+                                            @if (array_search($image->toArray(), $images->toArray()) + 1 < $images->count())
+                                                <a wire:click="orderPortfolio({{ $images }},{{ $image }},'down')"
+                                                    class="cursor-pointer" title="{{ __('generic.down') }}">
+                                                    <i class="fa-solid fa-arrow-down"></i>
+                                                </a>
                                             @endif
                                         </div>
                                     </td>
@@ -187,11 +190,16 @@
                                     <td class="p-2 max-lg:hidden">
                                         {{ $image->original_filename }}
                                     </td>
-                                    <td class="p-2 max-sm:hidden">{{ $image->created_at->format('d-m-Y') }}
                                     </td>
+                                    <td class="p-2 max-sm:hidden">{{ $image->width}}X{{$image->height}}</td>
                                     <td class="p-2 max-sm:hidden">{{ round($image->size / 1024) }} </td>
                                     <td class="p-2 normal-case">{{ basename($image->media_type) }}</td>
-                                    
+
+                                    <td class="p-2 normal-case">                                        
+                                        {{$this->haveResponsiveImages($image) ? __('generic.yes') : __('generic.no')}}
+                                    </td>
+                                    <td class="p-2 max-sm:hidden">{{ $image->created_at->format('d-m-Y') }}
+
                                     <td class="p-2">
                                         <div class="flex justify-center items-center gap-2">
                                             <!-- Info image -->
@@ -217,9 +225,8 @@
                                                 @csrf
                                                 <!-- Dirtective to Override the http method -->
                                                 @method('DELETE')
-                                                <button
-                                                onclick="return confirm('{{ __('generic.confirmDelete') }}')"
-                                                title="{{ __('generic.delete') }}">
+                                                <button onclick="return confirm('{{ __('generic.confirmDelete') }}')"
+                                                    title="{{ __('generic.delete') }}">
                                                     <span
                                                         class="text-red-600 hover:text-black transition-all duration-500"><i
                                                             class="fa-lg fa-solid fa-trash"></i></span>
@@ -270,84 +277,81 @@
             </div>
 
             @if ($documents->count() > 0)
-                    <!-- Files Table -->
-                    <div class="w-full overflow-x-auto">
+                <!-- Files Table -->
+                <div class="w-full overflow-x-auto">
 
-                        <table class="table-auto w-full border text-sm capitalize">
-                            <thead class="text-sm text-center text-white {{ $bgFilesTab }}">
-                                <th></th>
-                                <th class="p-2 max-lg:hidden">{{ __('generic.filename') }}</th>
-                                <th class="p-2 max-sm:hidden">{{ __('generic.created') }}</th>
-                                <th class="p-2 max-sm:hidden">{{ __('generic.size') }} <span
-                                        class="text-xs">(KB)</span></th>
-                                <th class="p-2">{{ __('generic.format') }}</th>                                
-                                <th></th>
-                            </thead>
+                    <table class="table-auto w-full border text-sm capitalize">
+                        <thead class="text-sm text-center text-white {{ $bgFilesTab }}">
+                            <th></th>
+                            <th class="p-2 max-lg:hidden">{{ __('generic.filename') }}</th>
+                            <th class="p-2 max-sm:hidden">{{ __('generic.created') }}</th>
+                            <th class="p-2 max-sm:hidden">{{ __('generic.size') }} <span class="text-xs">(KB)</span>
+                            </th>
+                            <th class="p-2">{{ __('generic.format') }}</th>
+                            <th></th>
+                        </thead>
 
-                            @foreach ($documents as $document)
-                               
-                                <tr class="bg-white border-b text-center normal-case">                                    
-                                    <td class="p-2">
-                                        @include('partials.mediatypes-file', [
-                                            'file' => $document,
-                                            'iconSize' => 'sm:text-4xl text-2xl',
-                                            'imagesBig' => true,
-                                        ])
-                                    </td>
-                                    <td class="p-2 max-lg:hidden">
-                                        {{ $document->original_filename }}
-                                    </td>
-                                    <td class="p-2 max-sm:hidden">{{ $document->created_at->format('d-m-Y') }}
-                                    </td>
-                                    <td class="p-2 max-sm:hidden">{{ round($document->size / 1024) }} </td>
-                                    <td class="p-2 normal-case">{{ basename($document->media_type) }}</td>
-                                    
-                                    <td class="p-2">
-                                        <div class="flex justify-center items-center gap-2">
-                                            <!-- Download file -->
-                                            <a href="{{ route('portfoliosfile.download', [$portfolio, $document]) }}"
-                                                title="{{ __('generic.download') }}">
+                        @foreach ($documents as $document)
+                            <tr class="bg-white border-b text-center normal-case">
+                                <td class="p-2">
+                                    @include('partials.mediatypes-file', [
+                                        'file' => $document,
+                                        'iconSize' => 'sm:text-4xl text-2xl',
+                                        'imagesBig' => true,
+                                    ])
+                                </td>
+                                <td class="p-2 max-lg:hidden">
+                                    {{ $document->original_filename }}
+                                </td>
+                                <td class="p-2 max-sm:hidden">{{ $document->created_at->format('d-m-Y') }}
+                                </td>
+                                <td class="p-2 max-sm:hidden">{{ round($document->size / 1024) }} </td>
+                                <td class="p-2 normal-case">{{ basename($document->media_type) }}</td>
+
+                                <td class="p-2">
+                                    <div class="flex justify-center items-center gap-2">
+                                        <!-- Download file -->
+                                        <a href="{{ route('portfoliosfile.download', [$portfolio, $document]) }}"
+                                            title="{{ __('generic.download') }}">
+                                            <span class="text-green-600 hover:text-black transition-all duration-500">
+                                                <i class="fa-lg fa-solid fa-file-arrow-down"></i>
+                                            </span>
+                                        </a>
+                                        <!-- Delete file -->
+                                        <form action="{{ route('portfoliosfile.destroy', [$portfolio, $document]) }}"
+                                            method="POST">
+                                            <!-- Add Token to prevent Cross-Site Request Forgery (CSRF) -->
+                                            @csrf
+                                            <!-- Dirtective to Override the http method -->
+                                            @method('DELETE')
+                                            <button onclick="return confirm('{{ __('generic.confirmDelete') }}')"
+                                                title="{{ __('generic.delete') }}">
                                                 <span
-                                                    class="text-green-600 hover:text-black transition-all duration-500">
-                                                    <i class="fa-lg fa-solid fa-file-arrow-down"></i>
-                                                </span>
-                                            </a>
-                                            <!-- Delete file -->
-                                            <form action="{{ route('portfoliosfile.destroy', [$portfolio, $document]) }}"
-                                                method="POST">
-                                                <!-- Add Token to prevent Cross-Site Request Forgery (CSRF) -->
-                                                @csrf
-                                                <!-- Dirtective to Override the http method -->
-                                                @method('DELETE')
-                                                <button
-                                                    onclick="return confirm('{{ __('generic.confirmDelete') }}')"
-                                                    title="{{ __('generic.delete') }}">
-                                                    <span
-                                                        class="text-red-600 hover:text-black transition-all duration-500"><i
-                                                            class="fa-lg fa-solid fa-trash"></i></span>
-                                                </button>
-                                            </form>
-                                        </div>
-                                    </td>
+                                                    class="text-red-600 hover:text-black transition-all duration-500"><i
+                                                        class="fa-lg fa-solid fa-trash"></i></span>
+                                            </button>
+                                        </form>
+                                    </div>
+                                </td>
 
-                                </tr>
-                            @endforeach
+                            </tr>
+                        @endforeach
 
-                        </table>
+                    </table>
 
-                    </div>
-                @else
-                    <!-- Upload file -->
-
-                @endif
-
-                <div class="flex flex-row my-2">
-                    <a href="{{ route('portfolios.upload', $portfolio) }}"
-                        class="w-full sm:w-fit p-2 rounded-md text-white text-center bg-slate-800 hover:bg-slate-600 transition-all duration-500">
-                        <span class="capitalize"> {{ __('generic.upload') }} {{ __('generic.documents') }}</span>
-                        <span class="pl-2"><i class="fa-solid fa-file-arrow-up"></i></span>
-                    </a>
                 </div>
+            @else
+                <!-- Upload file -->
+
+            @endif
+
+            <div class="flex flex-row my-2">
+                <a href="{{ route('portfolios.upload', $portfolio) }}"
+                    class="w-full sm:w-fit p-2 rounded-md text-white text-center bg-slate-800 hover:bg-slate-600 transition-all duration-500">
+                    <span class="capitalize"> {{ __('generic.upload') }} {{ __('generic.documents') }}</span>
+                    <span class="pl-2"><i class="fa-solid fa-file-arrow-up"></i></span>
+                </a>
+            </div>
 
 
             <!-- Check for Languges in the App -->
@@ -359,7 +363,8 @@
                     <!-- Translations Text / Number of Translations and Pending Translations -->
                     <div class="mb-2">
 
-                        <div class="w-fit {{ $bgTranslationTab }} text-white text-lg rounded-t-md capitalize mb-0 p-2">
+                        <div
+                            class="w-fit {{ $bgTranslationTab }} text-white text-lg rounded-t-md capitalize mb-0 p-2">
                             {{ __('generic.translations') }}
                             ({{ $portfolio->translations->count() }}/{{ $languages->count() }})
                         </div>
@@ -395,8 +400,10 @@
                                     <td class="p-2">{{ $translation->title }}</td>
                                     <td class="p-2 max-lg:hidden">{{ $translation->language->name }}</td>
                                     <td class="p-2">{{ $translation->language->code }}</td>
-                                    <td class="p-2 max-sm:hidden">{{ $translation->created_at->format('d-m-Y') }}</td>
-                                    <td class="p-2 max-sm:hidden">{{ $translation->updated_at->format('d-m-Y') }}</td>
+                                    <td class="p-2 max-sm:hidden">{{ $translation->created_at->format('d-m-Y') }}
+                                    </td>
+                                    <td class="p-2 max-sm:hidden">{{ $translation->updated_at->format('d-m-Y') }}
+                                    </td>
                                     <td class="p-2">
                                         <div class="flex justify-center items-center gap-2">
                                             <!-- Show -->

@@ -41,7 +41,12 @@ class PortfolioShow extends Component
         else{
             return 'portrait';
         }
-    }      
+    }   
+    
+    public function haveResponsiveImages($image): bool
+    {
+        return $this->fileService->responsiveImagesExists($image);
+    }
 
     public function orderPortfolio(array $images, PortfolioFile $image, string $direction)
     {      

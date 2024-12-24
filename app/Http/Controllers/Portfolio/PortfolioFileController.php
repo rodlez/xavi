@@ -68,4 +68,43 @@ class PortfolioFileController extends Controller
             return to_route('portfoliosfile.show', [$portfolio, $file])->with('error', __('generic.error') . ' (' . $e->getCode() . ') ' . __('generic.portfolio') . ' (' . $portfolio->name . ') ' . __('generic.errorResponsiveImages'));
         }
     }
+
+    
+    public function responsiveCreate(Portfolio $portfolio, PortfolioFile $image, string $screen)
+    {
+        $disk = 'public';
+
+        try {
+            $this->fileService->createResponsiveImage($disk, $image->path, $screen);
+            return to_route('portfoliosfile.show', [$portfolio, $image])->with('message', __('generic.image') . ' (' . $screen . ') ' . __('generic.successCreate'));
+        } catch (Exception $e) {
+            return to_route('portfoliosfile.show', [$portfolio, $image])->with('error', __('generic.error') . ' (' . $e->getCode() . ') ' . __('generic.image') . ' (' . $screen . ') ' . __('generic.errorCreate'));
+        }
+    }
+    
+    public function responsiveDownload(Portfolio $portfolio, PortfolioFile $image, string $screen)
+    {
+        // TODO: Open in new Tab Window!!
+        
+        $path = $this->fileService->getResponsivePath($image, $screen);
+        $imageName = pathinfo($image->original_filename, PATHINFO_FILENAME) . '_' . $screen . '.webp';
+
+        return $this->fileService->downloadResponsiveImg($path, $imageName);
+
+        //return to_route('portfoliosfile.show', [$portfolio, $image])->with('message', __('generic.image') . __('generic.download'));  
+    }
+
+    /**
+     * Remove the specified screen responsive image resource from storage.
+     */
+    public function responsiveDelete(Portfolio $portfolio, PortfolioFile $image, string $screen)
+    {        
+       //dd($image);
+
+        $path = $this->fileService->getResponsivePath($image, $screen);
+
+        $this->fileService->deleteResponsiveImg($path);
+
+        return to_route('portfoliosfile.show', [$portfolio, $image])->with('message', __('generic.image') . ' (' . $screen . ') ' . __('generic.successDelete'));        
+    }
 }

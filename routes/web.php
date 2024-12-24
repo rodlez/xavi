@@ -113,6 +113,9 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
 
 
     Route::get('/portfolios/{portfolio}/file/{file}/responsive', [PortfolioFileController::class, 'responsive'])->name('portfoliosfile.responsive');
+    Route::get('/portfolios/{portfolio}/file/{image}/responsive/{screen}', [PortfolioFileController::class, 'responsiveCreate'])->name('portfoliosfile.responsiveCreate');
+    Route::delete('/portfolios/{portfolio}/file/{image}/responsive/{screen}', [PortfolioFileController::class, 'responsiveDelete'])->name('portfoliosfile.responsiveDelete');
+    Route::get('/portfolios/{portfolio}/file/{image}/responsive/{screen}/download', [PortfolioFileController::class, 'responsiveDownload'])->name('portfoliosfile.responsiveDownload');
 
 
 

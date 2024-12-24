@@ -116,6 +116,7 @@ return [
     "webpText" => "Crear Imágenes Responsive",
     "webpImages" => "Imágenes Responsive",
     "screenSize" => "Tamaño pantalla",
+    "responsive" => "responsive",
     // DOCUMENTS
     "foundDocuments" => "Se han encontrado estos documentos",
     "noDocuments" => "No hay ningún documento",
@@ -136,4 +137,6 @@ return [
     'authorInfo' => 'Web creada por XavRod',
     // GENERIC WORDS
     'for' => 'para',
+    "yes" => "si",
+    "no" => "no",
 ];

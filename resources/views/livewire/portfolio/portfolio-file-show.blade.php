@@ -18,23 +18,22 @@
             <span class="text-lg text-white capitalize px-4">{{ __('generic.portfolio') }}</span>
         </div>
 
-        <div class="mx-auto w-11/12 my-4 px-2 bg-red-200">
+        <div class="mx-auto w-11/12 my-4 px-2 bg-yellow-200">
 
-            <span class="text-lg font-bold normal-case">{{ __('generic.image') }} {{ __('generic.for') }} {{ __('generic.portfolio') }} > {{ $portfolio->name }}</span>
+            <span class="text-lg font-bold normal-case">{{ __('generic.image') }} {{ __('generic.for') }}
+                {{ __('generic.portfolio') }} > {{ $portfolio->name }}</span>
 
             <div class="bg-slate-400 w-full h-2"></div>
-            
+
             <div class="flex flex-col bg-yellow-100">
 
                 <div class="flex">
-                    <img src="{{ asset('storage/' . $file->path) }}" alt=""
-                    class="w-32"
-                    >
+                    <img src="{{ asset('storage/' . $file->path) }}" alt="" class="w-32">
                 </div>
 
             </div>
-            
-            
+
+
             <!-- ORIGINAL PORTFOLIO INFORMATION -->
             <div class="flex flex-col capitalize">
 
@@ -72,7 +71,7 @@
                             </form>
                         </div>
                     </div>
-                    
+
                 </div>
                 <!-- Info Portfolio -->
                 <div class="flex flex-col text-black bg-gray-100">
@@ -91,21 +90,23 @@
                     <span class="{{ $menuInfo }} p-2">{{ __('generic.mediaType') }}</span>
                     <span class="p-2">{{ $image->media_type }}</span>
                     <span class="{{ $menuInfo }} p-2">{{ __('generic.size') }} (KB)</span>
-                    <span class="p-2">{{ ROUND ($image->size / 1024) }}</span>
-                    <span class="{{ $menuInfo }} p-2">{{ __('generic.width') }} ({{ __('generic.pixels') }})</span>
+                    <span class="p-2">{{ ROUND($image->size / 1024) }}</span>
+                    <span class="{{ $menuInfo }} p-2">{{ __('generic.width') }}
+                        ({{ __('generic.pixels') }})</span>
                     <span class="p-2">{{ $image->width }}</span>
-                    <span class="{{ $menuInfo }} p-2">{{ __('generic.height') }} ({{ __('generic.pixels') }})</span>
+                    <span class="{{ $menuInfo }} p-2">{{ __('generic.height') }}
+                        ({{ __('generic.pixels') }})</span>
                     <span class="p-2">{{ $image->height }}</span>
                     <span class="{{ $menuInfo }} p-2">{{ __('generic.orientation') }}</span>
                     <span class="p-2">{{ $image->orientation }}</span>
                     <span class="{{ $menuInfo }} p-2">{{ __('generic.resolution') }}</span>
-                    <span class="p-2">{{ $image->resolution }}</span>                    
+                    <span class="p-2">{{ $image->resolution }}</span>
                     <span class="{{ $menuInfo }} p-2">{{ __('generic.title') }}</span>
                     <span class="p-2">{{ $image->title ? $image->title : '-' }}</span>
                     <span class="{{ $menuInfo }} p-2">{{ __('generic.description') }}</span>
                     <span class="p-2 normal-case">{{ $image->description ? $image->description : '-' }}</span>
                 </div>
-                
+
                 <!-- Big Actions Buttons in SMALL SCREENS -->
                 <div class="flex flex-col sm:hidden justify-start gap-1 py-2">
                     <!-- Edit -->
@@ -138,47 +139,70 @@
                         {{ __('generic.webpImages') }}
                     </div>
                 </div>
-                {{count($responsiveImages)}}
+                {{ count($responsiveImages) }}
 
-                @if(count($responsiveImages) > 1)
+                @if (count($responsiveImages) > 1)
 
-                <div class="w-full overflow-x-auto">
+                    <div class="w-full overflow-x-auto">
 
-                    <table class="table-auto w-full border text-sm capitalize">
-                        <thead class="text-sm text-center text-white {{ $bgFilesTab }}">
-                            <th class="p-2">{{ __('generic.screenSize') }}</th>                                
-                            <th class="p-2 max-lg:hidden">{{ __('generic.filename') }}</th>
-                            <th class="p-2 max-sm:hidden">{{ __('generic.created') }}</th>
-                            <th class="p-2 max-sm:hidden">{{ __('generic.size') }} <span
-                                    class="text-xs">(KB)</span></th>
-                            <th></th>
-                        </thead>
+                        <table class="table-auto w-full border text-sm capitalize">
+                            <thead class="text-sm text-center text-white {{ $bgFilesTab }}">
+                                <th class="p-2">{{ __('generic.screenSize') }}</th>
+                                <th class="p-2 max-lg:hidden">{{ __('generic.filename') }}</th>
+                                <th class="p-2 max-sm:hidden">{{ __('generic.pixels') }}</th>
+                                <th class="p-2 max-sm:hidden">{{ __('generic.orientation') }}</th>
+                                <th class="p-2 max-sm:hidden">{{ __('generic.resolution') }}</th>
+                                <th class="p-2 max-sm:hidden">{{ __('generic.size') }} <span
+                                        class="text-xs">(KB)</span></th>
+                                <th class="p-2 max-sm:hidden">{{ __('generic.created') }}</th>
 
-                        @foreach ($responsiveImages as $responsiveImage)
-                           
-                            <tr class="{{$responsiveImage['filename'] ? 'bg-white' : 'bg-red-200'}} border-b text-center normal-case">                                    
-                                
-                                <td class="p-2 normal-case">{{ $responsiveImage['screen'] }}</td>
-                                <td class="p-2 max-lg:hidden">
-                                    {{ $responsiveImage['filename'] }}
-                                </td>
-                                <td class="p-2 max-sm:hidden">{{ $responsiveImage['created_at'] }}
-                                </td>
-                                <td class="p-2 max-sm:hidden">{{ $responsiveImage['size'] }} </td>
-                                
-                                
-                                <td class="p-2">
-                                    <div class="flex justify-center items-center gap-2">
-                                        {{-- <!-- Download file -->
-                                        <a href="{{ route('portfoliosfile.download', [$portfolio, $document]) }}"
+                                <th></th>
+                            </thead>
+
+                            @foreach ($responsiveImages as $responsiveImage)
+                                <tr
+                                    class="{{ $responsiveImage['filename'] ? 'bg-white' : 'bg-red-200' }} border-b text-center normal-case">
+
+                                    <td class="p-2 normal-case">{{ $responsiveImage['screen'] }}</td>
+                                    <td class="p-2 max-lg:hidden">
+                                        {{ $responsiveImage['filename'] }}
+                                    </td>
+                                    <td class="p-2 max-sm:hidden">
+                                        @if($responsiveImage['width'])
+                                        {{ $responsiveImage['width'] }} X {{ $responsiveImage['height'] }}
+                                        @endif
+                                    </td>
+                                    <td class="p-2 max-sm:hidden">{{ $responsiveImage['orientation'] }} </td>
+                                    <td class="p-2 max-sm:hidden">{{ $responsiveImage['resolution'] }} </td>
+                                    <td class="p-2 max-sm:hidden">{{ $responsiveImage['size'] }} </td>
+                                    <td class="p-2 max-sm:hidden">{{ $responsiveImage['created_at'] }}</td>
+
+
+                                    <td class="p-2">
+                                        <div class="flex justify-center items-center gap-2">
+                                            <!-- Create File -->
+                                            @if(!$responsiveImage['filename'])
+                                            <a href="{{ route('portfoliosfile.responsiveCreate', [$portfolio, $image, $responsiveImage['screen']]) }}"
+                                            title="{{ __('generic.create') }}">
+                                            <span
+                                                class="text-blue-600 hover:text-black transition-all duration-500">
+                                                <i class="fa-lg fa-solid fa-plus"></i>
+                                            </span>
+                                        </a>
+                                        @endif
+                                        <!-- Download file -->
+                                        @if($responsiveImage['filename'])
+                                        <a href="{{ route('portfoliosfile.responsiveDownload', [$portfolio, $image, $responsiveImage['screen']]) }}"
                                             title="{{ __('generic.download') }}">
                                             <span
                                                 class="text-green-600 hover:text-black transition-all duration-500">
                                                 <i class="fa-lg fa-solid fa-file-arrow-down"></i>
                                             </span>
                                         </a>
+                                        @endif
                                         <!-- Delete file -->
-                                        <form action="{{ route('portfoliosfile.destroy', [$portfolio, $document]) }}"
+                                        @if($responsiveImage['filename'])
+                                        <form action="{{ route('portfoliosfile.responsiveDelete', [$portfolio, $image, $responsiveImage['screen']]) }}"
                                             method="POST">
                                             <!-- Add Token to prevent Cross-Site Request Forgery (CSRF) -->
                                             @csrf
@@ -191,28 +215,29 @@
                                                     class="text-red-600 hover:text-black transition-all duration-500"><i
                                                         class="fa-lg fa-solid fa-trash"></i></span>
                                             </button>
-                                        </form> --}}
-                                    </div>
-                                </td>
+                                        </form>
+                                        @endif
+                                        </div>
+                                    </td>
 
-                            </tr>
-                        @endforeach
+                                </tr>
+                            @endforeach
 
-                    </table>
+                        </table>
 
-                </div>
+                    </div>
                 @else
-                <h2>No responsive images</h2>
+                    <h2>No responsive images</h2>
 
                 @endif
 
 
             </div>
 
-            {{var_dump($responsiveImages)}}
-<br />
+            {{ var_dump($responsiveImages) }}
+            <br />
 
-           
+
 
 
 
@@ -354,4 +379,3 @@
     </div>
 
 </div>
-
