@@ -33,6 +33,7 @@ use App\Livewire\Portfolio\PortfolioCreate;
 use App\Livewire\Portfolio\PortfolioEdit;
 use App\Livewire\Portfolio\PortfolioFileEdit;
 use App\Livewire\Portfolio\PortfolioFileShow;
+use App\Livewire\Portfolio\PortfolioFileTranslationCreate;
 use App\Livewire\Portfolio\PortfolioFileUpload;
 use App\Livewire\Portfolio\PortfolioShow;
 use App\Livewire\Portfolio\PortfolioTranslation;
@@ -102,27 +103,6 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
     Route::delete('/portfolios/{portfolio}', [PortfolioController::class, 'destroy'])->name('portfolios.destroy');
     Route::get('/portfolios/edit/{portfolio}', PortfolioEdit::class)->name('portfolios.edit');
 
-    /* PORTFOLIO FILES */
-    Route::get('/portfolios/upload/{portfolio}', PortfolioFileUpload::class)->name('portfolios.upload');
-
-    Route::get('/portfolios/{portfolio}/file/{file}', PortfolioFileShow::class)->name('portfoliosfile.show');
-
-    Route::put('/portfolios/{portfolio}/file/{file}', [PortfolioFileController::class, 'update'])->name('portfoliosfile.update');
-
-    Route::get('/portfolios/{portfolio}/file/{file}/edit', PortfolioFileEdit::class)->name('portfoliosfile.edit');
-
-
-    Route::get('/portfolios/{portfolio}/file/{file}/responsive', [PortfolioFileController::class, 'responsive'])->name('portfoliosfile.responsive');
-    Route::get('/portfolios/{portfolio}/file/{image}/responsive/{screen}', [PortfolioFileController::class, 'responsiveCreate'])->name('portfoliosfile.responsiveCreate');
-    Route::delete('/portfolios/{portfolio}/file/{image}/responsive/{screen}', [PortfolioFileController::class, 'responsiveDelete'])->name('portfoliosfile.responsiveDelete');
-    Route::get('/portfolios/{portfolio}/file/{image}/responsive/{screen}/download', [PortfolioFileController::class, 'responsiveDownload'])->name('portfoliosfile.responsiveDownload');
-
-
-
-    Route::get('/portfolios/{portfolio}/file/{file}/download', [PortfolioFileController::class, 'download'])->name('portfoliosfile.download');
-    //Route::get('/portfolios/{portfolio}/file/{file}', [PortfolioFileController::class, 'download'])->name('portfoliosfile.download');
-    Route::delete('/portfolios/{portfolio}/file/{file}', [PortfolioFileController::class, 'destroy'])->name('portfoliosfile.destroy');
-
     /* PORTFOLIO TRANSLATIONS */
     Route::get('/portfolios/{portfolio}/translation/create/{missingTranslationId?}', PortfolioTranslationCreate::class)
         ->name('portfolios_trans.create')
@@ -132,6 +112,38 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
     Route::delete('/portfolios_trans/{translation}', [PortfolioTranslationController::class, 'destroy'])->name('portfolios_trans.destroy');
     Route::get('/portfolios_trans/{translation}', PortfolioTranslationShow::class)->name('portfolios_trans.show');
     Route::get('/portfolios_trans/edit/{translation}', PortfolioTranslationEdit::class)->name('portfolios_trans.edit');
+
+
+    /* PORTFOLIO FILES */
+    Route::get('/portfolios/upload/{portfolio}', PortfolioFileUpload::class)->name('portfolios.upload');
+
+    Route::get('/portfolios/{portfolio}/file/{file}', PortfolioFileShow::class)->name('portfoliosfile.show');
+    Route::put('/portfolios/{portfolio}/file/{file}', [PortfolioFileController::class, 'update'])->name('portfoliosfile.update');
+    Route::get('/portfolios/{portfolio}/file/{file}/edit', PortfolioFileEdit::class)->name('portfoliosfile.edit');
+
+    Route::get('/portfolios/{portfolio}/file/{file}/responsive', [PortfolioFileController::class, 'responsive'])->name('portfoliosfile.responsive');
+    Route::get('/portfolios/{portfolio}/file/{image}/responsive/{screen}', [PortfolioFileController::class, 'responsiveCreate'])->name('portfoliosfile.responsiveCreate');
+    Route::delete('/portfolios/{portfolio}/file/{image}/responsive/{screen}', [PortfolioFileController::class, 'responsiveDelete'])->name('portfoliosfile.responsiveDelete');
+    Route::get('/portfolios/{portfolio}/file/{image}/responsive/{screen}/download', [PortfolioFileController::class, 'responsiveDownload'])->name('portfoliosfile.responsiveDownload');
+
+    Route::get('/portfolios/{portfolio}/file/{file}/download', [PortfolioFileController::class, 'download'])->name('portfoliosfile.download');
+    Route::delete('/portfolios/{portfolio}/file/{file}', [PortfolioFileController::class, 'destroy'])->name('portfoliosfile.destroy');
+
+    /* PORTFOLIO FILES TRANSLATIONS */
+
+    Route::get('/portfolios/{portfolio}/file/{file}/translation/create/{missingTranslationId?}', PortfolioFileTranslationCreate::class)
+        ->name('portfoliosfile_trans.create')
+        ->where('missingTranslationId', '[0-9]+');
+
+    /* PORTFOLIO TRANSLATIONS */
+    /* Route::get('/portfolios/{portfolio}/translation/create/{missingTranslationId?}', PortfolioTranslationCreate::class)
+        ->name('portfolios_trans.create')
+        ->where('missingTranslationId', '[0-9]+');
+    Route::get('/portfolios_trans', PortfolioTranslation::class)->name('portfolios_trans');
+    Route::put('/portfolios_trans/{translation}', [PortfolioTranslationController::class, 'update'])->name('portfolios_trans.update');
+    Route::delete('/portfolios_trans/{translation}', [PortfolioTranslationController::class, 'destroy'])->name('portfolios_trans.destroy');
+    Route::get('/portfolios_trans/{translation}', PortfolioTranslationShow::class)->name('portfolios_trans.show');
+    Route::get('/portfolios_trans/edit/{translation}', PortfolioTranslationEdit::class)->name('portfolios_trans.edit'); */
 
 
     /* PORTFOLIO CATEGORIES */

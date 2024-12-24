@@ -38,4 +38,15 @@ class PortfolioFile extends Model
             foreignKey: 'portfolio_id'
         );
     }    
+
+    /**
+     * Get the translations associated.
+     */
+    public function translations()
+    {
+        return $this->hasMany(
+            PortfolioFileTranslation::class,
+            foreignKey: 'portfolio_file_id'
+        );
+    }
 }

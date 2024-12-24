@@ -144,6 +144,18 @@ class TranslationService
         $portfolioTranslation->tags()->sync($selectedTags);
     }
 
+    public function insertTranslationPortfolioFile(string $table, string $elementColumn, int $elementId, int $languageId, string $title, string $description)
+    {
+        DB::table($table)->insert([
+            $elementColumn => $elementId,
+            'lang_id' => $languageId,
+            'title' => $title,
+            'description' => $description,
+            'created_at' => date('Y-m-d H:i:s'),
+            'updated_at' => date('Y-m-d H:i:s'),
+        ]);
+    }  
+
     /**
      * Insert a Translation for a Portfolio, also insert the tags in the pivot table
      * 

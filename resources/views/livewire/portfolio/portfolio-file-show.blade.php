@@ -238,10 +238,7 @@
             <br />
 
 
-
-
-
-            {{-- <!-- Check for Languges in the App -->
+            <!-- Check for Languges in the App -->
             @if ($languages->count() > 0)
 
                 <!-- Translations -->
@@ -252,10 +249,10 @@
 
                         <div class="w-fit {{ $bgTranslationTab }} text-white text-lg rounded-t-md capitalize mb-0 p-2">
                             {{ __('generic.translations') }}
-                            ({{ $portfolio->translations->count() }}/{{ $languages->count() }})
+                            ({{ $image->translations->count() }}/{{ $languages->count() }})
                         </div>
 
-                        @if ($portfolio->translations->count() == $languages->count())
+                        @if ($image->translations->count() == $languages->count())
                             <div class="flex justify-start items-center font-bold bg-gray-100 p-2 gap-2">
                                 {{ __('generic.doneTranslations') }}
                                 <i class="fa-solid fa-check text-green-600"></i>
@@ -281,7 +278,7 @@
                                 <th></th>
                             </thead>
 
-                            @foreach ($portfolio->translations as $translation)
+                            @foreach ($image->translations as $translation)
                                 <tr class="bg-green-200 border-b text-center">
                                     <td class="p-2">{{ $translation->title }}</td>
                                     <td class="p-2 max-lg:hidden">{{ $translation->language->name }}</td>
@@ -328,7 +325,7 @@
                                     <td class="p-2 max-sm:hidden">-</td>
                                     <td class="p-2 max-sm:hidden">-</td>
                                     <td class="p-2">
-                                        <a href="{{ route('portfolios_trans.create', ['portfolio' => $portfolio, 'missingTranslationId' => $missing->id]) }}"
+                                        <a href="{{ route('portfoliosfile_trans.create', ['portfolio' => $portfolio, 'file' => $image, 'missingTranslationId' => $missing->id]) }}"
                                             title="New Translation">
                                             <i
                                                 class="fa-solid fa-circle-plus text-green-600 hover:text-green-400 transition duration-1000 ease-in-out"></i>
@@ -355,7 +352,7 @@
                         </a>
                     </button>
                 </div>
-            @endif --}}
+            @endif
 
         </div>
 
