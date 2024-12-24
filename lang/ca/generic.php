@@ -116,6 +116,10 @@ return [
     "webpImages" => "Imatges Responsive",
     "screenSize" => "Tamany pantalla",
     "responsive" => "responsive",
+    "doneResponsiveImages" => "Totes les imatges responsive estàn creades",
+    "missingResponsive" => "Encara no hi ha cap imatge responsive",
+    "missingResponsiveImage" => "Imatge responsive pendent",
+    "missingResponsiveImages" => "Imatges responsive pendents",
     // DOCUMENTS
     "foundDocuments" => "S'han trobar aquests documents",
     "noDocuments" => "No hi ha cap document",

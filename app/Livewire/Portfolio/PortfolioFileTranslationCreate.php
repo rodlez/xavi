@@ -53,8 +53,12 @@ class PortfolioFileTranslationCreate extends Component
         // TODO: No insert the current cataegory id as pf_type_id
         // Error(PDOException: SQLSTATE[HY000]: General error: 1364 Field 'pf_type_id' doesn't have a default value
 
-        $this->validate();
-
+        // Because title and description are optional, if both are null, no need to do anything
+        $validated = $this->validate();
+        if($validated['title'] == null && $validated['description'] == null) {
+            return to_route('portfoliosfile.show', [$this->file->portfolio, $this->file]);
+        }
+        
         // Get the language of the translation to show on the returned success or fail message
         $languageName = Languages::where('id', $this->missingTranslationId)
             ->pluck('name')
@@ -83,9 +87,9 @@ class PortfolioFileTranslationCreate extends Component
 
         return view('livewire.portfolio.portfolio-file-translation-create', [
             // Styles
-            'underlineMenuHeader' => 'border-b-2 border-b-emerald-400',
-            'textMenuHeader' => 'hover:text-emerald-400',
-            'bgMenuColor' => 'bg-emerald-400',
+            'underlineMenuHeader' => 'border-b-2 border-b-slate-600',
+            'textMenuHeader' => 'hover:text-slate-800',
+            'bgMenuColor' => 'bg-slate-800',
             'bgInfoTab' => 'bg-orange-600',
             'typeName' => 'text-white font-bold bg-orange-600',
             'menuInfo' => 'text-white bg-slate-800',
@@ -94,8 +98,8 @@ class PortfolioFileTranslationCreate extends Component
             'languageName' => 'text-pink-600 italic',
             'translationName' => 'text-white font-bold bg-pink-600',
             'menuTranslation' => 'text-white bg-slate-800',
-            'menuTextColor' => 'text-emerald-400',
-            'focusColor' => 'focus:ring-emerald-400 focus:border-emerald-400',
+            'menuTextColor' => 'text-slate-800',
+            'focusColor' => 'focus:ring-slate-400 focus:border-slate-400',
             // Data
             'file' => $this->file,
             'languages' => Languages::all(),

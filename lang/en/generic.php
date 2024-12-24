@@ -119,6 +119,10 @@ return [
     "webpImages" => "Responsive Images",
     "screenSize" => "Screen size",
     "responsive" => "responsive",
+    "doneResponsiveImages" => "All the responsive images are done",
+    "missingResponsive" => "There is none responsive image yet",
+    "missingResponsiveImage" => "Pending responsive image",
+    "missingResponsiveImages" => "Pending responsive images",
     // DOCUMENTS
     "foundDocuments" => "These are the documents found",
     "noDocuments" => "There are no documents",

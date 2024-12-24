@@ -9,6 +9,7 @@ use App\Http\Controllers\Portfolio\PortfolioCategoryController;
 use App\Http\Controllers\Portfolio\PortfolioCategoryTranslationController;
 use App\Http\Controllers\Portfolio\PortfolioController;
 use App\Http\Controllers\Portfolio\PortfolioFileController;
+use App\Http\Controllers\Portfolio\PortfolioFileTranslationController;
 use App\Http\Controllers\Portfolio\PortfolioTagController;
 use App\Http\Controllers\Portfolio\PortfolioTagTranslationController;
 use App\Http\Controllers\Portfolio\PortfolioTranslationController;
@@ -34,6 +35,8 @@ use App\Livewire\Portfolio\PortfolioEdit;
 use App\Livewire\Portfolio\PortfolioFileEdit;
 use App\Livewire\Portfolio\PortfolioFileShow;
 use App\Livewire\Portfolio\PortfolioFileTranslationCreate;
+use App\Livewire\Portfolio\PortfolioFileTranslationEdit;
+use App\Livewire\Portfolio\PortfolioFileTranslationShow;
 use App\Livewire\Portfolio\PortfolioFileUpload;
 use App\Livewire\Portfolio\PortfolioShow;
 use App\Livewire\Portfolio\PortfolioTranslation;
@@ -113,7 +116,6 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
     Route::get('/portfolios_trans/{translation}', PortfolioTranslationShow::class)->name('portfolios_trans.show');
     Route::get('/portfolios_trans/edit/{translation}', PortfolioTranslationEdit::class)->name('portfolios_trans.edit');
 
-
     /* PORTFOLIO FILES */
     Route::get('/portfolios/upload/{portfolio}', PortfolioFileUpload::class)->name('portfolios.upload');
 
@@ -135,6 +137,12 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
         ->name('portfoliosfile_trans.create')
         ->where('missingTranslationId', '[0-9]+');
 
+    Route::get('/portfolios/{portfolio}/file/{file}/translation/{translation}', PortfolioFileTranslationShow::class)->name('portfoliosfile_trans.show');
+    Route::put('/portfolios/{portfolio}/file/{file}/translation/{translation}', [PortfolioFileTranslationController::class, 'update'])->name('portfoliosfile_trans.update');
+    Route::delete('/portfolios/{portfolio}/file/{file}/translation/{translation}', [PortfolioFileTranslationController::class, 'destroy'])->name('portfoliosfile_trans.destroy');
+
+    Route::get('/portfolios/{portfolio}/file/{file}/translation/{translation}/edit', PortfolioFileTranslationEdit::class)->name('portfoliosfile_trans.edit');
+
     /* PORTFOLIO TRANSLATIONS */
     /* Route::get('/portfolios/{portfolio}/translation/create/{missingTranslationId?}', PortfolioTranslationCreate::class)
         ->name('portfolios_trans.create')
@@ -144,7 +152,6 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
     Route::delete('/portfolios_trans/{translation}', [PortfolioTranslationController::class, 'destroy'])->name('portfolios_trans.destroy');
     Route::get('/portfolios_trans/{translation}', PortfolioTranslationShow::class)->name('portfolios_trans.show');
     Route::get('/portfolios_trans/edit/{translation}', PortfolioTranslationEdit::class)->name('portfolios_trans.edit'); */
-
 
     /* PORTFOLIO CATEGORIES */
     Route::get('/pf_categories', PortfolioCategories::class)->name('pf_categories');

@@ -18,22 +18,13 @@
             <span class="text-lg text-white capitalize px-4">{{ __('generic.portfolio') }}</span>
         </div>
 
-        <div class="mx-auto w-11/12 my-4 px-2 bg-yellow-200">
+        <div class="mx-auto w-11/12 my-4 px-2">
 
             <span class="text-lg font-bold normal-case">{{ __('generic.image') }} {{ __('generic.for') }}
                 {{ __('generic.portfolio') }} > {{ $portfolio->name }}</span>
 
-            <div class="bg-slate-400 w-full h-2"></div>
-
-            <div class="flex flex-col bg-yellow-100">
-
-                <div class="flex">
-                    <img src="{{ asset('storage/' . $file->path) }}" alt="" class="w-32">
-                </div>
-
-            </div>
-
-
+            <div class="bg-slate-400 w-full h-1 mb-4"></div>
+            
             <!-- ORIGINAL PORTFOLIO INFORMATION -->
             <div class="flex flex-col capitalize">
 
@@ -75,6 +66,7 @@
                 </div>
                 <!-- Info Portfolio -->
                 <div class="flex flex-col text-black bg-gray-100">
+                    <span class="py-2"><img src="{{ asset('storage/' . $file->path) }}" alt="" class="w-32"></span>
                     <span class="{{ $menuInfo }} p-2">Id</span>
                     <span class="p-2">{{ $image->id }}</span>
                     <span class="{{ $menuInfo }} p-2">{{ __('generic.position') }}</span>
@@ -132,17 +124,33 @@
 
             </div>
 
-            <div class="flex flex-col capitalize">
 
-                <div class="flex flex-row justify-between">
-                    <div class="w-fit {{ $bgInfoTab }} text-white text-lg rounded-t-md capitalize mb-0 p-2">
-                        {{ __('generic.webpImages') }}
-                    </div>
-                </div>
-                {{ count($responsiveImages) }}
+            <div class="flex flex-col capitalize my-8">
 
                 @if (count($responsiveImages) > 1)
+                    <!-- Translations Text / Number of Translations and Pending Translations -->
+                    <div class="mb-2">
 
+                        <div class="w-fit {{ $bgTranslationTab }} text-white text-lg rounded-t-md capitalize mb-0 p-2">
+                            {{ __('generic.webpImages') }}
+                            ({{ $totalResponsiveImages }}/{{ count($responsiveImages) }})
+                        </div>
+
+                        @if ($totalResponsiveImages == count($responsiveImages))
+                            <div class="flex justify-start items-center font-bold bg-gray-100 p-2 gap-2">
+                                {{ __('generic.doneResponsiveImages') }}
+                                <i class="fa-solid fa-check text-green-600"></i>
+                            </div>
+                        @else
+                            <div class="text-red-600 font-bold bg-gray-100 p-2">
+                                {{ count($responsiveImages) - $totalResponsiveImages }}
+                                {{ count($responsiveImages) - $totalResponsiveImages > 1 ? __('generic.missingResponsiveImages') : __('generic.missingResponsiveImage') }}
+                            </div>
+                        @endif
+
+                    </div>
+
+                    <!-- Responsive Images Table -->
                     <div class="w-full overflow-x-auto">
 
                         <table class="table-auto w-full border text-sm capitalize">
@@ -168,8 +176,8 @@
                                         {{ $responsiveImage['filename'] }}
                                     </td>
                                     <td class="p-2 max-sm:hidden">
-                                        @if($responsiveImage['width'])
-                                        {{ $responsiveImage['width'] }} X {{ $responsiveImage['height'] }}
+                                        @if ($responsiveImage['width'])
+                                            {{ $responsiveImage['width'] }} X {{ $responsiveImage['height'] }}
                                         @endif
                                     </td>
                                     <td class="p-2 max-sm:hidden">{{ $responsiveImage['orientation'] }} </td>
@@ -181,42 +189,43 @@
                                     <td class="p-2">
                                         <div class="flex justify-center items-center gap-2">
                                             <!-- Create File -->
-                                            @if(!$responsiveImage['filename'])
-                                            <a href="{{ route('portfoliosfile.responsiveCreate', [$portfolio, $image, $responsiveImage['screen']]) }}"
-                                            title="{{ __('generic.create') }}">
-                                            <span
-                                                class="text-blue-600 hover:text-black transition-all duration-500">
-                                                <i class="fa-lg fa-solid fa-plus"></i>
-                                            </span>
-                                        </a>
-                                        @endif
-                                        <!-- Download file -->
-                                        @if($responsiveImage['filename'])
-                                        <a href="{{ route('portfoliosfile.responsiveDownload', [$portfolio, $image, $responsiveImage['screen']]) }}"
-                                            title="{{ __('generic.download') }}">
-                                            <span
-                                                class="text-green-600 hover:text-black transition-all duration-500">
-                                                <i class="fa-lg fa-solid fa-file-arrow-down"></i>
-                                            </span>
-                                        </a>
-                                        @endif
-                                        <!-- Delete file -->
-                                        @if($responsiveImage['filename'])
-                                        <form action="{{ route('portfoliosfile.responsiveDelete', [$portfolio, $image, $responsiveImage['screen']]) }}"
-                                            method="POST">
-                                            <!-- Add Token to prevent Cross-Site Request Forgery (CSRF) -->
-                                            @csrf
-                                            <!-- Dirtective to Override the http method -->
-                                            @method('DELETE')
-                                            <button
-                                                onclick="return confirm('{{ __('generic.confirmDelete') }}')"
-                                                title="{{ __('generic.delete') }}">
-                                                <span
-                                                    class="text-red-600 hover:text-black transition-all duration-500"><i
-                                                        class="fa-lg fa-solid fa-trash"></i></span>
-                                            </button>
-                                        </form>
-                                        @endif
+                                            @if (!$responsiveImage['filename'])
+                                                <a href="{{ route('portfoliosfile.responsiveCreate', [$portfolio, $image, $responsiveImage['screen']]) }}"
+                                                    title="{{ __('generic.create') }}">
+                                                    <span
+                                                        class="text-blue-600 hover:text-black transition-all duration-500">
+                                                        <i class="fa-lg fa-solid fa-plus"></i>
+                                                    </span>
+                                                </a>
+                                            @endif
+                                            <!-- Download file -->
+                                            @if ($responsiveImage['filename'])
+                                                <a href="{{ route('portfoliosfile.responsiveDownload', [$portfolio, $image, $responsiveImage['screen']]) }}"
+                                                    title="{{ __('generic.download') }}">
+                                                    <span
+                                                        class="text-green-600 hover:text-black transition-all duration-500">
+                                                        <i class="fa-lg fa-solid fa-file-arrow-down"></i>
+                                                    </span>
+                                                </a>
+                                            @endif
+                                            <!-- Delete file -->
+                                            @if ($responsiveImage['filename'])
+                                                <form
+                                                    action="{{ route('portfoliosfile.responsiveDelete', [$portfolio, $image, $responsiveImage['screen']]) }}"
+                                                    method="POST">
+                                                    <!-- Add Token to prevent Cross-Site Request Forgery (CSRF) -->
+                                                    @csrf
+                                                    <!-- Dirtective to Override the http method -->
+                                                    @method('DELETE')
+                                                    <button
+                                                        onclick="return confirm('{{ __('generic.confirmDelete') }}')"
+                                                        title="{{ __('generic.delete') }}">
+                                                        <span
+                                                            class="text-red-600 hover:text-black transition-all duration-500"><i
+                                                                class="fa-lg fa-solid fa-trash"></i></span>
+                                                    </button>
+                                                </form>
+                                            @endif
                                         </div>
                                     </td>
 
@@ -227,15 +236,32 @@
 
                     </div>
                 @else
-                    <h2>No responsive images</h2>
+                    <!-- Translations Text / Number of Translations and Pending Translations -->
+                    <div class="mb-2">
+
+                        <div class="w-fit {{ $bgFilesTab }} text-white text-lg rounded-t-md capitalize mb-0 p-2">
+                            {{ __('generic.webpImages') }}                            
+                        </div>
+
+                        <div class="bg-gray-100 flex flex-col sm:flex-row justify-between">
+                            <div class="text-red-600 font-bold normal-case bg-gray-100 p-2">
+                                {{ __('generic.missingResponsive') }}
+                            </div>
+
+                            <div class="w-fit bg-green-600 text-white text-lg rounded-md capitalize p-2">
+                                <a href="{{ route('portfoliosfile.responsive', [$portfolio, $image]) }}"
+                                    title="{{ __('generic.webpText') }}">
+                                    {{ __('generic.webpText') }}
+                                </a>
+                            </div>
+                        
+                        </div>
+
+                    </div>
 
                 @endif
-
-
             </div>
 
-            {{ var_dump($responsiveImages) }}
-            <br />
 
 
             <!-- Check for Languges in the App -->
@@ -247,7 +273,8 @@
                     <!-- Translations Text / Number of Translations and Pending Translations -->
                     <div class="mb-2">
 
-                        <div class="w-fit {{ $bgTranslationTab }} text-white text-lg rounded-t-md capitalize mb-0 p-2">
+                        <div
+                            class="w-fit {{ $bgTranslationTab }} text-white text-lg rounded-t-md capitalize mb-0 p-2">
                             {{ __('generic.translations') }}
                             ({{ $image->translations->count() }}/{{ $languages->count() }})
                         </div>
@@ -283,23 +310,27 @@
                                     <td class="p-2">{{ $translation->title }}</td>
                                     <td class="p-2 max-lg:hidden">{{ $translation->language->name }}</td>
                                     <td class="p-2">{{ $translation->language->code }}</td>
-                                    <td class="p-2 max-sm:hidden">{{ $translation->created_at->format('d-m-Y') }}</td>
-                                    <td class="p-2 max-sm:hidden">{{ $translation->updated_at->format('d-m-Y') }}</td>
+                                    <td class="p-2 max-sm:hidden">{{ $translation->created_at->format('d-m-Y') }}
+                                    </td>
+                                    <td class="p-2 max-sm:hidden">{{ $translation->updated_at->format('d-m-Y') }}
+                                    </td>
                                     <td class="p-2">
                                         <div class="flex justify-center items-center gap-2">
                                             <!-- Show -->
-                                            <a href="{{ route('portfolios_trans.show', $translation) }}">
+                                            <a
+                                                href="{{ route('portfoliosfile_trans.show', [$portfolio, $image, $translation]) }}">
                                                 <i
                                                     class="fa-solid fa-circle-info text-blue-600 hover:text-black transition duration-1000 ease-in-out"></i>
                                             </a>
                                             <!-- Edit -->
-                                            <a href="{{ route('portfolios_trans.edit', $translation) }}"
+                                            <a href="{{ route('portfoliosfile_trans.edit', [$portfolio, $image, $translation]) }}"
                                                 title="{{ __('generic.edit') }}">
                                                 <i
                                                     class="fa-solid fa-pen-to-square text-blue-800 hover:text-black transition duration-1000 ease-in-out"></i>
                                             </a>
                                             <!-- Delete -->
-                                            <form action="{{ route('portfolios_trans.destroy', $translation) }}"
+                                            <form
+                                                action="{{ route('portfoliosfile_trans.destroy', [$portfolio, $image, $translation]) }}"
                                                 method="POST">
                                                 <!-- Add Token to prevent Cross-Site Request Forgery (CSRF) -->
                                                 @csrf

@@ -19,10 +19,8 @@ class PortfolioFileShow extends Component
     protected TranslationService $translationService;
 
     // Hook Runs on every request, immediately after the component is instantiated, but before any other lifecycle methods are called
-    public function boot(
-        FileService $fileService,
-        TranslationService $translationService,
-    ) {
+    public function boot(FileService $fileService, TranslationService $translationService)
+    {
         $this->fileService = $fileService;
         $this->translationService = $translationService;
     }
@@ -30,7 +28,7 @@ class PortfolioFileShow extends Component
     public function mount(Portfolio $portfolio, PortfolioFile $file)
     {
         $this->portfolio = $portfolio;
-        $this->file = $file;        
+        $this->file = $file;
     }
 
     public function render()
@@ -38,6 +36,13 @@ class PortfolioFileShow extends Component
         //dd($this->file);
         //dd($this->fileService->imageResponsiveInfo($this->file->path));
         $responsiveImages = $this->fileService->getResponsiveImagesInfo($this->file);
+
+        $totalResponsiveImages = 0;
+        if (count($responsiveImages) > 1) {
+            foreach ($responsiveImages as $responsiveImage) {
+                $responsiveImage['filename'] ? ($totalResponsiveImages = $totalResponsiveImages + 1) : '';
+            }
+        }
 
         $missingTranslations = $this->translationService->getTranslationsMissingTest($this->file);
         //dd($missingTranslations);
@@ -49,7 +54,7 @@ class PortfolioFileShow extends Component
             'bgMenuColor' => 'bg-slate-800',
             'bgInfoTab' => 'bg-orange-600',
             'portfolioName' => 'text-white font-bold bg-orange-600',
-            'menuInfo' => 'text-white bg-slate-800',            
+            'menuInfo' => 'text-white bg-slate-800',
             'bgFilesTab' => 'bg-lime-600',
             'bgTranslationTab' => 'bg-pink-600',
             'menuTextColor' => 'text-slate-800',
@@ -59,6 +64,7 @@ class PortfolioFileShow extends Component
             'languages' => Languages::all(),
             'missingTranslations' => $missingTranslations,
             'responsiveImages' => $responsiveImages,
+            'totalResponsiveImages' => $totalResponsiveImages,
         ])->layout('layouts.app');
     }
 }
