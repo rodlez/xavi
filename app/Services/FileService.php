@@ -103,6 +103,16 @@ class FileService
     }
 
     /**
+     * Delete the directory with the id of the portfolio and all the files inside.
+     */
+    public function deletePortfolioDirectory(Collection $files)
+    {
+        foreach ($files as $file) {
+            $this->deleteOneFile($file);
+        }
+    }
+
+    /**
      * Inset new Note and insert the tags in the intermediate table note_tag
      */
     public function deleteFiles(Collection $files)
@@ -123,6 +133,16 @@ class FileService
             Storage::disk('public')->delete($file->path);
             $file->delete();
         }
+    }
+
+    public function deleteThumbnailImg(PortfolioFile $image)
+    {
+        $path = $this->getThumbnailPath($image);
+        
+        if (Storage::disk('public')->exists($path)) 
+        {           
+            Storage::disk('public')->delete($path);
+        }        
     }
 
     public function deleteResponsiveImg(string $path)
@@ -230,6 +250,21 @@ class FileService
     /***************************** IMAGES ************************************/
 
     /**
+     * Given an Image get his path for the Thumbnail Image
+     */
+    public function getThumbnailPath (PortfolioFile $image)
+    {        
+        // Original Image Info
+        $storagePath = pathinfo($image->path, PATHINFO_DIRNAME);
+        $filename = pathinfo($image->path, PATHINFO_FILENAME);
+        $extension = pathinfo($image->path, PATHINFO_EXTENSION);
+
+        $thumbnailName = "thumb";
+
+        return $storagePath . '/' . $filename . '_' . $thumbnailName . '.' . $extension;
+    }
+
+    /**
      * True if there is at least one, false if there is none
      */
 
@@ -324,7 +359,25 @@ class FileService
         $extension = 'webp';
 
         return $storagePath . '/' . $filename . '_' . $screenSize . '.' . $extension;
+    }
 
+    public function deleteResponsiveImages($file)
+    {
+        $responsiveScreens = ['S', 'M', 'L'];
+        //$totalResponsiveScreens = count($responsiveScreens);
+
+       /*  $storagePath = pathinfo($file->path, PATHINFO_DIRNAME);
+        $filename = pathinfo($file->path, PATHINFO_FILENAME);
+        $extension = 'webp'; */
+
+        foreach ($responsiveScreens as $screenSize) {
+            //$responsiveImagePath = $storagePath . '/' . $filename . '_' . $screenSize . '.' . $extension;
+            $responsiveImagePath = $this->getResponsivePath($file, $screenSize);
+            //dd($responsiveImagePath);
+            $this->deleteResponsiveImg($responsiveImagePath);
+        }
+
+        //return $totalResponsiveScreens == count($responsiveScreens) ? false : true;
     }
 
     /* ************** Intervention Image processing library ******************/

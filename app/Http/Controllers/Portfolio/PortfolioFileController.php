@@ -26,12 +26,20 @@ class PortfolioFileController extends Controller
      */
     public function destroy(Portfolio $portfolio, PortfolioFile $file)
     {
+        // ONLY FOR IMAGES 
+        // 1) Reorder the Portfolio Image gallery 
+        // 2) delete the thumbnail 
+        // 3) if there is any, delete the responsive images.
         if ($file->type == 'image') {
+            
             if (!$this->fileService->isLastImage($file)) {
-                $this->fileService->decreasePortfolioPositions($file);
+                $this->fileService->decreasePortfolioPositions($file);                
             }
+            
+            $this->fileService->deleteThumbnailImg($file);
+            $this->fileService->deleteResponsiveImages($file);
         }
-
+        // FOR ALL FILES        
         $this->fileService->deleteOneFile($file);
 
         //return back()->with('message', __("generic.file") . ' (' . $file->original_filename . ') ' . __("generic.for") . ' (' . $portfolio->name . ') ' . __("generic.successDelete"));

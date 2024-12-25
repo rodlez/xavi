@@ -30,23 +30,32 @@ class PortfolioService
      * @return string
      */
     public function deletePortfolio(Portfolio $portfolio)
-    {
+    {   
+        
         try {
-            $files = $portfolio->files;
+            //$files = $portfolio->files;
             $result = $portfolio->delete();
-
-            // If the portfolio is deleted, check if there is associated files and delete them.
+            
             if ($result) {
-                if ($files->isNotEmpty()) {
-                    $this->fileService->deleteFiles($files);
+                // Approach deleting files inside the directory one by one
+                // If the portfolio is deleted, check if there is associated files and delete them.
+                //if ($files->isNotEmpty()) {                    
+                //    $this->fileService->deleteFiles($files);                    
+                //} 
+
+                // Instead of delete files one by one, approach delete the directory and ALL the files inside if there is any.
+                $directoryToDelete = 'portfoliofiles/' . $portfolio->id;
+                if(Storage::disk('public')->exists($directoryToDelete))
+                {
+                    Storage::disk('public')->deleteDirectory($directoryToDelete);
                 }
                 
                 return to_route('portfolios')->with('message', __('generic.portfolio') . ' (' . $portfolio->name . ') ' . __('generic.successDelete'));                
             } 
         } catch (Exception $e) {            
             return to_route('portfolios')->with('error', __('generic.error') . ' (' . $e->getCode() . ') ' . __('generic.portfolio') . ' (' . $portfolio->name . ') ' . __('generic.errorDelete'));
-        } 
-        
+        }         
+
     }
 
      /**
