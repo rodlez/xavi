@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Portfolio;
+namespace App\Livewire\Portfolio\PortfolioTranslations;
 
 use App\Models\Portfolio\PortfolioTranslation;
 use Livewire\Component;
@@ -17,7 +17,7 @@ class PortfolioTranslationShow extends Component
     public function render()
     {
                 
-        return view('livewire.portfolio.portfolio-translation-show', [
+        return view('livewire.portfolio.portfolios.translations.portfolio-translation-show', [
             // Styles
             'underlineMenuHeader' => 'border-b-2 border-b-slate-400',
             'textMenuHeader' => 'hover:text-slate-400',

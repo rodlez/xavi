@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Portfolio;
+namespace App\Livewire\Portfolio\PortfolioTranslations;
 
 use App\Models\Languages;
 use App\Models\Portfolio\PortfolioCategoryTranslation;
@@ -38,7 +38,7 @@ class PortfolioTranslationEdit extends Component
         
         $translationTags = $this->translationService->getPortfolioTranslationTags($this->translation->tags);
 
-        return view('livewire.portfolio.portfolio-translation-edit', [
+        return view('livewire.portfolio.portfolios.translations.portfolio-translation-edit', [
             // Styles
             'underlineMenuHeader' => 'border-b-2 border-b-slate-400',
             'textMenuHeader' => 'hover:text-slate-400',

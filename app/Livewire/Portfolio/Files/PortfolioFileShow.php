@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Portfolio;
+namespace App\Livewire\Portfolio\Files;
 
 use App\Models\Languages;
 use App\Models\Portfolio\Portfolio;
@@ -47,7 +47,7 @@ class PortfolioFileShow extends Component
         $missingTranslations = $this->translationService->getTranslationsMissingTest($this->file);
         //dd($missingTranslations);
         //dd($responsiveImages);
-        return view('livewire.portfolio.portfolio-file-show', [
+        return view('livewire.portfolio.portfolios.files.portfolio-file-show', [
             // Styles
             'underlineMenuHeader' => 'border-b-2 border-b-slate-600',
             'textMenuHeader' => 'hover:text-slate-800',

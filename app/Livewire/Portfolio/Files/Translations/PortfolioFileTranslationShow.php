@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Portfolio;
+namespace App\Livewire\Portfolio\Files\Translations;
 
 use App\Models\Languages;
 use App\Models\Portfolio\Portfolio;
@@ -8,7 +8,7 @@ use App\Models\Portfolio\PortfolioFile;
 use App\Models\Portfolio\PortfolioFileTranslation;
 use Livewire\Component;
 
-class PortfolioFileTranslationEdit extends Component
+class PortfolioFileTranslationShow extends Component
 {
     public Portfolio $portfolio;
     public PortfolioFile $file;
@@ -23,10 +23,9 @@ class PortfolioFileTranslationEdit extends Component
 
     public function render()
     {
-        
         $languages = Languages::all()->sortBy('name', SORT_NATURAL | SORT_FLAG_CASE);
 
-        return view('livewire.portfolio.portfolio-file-translation-edit', [
+        return view('livewire.portfolio.portfolios.files.translations.portfolio-file-translation-show', [
             // Styles
             'underlineMenuHeader' => 'border-b-2 border-b-slate-600',
             'textMenuHeader' => 'hover:text-slate-800',
@@ -42,9 +41,9 @@ class PortfolioFileTranslationEdit extends Component
             'menuTextColor' => 'text-slate-800',
             'focusColor' => 'focus:ring-slate-400 focus:border-slate-400',
             // Data
-            //'translation' => $this->translation,
             'languages' => $languages,
         ])->layout('layouts.app');
     }
-   
+    
+    
 }

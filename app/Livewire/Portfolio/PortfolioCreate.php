@@ -54,7 +54,7 @@ class PortfolioCreate extends Component
 
     public function render()
     {
-        return view('livewire.portfolio.portfolio-create', [
+        return view('livewire.portfolio.portfolios.portfolio-create', [
             // Styles
             'underlineMenuHeader' => 'border-b-2 border-b-slate-600',
             'textMenuHeader' => 'hover:text-slate-800',

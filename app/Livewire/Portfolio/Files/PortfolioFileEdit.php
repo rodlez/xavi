@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Portfolio;
+namespace App\Livewire\Portfolio\Files;
 
 use App\Models\Portfolio\Portfolio;
 use App\Models\Portfolio\PortfolioFile;
@@ -20,7 +20,7 @@ class PortfolioFileEdit extends Component
 
     public function render()
     {
-        return view('livewire.portfolio.portfolio-file-edit', [
+        return view('livewire.portfolio.portfolios.files.portfolio-file-edit', [
             // Styles
             'underlineMenuHeader' => 'border-b-2 border-b-slate-600',
             'textMenuHeader' => 'hover:text-slate-800',

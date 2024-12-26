@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Portfolio;
+namespace App\Livewire\Portfolio\Files\Translations;
 
 use App\Http\Requests\Portfolio\StorePortfolioFileTranslationRequest;
 use App\Models\Languages;
@@ -85,7 +85,7 @@ class PortfolioFileTranslationCreate extends Component
         // 2 - Check if the Language have already a translation. if so, no need to give the option to create a new one.
         $isTranslated = $this->translationService->isTranslated($this->file->translations, $this->missingTranslationId);
 
-        return view('livewire.portfolio.portfolio-file-translation-create', [
+        return view('livewire.portfolio.portfolios.files.translations.portfolio-file-translation-create', [
             // Styles
             'underlineMenuHeader' => 'border-b-2 border-b-slate-600',
             'textMenuHeader' => 'hover:text-slate-800',

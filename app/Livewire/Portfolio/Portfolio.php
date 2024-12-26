@@ -96,7 +96,7 @@ class Portfolio extends Component
         $total = $data->count();
         $data = $data->paginate($this->perPage);
 
-        return view('livewire.portfolio.portfolio', [
+        return view('livewire.portfolio.portfolios.portfolio', [
             // Styles
             'underlineMenuHeader' => 'border-b-2 border-b-slate-600',
             'textMenuHeader' => 'hover:text-slate-400',

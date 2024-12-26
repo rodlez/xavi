@@ -142,4 +142,7 @@ return [
     "for" => "per",
     "yes" => "si",
     "no" => "no",
+    // MENUS
+    "dashboard" => "Panell de Control",
+    "home" => "Inici",
 ];

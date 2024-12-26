@@ -79,7 +79,7 @@ class PortfolioShow extends Component
 
         $missingTranslations = $this->translationService->getTranslationsMissingTest($this->portfolio);
 
-        return view('livewire.portfolio.portfolio-show', [
+        return view('livewire.portfolio.portfolios.portfolio-show', [
             // Styles
             'underlineMenuHeader' => 'border-b-2 border-b-slate-600',
             'textMenuHeader' => 'hover:text-slate-800',

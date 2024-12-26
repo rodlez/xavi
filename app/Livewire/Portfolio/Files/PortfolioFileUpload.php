@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Portfolio;
+namespace App\Livewire\Portfolio\Files;
 
 use App\Http\Requests\Files\StoreFileRequest;
 use App\Models\Portfolio\Portfolio;
@@ -140,7 +140,7 @@ class PortfolioFileUpload extends Component
         // Get the files order by image position ignoring documents(left after the images)
         $portfolioFiles = PortfolioFile::where('portfolio_id', $this->portfolio->id)->orderByRaw('-position DESC')->get();        
 
-        return view('livewire.portfolio.portfolio-file-upload', [
+        return view('livewire.portfolio.portfolios.files.portfolio-file-upload', [
             // Styles
             'underlineMenuHeader' => 'border-b-2 border-b-slate-600',
             'textMenuHeader' => 'hover:text-slate-800',

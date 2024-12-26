@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Portfolio;
+namespace App\Livewire\Portfolio\PortfolioTranslations;
 
 use App\Http\Requests\Portfolio\StorePortfolioTranslationRequest;
 use App\Models\Languages;
@@ -108,7 +108,7 @@ class PortfolioTranslationCreate extends Component
         $tags = PortfolioTagTranslation::all()->where('lang_id', $this->missingTranslationId)->sortBy('name', SORT_NATURAL|SORT_FLAG_CASE);
         
         
-        return view('livewire.portfolio.portfolio-translation-create', [
+        return view('livewire.portfolio.portfolios.translations.portfolio-translation-create', [
             // Styles
             'underlineMenuHeader' => 'border-b-2 border-b-slate-400',
             'textMenuHeader' => 'hover:text-slate-400',

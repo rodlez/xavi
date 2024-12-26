@@ -16,7 +16,7 @@ class PortfolioEdit extends Component
 
     public function render()
     {
-        return view('livewire.portfolio.portfolio-edit', [
+        return view('livewire.portfolio.portfolios.portfolio-edit', [
             // Styles
             'underlineMenuHeader' => 'border-b-2 border-b-slate-600',
             'textMenuHeader' => 'hover:text-slate-800',

@@ -142,4 +142,7 @@ return [
     'for' => 'para',
     "yes" => "si",
     "no" => "no",
+    // MENUS
+    "dashboard" => "Panel de Control",
+    "home" => "Inicio",
 ];
