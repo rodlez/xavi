@@ -1,22 +1,24 @@
     <nav class="flex justify-start items-center gap-4 bg-red-200">
-        
+
         <!-- Menu Links -->
-        
+
         <a href="{{ route('home') }}" class="hover:underline">{{ __('menulinks.home') }}</a>
         <a href="{{ route('contact') }}" class="hover:underline">{{ __('menulinks.contact') }}</a>
         <a href="{{ route('services') }}" class="hover:underline">{{ __('menulinks.services') }}</a>
+
+        <a href="{{ route('portfolio') }}" class="hover:underline">{{ __('menulinks.portfolio') }}</a>
 
         <!-- Playground -->
         <a href="{{ route('playground') }}" class="hover:underline">Test</a>
 
         <!-- Authentication Links -->
-        
+
         @if (Auth::check())
             <a href="{{ route('dashboard') }}" class="hover:underline">Admin</a>
             <form method="POST" action="{{ route('logout') }}" x-data>
                 @csrf
                 <button type="submit"
-                    class="hover:underline hover:text-red-400">
+                        class="hover:underline hover:text-red-400">
                     {{ __('Log Out') }}
                 </button>
             </form>
@@ -25,7 +27,7 @@
         @endif
 
         <!-- Languages Links-->
-        
+
         @if (App::currentLocale() != 'es')
             <a href="{{ route('change.lang', ['lang' => 'es']) }}" class="hover:underline">ESP</a>
         @endif

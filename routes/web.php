@@ -15,6 +15,7 @@ use App\Http\Controllers\Portfolio\PortfolioTagTranslationController;
 use App\Http\Controllers\Portfolio\PortfolioTranslationController;
 use App\Http\Controllers\Portfolio\PortfolioTypeController;
 use App\Http\Controllers\Portfolio\PortfolioTypeTranslationController;
+use App\Http\Controllers\Section\Portfolio as SectionPortfolio;
 /* Livewire Full Page Components */
 
 use App\Livewire\Languages\Languages;
@@ -67,7 +68,7 @@ Route::get('/', function () {
 })->name('home');
 
 Route::get('/contact', function () {
-    return 'contact';
+    return 'contactito';
 })->name('contact');
 
 Route::get('/services', function () {
@@ -75,6 +76,11 @@ Route::get('/services', function () {
 })->name('services');
 
 Route::get('/playground', [Playground::class, 'index'])->name('playground');
+
+Route::get('/portfolio', [SectionPortfolio::class, 'index'])->name('portfolio');
+
+Route::get('/portfolio/{portfolio}', [SectionPortfolio::class, 'show'])->name('portfolio.show');
+
 
 /* LANGUAGES SWITCH */
 Route::get('lang', [LanguageController::class, 'change'])->name('change.lang');
