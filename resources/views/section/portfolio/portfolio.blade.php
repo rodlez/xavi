@@ -18,14 +18,14 @@
                 @foreach ($portfolios as $portfolio)
                     @if ($type->id == $portfolio->pf_type_trans_id)
                         @foreach ($portfolio->portfolio->files as $file)
-                            {{-- Break to take only the first image in the Gallery --}}
-                            @if ($file->type == 'image')
+                            {{-- Break to take only the first image and which is in the first position, to show in the Portfolio Gallery --}}
+                            @if ($file->type == 'image' && $file->position == 0)
                                 <div class="flex flex-col bg-emerald-600 my-4 p-2 w-48">
                                     <div class="flex bg-white">
                                         <img src="{{ asset('storage/' . $file->path) }}">
                                     </div>
                                     <div class="flex bg-black">
-                                        <a href="/portfolio/{{ $portfolio->id }}">
+                                        <a href="/portfolio/{{ $portfolio->portfolio_id }}">
                                             <span class="text-sm uppercase text-red-600">{{ $portfolio->title }}</span>
                                         </a>
                                     </div>
