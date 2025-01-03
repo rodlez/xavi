@@ -6,7 +6,7 @@
         <a href="{{ route('contact') }}" class="hover:underline">{{ __('menulinks.contact') }}</a>
         <a href="{{ route('services') }}" class="hover:underline">{{ __('menulinks.services') }}</a>
 
-        <a href="{{ route('portfolio') }}" class="hover:underline">{{ __('menulinks.portfolio') }}</a>
+        <a href="{{ route('portfolio') }}" class="hover:underline capitalize">{{ __('generic.portfolio') }}</a>
 
         <!-- Playground -->
         <a href="{{ route('playground') }}" class="hover:underline">Test</a>

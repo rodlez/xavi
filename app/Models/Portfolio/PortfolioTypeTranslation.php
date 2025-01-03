@@ -25,4 +25,15 @@ class PortfolioTypeTranslation extends Model
         return $this->belongsTo(Languages::class,
         foreignKey: 'lang_id');
     }
+
+     /**
+     * Get the portfolio translations associated.
+     */
+    public function portfoliotranslations()
+    {
+        return $this->hasMany(
+            PortfolioTranslation::class,
+            foreignKey: 'pf_type_trans_id'
+        );
+    }
 }

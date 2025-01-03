@@ -23,4 +23,5 @@ class PortfolioType extends Model
             foreignKey: 'pf_type_id'
         );
     }
+   
 }

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Languages;
 use App\Models\Portfolio\Portfolio as PortfolioModel;
 use App\Models\Portfolio\PortfolioCategoryTranslation;
+use App\Models\Portfolio\PortfolioTagTranslation;
 use App\Models\Portfolio\PortfolioTranslation;
 use App\Models\Portfolio\PortfolioType;
 use App\Models\Portfolio\PortfolioTypeTranslation;
@@ -23,14 +24,9 @@ class Portfolio extends Controller
     public function index()
     {
         $language = App::currentLocale();
-
         $languageId = Languages::where('code', $language)->pluck('id');
 
-        //$portfolios = PortfolioModel::all();
-        //$types = PortfolioType::all();
-
         $portfolios = PortfolioTranslation::where('lang_id', $languageId)->get();
-        //dd($portfolios);
         $types = PortfolioTypeTranslation::where('lang_id', $languageId)->get();
 
         return view('section.portfolio.portfolio', [
@@ -171,6 +167,49 @@ class Portfolio extends Controller
             //'files' => $portfolio->files,
             'language' => $language,
             'category' => $categoryTranslation,
+        ])->layout('layouts.xavi');
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function tags(string $id)
+    {
+        $language = App::currentLocale();
+
+        $languageId = Languages::where('code', $language)->pluck('id');        
+
+        //$typeIdTranslation = PortfolioTypeTranslation::where('pf_type_id', $id)->where('lang_id', $languageId)->pluck('id');
+
+        $tagTranslation = PortfolioTagTranslation::where('pf_tag_id', $id)->where('lang_id', $languageId)->first();
+
+        // get() returns a collection, first() returns a single instance
+        //dd('tagTranslation', $tagTranslation->translations);
+
+        //$portfolios =  PortfolioTranslation::whereRelation('tags', $tagTranslation)->where('lang_id', $languageId)->get();
+       
+        //dd('portfolios', $portfolios);
+
+        //$portfolios = PortfolioTranslation::where('pf_type_trans_id', $typeIdTranslation)->where('lang_id', $languageId)->get();
+        //$portfolios = PortfolioTranslation::where('pf_cat_trans_id', $tagTranslation->id)->where('lang_id', $languageId)->get();
+
+        //$portfolio = PortfolioModel::where('id', $id)->first();
+
+        
+        return view('section.portfolio.portfolio-tags', [
+            // Styles
+            'underlineMenuHeader' => 'border-b-2 border-b-slate-600',
+            'textMenuHeader' => 'hover:text-slate-400',
+            'bgMenuColor' => 'bg-slate-800',
+            'menuTextColor' => 'text-slate-800',
+            'focusColor' => 'focus:ring-slate-500 focus:border-slate-500',
+            // Layout
+            'title' => 'Portfolio',
+            // Data
+            'portfolios' => $tagTranslation->translations,
+            //'files' => $portfolio->files,
+            'language' => $language,
+            'tag' => $tagTranslation,
         ])->layout('layouts.xavi');
     }
 
