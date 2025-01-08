@@ -18,6 +18,8 @@ class PortfolioTypesTranslationCreate extends Component
     public PortfolioType $type;
     public string $missingTranslationId;
     public $name;
+    public $description;
+
 
     /**
      * USE LARAVEL FORM REQUEST IN LIVEWIRE
@@ -61,7 +63,7 @@ class PortfolioTypesTranslationCreate extends Component
             ->first();
 
         try {
-            $this->translationService->insertTranslation('pf_types_trans', 'pf_type_id', $this->type->id, $this->missingTranslationId, $this->name);
+            $this->translationService->insertTranslationTypes('pf_types_trans', 'pf_type_id', $this->type->id, $this->missingTranslationId, $this->name, $this->description);
             return to_route('pf_types.show', $this->type)->with('message', __('generic.translation') . ' (' . $languageName . ') ' . __('generic.successCreate'));
         } catch (Exception $e) {
             return to_route('pf_types.show', $this->type)->with('error', __('generic.error') . ' (' . $e->getCode() . ') ' . __('generic.translation') . ' (' . $languageName . ') ' . __('generic.errorCreate'));

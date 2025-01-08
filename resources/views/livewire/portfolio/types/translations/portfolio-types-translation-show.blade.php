@@ -77,7 +77,9 @@
                     <span class="{{ $menuTranslation }} p-2">{{ __('generic.language') }}</span>
                     <span class="{{$translationName}} p-2">{{ $translation->language->name }}</span>
                     <span class="{{ $menuTranslation }} p-2">{{ __('generic.translation') }}</span>
-                    <span class="{{$translationName}} p-2 sm:rounded-b-lg">{{ $translation->name }}</span>
+                    <span class="{{$translationName}} p-2">{{ $translation->name }}</span>
+                    <span class="{{ $menuTranslation }} p-2">{{ __('generic.description') }}</span>
+                    <span class="{{$translationName}} p-2 sm:rounded-b-lg">{{ $translation->description ? $translation->description : '-' }}</span>
                 </div>
 
                 <!-- Big Actions Buttons in SMALL SCREENS -->

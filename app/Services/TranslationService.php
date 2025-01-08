@@ -114,7 +114,7 @@ class TranslationService
     }
 
     /**
-     * Insert a Translation in the DB
+     * Insert a Translation in the DB, lang and name
      * 
      * @param string table Name of the DB translation table
      * @param string elementColumn Column in the DB table for foreignKey that references the translation table
@@ -134,6 +134,28 @@ class TranslationService
         ]);
     }    
 
+    /**
+     * Insert a Translation in the DB, lang and name
+     * 
+     * @param string table Name of the DB translation table
+     * @param string elementColumn Column in the DB table for foreignKey that references the translation table
+     * @param int elementId 
+     * @param int languageId 
+     * @param string translation 
+     */
+
+     public function insertTranslationTypes(string $table, string $elementColumn, int $elementId, int $languageId, string $translation, string $description)
+     {
+         DB::table($table)->insert([
+             $elementColumn => $elementId,
+             'lang_id' => $languageId,
+             'name' => $translation,
+             'description' => $description,
+             'created_at' => date('Y-m-d H:i:s'),
+             'updated_at' => date('Y-m-d H:i:s'),
+         ]);
+     }  
+
 
     public function insertTranslationPortfolio(array $validated)
     {        
@@ -143,6 +165,17 @@ class TranslationService
         $portfolioTranslation = PortfolioTranslation::create($validated);
         $portfolioTranslation->tags()->sync($selectedTags);
     }
+
+    /**
+     * Insert a Translation in the DB, lang, name and description
+     * 
+     * @param string table Name of the DB translation table
+     * @param string elementColumn Column in the DB table for foreignKey that references the translation table
+     * @param int elementId 
+     * @param int languageId 
+     * @param string translation 
+     * @param string description 
+     */
 
     public function insertTranslationPortfolioFile(string $table, string $elementColumn, int $elementId, int $languageId, string $title, string $description)
     {

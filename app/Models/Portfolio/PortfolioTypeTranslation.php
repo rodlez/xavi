@@ -12,7 +12,7 @@ class PortfolioTypeTranslation extends Model
 
     use HasFactory;
 
-    protected $fillable = ['pf_type_id', 'lang_id', 'name'];
+    protected $fillable = ['pf_type_id', 'lang_id', 'name', 'description'];
 
     public function type()
     {

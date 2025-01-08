@@ -96,6 +96,18 @@
                         </div>
                     @enderror
 
+                    <!-- Description -->
+                    <div class="flex flex-col justify-start items-start w-full sm:w-2/3 gap-4 py-2">
+                        <span class="text-lg font-semibold capitalize px-2">{{ __('generic.description') }}</span>
+                        <textarea rows="6" name="description" id="description"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-md rounded-lg w-full p-2 {{ $focusColor }}">{{ $translation->description }}</textarea>
+                    </div>
+                    @error('description')
+                        <div class="text-sm text-red-600 font-bold py-1">
+                            {{ $message }}
+                        </div>
+                    @enderror                    
+
                     <!-- Save -->
                     <div class="mt-4 mb-2">
                         <button type="submit"

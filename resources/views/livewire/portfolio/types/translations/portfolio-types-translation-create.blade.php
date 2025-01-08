@@ -23,7 +23,8 @@
             <div class="flex flex-col">
 
                 <div class="flex flex-row justify-between">
-                    <div class="flex w-full sm:w-fit {{ $bgInfoTab }} text-white font-light uppercase rounded-t-md p-2">
+                    <div
+                        class="flex w-full sm:w-fit {{ $bgInfoTab }} text-white font-light uppercase rounded-t-md p-2">
                         {{ __('generic.type') }}
                     </div>
                 </div>
@@ -41,24 +42,27 @@
                 @if ($isTranslated == false)
                     <div class="flex flex-col my-8">
                         <!-- Info Type Translation -->
-                        <div class="flex w-full sm:w-fit {{ $bgTranslationTab }} text-white font-light uppercase rounded-t-md p-2">
+                        <div
+                            class="flex w-full sm:w-fit {{ $bgTranslationTab }} text-white font-light uppercase rounded-t-md p-2">
                             {{ __('generic.translation') }}
                         </div>
                         <div class="flex flex-col text-black capitalize bg-gray-200 rounded-b-lg sm:rounded-tr-lg">
                             <span class="{{ $menuInfo }} p-2 sm:rounded-tr-lg">{{ __('generic.language') }}</span>
-                            <span class="{{ $translationName }} p-2 rounded-b-lg">{{ $translationLanguage->name }}</span>
+                            <span
+                                class="{{ $translationName }} p-2 rounded-b-lg">{{ $translationLanguage->name }}</span>
                         </div>
                     </div>
 
                     <!-- Create Translation Type Message -->
                     <div
-                        class="flex w-full sm:w-fit text-lg {{$createTranslation}} font-light normal-case rounded-t-md p-2">
+                        class="flex w-full sm:w-fit text-lg {{ $createTranslation }} font-light normal-case rounded-t-md p-2">
                         <span>{{ __('generic.createTranslation') }}</span>
                     </div>
                     <!-- Mandatory Form Fields Message -->
                     <div class="flex flex-col text-black normal-case bg-gray-200 sm:rounded-tr-lg">
-                        <span class="{{ $menuInfo }} text-sm p-2 sm:rounded-tr-lg">{{ __('generic.mandatoryFields') }}</span>
-                    </div>                   
+                        <span
+                            class="{{ $menuInfo }} text-sm p-2 sm:rounded-tr-lg">{{ __('generic.mandatoryFields') }}</span>
+                    </div>
 
                     <!-- Form -->
                     <div class="bg-slate-200 rounded-b-md my-0 p-2">
@@ -80,6 +84,20 @@
 
                             @error('name')
                                 <div class="text-sm text-red-600 normal-case font-bold py-1 px-2">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+
+                            <!-- Description -->
+                            <div class="flex flex-col justify-start items-start w-full sm:w-2/3 gap-4 py-2">
+                                <span
+                                    class="text-lg font-semibold capitalize px-1">{{ __('generic.description') }}</span>
+                                <textarea wire:model="description" rows="6" name="description" id="description"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-md rounded-lg w-full p-2 {{ $focusColor }}"></textarea>
+                            </div>
+
+                            @error('description')
+                                <div class="text-sm text-red-600 font-bold py-1">
                                     {{ $message }}
                                 </div>
                             @enderror

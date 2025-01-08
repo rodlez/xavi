@@ -24,6 +24,7 @@ class StorePFTypeTranslationRequest extends FormRequest
     {        
         return [
             'name' => 'bail|required|min:3|string',
+            'description' => 'bail|nullable|min:3|string',
         ];
     }
 
@@ -35,18 +36,21 @@ class StorePFTypeTranslationRequest extends FormRequest
             return [
                 'name.required' => 'The translation is required',
                 'name.min' => 'The translation must have at least :min characters',
+                'description' => 'If there is a description must have at least :min characters',
             ];
         }
         if ($language == 'es') {
             return [
                 'name.required' => 'La traducción es obligatoria',
                 'name.min' => 'La traducción debe tener al menos :min carácteres',
+                'description' => 'Si hay una descripción, debe tener al menos :min carácteres',
             ];
         }
         if ($language == 'ca') {
             return [
                 'name.required' => 'La traducció es obligatoria',
                 'name.min' => 'La traducció ha de tenir al menys :min caràcters',
+                'description' => 'Si hi ha una descripció, ha de tenir al menys :min caràcters',
             ];
         }
     }

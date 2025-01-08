@@ -17,8 +17,7 @@
                         <span
                             class="text-lg text-slate-800 font-bold uppercase hover:text-slate-400">{{ $type->name }}</span>
                     </a>
-                    <span class="text-sm text-slate-600 font-normal">Add column description in the DB Table
-                        pf_type_trans</span>
+                    <span class="text-sm text-slate-600 font-normal">{{ $type->description }}</span>
                 </div>
 
                 <div
