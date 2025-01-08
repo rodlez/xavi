@@ -26,9 +26,9 @@
         </header>
         <main class="container mx-auto flex-1 px-4">
             {{-- Title --}}
-            <h1 class="text-3xl mb-4 capitalize">
+            {{-- <h1 class="text-3xl mb-4 capitalize">
                 {{ $subtitle ?? ($title ?? 'This page has no (sub)title') }}
-            </h1>
+            </h1> --}}
             {{-- Main content --}}
             {{ $slot }}
         </main>

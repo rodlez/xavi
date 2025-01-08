@@ -40,7 +40,7 @@ return [
     'location' => 'localización',
     'client' => 'cliente',
     'project' => 'proyecto',
-    'portfolio' => 'portfolio',
+    'portfolio' => 'Portfolio',
     'portfolios' => 'portfolios',
     'optional' => 'opcional',
     'total' => 'total',

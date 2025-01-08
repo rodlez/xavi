@@ -40,7 +40,7 @@ return [
     "location" => "location",
     "client" => "client",
     "project" => "project",
-    "portfolio" => "portfolio",
+    "portfolio" => "Portfolio",
     "portfolios" => "portfolios",
     "optional" => "optional",
     "total" => "total",

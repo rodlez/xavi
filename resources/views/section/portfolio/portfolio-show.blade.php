@@ -1,11 +1,19 @@
 <x-xavi-layout>
 
-    <x-slot name="title">{{ $portfolio->title }}</x-slot>
+    <x-slot name="title">{{ __('generic.portfolio') }} > {{ $portfolio->title }}</x-slot>
 
+    <!-- Sitemap -->
+    <div class="flex gap-1 bg-black text-white rounded p-2 capitalize mb-2">
+        <a href="/portfolio" class="hover:text-green-400">{{ __('generic.portfolio') }}
+        </a> / 
+        <span>{{ $portfolio->title }}</span>
+    </div>
+
+    
+    <!-- Portfolio Data -->
     <div class="border-2 border-black rounded-lg p-4">
 
-        {{-- {{ $portfolio }} --}}
-
+       <!-- Info Detail -->
         <div class="flex flex-col gap-2 w-full my-4">
             <span class="text-lg font-bold">{{ $portfolio->title }}</span>
             <span class="text-md">{{ $portfolio->subtitle }}</span>
@@ -27,7 +35,8 @@
               <span><i class="fa-solid fa-wrench"></i></span>
                 <span>{{ $portfolio->project }}</span>
             </div>
-
+            
+            <!-- Type / Categories / Tags -->
             <div class="flex flex-row flex-wrap justify-start py-2 gap-1">
 
                 <a href="/portfolio/type/{{ $portfolio->type->pf_type_id }}">
@@ -50,6 +59,7 @@
 
         </div>
 
+        <!-- Images -->
         <div class="flex flex-col w-full my-2 border-b-2 capitalize">
           {{ __('generic.images') }}
         </div>
@@ -69,6 +79,7 @@
 
         </div>
 
+        <!-- Documents -->
         <div class="flex flex-col w-full my-2 border-b-2 capitalize">
           {{ __('generic.documents') }}
         </div>
