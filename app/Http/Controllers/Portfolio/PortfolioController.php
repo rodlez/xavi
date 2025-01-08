@@ -20,6 +20,13 @@ class PortfolioController extends Controller
     public function update(StorePortfolioRequest $request, Portfolio $portfolio)
     {
         $formData = $request->validated();
+        // If published NOT selected, store value 0 in the DB
+        /* if($request['published'] == null)
+        {
+            $formData['published'] = 0;
+        } */
+        $request['published'] ?? $formData['published'] = 0;
+
         try {
             Portfolio::where('id', $portfolio->id)->update($formData);
             return to_route('portfolios.show', $portfolio)->with('message', __("generic.portfolio") . ' (' . $portfolio->name . ') '. __("generic.successUpdate"));

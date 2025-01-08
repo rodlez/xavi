@@ -81,7 +81,6 @@ Route::get('/playground', [Playground::class, 'index'])->name('playground');
 
 Route::get('/portfolio', [SectionPortfolio::class, 'index'])->name('portfolio');
 Route::get('/portfolio/{portfolio}', [SectionPortfolio::class, 'show'])->name('portfolio.show');
-
 Route::get('/portfolio/type/{type}', [SectionPortfolio::class, 'types'])->name('portfolio.types');
 Route::get('/portfolio/cat/{category}', [SectionPortfolio::class, 'categories'])->name('portfolio.categories');
 Route::get('/portfolio/tag/{tag}', [SectionPortfolio::class, 'tags'])->name('portfolio.tags');

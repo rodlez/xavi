@@ -7,11 +7,14 @@ use Livewire\Component;
 
 class PortfolioEdit extends Component
 {
+    public $published;
+
     public Portfolio $portfolio;
 
     public function mount(Portfolio $portfolio)
     {
         $this->portfolio = $portfolio;
+        $this->published = $this->portfolio->published;
     }
 
     public function render()

@@ -2,8 +2,6 @@
 
     <x-slot name="title">{{ __('generic.portfolio') }}</x-slot>
 
-    {{-- <h2>Lang -> {{ $language }}</h2> --}}
-
     <div class="p-0 border-0 border-slate-600 shadow-lg shadow-black">
 
         <!-- TYPES -->

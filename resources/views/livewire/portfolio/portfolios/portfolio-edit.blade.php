@@ -37,15 +37,16 @@
                     <!-- Directive to Override the http method -->
                     @method('PUT')
                     <!-- Published -->
+                    PUBLISHED {{$published}}
                     <div
-                        class="flex flex-row justify-start items-center mt-6 py-2 px-2 rounded-md gap-3 {{ $portfolio->published == 0 ? 'bg-red-100' : 'bg-green-100' }}  ">
+                        class="flex flex-row justify-start items-center mt-6 py-2 px-2 rounded-md gap-3 {{ $published == 0 ? 'bg-red-100' : 'bg-green-100' }}  ">
                         <div>
                             <h2 class="text-black text-lg capitalize font-semibold">{{ __('generic.published') }}</h2>
                         </div>
                         <div>
                             <label class="inline-flex cursor-pointer pt-2">
                                 <input wire:model.live="published" name="published" id="published" type="checkbox"
-                                    value="{{ $portfolio->published }}" class="sr-only peer">
+                                    value="{{ $published }}" {{ $published == 1 ? 'checked' : '' }} class="sr-only peer">
                                 <div
                                     class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-white dark:peer-focus:ring-gray-600 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-green-600">
                                 </div>

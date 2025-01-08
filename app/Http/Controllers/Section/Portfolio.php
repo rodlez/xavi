@@ -24,10 +24,15 @@ class Portfolio extends Controller
     public function index()
     {
         $language = App::currentLocale();
-        $languageId = Languages::where('code', $language)->pluck('id');
-
-        $portfolios = PortfolioTranslation::where('lang_id', $languageId)->get();
+        // Need All the Portfolios for the language AND with published status == 1
+        $languageId = Languages::where('code', $language)->pluck('id');        
+        $publishedPortfolios = PortfolioModel::where('published', 1)->pluck('id');
+        
+        // ALL Portfolios with translation for the language
+        $portfolios = PortfolioTranslation::where('lang_id', $languageId)->whereIn('portfolio_id', $publishedPortfolios)->get();
         $types = PortfolioTypeTranslation::where('lang_id', $languageId)->get();
+
+        
 
         return view('section.portfolio.portfolio', [
             // Styles
