@@ -12,7 +12,7 @@
     <div class="p-0 border-0 border-slate-600 shadow-sm shadow-slate-300">
 
         <!-- CATEGORY Info -->
-        <div class="flex flex-col gap-0 bg-green-200 p-2">
+        <div class="flex flex-col gap-0 bg-emerald-200 p-2">
             <span class="text-xl text-slate-800 font-semibold capitalize">{{ __('generic.category') }}:
                 {{ $category->name }}</span>
         </div>

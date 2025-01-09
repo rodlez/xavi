@@ -145,6 +145,7 @@ return [
     "for" => "for",
     "yes" => "yes",
     "no" => "no",
+    "color" => "color",
     // MENUS
     "dashboard" => "Dashboard",
     "home" => "Home",

@@ -1,6 +1,6 @@
 <div class="max-w-7xl mx-auto sm:pb-8 sm:px-6 lg:px-8">
 
-    <!-- Sitemap -->    
+    <!-- Sitemap -->
     <div class="flex flex-row justify-start items-start gap-1 text-sm py-3 px-4 text-slate-500 capitalize">
         <a href="/portfolios"
             class="font-bold text-black {{ $underlineMenuHeader }}">{{ __('admin/portfolio/portfolio.menuIndex') }}</a>
@@ -83,10 +83,10 @@
                                 <th wire:click="sorting('name')" scope="col"
                                     class="p-2 hover:cursor-pointer hover:{{ $menuTextColor }} {{ $column == 'name' ? $menuTextColor : '' }}">
                                     {{ __('generic.name') }} {!! $sortLink !!}</th>
-                                <th wire:click="sorting('portfolios.id')" scope="col"
+                                <th wire:click="sorting('portfolios.published')" scope="col"
                                     class="p-2 hover:cursor-pointer hover:{{ $menuTextColor }} {{ $column == 'published' ? $menuTextColor : '' }}">
                                     {{ __('generic.published') }} {!! $sortLink !!}</th>
-                                <th wire:click="sorting('portfolios.id')" scope="col"
+                                <th wire:click="sorting('portfolios.status')" scope="col"
                                     class="p-2 hover:cursor-pointer hover:{{ $menuTextColor }} {{ $column == 'status' ? $menuTextColor : '' }}">
                                     {{ __('generic.status') }} {!! $sortLink !!}</th>
                                 <th wire:click="sorting('portfolios.created_at')" scope="col"
@@ -95,7 +95,9 @@
                                 <th wire:click="sorting('portfolios.updated_at')" scope="col"
                                     class="p-2 hover:cursor-pointer hover:{{ $menuTextColor }} {{ $column == 'portfolios.updated_at' ? $menuTextColor : '' }}">
                                     {{ __('generic.updated') }} {!! $sortLink !!}</th>
-                                <th scope="col" class="p-2 text-center capitalize">{{ __('generic.translations') }}</th>
+                                <th scope="col" class="p-2 text-center capitalize">{{ __('generic.type') }}</th>
+                                <th scope="col" class="p-2 text-center capitalize">{{ __('generic.translations') }}
+                                </th>
                                 <th scope="col" class="p-2 text-center capitalize">{{ __('generic.files') }}</th>
                                 <th scope="col" class="p-2 text-center capitalize">{{ __('generic.actions') }}</th>
                             </tr>
@@ -112,11 +114,26 @@
                                     <td class="p-2"><a
                                             href="{{ route('portfolios.show', $portfolio) }}">{{ $portfolio->name }}</a>
                                     </td>
-                                    <td class="p-2">{{ publishedText($portfolio->published) }}</td>
+                                    <td class="p-2">{{-- {{ publishedText($portfolio->published) }} --}}
+                                        @if($portfolio->published == 1) 
+                                        <i class="fa-solid fa-check text-green-600"></i>
+                                        @else
+                                        <i class="fa-solid fa-x text-red-600"></i>
+                                        @endif
+                                    </td>
                                     <td class="p-2">{{ statusText($portfolio->status) }}</td>
                                     <td class="p-2">{{ date('d-m-Y', strtotime($portfolio->created_at)) }}</td>
                                     <td class="p-2">{{ date('d-m-Y', strtotime($portfolio->updated_at)) }}</td>
-                                    <td class="p-2 text-center normal-case">                                        
+
+                                    <td class="p-2 text-center normal-case">
+                                        @foreach ($portfolio->translations as $translation)
+                                            @if ($languageId == $translation->lang_id)
+                                                {{ $translation->type->name }}
+                                            @endif
+                                        @endforeach
+                                    </td>
+
+                                    <td class="p-2 text-center normal-case">
                                         <!-- If translation exists link to show, if not link to create new -->
                                         @foreach ($this->translationLinks($portfolio) as $translation)
                                             @if ($translation['translationId'])
@@ -134,12 +151,12 @@
                                     </td>
                                     <td class="p-2 text-center normal-case">
                                         @if ($portfolio->files->count() > 0)
-                                        <a href="/portfolios/{{ $portfolio->id }}/#filetest"
-                                          class="text-green-600"  >{{$portfolio->files->count()}}</a>
+                                            <a href="/portfolios/{{ $portfolio->id }}/#filetest"
+                                                class="text-green-600">{{ $portfolio->files->count() }}</a>
                                         @else
-                                        -
+                                            -
                                         @endif
-                                            </td>
+                                    </td>
                                     <td class="p-2">
                                         <div class="flex justify-center items-center gap-2">
                                             <!-- Show -->
@@ -148,8 +165,8 @@
                                                 <i
                                                     class="fa-solid fa-circle-info text-blue-600 hover:text-black transition duration-1000 ease-in-out"></i>
                                             </a>
-                                             <!-- Upload File -->
-                                             <a href="{{ route('portfolios.upload', $portfolio) }}"
+                                            <!-- Upload File -->
+                                            <a href="{{ route('portfolios.upload', $portfolio) }}"
                                                 title="{{ __('generic.upload') }}">
                                                 <i
                                                     class="fa-solid fa-file-arrow-up text-violet-600 hover:text-black transition duration-1000 ease-in-out"></i>
@@ -161,7 +178,8 @@
                                                     class="fa-solid fa-pen-to-square text-green-600 hover:text-black transition duration-1000 ease-in-out"></i>
                                             </a>
                                             <!-- Delete -->
-                                            <form action="{{ route('portfolios.destroy', $portfolio) }}" method="POST">
+                                            <form action="{{ route('portfolios.destroy', $portfolio) }}"
+                                                method="POST">
                                                 <!-- Add Token to prevent Cross-Site Request Forgery (CSRF) -->
                                                 @csrf
                                                 <!-- Directive to Override the http method -->
@@ -179,15 +197,15 @@
                         </tbody>
                     </table>
                 @else
-                <div
-                class="flex flex-row justify-between items-center bg-red-100 text-white rounded-lg p-4 mx-2 sm:mx-0">
-                <span class="text-red-600">{{ __('generic.elementNotFound') }}</span>
-                <a wire:click.prevent="clearSearch" title="{{ __('generic.close') }}">
-                    <i
-                        class="fa-lg fa-solid fa-circle-xmark cursor-pointer px-2 text-red-600 hover:text-red-400 transition duration-1000 ease-in-out"></i>
-                </a>
-                </span>
-            </div>
+                    <div
+                        class="flex flex-row justify-between items-center bg-red-100 text-white rounded-lg p-4 mx-2 sm:mx-0">
+                        <span class="text-red-600">{{ __('generic.elementNotFound') }}</span>
+                        <a wire:click.prevent="clearSearch" title="{{ __('generic.close') }}">
+                            <i
+                                class="fa-lg fa-solid fa-circle-xmark cursor-pointer px-2 text-red-600 hover:text-red-400 transition duration-1000 ease-in-out"></i>
+                        </a>
+                        </span>
+                    </div>
                 @endif
 
             </div>

@@ -41,18 +41,18 @@
 
                 <a href="/portfolio/type/{{ $portfolio->type->pf_type_id }}">
                     <span
-                        class="bg-blue-100 text-blue-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded w-fit dark:bg-blue-900 dark:text-blue-300">{{ $portfolio->type->name }}</span>
+                        class="{{$portfolio->type->type->color}} text-slate-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded w-fit dark:bg-blue-900 dark:text-blue-300">{{ $portfolio->type->name }}</span>
                 </a>
 
                 <a href="/portfolio/cat/{{ $portfolio->category->pf_cat_id }}">
                     <span
-                        class="bg-red-100 text-red-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded w-fit dark:bg-red-900 dark:text-red-300">{{ $portfolio->category->name }}</span>
+                        class="bg-emerald-200 text-emerald-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded w-fit dark:bg-red-900 dark:text-red-300">{{ $portfolio->category->name }}</span>
                 </a>
 
                 @foreach ($portfolio->tags as $tag)
                     <a href="/portfolio/tag/{{ $tag->tag->id }}">
                         <span
-                            class="bg-green-100 text-green-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded w-fit dark:bg-green-900 dark:text-green-300">{{ $tag->name }}</span>
+                            class="bg-blue-200 text-blue-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded w-fit dark:bg-green-900 dark:text-green-300">{{ $tag->name }}</span>
                     </a>
                 @endforeach
             </div>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Section;
 use App\Http\Controllers\Controller;
 use App\Models\Languages;
 use App\Models\Portfolio\Portfolio as PortfolioModel;
+use App\Models\Portfolio\PortfolioCategory;
 use App\Models\Portfolio\PortfolioCategoryTranslation;
 use App\Models\Portfolio\PortfolioTagTranslation;
 use App\Models\Portfolio\PortfolioTranslation;
@@ -25,14 +26,18 @@ class Portfolio extends Controller
     {
         $language = App::currentLocale();
         // Need All the Portfolios for the language AND with published status == 1
-        $languageId = Languages::where('code', $language)->pluck('id');        
+        $languageId = Languages::where('code', $language)->pluck('id')->first();        
         $publishedPortfolios = PortfolioModel::where('published', 1)->pluck('id');
-        
+        //dd($publishedPortfolios);
         // ALL Portfolios with translation for the language
-        $portfolios = PortfolioTranslation::where('lang_id', $languageId)->whereIn('portfolio_id', $publishedPortfolios)->get();
-        $types = PortfolioTypeTranslation::where('lang_id', $languageId)->get();
+        $portfolios = PortfolioTranslation::where('lang_id', $languageId)->whereIn('portfolio_id', $publishedPortfolios)->orderby('id', 'ASC')->get();        
+        //$types = PortfolioTypeTranslation::where('lang_id', $languageId)->get();
 
-        
+        $tipos = PortfolioType::orderby('position', 'ASC')->get();
+        //dd($tipos[0]->translations);
+
+        $porfs = PortfolioModel::where('published', 1)->orderby('id', 'DESC')->get();
+        //dd($porfs);
 
         return view('section.portfolio.portfolio', [
             // Styles
@@ -41,12 +46,18 @@ class Portfolio extends Controller
             'bgMenuColor' => 'bg-slate-800',
             'menuTextColor' => 'text-slate-800',
             'focusColor' => 'focus:ring-slate-500 focus:border-slate-500',
+            // Test Colors
+            'typeMenuColor' => 'bg-orange-400',
             // Layout
             'title' => 'Portfolio',
             // Data
             'portfolios' => $portfolios,
-            'types' => $types,
-            'language' => $language,
+            //'types' => $types,
+            //'language' => $language,
+            'porfs' => $porfs,
+            'tipos' => $tipos,
+            'languageId' => $languageId,
+            
         ])->layout('layouts.xavi');
     }
 

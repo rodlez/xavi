@@ -88,6 +88,9 @@
                                 <th wire:click="sorting('pf_types.id')" scope="col"
                                     class="p-2 hover:cursor-pointer hover:{{ $menuTextColor }} {{ $column == 'pf_types.id' ? $menuTextColor : '' }}">
                                     id {!! $sortLink !!}</th>
+                                    <th wire:click="sorting('pf_types.position')" scope="col"
+                                    class="p-2 hover:cursor-pointer hover:{{ $menuTextColor }} {{ $column == 'pf_types.position' ? $menuTextColor : '' }}">
+                                    {{ __('generic.position') }} {!! $sortLink !!}</th>
                                 <th wire:click="sorting('name')" scope="col"
                                     class="p-2 hover:cursor-pointer hover:{{ $menuTextColor }} {{ $column == 'name' ? $menuTextColor : '' }}">
                                     {{ __('generic.name') }} {!! $sortLink !!}</th>
@@ -99,8 +102,8 @@
                                     class="p-2 hover:cursor-pointer hover:{{ $menuTextColor }} {{ $column == 'pf_types.updated_at' ? $menuTextColor : '' }}">
                                     {{ __('generic.updated') }} {!! $sortLink !!}</th>
 
-                                <th scope="col" class="p-2 text-center capitalize">{{ __('generic.translations') }}
-                                </th>
+                                <th scope="col" class="p-2 text-center capitalize">{{ __('generic.color') }}</th>
+                                <th scope="col" class="p-2 text-center capitalize">{{ __('generic.translations') }}</th>
                                 <th scope="col" class="p-2 text-center capitalize">{{ __('generic.actions') }}</th>
                             </tr>
                         </thead>
@@ -113,6 +116,7 @@
                                             class="text-green-600 outline-none focus:ring-0 checked:bg-green-500"
                                             value={{ $type->id }}></td>
                                     <td class="p-2">{{ $type->id }}</td>
+                                    <td class="p-2">{{ $type->position }}</td>
                                     <td class="p-2"><a
                                             href="{{ route('pf_types.show', $type) }}">{{ $type->name }}</a>
                                     </td>
@@ -122,6 +126,7 @@
 
                                     <td class="p-2">{{ date('d-m-Y', strtotime($type->created_at)) }}</td>
                                     <td class="p-2">{{ date('d-m-Y', strtotime($type->updated_at)) }}</td>
+                                    <td class="p-2">{{ $type->color }}</td>
                                     <td class="p-2 text-center normal-case">
                                         <!-- If translation exists link to show, if not link to create new -->
                                         @foreach ($this->translationLinks($type) as $translation)

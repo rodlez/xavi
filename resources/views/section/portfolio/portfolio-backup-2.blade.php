@@ -2,19 +2,14 @@
 
     <x-slot name="title">{{ __('generic.portfolio') }}</x-slot>
 
-   {{--  @foreach ($porfs as $porf)
-        @foreach ($porf->translations as $pfTrans)
-            @if ($pfTrans->lang_id == $languageId)
-                {{ $pfTrans }}
-            @endif
-        @endforeach
-    @endforeach --}}
-    @foreach ($tipos as $tipo)
-    <br />
-    {{$tipo}}
+    @foreach ($porfs as $porf)
+    @foreach ($porf->translations as $pfTrans)    
+    {{-- {{$pfTrans}} --}}
+        @if ($pfTrans->lang_id == $languageId)
+            {{ $pfTrans }}
+        @endif
     @endforeach
-
-
+    @endforeach
 
     <div class="p-0 border-0 border-slate-600 shadow-lg shadow-black">
 
@@ -23,7 +18,7 @@
             <!-- Check if the TYPE has yet any portfolio associated, Must have translations and at least one translation must have a portfolio associated -->
             @if (count($type->translations[0]->portfoliotranslations) > 0)
                 @foreach ($type->translations as $typeTrans)
-                    @if ($typeTrans->lang_id == $languageId)                    
+                    @if ($typeTrans->lang_id == $languageId)
                         <!-- TYPE Info -->
                         <div class="flex flex-col gap-0 {{ $type->color }} text-white p-2">
                             <a href="/portfolio/type/{{ $typeTrans->pf_type_id }}">
@@ -36,26 +31,9 @@
                     <div
                         class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 bg-white p-2">
 
-                        TYPE ID
-                        {{$type->id}}
-                        <br />
-
-                        @foreach ($porfs as $porf)
-                        
-                           {{--  @foreach ($porf->translations as $pfTrans)
-
-                            {{ $pfTrans->title }}
-
-                                @if (($pfTrans->lang_id == $languageId) /* && ($pfTrans->type->pf_type_id == $type->id) */)
-                                    {{ $pfTrans->title }}
-                                @endif
-                            @endforeach --}}
-                        @endforeach
-
-
-
                         <!-- PORTFOLIOS for this TYPE -->
-                        {{-- @foreach ($portfolios as $portfolio)
+                        @foreach ($portfolios as $portfolio)
+                            {{-- {{$portfolio}} --}}
                             @if ($typeTrans->id == $portfolio->pf_type_trans_id)
                                 @foreach ($portfolio->portfolio->files as $file)
                                     @if ($file->type == 'image' && $file->position == 0)
@@ -77,8 +55,7 @@
                                     @endif
                                 @endforeach
                             @endif
-                        @endforeach --}}
-
+                        @endforeach
                     </div>
                 @endforeach
             @endif

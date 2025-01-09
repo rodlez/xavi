@@ -24,7 +24,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('pf_types_trans', function (Blueprint $table) {
-            $table->text('description')->nullable();
+            $table->dropColumn('description');
         });
     }
 };

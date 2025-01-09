@@ -142,6 +142,7 @@ return [
     "for" => "per",
     "yes" => "si",
     "no" => "no",
+    "color" => "color",
     // MENUS
     "dashboard" => "Panell de Control",
     "home" => "Inici",

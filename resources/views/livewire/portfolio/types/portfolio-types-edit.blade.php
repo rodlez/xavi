@@ -21,7 +21,8 @@
 
             <!-- Edit Type Message -->
             <div class="flex w-full sm:w-fit text-lg text-white bg-blue-600 font-light normal-case rounded-t-md p-2">
-                <span>{{ __('admin/portfolio/portfolioTypes.infoMessageEdit') }} > <span class="font-bold">{{ $type->name }}</span></span>
+                <span>{{ __('admin/portfolio/portfolioTypes.infoMessageEdit') }} > <span
+                        class="font-bold">{{ $type->name }}</span></span>
             </div>
             <!-- Mandatory Form Fields Message -->
             <div class="flex flex-col text-black normal-case bg-gray-200 sm:rounded-tr-lg">
@@ -46,11 +47,47 @@
                             value="{{ $type->name }}" maxlength="100"
                             class="w-full pl-12 rounded-lg bg-gray-50 border border-gray-200 text-gray-900 dark:bg-gray-700 dark:border-gray-600 dark:text-white {{ $focusColor }}">
                         <div class="absolute flex items-center inset-y-0 left-0 pointer-events-none">
-                            <i class="fa-solid fa-tag  bg-gray-200 p-3 rounded-l-md"></i>
+                            <i class="fa-solid fa-tag bg-gray-200 p-3 rounded-l-md"></i>
                         </div>
                     </div>
 
                     @error('name')
+                        <div class="text-sm text-red-600 font-bold py-1">
+                            {{ $message }}
+                        </div>
+                    @enderror
+
+                    <!-- Position -->
+                    <h2 class="text-lg font-bold capitalize pt-2 pb-1 px-2">{{ __('generic.position') }}</h2>
+
+                    <div class="relative">
+                        <input wire:model="position" name="position" id="position" type="number"
+                            value="{{ $type->position }}" maxlength="100"
+                            class="w-full pl-12 rounded-lg bg-gray-50 border border-gray-200 text-gray-900 dark:bg-gray-700 dark:border-gray-600 dark:text-white {{ $focusColor }}">
+                        <div class="absolute flex items-center inset-y-0 left-0 pointer-events-none">
+                            <i class="fa-solid fa-sort bg-gray-200 p-3 rounded-l-md"></i>
+                        </div>
+                    </div>
+
+                    @error('position')
+                        <div class="text-sm text-red-600 font-bold py-1">
+                            {{ $message }}
+                        </div>
+                    @enderror
+
+                    <!-- Color -->
+                    <h2 class="text-lg font-bold capitalize pt-2 pb-1 px-2">{{ __('generic.color') }}</h2>
+
+                    <div class="relative">
+                        <input wire:model="color" name="color" id="color" type="text"
+                            value="{{ $type->color }}" maxlength="100"
+                            class="w-full pl-12 rounded-lg bg-gray-50 border border-gray-200 text-gray-900 dark:bg-gray-700 dark:border-gray-600 dark:text-white {{ $focusColor }}">
+                        <div class="absolute flex items-center inset-y-0 left-0 pointer-events-none">
+                            <i class="fa-solid fa-droplet bg-gray-200 p-3 rounded-l-md"></i>
+                        </div>
+                    </div>
+
+                    @error('color')
                         <div class="text-sm text-red-600 font-bold py-1">
                             {{ $message }}
                         </div>
@@ -82,7 +119,7 @@
 
         </div>
 
-        <!-- FOOTER -->        
+        <!-- FOOTER -->
         <div
             class="flex flex-row justify-between items-center text-white text-center p-4 {{ $bgMenuColor }} sm:rounded-b-lg">
             <div class="w-1/3 text-left"><a href="{{ route('pf_types.show', $type) }}">

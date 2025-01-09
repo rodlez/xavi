@@ -12,8 +12,8 @@
     <div class="p-0 border-0 border-slate-600 shadow-sm shadow-slate-300">
 
         <!-- TYPE Info -->
-        <div class="flex flex-col gap-0 bg-green-200 p-2">            
-            <span class="text-xl text-slate-800 font-semibold capitalize">{{ $type->name }}</span>
+        <div class="flex flex-col gap-0 {{$type->type->color}} p-2">            
+            <span class="text-xl text-slate-800 font-semibold">{{ $type->name }}</span>
             <span class="text-md text-slate-600">{{ $type->description }}</span>
         </div>
 

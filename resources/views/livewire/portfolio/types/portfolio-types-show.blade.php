@@ -53,6 +53,10 @@
                     <span class="p-2">{{ $type->id }}</span>
                     <span class="{{ $menuInfo }} p-2">{{ __('generic.name') }}</span>
                     <span class="{{$typeName}} p-2">{{ $type->name }}</span>
+                    <span class="{{ $menuInfo }} p-2">{{ __('generic.position') }}</span>
+                    <span class="p-2 normal-case">{{ $type->position ? $type->position : '-' }}</span>
+                    <span class="{{ $menuInfo }} p-2">{{ __('generic.color') }}</span>
+                    <span class="p-2 normal-case">{{ $type->color ? $type->color : '-' }}</span>
                     <span class="{{ $menuInfo }} p-2">{{ __('generic.description') }}</span>
                     <span class="p-2 normal-case">{{ $type->description ? $type->description : '-' }}</span>
                 </div>

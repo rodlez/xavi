@@ -11,7 +11,7 @@ class PortfolioType extends Model
 
     use HasFactory;
 
-    protected $fillable = ['name', 'description'];
+    protected $fillable = ['name', 'position', 'color', 'description'];
 
     /**
      * Get the translations associated.

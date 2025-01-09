@@ -15,6 +15,8 @@ class PortfolioTypesCreate extends Component
 
     public $autoTranslations;
     public $name;
+    public $position;
+    public $color;
     public $description;
 
     /**

@@ -2,10 +2,12 @@
 
 namespace App\Livewire\Portfolio;
 
+use App\Models\Languages;
 use App\Models\Portfolio\Portfolio as PortfolioModel;
 use App\Services\PortfolioService;
 use App\Services\TranslationService;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\App;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -85,6 +87,10 @@ class Portfolio extends Component
 
     public function render()
     {
+        $language = App::currentLocale();
+        // Need All the Portfolios for the language AND with published status == 1
+        // get() always returns a collection. If you only expect one result from your query, use first()
+        $languageId = Languages::where('code', $language)->pluck('id')->first();
         $found = 0;
 
         $data = PortfolioModel::orderby($this->orderColumn, $this->sortOrder)->select('*');
@@ -108,6 +114,8 @@ class Portfolio extends Component
             'found' => $found,
             'column' => $this->orderColumn,
             'total' => $total,
+            // Language
+            'languageId' => $languageId,
         ])->layout('layouts.app');
     }
    
