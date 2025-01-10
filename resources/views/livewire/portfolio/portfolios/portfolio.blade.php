@@ -95,8 +95,9 @@
                                 <th wire:click="sorting('portfolios.updated_at')" scope="col"
                                     class="p-2 hover:cursor-pointer hover:{{ $menuTextColor }} {{ $column == 'portfolios.updated_at' ? $menuTextColor : '' }}">
                                     {{ __('generic.updated') }} {!! $sortLink !!}</th>
-                                <th scope="col" class="p-2 text-center capitalize">{{ __('generic.type') }}</th>
-                                <th scope="col" class="p-2 text-center capitalize">{{ __('generic.translations') }}
+                                    <th scope="col" class="p-2 text-center capitalize">{{ __('generic.type') }}</th>
+                                    <th scope="col" class="p-2 text-center capitalize">{{ __('generic.position') }}</th>
+                                    <th scope="col" class="p-2 text-center capitalize">{{ __('generic.translations') }}
                                 </th>
                                 <th scope="col" class="p-2 text-center capitalize">{{ __('generic.files') }}</th>
                                 <th scope="col" class="p-2 text-center capitalize">{{ __('generic.actions') }}</th>
@@ -132,6 +133,8 @@
                                             @endif
                                         @endforeach
                                     </td>
+
+                                    <td class="p-2">{{ $portfolio->position ? $portfolio->position : '-' }}</td>
 
                                     <td class="p-2 text-center normal-case">
                                         <!-- If translation exists link to show, if not link to create new -->

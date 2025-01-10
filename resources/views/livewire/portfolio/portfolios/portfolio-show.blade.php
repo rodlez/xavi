@@ -56,6 +56,8 @@
                         class="p-2 {{ $portfolio->published ? 'bg-green-200' : 'bg-red-200' }}">{{ publishedText($portfolio->published) }}</span>
                     <span class="{{ $menuInfo }} p-2">{{ __('generic.status') }}</span>
                     <span class="p-2">{{ statusText($portfolio->status) }}</span>
+                    <span class="{{ $menuInfo }} p-2">{{ __('generic.position') }}</span>
+                    <span class="p-2">{{ $portfolio->position ? $portfolio->position : '-' }}</span>
                     <span class="{{ $menuInfo }} p-2">{{ __('generic.name') }}</span>
                     <span class="p-2 {{ $portfolioName }}">{{ $portfolio->name }}</span>
                     <span class="{{ $menuInfo }} p-2">{{ __('generic.description') }}</span>

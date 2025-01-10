@@ -12,6 +12,7 @@ class PortfolioCreate extends Component
 {
     public $published;
     public $status;
+    public $position;
     public $name;
     public $description;
 

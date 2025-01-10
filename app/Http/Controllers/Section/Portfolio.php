@@ -27,16 +27,19 @@ class Portfolio extends Controller
         $language = App::currentLocale();
         // Need All the Portfolios for the language AND with published status == 1
         $languageId = Languages::where('code', $language)->pluck('id')->first();        
-        $publishedPortfolios = PortfolioModel::where('published', 1)->pluck('id');
-        //dd($publishedPortfolios);
-        // ALL Portfolios with translation for the language
-        $portfolios = PortfolioTranslation::where('lang_id', $languageId)->whereIn('portfolio_id', $publishedPortfolios)->orderby('id', 'ASC')->get();        
+       
+        
+        // One Approach -> Passing the translations directly
+        //$publishedPortfolios = PortfolioModel::where('published', 1)->pluck('id');
+        //$portfolios = PortfolioTranslation::where('lang_id', $languageId)->whereIn('portfolio_id', $publishedPortfolios)->orderby('id', 'ASC')->get();        
         //$types = PortfolioTypeTranslation::where('lang_id', $languageId)->get();
 
-        $tipos = PortfolioType::orderby('position', 'ASC')->get();
+        // Second Approach, passing the parent and use the relations to get the translations
+        // This way the position(order in the gallery) of the portfolios can be determined by the parent not by the children translations
+        $types = PortfolioType::orderby('position', 'ASC')->get();
         //dd($tipos[0]->translations);
 
-        $porfs = PortfolioModel::where('published', 1)->orderby('id', 'DESC')->get();
+        $portfolios = PortfolioModel::where('published', 1)->orderby('position', 'ASC')->get();
         //dd($porfs);
 
         return view('section.portfolio.portfolio', [
@@ -52,10 +55,7 @@ class Portfolio extends Controller
             'title' => 'Portfolio',
             // Data
             'portfolios' => $portfolios,
-            //'types' => $types,
-            //'language' => $language,
-            'porfs' => $porfs,
-            'tipos' => $tipos,
+            'types' => $types,            
             'languageId' => $languageId,
             
         ])->layout('layouts.xavi');

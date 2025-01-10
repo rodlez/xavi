@@ -26,6 +26,7 @@ class StorePortfolioRequest extends FormRequest
         return [
             'published' => 'bail|nullable',
             'status' => 'bail|required',
+            'position' => 'bail|nullable|numeric|gt:0',
             'name' => 'bail|required|min:3|string|' . Rule::unique('portfolios')->ignore($this->portfolio),
             'description' => 'bail|nullable|min:3|string',
         ];
@@ -38,6 +39,8 @@ class StorePortfolioRequest extends FormRequest
         if ($language == 'en') {
             return [
                 'status.required' => 'Status is required',
+                'position' => 'Position must be a number',
+                'position.gt' => 'Position must be a positive number',
                 'name.required' => 'The portfolio name is required',
                 'name.min' => 'The portfolio name must have at least :min characters',
                 'name.unique' => 'This portfolio is already created',
@@ -47,6 +50,8 @@ class StorePortfolioRequest extends FormRequest
         if ($language == 'es') {
             return [
                 'status.required' => 'Estado es obligatorio',
+                'position' => 'Posición debe ser un número',
+                'position.gt' => 'Posición debe ser un número positivo',
                 'name.required' => 'El nombre es obligatorio',
                 'name.min' => 'El nombre debe tener al menos :min carácteres',
                 'name.unique' => 'Este nombre ya ha sido creado',
@@ -56,6 +61,8 @@ class StorePortfolioRequest extends FormRequest
         if ($language == 'ca') {
             return [
                 'status.required' => 'Estat es obligatori',
+                'position' => 'Posició ha de ser un número',
+                'position.gt' => 'Posició ha de ser un número positiu',
                 'name.required' => 'El nom es obligatori',
                 'name.min' => 'El nom ha de tenir al menys :min caràcters',
                 'name.unique' => 'Aquest nom ja ha estat creat',

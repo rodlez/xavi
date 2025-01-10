@@ -37,7 +37,6 @@
                     <!-- Directive to Override the http method -->
                     @method('PUT')
                     <!-- Published -->
-                    PUBLISHED {{$published}}
                     <div
                         class="flex flex-row justify-start items-center mt-6 py-2 px-2 rounded-md gap-3 {{ $published == 0 ? 'bg-red-100' : 'bg-green-100' }}  ">
                         <div>
@@ -75,6 +74,25 @@
                             {{ $message }}
                         @enderror
                     </div>
+
+                    <!-- Position -->
+                    <h2 class="text-lg font-bold capitalize pt-2 pb-1 px-2">{{ __('generic.position') }}</h2>
+
+                    <div class="relative">
+                        <input wire:model="position" name="position" id="position" type="number"
+                            value="{{ $portfolio->position }}" maxlength="100"
+                            class="w-full pl-12 rounded-lg bg-gray-50 border border-gray-200 text-gray-900 dark:bg-gray-700 dark:border-gray-600 dark:text-white {{ $focusColor }}">
+                        <div class="absolute flex items-center inset-y-0 left-0 pointer-events-none">
+                            <i class="fa-solid fa-sort bg-gray-200 p-3 rounded-l-md"></i>
+                        </div>
+                    </div>
+
+                    @error('position')
+                        <div class="text-sm text-red-600 font-bold py-1">
+                            {{ $message }}
+                        </div>
+                    @enderror
+
                     <!-- Name -->
                     <h2 class="text-lg font-bold capitalize pt-2 pb-1 px-2">{{ __('generic.name') }} <span
                             class="text-red-600">*</span></h2>

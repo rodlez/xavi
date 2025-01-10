@@ -15,6 +15,7 @@ class Portfolio extends Model
         'user_id',
         'published',
         'status',
+        'position',
         'name',
         'description',
     ];
