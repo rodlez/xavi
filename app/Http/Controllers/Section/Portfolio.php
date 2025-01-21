@@ -14,6 +14,10 @@ use App\Models\Portfolio\PortfolioTypeTranslation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 
+
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+
+
 class Portfolio extends Controller
 {
 
@@ -84,6 +88,7 @@ class Portfolio extends Controller
     {
         $portfolio = PortfolioModel::where('id', $id)->first();
         if ($portfolio == null) {
+            //throw new NotFoundHttpException();
             abort(404);
         } 
 
@@ -124,7 +129,9 @@ class Portfolio extends Controller
         //$typeIdTranslation = PortfolioTypeTranslation::where('pf_type_id', $id)->where('lang_id', $languageId)->pluck('id');
 
         $typeTranslation = PortfolioTypeTranslation::where('pf_type_id', $id)->where('lang_id', $languageId)->first();
-
+        if ($typeTranslation == null) {
+            abort(404);
+        } 
         // get() returns a collection, first() returns a single instance
         
        
@@ -163,7 +170,9 @@ class Portfolio extends Controller
         //$typeIdTranslation = PortfolioTypeTranslation::where('pf_type_id', $id)->where('lang_id', $languageId)->pluck('id');
 
         $categoryTranslation = PortfolioCategoryTranslation::where('pf_cat_id', $id)->where('lang_id', $languageId)->first();
-
+        if ($categoryTranslation == null) {
+            abort(404);
+        } 
         // get() returns a collection, first() returns a single instance
         
        
@@ -202,7 +211,9 @@ class Portfolio extends Controller
         //$typeIdTranslation = PortfolioTypeTranslation::where('pf_type_id', $id)->where('lang_id', $languageId)->pluck('id');
 
         $tagTranslation = PortfolioTagTranslation::where('pf_tag_id', $id)->where('lang_id', $languageId)->first();
-
+        if ($tagTranslation == null) {
+            abort(404);
+        } 
         // get() returns a collection, first() returns a single instance
         //dd('tagTranslation', $tagTranslation->translations);
 

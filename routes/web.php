@@ -221,3 +221,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
 
     Route::get('/pf_tags_trans/edit/{translation}', PortfolioTagsTranslationEdit::class)->name('pf_tags_trans.edit');
 });
+
+Route::fallback(function () {
+    return response()->view('errors.404', [], 404);
+});

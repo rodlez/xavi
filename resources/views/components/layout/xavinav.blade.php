@@ -38,6 +38,12 @@
             <a href="{{ route('change.lang', ['lang' => 'en']) }}" class="hover:underline">ENG</a>
         @endif
 
+        <!-- Test Session -->
+        SESSION -> {{var_dump(session()->all())}}
+
+        <!-- Test Locale -->
+        LOCALE -> {{App::currentLocale()}}
+
         <!-- Using a Dropdown Component -->
         {{-- <x-dropdown align="right" width="48">
             <x-slot name="trigger">

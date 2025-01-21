@@ -17,6 +17,8 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->web(append: [
             SetLocale::class
         ]);
+        // Use appendToGroup() to add the middleware to the 'web' group.
+        /* $middleware->appendToGroup('web', SetLocale::class); */
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //
