@@ -82,18 +82,18 @@ class Portfolio extends Controller
      */
     public function show(string $id)
     {
+        $portfolio = PortfolioModel::where('id', $id)->first();
+        if ($portfolio == null) {
+            abort(404);
+        } 
+
         $language = App::currentLocale();
 
         $languageId = Languages::where('code', $language)->pluck('id')->first();
         //dd($languageId);
 
         // get() returns a collection, first() returns a single instance
-        $portfolioTranslation = PortfolioTranslation::where('portfolio_id', $id)->where('lang_id', $languageId)->first();
-
-        $portfolio = PortfolioModel::where('id', $id)->first();
-        if ($portfolio == null) {
-            abort(404);
-        } 
+        $portfolioTranslation = PortfolioTranslation::where('portfolio_id', $id)->where('lang_id', $languageId)->first();        
         
         return view('section.portfolio.portfolio-show', [
             // Styles
