@@ -84,13 +84,16 @@ class Portfolio extends Controller
     {
         $language = App::currentLocale();
 
-        $languageId = Languages::where('code', $language)->pluck('id');
+        $languageId = Languages::where('code', $language)->pluck('id')->first();
+        //dd($languageId);
 
         // get() returns a collection, first() returns a single instance
         $portfolioTranslation = PortfolioTranslation::where('portfolio_id', $id)->where('lang_id', $languageId)->first();
 
         $portfolio = PortfolioModel::where('id', $id)->first();
-
+        if ($portfolio == null) {
+            abort(404);
+        } 
         
         return view('section.portfolio.portfolio-show', [
             // Styles
@@ -105,6 +108,7 @@ class Portfolio extends Controller
             'portfolio' => $portfolioTranslation,
             'files' => $portfolio->files,
             'language' => $language,
+            'languageId' => $languageId,
         ])->layout('layouts.xavi');
     }
 
