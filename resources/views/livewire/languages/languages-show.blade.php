@@ -1,8 +1,8 @@
 <div class="max-w-7xl mx-auto sm:pb-8 sm:px-6 lg:px-8">
     <!-- Sitemap -->
     <div class="flex flex-row justify-start items-start gap-1 text-sm py-3 px-4 text-slate-500 capitalize">
-        <a href="/languages" class="text-black {{ $textMenuHeader }}">{{ __('generic.languages') }}</a> /
-        <a href="/languages/{{ $language->id }}"
+        <a href="/admin/languages" class="text-black {{ $textMenuHeader }}">{{ __('generic.languages') }}</a> /
+        <a href="/admin/languages/{{ $language->id }}"
             class="font-bold text-black {{ $underlineMenuHeader }}">{{ __('generic.info') }}</a>
     </div>
 

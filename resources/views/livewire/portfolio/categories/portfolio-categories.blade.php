@@ -2,7 +2,7 @@
 
     <!-- Sitemap -->
     <div class="flex flex-row justify-start items-start gap-1 text-sm py-3 px-4 text-slate-500 capitalize">
-        <a href="/pf_categories"
+        <a href="/admin/admin/pf_categories"
             class="font-bold text-black {{ $underlineMenuHeader }}">{{ __('admin/portfolio/portfolioCategories.menuIndex') }}</a>
     </div>
     <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
@@ -122,7 +122,7 @@
                                         <!-- If translation exists link to show, if not link to create new -->
                                         @foreach ($this->translationLinks($category) as $translation)
                                             @if ($translation['translationId'])
-                                                <a href="/pf_categories_trans/{{ $translation['translationId'] }}"
+                                                <a href="/admin/pf_categories_trans/{{ $translation['translationId'] }}"
                                                     class="text-green-600" title="{{ __('generic.show') }}">
                                                     {{ $translation['code'] }}
                                                 </a>

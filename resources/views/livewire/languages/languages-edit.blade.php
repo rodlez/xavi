@@ -1,9 +1,9 @@
 <div class="max-w-7xl mx-auto sm:pb-8 sm:px-6 lg:px-8">
     <!-- Sitemap -->
     <div class="flex flex-row justify-start items-start gap-1 text-sm py-3 px-4 text-slate-500">
-        <a href="/languages" class="{{ $textMenuHeader }}">{{ __('generic.languages') }}</a> /
-        <a href="/languages/{{ $language->id }}" class="{{ $textMenuHeader }}">{{ __('generic.info') }}</a> /
-        <a href="/languages/edit/{{ $language->id }}"
+        <a href="/admin/languages" class="{{ $textMenuHeader }}">{{ __('generic.languages') }}</a> /
+        <a href="/admin/languages/{{ $language->id }}" class="{{ $textMenuHeader }}">{{ __('generic.info') }}</a> /
+        <a href="/admin/languages/edit/{{ $language->id }}"
             class="font-bold text-black {{ $underlineMenuHeader }}">{{ __('generic.edit') }}</a>
     </div>
 

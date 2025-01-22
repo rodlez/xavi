@@ -2,10 +2,10 @@
 
     <!-- Sitemap -->
     <div class="flex flex-row justify-start items-start gap-1 text-sm py-3 px-4 text-slate-500 capitalize">
-        <a href="/portfolios"
+        <a href="/admin/portfolios"
             class="font-bold text-black {{ $underlineMenuHeader }}">{{ __('admin/portfolio/portfolio.menuIndex') }}</a>
         /
-        <a href="/portfolios_trans" class="text-black {{ $textMenuHeader }}">{{ __('generic.translations') }}
+        <a href="/admin/portfolios_trans" class="text-black {{ $textMenuHeader }}">{{ __('generic.translations') }}
         </a>
     </div>
 
@@ -140,7 +140,7 @@
                                         <!-- If translation exists link to show, if not link to create new -->
                                         @foreach ($this->translationLinks($portfolio) as $translation)
                                             @if ($translation['translationId'])
-                                                <a href="/portfolios_trans/{{ $translation['translationId'] }}"
+                                                <a href="/admin/portfolios_trans/{{ $translation['translationId'] }}"
                                                     class="text-green-600" title="{{ $translation['lang'] }}">
                                                     {{ $translation['code'] }}
                                                 </a>
@@ -154,7 +154,7 @@
                                     </td>
                                     <td class="p-2 text-center normal-case">
                                         @if ($portfolio->files->count() > 0)
-                                            <a href="/portfolios/{{ $portfolio->id }}/#filetest"
+                                            <a href="/admin/portfolios/{{ $portfolio->id }}/#filetest"
                                                 class="text-green-600">{{ $portfolio->files->count() }}</a>
                                         @else
                                             -

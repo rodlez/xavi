@@ -2,10 +2,10 @@
 
     <!-- Sitemap -->
     <div class="flex flex-row justify-start items-start gap-1 text-sm py-3 px-4 text-slate-500 capitalize">
-        <a href="/portfolios" class="{{ $textMenuHeader }}">{{ __('admin/portfolio/portfolio.menuIndex') }}</a> /
-        <a href="/portfolios/{{ $translation->portfolio->id }}"
+        <a href="/admin/portfolios" class="{{ $textMenuHeader }}">{{ __('admin/portfolio/portfolio.menuIndex') }}</a> /
+        <a href="/admin/portfolios/{{ $translation->portfolio->id }}"
             class="{{ $textMenuHeader }}">{{ $translation->portfolio->name }}</a> /
-        <a href="/portfolios_trans/edit/{{ $translation->id }}"
+        <a href="/admin/portfolios_trans/edit/{{ $translation->id }}"
             class="font-bold text-black {{ $underlineMenuHeader }}">{{ __('generic.edit') }}
             {{ __('generic.translation') }} ({{ $translation->language->code }})</a>
     </div>
@@ -402,7 +402,7 @@
                         </button>
                         {{-- <button
                             class="w-full sm:w-fit bg-black hover:bg-slate-700 text-white capitalize p-2 sm:px-4 rounded-lg shadow-none transition duration-500 ease-in-out">
-                            <a href="/portfolios_trans/edit/{{ $translation->id }}">
+                            <a href="/admin/portfolios_trans/edit/{{ $translation->id }}">
                                 {{ __('generic.reset') }}
                             </a>
                         </button> --}}

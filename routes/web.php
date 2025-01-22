@@ -93,155 +93,142 @@ Route::get('lang', [LanguageController::class, 'change'])->name('change.lang');
 
 Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified'])->group(function () {
     /* DASHBOARD */
-    Route::get('/dashboard', function () {
+    Route::get('/admin/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
 
     /************************* LANGUAGES *************************/
 
-    Route::get('/languages', Languages::class)->name('languages');
-    Route::get('/languages/create', LanguagesCreate::class)->name('languages.create');
-    Route::get('/languages/{language}', LanguagesShow::class)->name('languages.show');
-    Route::put('/languages/{language}', [LanguagesController::class, 'update'])->name('languages.update');
-    Route::delete('/languages/{language}', [LanguagesController::class, 'destroy'])->name('languages.destroy');
-    Route::get('/languages/edit/{language}', LanguagesEdit::class)->name('languages.edit');
+    Route::get('/admin/languages', Languages::class)->name('languages');
+    Route::get('/admin/languages/create', LanguagesCreate::class)->name('languages.create');
+    Route::get('/admin/languages/{language}', LanguagesShow::class)->name('languages.show');
+    Route::put('/admin/languages/{language}', [LanguagesController::class, 'update'])->name('languages.update');
+    Route::delete('/admin/languages/{language}', [LanguagesController::class, 'destroy'])->name('languages.destroy');
+    Route::get('/admin/languages/edit/{language}', LanguagesEdit::class)->name('languages.edit');
 
     /************************* PORTFOLIO *************************/
 
     /* PORTFOLIO */
-    Route::get('/portfolios', Portfolio::class)->name('portfolios');
-    Route::get('/portfolios/create', PortfolioCreate::class)->name('portfolios.create');
-    Route::get('/portfolios/{portfolio}', PortfolioShow::class)->name('portfolios.show');
-    Route::put('/portfolios/{portfolio}', [PortfolioController::class, 'update'])->name('portfolios.update');
-    Route::delete('/portfolios/{portfolio}', [PortfolioController::class, 'destroy'])->name('portfolios.destroy');
-    Route::get('/portfolios/edit/{portfolio}', PortfolioEdit::class)->name('portfolios.edit');
+    Route::get('/admin/portfolios', Portfolio::class)->name('portfolios');
+    Route::get('/admin/portfolios/create', PortfolioCreate::class)->name('portfolios.create');
+    Route::get('/admin/portfolios/{portfolio}', PortfolioShow::class)->name('portfolios.show');
+    Route::put('/admin/portfolios/{portfolio}', [PortfolioController::class, 'update'])->name('portfolios.update');
+    Route::delete('/admin/portfolios/{portfolio}', [PortfolioController::class, 'destroy'])->name('portfolios.destroy');
+    Route::get('/admin/portfolios/edit/{portfolio}', PortfolioEdit::class)->name('portfolios.edit');
 
     /* PORTFOLIO TRANSLATIONS */
-    Route::get('/portfolios/{portfolio}/translation/create/{missingTranslationId?}', PortfolioTranslationCreate::class)
+    Route::get('/admin/portfolios/{portfolio}/translation/create/{missingTranslationId?}', PortfolioTranslationCreate::class)
         ->name('portfolios_trans.create')
         ->where('missingTranslationId', '[0-9]+');
-    Route::get('/portfolios_trans', PortfolioTranslation::class)->name('portfolios_trans');
-    Route::put('/portfolios_trans/{translation}', [PortfolioTranslationController::class, 'update'])->name('portfolios_trans.update');
-    Route::delete('/portfolios_trans/{translation}', [PortfolioTranslationController::class, 'destroy'])->name('portfolios_trans.destroy');
-    Route::get('/portfolios_trans/{translation}', PortfolioTranslationShow::class)->name('portfolios_trans.show');
-    Route::get('/portfolios_trans/edit/{translation}', PortfolioTranslationEdit::class)->name('portfolios_trans.edit');
+    Route::get('/admin/portfolios_trans', PortfolioTranslation::class)->name('portfolios_trans');
+    Route::put('/admin/portfolios_trans/{translation}', [PortfolioTranslationController::class, 'update'])->name('portfolios_trans.update');
+    Route::delete('/admin/portfolios_trans/{translation}', [PortfolioTranslationController::class, 'destroy'])->name('portfolios_trans.destroy');
+    Route::get('/admin/portfolios_trans/{translation}', PortfolioTranslationShow::class)->name('portfolios_trans.show');
+    Route::get('/admin/portfolios_trans/edit/{translation}', PortfolioTranslationEdit::class)->name('portfolios_trans.edit');
 
     /* PORTFOLIO FILES */
-    Route::get('/portfolios/upload/{portfolio}', PortfolioFileUpload::class)->name('portfolios.upload');
+    Route::get('/admin/portfolios/upload/{portfolio}', PortfolioFileUpload::class)->name('portfolios.upload');
 
-    Route::get('/portfolios/{portfolio}/file/{file}', PortfolioFileShow::class)->name('portfoliosfile.show');
-    Route::put('/portfolios/{portfolio}/file/{file}', [PortfolioFileController::class, 'update'])->name('portfoliosfile.update');
-    Route::get('/portfolios/{portfolio}/file/{file}/edit', PortfolioFileEdit::class)->name('portfoliosfile.edit');
+    Route::get('/admin/portfolios/{portfolio}/file/{file}', PortfolioFileShow::class)->name('portfoliosfile.show');
+    Route::put('/admin/portfolios/{portfolio}/file/{file}', [PortfolioFileController::class, 'update'])->name('portfoliosfile.update');
+    Route::get('/admin/portfolios/{portfolio}/file/{file}/edit', PortfolioFileEdit::class)->name('portfoliosfile.edit');
 
-    Route::get('/portfolios/{portfolio}/file/{file}/responsive', [PortfolioFileController::class, 'responsive'])->name('portfoliosfile.responsive');
-    Route::get('/portfolios/{portfolio}/file/{image}/responsive/{screen}', [PortfolioFileController::class, 'responsiveCreate'])->name('portfoliosfile.responsiveCreate');
-    Route::delete('/portfolios/{portfolio}/file/{image}/responsive/{screen}', [PortfolioFileController::class, 'responsiveDelete'])->name('portfoliosfile.responsiveDelete');
-    Route::get('/portfolios/{portfolio}/file/{image}/responsive/{screen}/download', [PortfolioFileController::class, 'responsiveDownload'])->name('portfoliosfile.responsiveDownload');
+    Route::get('/admin/portfolios/{portfolio}/file/{file}/responsive', [PortfolioFileController::class, 'responsive'])->name('portfoliosfile.responsive');
+    Route::get('/admin/portfolios/{portfolio}/file/{image}/responsive/{screen}', [PortfolioFileController::class, 'responsiveCreate'])->name('portfoliosfile.responsiveCreate');
+    Route::delete('/admin/portfolios/{portfolio}/file/{image}/responsive/{screen}', [PortfolioFileController::class, 'responsiveDelete'])->name('portfoliosfile.responsiveDelete');
+    Route::get('/admin/portfolios/{portfolio}/file/{image}/responsive/{screen}/download', [PortfolioFileController::class, 'responsiveDownload'])->name('portfoliosfile.responsiveDownload');
 
-    Route::get('/portfolios/{portfolio}/file/{file}/download', [PortfolioFileController::class, 'download'])->name('portfoliosfile.download');
-    Route::delete('/portfolios/{portfolio}/file/{file}', [PortfolioFileController::class, 'destroy'])->name('portfoliosfile.destroy');
+    Route::get('/admin/portfolios/{portfolio}/file/{file}/download', [PortfolioFileController::class, 'download'])->name('portfoliosfile.download');
+    Route::delete('/admin/portfolios/{portfolio}/file/{file}', [PortfolioFileController::class, 'destroy'])->name('portfoliosfile.destroy');
 
     /* PORTFOLIO FILES TRANSLATIONS */
-
-    Route::get('/portfolios/{portfolio}/file/{file}/translation/create/{missingTranslationId?}', PortfolioFileTranslationCreate::class)
+    Route::get('/admin/portfolios/{portfolio}/file/{file}/translation/create/{missingTranslationId?}', PortfolioFileTranslationCreate::class)
         ->name('portfoliosfile_trans.create')
         ->where('missingTranslationId', '[0-9]+');
+    Route::get('/admin/portfolios/{portfolio}/file/{file}/translation/{translation}', PortfolioFileTranslationShow::class)->name('portfoliosfile_trans.show');
+    Route::put('/admin/portfolios/{portfolio}/file/{file}/translation/{translation}', [PortfolioFileTranslationController::class, 'update'])->name('portfoliosfile_trans.update');
+    Route::delete('/admin/portfolios/{portfolio}/file/{file}/translation/{translation}', [PortfolioFileTranslationController::class, 'destroy'])->name('portfoliosfile_trans.destroy');
 
-    Route::get('/portfolios/{portfolio}/file/{file}/translation/{translation}', PortfolioFileTranslationShow::class)->name('portfoliosfile_trans.show');
-    Route::put('/portfolios/{portfolio}/file/{file}/translation/{translation}', [PortfolioFileTranslationController::class, 'update'])->name('portfoliosfile_trans.update');
-    Route::delete('/portfolios/{portfolio}/file/{file}/translation/{translation}', [PortfolioFileTranslationController::class, 'destroy'])->name('portfoliosfile_trans.destroy');
-
-    Route::get('/portfolios/{portfolio}/file/{file}/translation/{translation}/edit', PortfolioFileTranslationEdit::class)->name('portfoliosfile_trans.edit');
-
-    /* PORTFOLIO TRANSLATIONS */
-    /* Route::get('/portfolios/{portfolio}/translation/create/{missingTranslationId?}', PortfolioTranslationCreate::class)
-        ->name('portfolios_trans.create')
-        ->where('missingTranslationId', '[0-9]+');
-    Route::get('/portfolios_trans', PortfolioTranslation::class)->name('portfolios_trans');
-    Route::put('/portfolios_trans/{translation}', [PortfolioTranslationController::class, 'update'])->name('portfolios_trans.update');
-    Route::delete('/portfolios_trans/{translation}', [PortfolioTranslationController::class, 'destroy'])->name('portfolios_trans.destroy');
-    Route::get('/portfolios_trans/{translation}', PortfolioTranslationShow::class)->name('portfolios_trans.show');
-    Route::get('/portfolios_trans/edit/{translation}', PortfolioTranslationEdit::class)->name('portfolios_trans.edit'); */
+    Route::get('/portfolios/{portfolio}/file/{file}/translation/{translation}/edit', PortfolioFileTranslationEdit::class)->name('portfoliosfile_trans.edit');    
 
     /* PORTFOLIO CATEGORIES */
-    Route::get('/pf_categories', PortfolioCategories::class)->name('pf_categories');
-    Route::get('/pf_categories/create', PortfolioCategoriesCreate::class)->name('pf_categories.create');
-    Route::get('/pf_categories/{category}', PortfolioCategoriesShow::class)->name('pf_categories.show');
-    Route::put('/pf_categories/{category}', [PortfolioCategoryController::class, 'update'])->name('pf_categories.update');
-    Route::delete('/pf_categories/{category}', [PortfolioCategoryController::class, 'destroy'])->name('pf_categories.destroy');
-    Route::get('/pf_categories/edit/{category}', PortfolioCategoriesEdit::class)->name('pf_categories.edit');
+    Route::get('/admin/pf_categories', PortfolioCategories::class)->name('pf_categories');
+    Route::get('/admin/pf_categories/create', PortfolioCategoriesCreate::class)->name('pf_categories.create');
+    Route::get('/admin/pf_categories/{category}', PortfolioCategoriesShow::class)->name('pf_categories.show');
+    Route::put('/admin/pf_categories/{category}', [PortfolioCategoryController::class, 'update'])->name('pf_categories.update');
+    Route::delete('/admin/pf_categories/{category}', [PortfolioCategoryController::class, 'destroy'])->name('pf_categories.destroy');
+    Route::get('/admin/pf_categories/edit/{category}', PortfolioCategoriesEdit::class)->name('pf_categories.edit');
 
     /* PORTFOLIO CATEGORIES TRANSLATIONS */
-    Route::get('/pf_categories/{category}/translation/create/{missingTranslationId?}', PortfolioCategoriesTranslationCreate::class)
+    Route::get('/admin/pf_categories/{category}/translation/create/{missingTranslationId?}', PortfolioCategoriesTranslationCreate::class)
         ->name('pf_categories_trans.create')
         ->where('missingTranslationId', '[0-9]+');
-    Route::get('/pf_categories_trans', PortfolioCategoriesTranslation::class)->name('pf_categories_trans');
-    Route::put('/pf_categories_trans/{translation}', [PortfolioCategoryTranslationController::class, 'update'])->name('pf_categories_trans.update');
-    Route::delete('/pf_categories_trans/{translation}', [PortfolioCategoryTranslationController::class, 'destroy'])->name('pf_categories_trans.destroy');
-    Route::get('/pf_categories_trans/{translation}', PortfolioCategoriesTranslationShow::class)->name('pf_categories_trans.show');
+    Route::get('/admin/pf_categories_trans', PortfolioCategoriesTranslation::class)->name('pf_categories_trans');
+    Route::put('/admin/pf_categories_trans/{translation}', [PortfolioCategoryTranslationController::class, 'update'])->name('pf_categories_trans.update');
+    Route::delete('/admin/pf_categories_trans/{translation}', [PortfolioCategoryTranslationController::class, 'destroy'])->name('pf_categories_trans.destroy');
+    Route::get('/admin/pf_categories_trans/{translation}', PortfolioCategoriesTranslationShow::class)->name('pf_categories_trans.show');
 
-    Route::get('/pf_categories_trans/edit/{translation}', PortfolioCategoriesTranslationEdit::class)->name('pf_categories_trans.edit');
+    Route::get('/admin/pf_categories_trans/edit/{translation}', PortfolioCategoriesTranslationEdit::class)->name('pf_categories_trans.edit');
 
     /* PORTFOLIO TYPES */
-    Route::get('/pf_types', PortfolioTypes::class)->name('pf_types');
-    Route::get('/pf_types/create', PortfolioTypesCreate::class)->name('pf_types.create');
-    Route::get('/pf_types/{type}', PortfolioTypesShow::class)->name('pf_types.show');
-    Route::put('/pf_types/{type}', [PortfolioTypeController::class, 'update'])->name('pf_types.update');
-    Route::delete('/pf_types/{type}', [PortfolioTypeController::class, 'destroy'])->name('pf_types.destroy');
-    Route::get('/pf_types/edit/{type}', PortfolioTypesEdit::class)->name('pf_types.edit');
+    Route::get('/admin/pf_types', PortfolioTypes::class)->name('pf_types');
+    Route::get('/admin/pf_types/create', PortfolioTypesCreate::class)->name('pf_types.create');
+    Route::get('/admin/pf_types/{type}', PortfolioTypesShow::class)->name('pf_types.show');
+    Route::put('/admin/pf_types/{type}', [PortfolioTypeController::class, 'update'])->name('pf_types.update');
+    Route::delete('/admin/pf_types/{type}', [PortfolioTypeController::class, 'destroy'])->name('pf_types.destroy');
+    Route::get('/admin/pf_types/edit/{type}', PortfolioTypesEdit::class)->name('pf_types.edit');
 
     /* PORTFOLIO TYPES TRANSLATIONS */
-    Route::get('/pf_types/{type}/translation/create/{missingTranslationId?}', PortfolioTypesTranslationCreate::class)
+    Route::get('/admin/pf_types/{type}/translation/create/{missingTranslationId?}', PortfolioTypesTranslationCreate::class)
         ->name('pf_types_trans.create')
         ->where('missingTranslationId', '[0-9]+');
-    Route::get('/pf_types_trans', PortfolioTypesTranslation::class)->name('pf_types_trans');
-    Route::put('/pf_types_trans/{translation}', [PortfolioTypeTranslationController::class, 'update'])->name('pf_types_trans.update');
-    Route::delete('/pf_types_trans/{translation}', [PortfolioTypeTranslationController::class, 'destroy'])->name('pf_types_trans.destroy');
-    Route::get('/pf_types_trans/{translation}', PortfolioTypesTranslationShow::class)->name('pf_types_trans.show');
+    Route::get('/admin/pf_types_trans', PortfolioTypesTranslation::class)->name('pf_types_trans');
+    Route::put('/admin/pf_types_trans/{translation}', [PortfolioTypeTranslationController::class, 'update'])->name('pf_types_trans.update');
+    Route::delete('/admin/pf_types_trans/{translation}', [PortfolioTypeTranslationController::class, 'destroy'])->name('pf_types_trans.destroy');
+    Route::get('/admin/pf_types_trans/{translation}', PortfolioTypesTranslationShow::class)->name('pf_types_trans.show');
 
-    Route::get('/pf_types_trans/edit/{translation}', PortfolioTypesTranslationEdit::class)->name('pf_types_trans.edit');
+    Route::get('/admin/pf_types_trans/edit/{translation}', PortfolioTypesTranslationEdit::class)->name('pf_types_trans.edit');
 
     /* PORTFOLIO TAGS */
-    Route::get('/pf_tags', PortfolioTags::class)->name('pf_tags');
-    Route::get('/pf_tags/create', PortfolioTagsCreate::class)->name('pf_tags.create');
-    Route::get('/pf_tags/{tag}', PortfolioTagsShow::class)->name('pf_tags.show');
-    Route::put('/pf_tags/{tag}', [PortfolioTagController::class, 'update'])->name('pf_tags.update');
-    Route::delete('/pf_tags/{tag}', [PortfolioTagController::class, 'destroy'])->name('pf_tags.destroy');
-    Route::get('/pf_tags/edit/{tag}', PortfolioTagsEdit::class)->name('pf_tags.edit');
+    Route::get('/admin/pf_tags', PortfolioTags::class)->name('pf_tags');
+    Route::get('/admin/pf_tags/create', PortfolioTagsCreate::class)->name('pf_tags.create');
+    Route::get('/admin/pf_tags/{tag}', PortfolioTagsShow::class)->name('pf_tags.show');
+    Route::put('/admin/pf_tags/{tag}', [PortfolioTagController::class, 'update'])->name('pf_tags.update');
+    Route::delete('/admin/pf_tags/{tag}', [PortfolioTagController::class, 'destroy'])->name('pf_tags.destroy');
+    Route::get('/admin/pf_tags/edit/{tag}', PortfolioTagsEdit::class)->name('pf_tags.edit');
 
     /* PORTFOLIO TAGS TRANSLATIONS */
-    Route::get('/pf_tags/{tag}/translation/create/{missingTranslationId?}', PortfolioTagsTranslationCreate::class)
+    Route::get('/admin/pf_tags/{tag}/translation/create/{missingTranslationId?}', PortfolioTagsTranslationCreate::class)
         ->name('pf_tags_trans.create')
         ->where('missingTranslationId', '[0-9]+');
-    Route::get('/pf_tags_trans', PortfolioTagsTranslation::class)->name('pf_tags_trans');
-    Route::put('/pf_tags_trans/{translation}', [PortfolioTagTranslationController::class, 'update'])->name('pf_tags_trans.update');
-    Route::delete('/pf_tags_trans/{translation}', [PortfolioTagTranslationController::class, 'destroy'])->name('pf_tags_trans.destroy');
+    Route::get('/admin/pf_tags_trans', PortfolioTagsTranslation::class)->name('pf_tags_trans');
+    Route::put('/admin/pf_tags_trans/{translation}', [PortfolioTagTranslationController::class, 'update'])->name('pf_tags_trans.update');
+    Route::delete('/admin/pf_tags_trans/{translation}', [PortfolioTagTranslationController::class, 'destroy'])->name('pf_tags_trans.destroy');
 
-    Route::get('/pf_tags_trans/{translation}', PortfolioTagsTranslationShow::class)->name('pf_tags_trans.show');
+    Route::get('/admin/pf_tags_trans/{translation}', PortfolioTagsTranslationShow::class)->name('pf_tags_trans.show');
 
-    Route::get('/pf_tags_trans/edit/{translation}', PortfolioTagsTranslationEdit::class)->name('pf_tags_trans.edit');
+    Route::get('/admin/pf_tags_trans/edit/{translation}', PortfolioTagsTranslationEdit::class)->name('pf_tags_trans.edit');
 
 });
-
-/* TEST */
-
 
 /* ERRORS */
 Route::fallback(function () {
     $errorPath = request()->path();
-    // Log the miss
-    Log::error('404. Fallback Missing page: ', ['path' => $errorPath, 'userId' => Auth::id()]);
+    //dd($errorPath);
+    if (request()->is('admin/*')) {
+        // Log the miss
+        Log::error('404. Fallback Missing page ADMIN: ', ['path' => $errorPath, 'userId' => Auth::id()]);
 
-    return response()
-        ->view('errors.404', ['errorPath' => $errorPath, 'fallback' => true], 404);
-});
-
-
-
-/* Route::fallback(function () {
-    if (Auth::id() != null) {
-    return response()->view('errors.500', [], 500);
-    } else {
-    return response()->view('errors.404', [], 404);
+        return response()
+            ->view('errors.404-admin', ['errorPath' => $errorPath, 'fallback' => true], 404);
     }
-    }); */
+    else
+    {
+        // Log the miss
+        Log::error('404. Fallback Missing page FRONTEND: ', ['path' => $errorPath, 'userId' => Auth::id()]);
+
+        return response()
+            ->view('errors.404', ['errorPath' => $errorPath, 'fallback' => true], 404);
+    }
+    
+});

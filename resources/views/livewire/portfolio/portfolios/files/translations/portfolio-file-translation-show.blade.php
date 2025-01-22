@@ -2,15 +2,15 @@
 
     <!-- Sitemap -->
     <div class="flex flex-row justify-start items-start gap-1 text-sm py-3 px-4 text-slate-500 capitalize">
-        <a href="/portfolios" class="text-black {{ $textMenuHeader }}">{{ __('admin/portfolio/portfolio.menuIndex') }}</a>
+        <a href="/admin/portfolios" class="text-black {{ $textMenuHeader }}">{{ __('admin/portfolio/portfolio.menuIndex') }}</a>
         /
-        <a href="/portfolios/{{ $file->portfolio->id }}"
+        <a href="/admin/portfolios/{{ $file->portfolio->id }}"
             class="font-bold text-black {{ $textMenuHeader }}">{{ $file->portfolio->name }}</a>
         /
-        <a href="/portfolios/{{ $file->portfolio->id }}/file/{{ $file->id }}"
+        <a href="/admin/portfolios/{{ $file->portfolio->id }}/file/{{ $file->id }}"
             class="font-bold text-black {{ $textMenuHeader }}">{{ __('generic.image') }}</a>
         /        
-        <a href="/portfolios/{{ $file->portfolio->id }}/file/{{ $file->id }}/translation/{{ $translation->id }}"
+        <a href="/admin/portfolios/{{ $file->portfolio->id }}/file/{{ $file->id }}/translation/{{ $translation->id }}"
             class="font-bold text-black {{ $underlineMenuHeader }}">{{ __('generic.info') }}</a>
     </div>
 

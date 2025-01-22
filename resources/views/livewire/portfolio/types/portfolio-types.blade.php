@@ -2,10 +2,10 @@
 
     <!-- Sitemap -->
     <div class="flex flex-row justify-start items-start gap-1 text-sm py-3 px-4 text-slate-500 capitalize">
-        <a href="/pf_types"
+        <a href="/admin/pf_types"
             class="font-bold text-black {{ $underlineMenuHeader }}">{{ __('admin/portfolio/portfolioTypes.menuIndex') }}</a>
         /
-        <a href="/pf_types_trans" class="text-black {{ $textMenuHeader }}">{{ __('generic.translations') }}
+        <a href="/admin/pf_types_trans" class="text-black {{ $textMenuHeader }}">{{ __('generic.translations') }}
         </a>
     </div>
 
@@ -131,7 +131,7 @@
                                         <!-- If translation exists link to show, if not link to create new -->
                                         @foreach ($this->translationLinks($type) as $translation)
                                             @if ($translation['translationId'])
-                                                <a href="/pf_types_trans/{{ $translation['translationId'] }}"
+                                                <a href="/admin/pf_types_trans/{{ $translation['translationId'] }}"
                                                     class="text-green-600" title="{{ $translation['lang'] }}">
                                                     {{ $translation['code'] }}
                                                 </a>

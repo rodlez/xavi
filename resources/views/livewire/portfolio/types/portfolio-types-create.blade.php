@@ -2,9 +2,9 @@
 
     <!-- Sitemap -->
     <div class="flex flex-row justify-start items-start gap-1 text-sm py-3 px-4 text-slate-500 capitalize">
-        <a href="/pf_types"
+        <a href="/admin/pf_types"
             class="text-black {{ $textMenuHeader }}">{{ __('admin/portfolio/portfolioTypes.menuIndex') }}</a> /
-        <a href="/pf_types/create" class="font-bold text-black {{ $underlineMenuHeader }}">{{ __('generic.new') }}</a>
+        <a href="/admin/pf_types/create" class="font-bold text-black {{ $underlineMenuHeader }}">{{ __('generic.new') }}</a>
     </div>
 
     <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
