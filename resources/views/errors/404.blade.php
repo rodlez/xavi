@@ -1,27 +1,20 @@
 <x-xavi-layout>
 
+<div class="flex flex-col justify-center items-center gap-6 text-white bg-red-500 h-screen">
+    <div class="text-white text-9xl font-bold">{{ __('errors.error404') }}</div>
+    <span class="text-white">{{ __('errors.message404') }}</span>
+    <div class="class flex flex-row justify-center gap-4">
+        <a href="/" class="bg-blue-700 hover:bg-blue-500 text-white font-semibold hover:text-white py-2 px-4 border border-white hover:border-transparent rounded">{{ __('errors.home') }}</a>
+        <a href="/contact" class="bg-blue-700 hover:bg-blue-500 text-white font-semibold hover:text-white py-2 px-4 border border-white hover:border-transparent rounded">{{ __('errors.contact') }}</a>
+    </div>    
 
+    <br /><br /><br />
+    @if (isset($fallback))
+    <span class="bg-green-400 p-4">FALLBACK</span>
+    @else
+    <span class="bg-black p-4">EXCEPTION</span>
+    @endif  
 
-
-<div id="notfound">
-    <div class="notfound-bg"></div>
-    <div class="notfound">
-        <div class="notfound-404">
-            <h1>{{ __('errors.error404') }}</h1>
-        </div>
-        <h2>{{ __('errors.message404') }}</h2>
-        <a href="/" class="home-btn">{{ __('errors.home') }}</a>
-        <a href="/contact" class="contact-btn">{{ __('errors.contact') }}</a>
-        current locale - {{App::currentLocale()}}
-        <br />
-        get locale - {{App::getLocale()}}
-        <br />
-        session {{var_dump(session()->all())}}
-{{-- <h2>{{ $exception->getMessage() }}</h2> --}}
-    </div>
-    
 </div>
-
-
 
 </x-xavi-layout>

@@ -76,7 +76,7 @@ class PortfolioShow extends Component
     public function render()
     {
         //$missingTranslations = $this->translationService->getTranslationsMissing(PortfolioTranslation::class, 'portfolio_id', $this->portfolio->id);
-
+        //dd($this->portfolio);
         $missingTranslations = $this->translationService->getTranslationsMissingTest($this->portfolio);
 
         return view('livewire.portfolio.portfolios.portfolio-show', [

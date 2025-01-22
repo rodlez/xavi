@@ -16,8 +16,8 @@ use App\Http\Controllers\Portfolio\PortfolioTranslationController;
 use App\Http\Controllers\Portfolio\PortfolioTypeController;
 use App\Http\Controllers\Portfolio\PortfolioTypeTranslationController;
 use App\Http\Controllers\Section\Portfolio as SectionPortfolio;
-/* Livewire Full Page Components */
 
+/* Livewire Full Page Components */
 use App\Livewire\Languages\Languages;
 use App\Livewire\Languages\LanguagesCreate;
 use App\Livewire\Languages\LanguagesEdit;
@@ -60,6 +60,8 @@ use App\Livewire\Portfolio\Types\Translations\PortfolioTypesTranslation;
 use App\Livewire\Portfolio\Types\Translations\PortfolioTypesTranslationCreate;
 use App\Livewire\Portfolio\Types\Translations\PortfolioTypesTranslationEdit;
 use App\Livewire\Portfolio\Types\Translations\PortfolioTypesTranslationShow;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 /* ------------------------------------------------------------- WEB ------------------------------------------------------------- */
 
@@ -78,13 +80,11 @@ Route::get('/services', function () {
 Route::get('/playground', [Playground::class, 'index'])->name('playground');
 
 /* PORTFOLIO GALLERY */
-
 Route::get('/portfolio', [SectionPortfolio::class, 'index'])->name('portfolio');
 Route::get('/portfolio/{portfolio}', [SectionPortfolio::class, 'show'])->name('portfolio.show');
 Route::get('/portfolio/type/{type}', [SectionPortfolio::class, 'types'])->name('portfolio.types');
 Route::get('/portfolio/cat/{category}', [SectionPortfolio::class, 'categories'])->name('portfolio.categories');
 Route::get('/portfolio/tag/{tag}', [SectionPortfolio::class, 'tags'])->name('portfolio.tags');
-
 
 /* LANGUAGES SWITCH */
 Route::get('lang', [LanguageController::class, 'change'])->name('change.lang');
@@ -220,8 +220,28 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
     Route::get('/pf_tags_trans/{translation}', PortfolioTagsTranslationShow::class)->name('pf_tags_trans.show');
 
     Route::get('/pf_tags_trans/edit/{translation}', PortfolioTagsTranslationEdit::class)->name('pf_tags_trans.edit');
+
 });
 
+/* TEST */
+
+
+/* ERRORS */
 Route::fallback(function () {
-    return response()->view('errors.404', [], 404);
+    $errorPath = request()->path();
+    // Log the miss
+    Log::error('404. Fallback Missing page: ', ['path' => $errorPath, 'userId' => Auth::id()]);
+
+    return response()
+        ->view('errors.404', ['errorPath' => $errorPath, 'fallback' => true], 404);
 });
+
+
+
+/* Route::fallback(function () {
+    if (Auth::id() != null) {
+    return response()->view('errors.500', [], 500);
+    } else {
+    return response()->view('errors.404', [], 404);
+    }
+    }); */

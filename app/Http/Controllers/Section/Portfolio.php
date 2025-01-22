@@ -13,8 +13,8 @@ use App\Models\Portfolio\PortfolioType;
 use App\Models\Portfolio\PortfolioTypeTranslation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
-
-
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 
@@ -30,8 +30,7 @@ class Portfolio extends Controller
     {
         $language = App::currentLocale();
         // Need All the Portfolios for the language AND with published status == 1
-        $languageId = Languages::where('code', $language)->pluck('id')->first();        
-       
+        $languageId = Languages::where('code', $language)->pluck('id')->first();               
         
         // One Approach -> Passing the translations directly
         //$publishedPortfolios = PortfolioModel::where('published', 1)->pluck('id');
@@ -88,7 +87,7 @@ class Portfolio extends Controller
     {
         $portfolio = PortfolioModel::where('id', $id)->first();
         if ($portfolio == null) {
-            //throw new NotFoundHttpException();
+            Log::error('404. Frontend Portfolio show method id does not exists.', ['portfolioId' => $id, 'userId' => Auth::id()]);
             abort(404);
         } 
 
@@ -130,6 +129,7 @@ class Portfolio extends Controller
 
         $typeTranslation = PortfolioTypeTranslation::where('pf_type_id', $id)->where('lang_id', $languageId)->first();
         if ($typeTranslation == null) {
+            Log::error('404. Frontend Portfolio types method id does not exists.', ['typeId' => $id, 'userId' => Auth::id()]);
             abort(404);
         } 
         // get() returns a collection, first() returns a single instance
@@ -171,6 +171,7 @@ class Portfolio extends Controller
 
         $categoryTranslation = PortfolioCategoryTranslation::where('pf_cat_id', $id)->where('lang_id', $languageId)->first();
         if ($categoryTranslation == null) {
+            Log::error('404. Frontend Portfolio categories method id does not exists.', ['catId' => $id, 'userId' => Auth::id()]);
             abort(404);
         } 
         // get() returns a collection, first() returns a single instance
@@ -212,6 +213,7 @@ class Portfolio extends Controller
 
         $tagTranslation = PortfolioTagTranslation::where('pf_tag_id', $id)->where('lang_id', $languageId)->first();
         if ($tagTranslation == null) {
+            Log::error('404. Frontend Portfolio tags method id does not exists.', ['tagId' => $id, 'userId' => Auth::id()]);
             abort(404);
         } 
         // get() returns a collection, first() returns a single instance
