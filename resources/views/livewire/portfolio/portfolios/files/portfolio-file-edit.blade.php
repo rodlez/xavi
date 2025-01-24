@@ -1,23 +1,24 @@
 <div class="max-w-7xl mx-auto sm:pb-8 sm:px-6 lg:px-8">
-   
+
     <!-- Sitemap -->
     <div class="flex flex-row justify-start items-start gap-1 text-sm py-3 px-4 text-slate-500 capitalize">
-        <a href="/admin/portfolios" class="text-black {{ $textMenuHeader }}">{{ __('admin/portfolio/portfolio.menuIndex') }}</a>
+        <a href="{{ route('portfolios') }}"
+            class="text-black {{ $textMenuHeader }}">{{ __('admin/portfolio/portfolio.menuIndex') }}</a>
         /
-        <a href="/admin/portfolios/{{ $portfolio->id }}"
+        <a href="{{ route('portfolios.show', $portfolio) }}"
             class="font-bold text-black {{ $textMenuHeader }}">{{ $portfolio->name }}</a>
         /
-        <a href="/admin/portfolios/{{ $portfolio->id }}/file/{{ $image->id }}"
+        <a href="{{ route('portfoliosfile.show', [$portfolio, $image]) }}"
             class="font-bold text-black {{ $textMenuHeader }}">{{ __('generic.image') }}</a>
-            /
-            <a href="/admin/portfolios/{{ $portfolio->id }}/file/{{ $image->id }}/edit"
-                class="font-bold text-black {{ $underlineMenuHeader }}">{{ __('generic.edit') }}</a>
+        /
+        <a href="{{ route('portfoliosfile.edit', [$portfolio, $image]) }}"
+            class="font-bold text-black {{ $underlineMenuHeader }}">{{ __('generic.edit') }}</a>
     </div>
 
     <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
 
-         <!-- HEADER -->
-         <div class="flex flex-row justify-start items-center py-4 {{ $bgMenuColor }}">
+        <!-- HEADER -->
+        <div class="flex flex-row justify-start items-center py-4 {{ $bgMenuColor }}">
             <span class="text-lg text-white capitalize px-4">{{ __('generic.portfolio') }}</span>
         </div>
 
@@ -26,9 +27,10 @@
 
             <!-- Edit Type Message -->
             <div class="flex w-full sm:w-fit text-lg text-white bg-blue-600 font-light normal-case rounded-t-md p-2">
-                <span>{{ __('generic.edit') }} {{ __('generic.image') }} > <span class="font-bold">{{ $image->original_filename }}</span></span>
+                <span>{{ __('generic.edit') }} {{ __('generic.image') }} > <span
+                        class="font-bold">{{ $image->original_filename }}</span></span>
             </div>
-            
+
 
             <!-- Form -->
             <div class="bg-slate-100 rounded-md p-2">
@@ -82,24 +84,23 @@
 
         </div>
 
-         <!-- FOOTER -->
-         <div
-         class="flex flex-row justify-between items-center text-white text-center p-4 {{ $bgMenuColor }} sm:rounded-b-lg">
-         <div class="w-1/3 text-left"><a href="{{ route('portfoliosfile.show', [$portfolio, $image]) }}">
-                 <i class="fa-lg fa-solid fa-chevron-left hover:text-black transition duration-1000 ease-in-out"
-                     title="{{ __('generic.back') }}"></i>
-             </a>
-         </div>
-         <div class="w-1/3 text-xs">{{ __('generic.authorInfo') }}</div>
-         <div class="w-1/3 text-right">
-             <a href="{{ route('dashboard') }}">
-                 <i class="fa-lg fa-solid fa-house hover:text-black transition duration-1000 ease-in-out"
-                     title="{{ __('generic.back') }}"></i>
-             </a>
-         </div>
-     </div>
+        <!-- FOOTER -->
+        <div
+            class="flex flex-row justify-between items-center text-white text-center p-4 {{ $bgMenuColor }} sm:rounded-b-lg">
+            <div class="w-1/3 text-left"><a href="{{ route('portfoliosfile.show', [$portfolio, $image]) }}">
+                    <i class="fa-lg fa-solid fa-chevron-left hover:text-black transition duration-1000 ease-in-out"
+                        title="{{ __('generic.back') }}"></i>
+                </a>
+            </div>
+            <div class="w-1/3 text-xs">{{ __('generic.authorInfo') }}</div>
+            <div class="w-1/3 text-right">
+                <a href="{{ route('dashboard') }}">
+                    <i class="fa-lg fa-solid fa-house hover:text-black transition duration-1000 ease-in-out"
+                        title="{{ __('generic.back') }}"></i>
+                </a>
+            </div>
+        </div>
 
     </div>
 
 </div>
-

@@ -2,10 +2,10 @@
 
     <!-- Sitemap -->
     <div class="flex flex-row justify-start items-start gap-1 text-sm py-3 px-4 text-slate-500 capitalize">
-        <a href="/admin/portfolios"
+        <a href="{{route('portfolios')}}"
             class="font-bold text-black {{ $underlineMenuHeader }}">{{ __('admin/portfolio/portfolio.menuIndex') }}</a>
         /
-        <a href="/admin/portfolios_trans" class="text-black {{ $textMenuHeader }}">{{ __('generic.translations') }}
+        <a href="{{route('portfolios_trans')}}" class="text-black {{ $textMenuHeader }}">{{ __('generic.translations') }}
         </a>
     </div>
 
@@ -21,7 +21,7 @@
             <div class="px-4">
                 <a href="{{ route('portfolios.create') }}"
                     class="text-white text-sm capitalize sm:text-md rounded-lg py-2 px-4 bg-black hover:bg-gray-600 transition duration-1000 ease-in-out"
-                    title="Create New Language">{{ __('generic.new') }}
+                    title="{{ __('generic.new') }}">{{ __('generic.new') }}
                 </a>
             </div>
         </div>

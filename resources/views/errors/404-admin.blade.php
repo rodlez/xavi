@@ -7,7 +7,7 @@
         <a href="/admin/dashboard" class="bg-blue-700 hover:bg-blue-500 text-white font-semibold hover:text-white py-2 px-4 border border-white hover:border-transparent rounded">{{ __('errors.home') }}</a>
         <a href="/contact" class="bg-blue-700 hover:bg-blue-500 text-white font-semibold hover:text-white py-2 px-4 border border-white hover:border-transparent rounded">{{ __('errors.contact') }}</a>
     </div>    
-aadmin
+<div><h1>Admin</h1></div>
     <br /><br /><br />
     @if (isset($fallback))
     <span class="bg-green-400 p-4">FALLBACK</span>

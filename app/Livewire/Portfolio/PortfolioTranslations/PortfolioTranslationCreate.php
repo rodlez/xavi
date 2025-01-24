@@ -10,7 +10,9 @@ use App\Models\Portfolio\PortfolioTagTranslation;
 use App\Models\Portfolio\PortfolioTypeTranslation;
 use App\Services\TranslationService;
 use Exception;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Livewire\Component;
 
 class PortfolioTranslationCreate extends Component
@@ -95,7 +97,9 @@ class PortfolioTranslationCreate extends Component
         $translationLanguage = Languages::where('id', $this->missingTranslationId)->first();
 
         if (!$translationLanguage) {
-            abort(404, 'Language not found');
+            //abort(404, 'Language not found');
+            Log::error('404. Admin/TranslationCreate Language for translation does not exists.', ['langId' => $this->missingTranslationId, 'userId' => Auth::id()]);
+            return view('errors.404-admin', [])->layout('layouts.app');
         }
 
         // 2 - Check if the Language have already a translation. if so, no need to give the option to create a new one.

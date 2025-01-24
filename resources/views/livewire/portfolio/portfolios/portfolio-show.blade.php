@@ -2,9 +2,10 @@
 
     <!-- Sitemap -->
     <div class="flex flex-row justify-start items-start gap-1 text-sm py-3 px-4 text-slate-500 capitalize">
-        <a href="/admin/portfolios" class="text-black {{ $textMenuHeader }}">{{ __('admin/portfolio/portfolio.menuIndex') }}</a>
+        <a href="{{ route('portfolios') }}"
+            class="text-black {{ $textMenuHeader }}">{{ __('admin/portfolio/portfolio.menuIndex') }}</a>
         /
-        <a href="/admin/portfolios/{{ $portfolio->id }}"
+        <a href="{{ route('portfolios.show', $portfolio) }}"
             class="font-bold text-black {{ $underlineMenuHeader }}">{{ $portfolio->name }}</a>
     </div>
 
@@ -193,12 +194,12 @@
                                         {{ $image->original_filename }}
                                     </td>
                                     </td>
-                                    <td class="p-2 max-sm:hidden">{{ $image->width}}X{{$image->height}}</td>
+                                    <td class="p-2 max-sm:hidden">{{ $image->width }}X{{ $image->height }}</td>
                                     <td class="p-2 max-sm:hidden">{{ round($image->size / 1024) }} </td>
                                     <td class="p-2 normal-case">{{ basename($image->media_type) }}</td>
 
-                                    <td class="p-2 normal-case">                                        
-                                        {{$this->haveResponsiveImages($image) ? __('generic.yes') : __('generic.no')}}
+                                    <td class="p-2 normal-case">
+                                        {{ $this->haveResponsiveImages($image) ? __('generic.yes') : __('generic.no') }}
                                     </td>
                                     <td class="p-2 max-sm:hidden">{{ $image->created_at->format('d-m-Y') }}
 

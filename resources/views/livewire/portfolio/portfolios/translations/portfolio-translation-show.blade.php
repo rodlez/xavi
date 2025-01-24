@@ -2,10 +2,10 @@
 
     <!-- Sitemap -->
     <div class="flex flex-row justify-start items-start gap-1 text-sm py-3 px-4 text-slate-500 capitalize">
-        <a href="/admin/portfolios" class="{{ $textMenuHeader }}">{{ __('admin/portfolio/portfolio.menuIndex') }}</a> /
-        <a href="/admin/portfolios/{{ $translation->portfolio->id }}"
+        <a href="{{ route('portfolios') }}" class="{{ $textMenuHeader }}">{{ __('admin/portfolio/portfolio.menuIndex') }}</a> /
+        <a href="{{ route('portfolios.show', $translation->portfolio) }}"
             class="{{ $textMenuHeader }}">{{ $translation->portfolio->name }}</a> /
-        <a href="/admin/portfolios_trans/{{ $translation->id }}"
+        <a href="{{ route('portfolios_trans.show', $translation) }}"
             class="font-bold text-black {{ $underlineMenuHeader }}">{{ __('generic.info') }}
             {{ __('generic.translation') }} ({{ $translation->language->code }})</a>
     </div>
