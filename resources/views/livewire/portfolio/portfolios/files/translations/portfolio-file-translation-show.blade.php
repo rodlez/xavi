@@ -2,16 +2,18 @@
 
     <!-- Sitemap -->
     <div class="flex flex-row justify-start items-start gap-1 text-sm py-3 px-4 text-slate-500 capitalize">
-        <a href="/admin/portfolios" class="text-black {{ $textMenuHeader }}">{{ __('admin/portfolio/portfolio.menuIndex') }}</a>
+        <a href="{{ route('portfolios') }}"
+            class="text-black {{ $textMenuHeader }}">{{ __('admin/portfolio/portfolio.menuIndex') }}</a>
         /
-        <a href="/admin/portfolios/{{ $file->portfolio->id }}"
+        <a href="{{ route('portfolios.show', $file->portfolio) }}"
             class="font-bold text-black {{ $textMenuHeader }}">{{ $file->portfolio->name }}</a>
         /
-        <a href="/admin/portfolios/{{ $file->portfolio->id }}/file/{{ $file->id }}"
+        <a href="{{ route('portfoliosfile.show', [$file->portfolio, $file]) }}"
             class="font-bold text-black {{ $textMenuHeader }}">{{ __('generic.image') }}</a>
-        /        
-        <a href="/admin/portfolios/{{ $file->portfolio->id }}/file/{{ $file->id }}/translation/{{ $translation->id }}"
-            class="font-bold text-black {{ $underlineMenuHeader }}">{{ __('generic.info') }}</a>
+        /
+        <a href="{{ route('portfoliosfile_trans.show', [$file->portfolio, $file, $translation]) }}"
+            class="font-bold text-black {{ $underlineMenuHeader }}">{{ __('generic.info') }}
+        </a>        
     </div>
 
     <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
@@ -69,7 +71,9 @@
                             </div>
                             <!-- Delete Image Translation -->
                             <div class="w-fit bg-red-600 text-white text-lg rounded-t-md capitalize mb-0 p-2">
-                                <form action="{{ route('portfoliosfile_trans.destroy', [$portfolio, $file, $translation]) }}" method="POST">
+                                <form
+                                    action="{{ route('portfoliosfile_trans.destroy', [$portfolio, $file, $translation]) }}"
+                                    method="POST">
                                     <!-- Add Token to prevent Cross-Site Request Forgery (CSRF) -->
                                     @csrf
                                     <!-- Directive to Override the http method -->
@@ -104,7 +108,8 @@
                             </a>
                         </button>
                         <!-- Delete -->
-                        <form action="{{ route('portfoliosfile_trans.destroy', [$portfolio, $file, $translation]) }}" method="POST">
+                        <form action="{{ route('portfoliosfile_trans.destroy', [$portfolio, $file, $translation]) }}"
+                            method="POST">
                             <!-- Add Token to prevent Cross-Site Request Forgery (CSRF) -->
                             @csrf
                             <!-- Directive to Override the http method -->

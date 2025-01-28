@@ -7,6 +7,8 @@ use App\Models\Languages;
 use App\Models\Portfolio\PortfolioFile;
 use App\Services\TranslationService;
 use Exception;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Livewire\Component;
 
 class PortfolioFileTranslationCreate extends Component
@@ -79,7 +81,9 @@ class PortfolioFileTranslationCreate extends Component
         $translationLanguage = Languages::where('id', $this->missingTranslationId)->first();
 
         if (!$translationLanguage) {
-            abort(404, 'Language not found');
+            //abort(404, 'Language not found');
+            Log::error('404. Admin/FileTranslationCreate Language for translation does not exists.', ['langId' => $this->missingTranslationId, 'userId' => Auth::id()]);
+            return view('errors.404-admin', [])->layout('layouts.app');
         }
 
         // 2 - Check if the Language have already a translation. if so, no need to give the option to create a new one.
@@ -102,6 +106,7 @@ class PortfolioFileTranslationCreate extends Component
             'focusColor' => 'focus:ring-slate-400 focus:border-slate-400',
             // Data
             'file' => $this->file,
+            'missingTranslationId' => $this->missingTranslationId,
             'languages' => Languages::all(),
             'translationLanguage' => $translationLanguage,
             'isTranslated' => $isTranslated,

@@ -28,7 +28,7 @@ return Application::configure(basePath: dirname(__DIR__))
             // set locale to show the custom error in the correct language
             $locale = $request->session()->get('locale', 'es');
             App::setLocale($locale);
-            dd($e);
+            //dd($e);
             if ($e->getPrevious() instanceof ModelNotFoundException) {
                 // Log the miss
                 Log::error('404. NotFound: ', ['path' => $errorPath, 'userId' => Auth::id(), 'message' => $e->getMessage()]);

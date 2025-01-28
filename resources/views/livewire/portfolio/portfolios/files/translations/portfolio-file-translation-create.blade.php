@@ -2,7 +2,8 @@
 
     <!-- Sitemap -->
     <div class="flex flex-row justify-start items-start gap-1 text-sm py-3 px-4 text-slate-500 capitalize">
-        <a href="{{ route('portfolios') }}" class="text-black {{ $textMenuHeader }}">{{ __('admin/portfolio/portfolio.menuIndex') }}</a>
+        <a href="{{ route('portfolios') }}"
+            class="text-black {{ $textMenuHeader }}">{{ __('admin/portfolio/portfolio.menuIndex') }}</a>
         /
         <a href="{{ route('portfolios.show', $file->portfolio) }}"
             class="font-bold text-black {{ $textMenuHeader }}">{{ $file->portfolio->name }}</a>
@@ -10,11 +11,8 @@
         <a href="{{ route('portfoliosfile.show', [$file->portfolio, $file]) }}"
             class="font-bold text-black {{ $textMenuHeader }}">{{ __('generic.image') }}</a>
         /
-        <a href="/admin/portfolios/{{ $file->portfolio->id }}/file/{{ $file->id }}/create"
+        <a href="{{ route('portfoliosfile_trans.create', ['portfolio' => $file->portfolio, 'file' => $file, 'missingTranslationId' => $missingTranslationId]) }}"
             class="font-bold text-black {{ $underlineMenuHeader }}">{{ __('generic.translation') }}</a>
-
-            {{-- <a href="/admin/portfolios/{{ $file->portfolio->id }}/file/{{ $file->id }}/create"
-                class="font-bold text-black {{ $underlineMenuHeader }}">{{ __('generic.translation') }}</a> --}}
     </div>
 
     <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">

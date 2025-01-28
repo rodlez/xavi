@@ -149,7 +149,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
     Route::put('/admin/portfolios/{portfolio}/file/{file}/translation/{translation}', [PortfolioFileTranslationController::class, 'update'])->name('portfoliosfile_trans.update');
     Route::delete('/admin/portfolios/{portfolio}/file/{file}/translation/{translation}', [PortfolioFileTranslationController::class, 'destroy'])->name('portfoliosfile_trans.destroy');
 
-    Route::get('/portfolios/{portfolio}/file/{file}/translation/{translation}/edit', PortfolioFileTranslationEdit::class)->name('portfoliosfile_trans.edit');    
+    Route::get('/admin/portfolios/{portfolio}/file/{file}/translation/{translation}/edit', PortfolioFileTranslationEdit::class)->name('portfoliosfile_trans.edit');    
 
     /* PORTFOLIO CATEGORIES */
     Route::get('/admin/pf_categories', PortfolioCategories::class)->name('pf_categories');

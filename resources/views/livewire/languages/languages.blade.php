@@ -2,7 +2,7 @@
 
     <!-- Sitemap -->
     <div class="flex flex-row justify-start items-start gap-1 text-sm py-3 px-4 text-slate-500 capitalize">
-        <a href="/admin/languages" class="font-bold text-black {{$underlineMenuHeader}}">{{__("generic.languages")}}</a>
+        <a href="{{route('languages')}}" class="font-bold text-black {{$underlineMenuHeader}}">{{__("generic.languages")}}</a>
     </div>
     <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
 

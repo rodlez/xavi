@@ -14,7 +14,7 @@ class PortfolioFileTranslationEdit extends Component
     public PortfolioFile $file;
     public PortfolioFileTranslation $translation;    
 
-    public function mount(Portfolio $portfolio, PortfolioFile $file, PortfolioFileTranslation $translation, )
+    public function mount(Portfolio $portfolio, PortfolioFile $file, PortfolioFileTranslation $translation)
     {
         $this->portfolio = $portfolio;
         $this->file = $file;        
