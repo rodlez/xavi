@@ -2,9 +2,9 @@
 
     <!-- Sitemap -->
     <div class="flex flex-row justify-start items-start gap-1 text-sm py-3 px-4 text-slate-500 capitalize">
-        <a href="/admin/pf_types" class="{{ $textMenuHeader }}">{{ __('admin/portfolio/portfolioTypes.menuIndex') }}</a> /
-        <a href="/admin/pf_types/{{ $translation->type->id }}" class="{{ $textMenuHeader }}">{{ $translation->type->name }}</a> /
-        <a href="/admin/pf_types_trans/{{ $translation->id }}"
+        <a href="{{route('pf_types')}}" class="{{ $textMenuHeader }}">{{ __('admin/portfolio/portfolioTypes.menuIndex') }}</a> /
+        <a href="{{route('pf_types.show', $translation->type)}}" class="{{ $textMenuHeader }}">{{ $translation->type->name }}</a> /
+        <a href="{{route('pf_types_trans.show', $translation)}}"
             class="font-bold text-black {{ $underlineMenuHeader }}">{{ __('generic.info') }}
             {{ __('generic.translation') }} ({{ $translation->language->code }})</a>
     </div>

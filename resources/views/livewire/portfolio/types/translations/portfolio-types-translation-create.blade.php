@@ -2,9 +2,10 @@
 
     <!-- Sitemap -->
     <div class="flex flex-row justify-start items-start gap-1 text-sm py-3 px-4 text-slate-500 capitalize">
-        <a href="/admin/pf_types" class="{{ $textMenuHeader }}">{{ __('admin/portfolio/portfolioTypes.menuIndex') }}</a> /
-        <a href="/admin/pf_types/{{ $type->id }}" class="{{ $textMenuHeader }}">{{ $type->name }}</a> /
-        <a href="/admin/pf_types/{{ $type->id }}/translation/create/{{ $missingTranslationId }}"
+        <a href="{{ route('pf_types') }}"
+            class="{{ $textMenuHeader }}">{{ __('admin/portfolio/portfolioTypes.menuIndex') }}</a> /
+        <a href="{{ route('pf_types.show', $type) }}" class="{{ $textMenuHeader }}">{{ $type->name }}</a> /
+        <a href="{{ route('pf_types_trans.create', ['type' => $type, 'missingTranslationId' => $missingTranslationId]) }}"
             class="font-bold text-black {{ $underlineMenuHeader }}">{{ __('generic.newF') }}
             {{ __('generic.translation') }} ({{ $translationLanguage->code }})</a>
     </div>

@@ -2,9 +2,10 @@
 
     <!-- Sitemap -->
     <div class="flex flex-row justify-start items-start gap-1 text-sm py-3 px-4 text-slate-500 capitalize">
-        <a href="/admin/pf_tags" class="{{ $textMenuHeader }}">{{ __('admin/portfolio/portfolioTags.menuIndex') }}</a> /
-        <a href="/admin/pf_tags/{{ $tag->id }}" class="{{ $textMenuHeader }}">{{ $tag->name }}</a> /
-        <a href="/admin/pf_tags/{{ $tag->id }}/translation/create/{{ $missingTranslationId }}"
+        <a href="{{ route('pf_tags') }}"
+            class="{{ $textMenuHeader }}">{{ __('admin/portfolio/portfolioTags.menuIndex') }}</a> /
+        <a href="{{ route('pf_tags.show', $tag) }}" class="{{ $textMenuHeader }}">{{ $tag->name }}</a> /
+        <a href="{{ route('pf_tags_trans.create', ['tag' => $tag, 'missingTranslationId' => $missingTranslationId]) }}"
             class="font-bold text-black {{ $underlineMenuHeader }}">{{ __('generic.newF') }}
             {{ __('generic.translation') }} ({{ $translationLanguage->code }})</a>
     </div>
@@ -23,7 +24,8 @@
             <div class="flex flex-col">
 
                 <div class="flex flex-row justify-between">
-                    <div class="flex w-full sm:w-fit {{ $bgInfoTab }} text-white font-light uppercase rounded-t-md p-2">
+                    <div
+                        class="flex w-full sm:w-fit {{ $bgInfoTab }} text-white font-light uppercase rounded-t-md p-2">
                         {{ __('generic.tag') }}
                     </div>
                 </div>
@@ -41,24 +43,27 @@
                 @if ($isTranslated == false)
                     <div class="flex flex-col my-8">
                         <!-- Info Tag Translation -->
-                        <div class="flex w-full sm:w-fit {{ $bgTranslationTab }} text-white font-light uppercase rounded-t-md p-2">
+                        <div
+                            class="flex w-full sm:w-fit {{ $bgTranslationTab }} text-white font-light uppercase rounded-t-md p-2">
                             {{ __('generic.translation') }}
                         </div>
                         <div class="flex flex-col text-black capitalize bg-gray-200 rounded-b-lg sm:rounded-tr-lg">
                             <span class="{{ $menuInfo }} p-2 sm:rounded-tr-lg">{{ __('generic.language') }}</span>
-                            <span class="{{ $translationName }} p-2 rounded-b-lg">{{ $translationLanguage->name }}</span>
+                            <span
+                                class="{{ $translationName }} p-2 rounded-b-lg">{{ $translationLanguage->name }}</span>
                         </div>
                     </div>
 
                     <!-- Create Translation Tag Message -->
                     <div
-                        class="flex w-full sm:w-fit text-lg {{$createTranslation}} font-light normal-case rounded-t-md p-2">
+                        class="flex w-full sm:w-fit text-lg {{ $createTranslation }} font-light normal-case rounded-t-md p-2">
                         <span>{{ __('generic.createTranslation') }}</span>
                     </div>
                     <!-- Mandatory Form Fields Message -->
                     <div class="flex flex-col text-black normal-case bg-gray-200 sm:rounded-tr-lg">
-                        <span class="{{ $menuInfo }} text-sm p-2 sm:rounded-tr-lg">{{ __('generic.mandatoryFields') }}</span>
-                    </div>                   
+                        <span
+                            class="{{ $menuInfo }} text-sm p-2 sm:rounded-tr-lg">{{ __('generic.mandatoryFields') }}</span>
+                    </div>
 
                     <!-- Form -->
                     <div class="bg-slate-200 rounded-b-md my-0 p-2">

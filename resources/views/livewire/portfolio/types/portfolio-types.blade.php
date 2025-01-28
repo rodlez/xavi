@@ -2,10 +2,10 @@
 
     <!-- Sitemap -->
     <div class="flex flex-row justify-start items-start gap-1 text-sm py-3 px-4 text-slate-500 capitalize">
-        <a href="/admin/pf_types"
+        <a href="{{route('pf_types')}}"
             class="font-bold text-black {{ $underlineMenuHeader }}">{{ __('admin/portfolio/portfolioTypes.menuIndex') }}</a>
         /
-        <a href="/admin/pf_types_trans" class="text-black {{ $textMenuHeader }}">{{ __('generic.translations') }}
+        <a href="{{route('pf_types_trans')}}" class="text-black {{ $textMenuHeader }}">{{ __('generic.translations') }}
         </a>
     </div>
 

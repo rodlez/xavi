@@ -2,9 +2,9 @@
 
     <!-- Sitemap -->
     <div class="flex flex-row justify-start items-start gap-1 text-sm py-3 px-4 text-slate-500 capitalize">
-        <a href="/admin/pf_tags" class="{{ $textMenuHeader }}">{{ __('admin/portfolio/portfolioTags.menuIndex') }}</a> /
-        <a href="/admin/pf_tags/{{ $tag->id }}" class="{{ $textMenuHeader }}">{{ $tag->name }}</a> /
-        <a href="/admin/pf_tags/edit/{{ $tag->id }}"
+        <a href="{{route('pf_tags')}}" class="{{ $textMenuHeader }}">{{ __('admin/portfolio/portfolioTags.menuIndex') }}</a> /
+        <a href="{{route('pf_tags.show', $tag)}}" class="{{ $textMenuHeader }}">{{ $tag->name }}</a> /
+        <a href="{{route('pf_tags.edit', $tag)}}"
             class="font-bold text-black {{ $underlineMenuHeader }}">{{ __('generic.edit') }}</a>
     </div>
 
