@@ -2,9 +2,9 @@
 
     <!-- Sitemap -->
     <div class="flex flex-row justify-start items-start gap-1 text-sm py-3 px-4 text-slate-500 capitalize">
-        <a href="/admin/pf_categories"
+        <a href="{{route('pf_categories')}}"
             class="text-black {{ $textMenuHeader }}">{{ __('admin/portfolio/portfolioCategories.menuIndex') }}</a> /
-        <a href="/admin/pf_categories/{{ $category->id }}"
+        <a href="{{route('pf_categories.show', $category)}}"
             class="font-bold text-black {{ $underlineMenuHeader }}">{{ $category->name }}</a>
     </div>
 

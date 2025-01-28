@@ -97,6 +97,7 @@ class PortfolioCategories extends Component
         return view('livewire.portfolio.categories.portfolio-categories', [
             // Styles
             'underlineMenuHeader' => 'border-b-2 border-b-blue-600',
+            'textMenuHeader' => 'hover:text-blue-400',
             'bgMenuColor' => 'bg-blue-800',
             'menuTextColor' => 'text-blue-800',
             'focusColor' => 'focus:ring-blue-500 focus:border-blue-500',

@@ -82,9 +82,9 @@ class PortfolioCategoriesTranslationCreate extends Component
         
         return view('livewire.portfolio.categories.translations.portfolio-categories-translation-create', [
             // Styles
-            'underlineMenuHeader' => 'border-b-2 border-b-yellow-400',
-            'textMenuHeader' => 'hover:text-yellow-400',
-            'bgMenuColor' => 'bg-yellow-400',
+            'underlineMenuHeader' => 'border-b-2 border-b-blue-400',
+            'textMenuHeader' => 'hover:text-blue-400',
+            'bgMenuColor' => 'bg-blue-400',
             'bgInfoTab' => 'bg-orange-600',
             'categoryName' => 'text-white font-bold bg-orange-600',
             'menuInfo' => 'text-white bg-slate-800',
@@ -93,8 +93,8 @@ class PortfolioCategoriesTranslationCreate extends Component
             'languageName' => 'text-pink-600 italic',
             'translationName' => 'text-white font-bold bg-pink-600',
             'menuTranslation' => 'text-white bg-slate-800',
-            'menuTextColor' => 'text-yellow-400',
-            'focusColor' => 'focus:ring-yellow-400 focus:border-yellow-400',
+            'menuTextColor' => 'text-blue-400',
+            'focusColor' => 'focus:ring-blue-400 focus:border-blue-400',
             // Data
             'category' => $this->category,
             'languages' => Languages::all(),

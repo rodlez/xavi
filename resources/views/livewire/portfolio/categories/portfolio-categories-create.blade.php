@@ -2,8 +2,8 @@
 
     <!-- Sitemap -->
     <div class="flex flex-row justify-start items-start gap-1 text-sm py-3 px-4 text-slate-500 capitalize">
-        <a href="/admin/pf_categories" class="text-black {{$textMenuHeader}}">{{__("admin/portfolio/portfolioCategories.menuIndex")}}</a> /
-        <a href="/admin/pf_categories/create" class="font-bold text-black {{$underlineMenuHeader}}">{{__("generic.new")}}</a>
+        <a href="{{route('pf_categories')}}" class="text-black {{$textMenuHeader}}">{{__("admin/portfolio/portfolioCategories.menuIndex")}}</a> /
+        <a href="{{route('pf_categories.create')}}" class="font-bold text-black {{$underlineMenuHeader}}">{{__("generic.new")}}</a>
     </div>
 
     <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
