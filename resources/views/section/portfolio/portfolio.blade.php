@@ -27,7 +27,9 @@
         <!-- TYPES -->
         @foreach ($types as $type)
             <!-- Check if the TYPE has yet any portfolio associated, Must have translations and at least one translation must have a portfolio associated -->
+            <!-- Checking $type->translations[0]->portfoliotranslations, MUST HAVE AT LEAST ONE TRANSLATION IN SPANISH, BECAUSE IS THE LANGUAGE WITH THE SMALLER ID -->
             @if (count($type->translations[0]->portfoliotranslations) > 0)
+            
                 @foreach ($type->translations as $typeTrans)
                     @if ($typeTrans->lang_id == $languageId)
                         <!-- TYPE Info -->

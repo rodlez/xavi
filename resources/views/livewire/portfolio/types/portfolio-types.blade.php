@@ -126,7 +126,9 @@
 
                                     <td class="p-2">{{ date('d-m-Y', strtotime($type->created_at)) }}</td>
                                     <td class="p-2">{{ date('d-m-Y', strtotime($type->updated_at)) }}</td>
-                                    <td class="p-2">{{ $type->color }}</td>
+                                    <td class="p-2">{{ $type->color }}
+                                        {{count($type->translations)}}
+                                    </td>
                                     <td class="p-2 text-center normal-case">
                                         <!-- If translation exists link to show, if not link to create new -->
                                         @foreach ($this->translationLinks($type) as $translation)

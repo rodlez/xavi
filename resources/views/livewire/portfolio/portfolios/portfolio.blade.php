@@ -108,13 +108,17 @@
                             @foreach ($portfolios as $portfolio)
                                 <tr
                                     class="text-black text-sm leading-6 even:bg-zinc-200 odd:bg-gray-300 transition-all duration-1000 hover:bg-yellow-400">
+                                    <!-- Checkbox Multioption Delete Item-->
                                     <td class="p-2 text-center"><input wire:model.live="selections" type="checkbox"
                                             class="text-green-600 outline-none focus:ring-0 checked:bg-green-500"
                                             value={{ $portfolio->id }}></td>
+                                    <!-- ID -->
                                     <td class="p-2">{{ $portfolio->id }}</td>
+                                    <!-- Name -->
                                     <td class="p-2"><a
                                             href="{{ route('portfolios.show', $portfolio) }}">{{ $portfolio->name }}</a>
                                     </td>
+                                    <!-- Published -->
                                     <td class="p-2">{{-- {{ publishedText($portfolio->published) }} --}}
                                         @if($portfolio->published == 1) 
                                         <i class="fa-solid fa-check text-green-600"></i>
@@ -122,10 +126,13 @@
                                         <i class="fa-solid fa-x text-red-600"></i>
                                         @endif
                                     </td>
+                                    <!-- Status -->
                                     <td class="p-2">{{ statusText($portfolio->status) }}</td>
+                                    <!-- Created -->
                                     <td class="p-2">{{ date('d-m-Y', strtotime($portfolio->created_at)) }}</td>
+                                    <!-- Updated -->
                                     <td class="p-2">{{ date('d-m-Y', strtotime($portfolio->updated_at)) }}</td>
-
+                                    <!-- Types -->
                                     <td class="p-2 text-center normal-case">
                                         @foreach ($portfolio->translations as $translation)
                                             @if ($languageId == $translation->lang_id)
@@ -133,9 +140,10 @@
                                             @endif
                                         @endforeach
                                     </td>
-
+                                    <!-- Position -->
                                     <td class="p-2">{{ $portfolio->position ? $portfolio->position : '-' }}</td>
 
+                                    <!-- Translations -->
                                     <td class="p-2 text-center normal-case">
                                         <!-- If translation exists link to show, if not link to create new -->
                                         @foreach ($this->translationLinks($portfolio) as $translation)
@@ -152,6 +160,7 @@
                                             @endif
                                         @endforeach
                                     </td>
+                                    <!-- Files -->
                                     <td class="p-2 text-center normal-case">
                                         @if ($portfolio->files->count() > 0)
                                             <a href="/admin/portfolios/{{ $portfolio->id }}/#filetest"
@@ -160,6 +169,7 @@
                                             -
                                         @endif
                                     </td>
+                                    <!-- Actions -->
                                     <td class="p-2">
                                         <div class="flex justify-center items-center gap-2">
                                             <!-- Show -->

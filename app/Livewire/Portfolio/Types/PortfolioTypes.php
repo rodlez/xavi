@@ -3,6 +3,7 @@
 namespace App\Livewire\Portfolio\Types;
 
 use App\Models\Portfolio\PortfolioType;
+use App\Models\Portfolio\PortfolioTypeTranslation;
 use App\Services\TranslationService;
 use Illuminate\Database\Eloquent\Model;
 use Livewire\Component;
@@ -90,7 +91,7 @@ class PortfolioTypes extends Component
         }
 
         $total = $data->count();
-        $data = $data->paginate($this->perPage);
+        $data = $data->paginate($this->perPage);      
 
         return view('livewire.portfolio.types.portfolio-types', [
             // Styles

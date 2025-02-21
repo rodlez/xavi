@@ -20,9 +20,6 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class Portfolio extends Controller
 {
-
-
-
     /**
      * Display a listing of the resource.
      */
@@ -41,7 +38,7 @@ class Portfolio extends Controller
         // This way the position(order in the gallery) of the portfolios can be determined by the parent not by the children translations
         $types = PortfolioType::orderby('position', 'ASC')->get();
         //dd($tipos[0]->translations);
-
+        
         $portfolios = PortfolioModel::where('published', 1)->orderby('position', 'ASC')->get();
         //dd($porfs);
 
