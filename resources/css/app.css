@@ -11,6 +11,13 @@
     display: none;
 }
 
+/*
+The @layer directive allows you to define custom styles within the same conceptual layers as Tailwind's base, components, and utilities:
+
+    Base Layer: For global styles and resets.
+    Components Layer: For custom component styles.
+    Utilities Layer: For custom utility classes.
+*/
 
 @layer base {
     h2 {

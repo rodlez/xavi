@@ -53,6 +53,7 @@ class Portfolio extends Controller
             'typeMenuColor' => 'bg-orange-400',
             // Layout
             'title' => 'Portfolio',
+            'description' => 'Una selección de nuestras obras',
             // Data
             'portfolios' => $portfolios,
             'types' => $types,            

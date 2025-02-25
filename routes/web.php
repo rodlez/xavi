@@ -77,6 +77,10 @@ Route::get('/services', function () {
     return 'services';
 })->name('services');
 
+Route::get('/under-construction', function () {
+    return 'under construction';
+})->name('under-construction');
+
 Route::get('/playground', [Playground::class, 'index'])->name('playground');
 
 /* PORTFOLIO GALLERY */
@@ -92,7 +96,8 @@ Route::get('lang', [LanguageController::class, 'change'])->name('change.lang');
 /* ------------------------------------------------------------ ADMIN ------------------------------------------------------------ */
 
 Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified'])->group(function () {
-    /* DASHBOARD */
+    
+    /************************ DASHBOARD **************************/
     Route::get('/admin/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');

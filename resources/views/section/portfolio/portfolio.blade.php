@@ -1,6 +1,9 @@
 <x-xavi-layout>
 
+    <!-- HEADER -->
+    
     <x-slot name="title">{{ __('generic.portfolio') }}</x-slot>
+    <x-slot name="description">{{ __('web/portfolio.description') }}</x-slot>
 
     {{-- @foreach ($tipos as $tipo)
 

@@ -12,7 +12,23 @@ class Playground extends Controller
      */
     public function index(): View
     {
-        return view('playground');
+        
+        // USING WITH
+       /*  $data = [
+            'title' => 'oli',
+            'description' => 'mire usted',
+        ]; 
+
+        return view('playground')->with($data); */
+       
+
+        //USING COMPACT
+
+        $title = 'This is a Playground page';
+        $description = 'Here there is different Components to test';  
+
+        
+        return view('playground', compact('title', 'description'))->layout('layouts.xavi');
     }
 
     /**

@@ -7,7 +7,6 @@
     <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
 
         <div>
-
             <!-- Header -->
             <div class="flex flex-row justify-between items-center py-4 {{$bgMenuColor}}">
                 <div>

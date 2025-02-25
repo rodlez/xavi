@@ -72,7 +72,25 @@ class Languages extends Component
         $total = $languages->count();
         $languages = $languages->paginate($this->perPage);
 
-        return view('livewire.languages.languages', [
+        // Test Passing values to the view using with() instead type the variables in an associative array
+
+        $styles = [
+            'underlineMenuHeader' => 'border-b-2 border-b-violet-600',
+            'bgMenuColor' => 'bg-violet-800',
+            'menuTextColor' => 'text-violet-800',
+            'focusColor' => 'focus:ring-violet-500 focus:border-violet-500',
+        ];
+
+        $data = [
+            'languages' => $languages,
+            'found'     => $found,
+            'column'    => $this->orderColumn,
+            'total'     => $total,
+        ];
+
+        return view('livewire.languages.languages')->layout('layouts.app')->with($styles)->with($data);
+
+        /* return view('livewire.languages.languages', [
             // Styles
             'underlineMenuHeader' => 'border-b-2 border-b-violet-600',
             'bgMenuColor' => 'bg-violet-800',
@@ -83,6 +101,6 @@ class Languages extends Component
             'found'     => $found,
             'column'    => $this->orderColumn,
             'total'     => $total,
-        ])->layout('layouts.app');
+        ])->layout('layouts.app'); */
     }
 }
